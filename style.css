@@ -2685,3 +2685,9 @@ header img[src*="logo-main"]{
   .magazine-front-banner{padding:24px 14px 34px;}
   .magazine-front-link{border-radius:22px;}
 }
+
+
+/* FIX 2026-05-12: remove giant hero logo from middle of front page */
+.hero-title-logo{display:none !important;}
+.hero-copy{padding-top:0 !important;}
+.hero-copy h1{margin-top:0 !important;}
