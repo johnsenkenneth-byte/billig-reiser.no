@@ -2711,28 +2711,3 @@ body{background:#020712;color:#fff;}
 .smart-prompt{display:none!important}.search-fields.fields{display:grid!important;grid-template-columns:1.15fr 1.15fr .92fr .92fr 1.1fr!important;gap:0!important;padding:0!important;border:1px solid rgba(255,255,255,.11)!important;border-radius:18px!important;overflow:visible!important;background:rgba(5,10,24,.50)!important}.search-fields label{position:relative!important;min-height:74px!important;padding:17px 18px 14px 58px!important;border:0!important;border-right:1px solid rgba(255,255,255,.10)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;display:block!important}.search-fields label:last-child{border-right:0!important}.field-icon{position:absolute!important;left:20px!important;top:26px!important;font-size:21px!important;color:#21d7ff!important;filter:drop-shadow(0 0 10px rgba(33,215,255,.35))}.search-fields small{display:block!important;margin:0 0 5px!important;color:#9faec6!important;font-size:11px!important;letter-spacing:.08em!important;text-transform:uppercase!important;font-weight:900!important}.search-fields input,.traveler-toggle{width:100%!important;background:transparent!important;border:0!important;color:#fff!important;font-size:15px!important;font-weight:800!important;outline:0!important;padding:0!important;min-height:22px!important}.search-fields input::placeholder{color:#e8efff!important;opacity:.9!important}.traveler-menu{z-index:30!important}.search-actions.single-action{position:absolute!important;right:22px!important;bottom:76px!important;display:block!important;padding:0!important}.search-launch{min-width:150px!important;min-height:74px!important;border-radius:18px!important;padding:0 24px!important;display:flex!important;gap:12px!important;align-items:center!important;justify-content:center!important;font-size:16px!important;background:linear-gradient(110deg,#ff25c8,#7a44ff 48%,#21d7ff)!important;box-shadow:0 12px 36px rgba(33,215,255,.18),0 0 28px rgba(255,37,200,.22)!important}.search-help{display:none!important}.deal-pulse-row{display:flex!important;align-items:center!important;gap:12px!important;margin-top:18px!important;flex-wrap:wrap!important;color:#dbe7fb!important}.deal-pulse-row span{color:#fff!important;font-weight:900!important}.deal-pulse-row b{font-size:13px!important;font-weight:800!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.10)!important;border-radius:999px!important;padding:9px 16px!important}.tp-live-box{display:none!important}.partners-line{max-width:1180px!important;margin:16px 0 0!important;color:#aab8d0!important}.map-card.live-map-card,.travel-pulse-panel{display:none!important}.magazine-front-banner{max-width:1180px!important;margin:30px auto 50px!important;padding:0 18px!important}.magazine-front-link{display:block!important;border-radius:28px!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 24px 80px rgba(0,0,0,.36),0 0 0 1px rgba(255,37,200,.10)!important}.magazine-front-link img{width:100%!important;height:auto!important;display:block!important;aspect-ratio:16/5.1!important;object-fit:cover!important;}
 @media(max-width:1100px){.hero{padding:62px 22px 34px!important}.search-card.neon-flight-deck,.search-card.travel-search{padding:18px!important}.search-fields.fields{grid-template-columns:1fr 1fr!important;border-radius:18px!important;overflow:visible!important}.search-fields label{border-right:0!important;border-bottom:1px solid rgba(255,255,255,.10)!important}.search-fields label:nth-last-child(-n+1){border-bottom:0!important}.search-actions.single-action{position:static!important;margin-top:16px!important}.search-launch{width:100%!important;min-height:62px!important}.deal-pulse-row{display:none!important}}
 @media(max-width:760px){.topbar{height:72px!important}.topbar .brand img,.brand img,header img[src*="logo-main"]{width:min(190px,52vw)!important;max-height:56px!important}.hero{padding:44px 14px 24px!important;background-position:center right!important}.hero-copy h1{font-size:clamp(38px,12vw,58px)!important;max-width:92vw!important}.hero-copy>p{font-size:16px!important;max-width:90vw!important}.flight-deck-head{display:block!important}.flight-deck-head em{display:none!important}.search-card.neon-flight-deck,.search-card.travel-search{border-radius:22px!important;padding:14px!important}.search-tabs button{min-width:112px!important;min-height:48px!important}.search-tabs button span:not(.tab-emoji){font-size:15px!important}.search-fields.fields{grid-template-columns:1fr!important}.search-fields label{min-height:66px!important;padding:14px 16px 12px 52px!important}.field-icon{left:18px!important;top:23px!important}.magazine-front-banner{margin:22px auto 34px!important;padding:0 14px!important}.magazine-front-link{border-radius:20px!important}.magazine-front-link img{aspect-ratio:16/8!important;}}
-
-/* FIX 2026-05-12: Tilpass Reisemagasin-bildet på forsiden slik at hele bildet får plass i skjermen */
-.magazine-front-banner{
-  padding:28px 36px 38px !important;
-}
-.magazine-front-link{
-  width:min(1220px, calc(82vh * 1.5), calc(100vw - 72px)) !important;
-  max-width:none !important;
-  margin:0 auto !important;
-}
-.magazine-front-link img{
-  width:100% !important;
-  height:auto !important;
-  max-height:calc(100vh - 180px) !important;
-  object-fit:contain !important;
-}
-@media(max-width:900px){
-  .magazine-front-banner{padding:22px 14px 30px !important;}
-  .magazine-front-link{width:100% !important;max-width:100% !important;}
-  .magazine-front-link img{max-height:none !important;}
-}
-@media(max-width:520px){
-  .magazine-front-banner{padding-top:18px !important;}
-  .magazine-front-link{border-radius:18px !important;}
-}

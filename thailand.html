@@ -14,7 +14,22 @@
 .hotel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.hotel-card a{display:inline-flex;margin-top:10px;color:#06101f;background:#f7c75f;border-radius:999px;padding:11px 16px;font-weight:950;text-decoration:none}.experience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}.price-grid,.month-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.month-card b{display:block;color:#fff;font-size:20px;margin-bottom:8px}.note-box{border:1px solid rgba(247,199,95,.25);background:linear-gradient(135deg,#111827,#07111f);border-radius:30px;padding:32px;margin-top:24px}
 @media(max-width:900px){.thai-grid,.experience-grid,.hotel-grid,.split,.price-grid,.month-grid{grid-template-columns:1fr}.thai-hero{padding:60px 22px}.thai-card img{height:240px}}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Forside", "item": "https://billig-reiser.no/"}, {"@type": "ListItem", "position": 2, "name": "Thailand hotellguide", "item": "https://billig-reiser.no/thailand.html"}]}</script></head>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Forside", "item": "https://billig-reiser.no/"}, {"@type": "ListItem", "position": 2, "name": "Thailand hotellguide", "item": "https://billig-reiser.no/thailand.html"}]}</script>
+<style>
+.mag-card{
+transition:transform .25s ease, box-shadow .25s ease;
+}
+.mag-card:hover{
+transform:translateY(-6px);
+box-shadow:0 30px 80px rgba(0,0,0,.45);
+}
+.mag-card img{
+height:260px;
+object-fit:cover;
+}
+</style>
+
+</head>
 <body class="thai-page">
 <header class="topbar">
 <a aria-label="Billig-reiser.no" class="brand" href="index.html"><img loading="lazy" alt="Billig-reiser.no" decoding="async" height="220" src="assets/logo-main.png" width="330"/></a>
@@ -108,5 +123,72 @@
 <nav class="footer-links"><a href="index.html">Forside</a><a href="reisemagasinet.html">Reisemagasin</a><a href="kontakt.html">Kontakt</a><a href="personvern.html">Personvern</a></nav>
 </div>
 </footer>
+
+<section class="mag-section">
+  <h2>Premium hotell i Thailand</h2>
+  <p style="max-width:900px;color:#cbd5e1;font-size:18px">
+    Håndplukkede hotell for par, familier, backpackere og luksusreisende.
+    Vi har samlet de mest populære hotellene nordmenn elsker i Thailand.
+  </p>
+
+  <div class="mag-grid">
+
+    <a class="mag-card" href="https://www.hotels.com/affiliates/capella-bangkok-bangkok-thailand.iMbCnSh" target="_blank">
+      <img src="assets/deal-bangkok.png" alt="Capella Bangkok">
+      <div>
+        <span>Luksus • Bangkok</span>
+        <h3>Capella Bangkok</h3>
+        <p>Perfekt for honeymoon, rolig luksus og premium opplevelser ved elven.</p>
+      </div>
+    </a>
+
+    <a class="mag-card" href="https://www.hotels.com/affiliates/the-standard-bangkok-mahanakhon-bangkok-thailand.xlaNe6i" target="_blank">
+      <img src="assets/hero-neon-universe.png" alt="The Standard Bangkok">
+      <div>
+        <span>Rooftop • Nightlife</span>
+        <h3>The Standard Bangkok</h3>
+        <p>Bangkoks mest trendy hotell med skyline, rooftop og moderne design.</p>
+      </div>
+    </a>
+
+    <a class="mag-card" href="https://www.hotels.com/affiliates/sri-panwa-phuket-luxury-pool-villa-hotel-wichit-thailand.YcApZxj" target="_blank">
+      <img src="assets/deal-phuket.png" alt="Sri Panwa Phuket">
+      <div>
+        <span>Luxury Resort • Phuket</span>
+        <h3>Sri Panwa Phuket</h3>
+        <p>Kjent for private poolvillaer, luksus og en av Thailands beste rooftopbarer.</p>
+      </div>
+    </a>
+
+    <a class="mag-card" href="https://www.hotels.com/affiliates/sunwing-kamala-beach-kamala-thailand.sedt4wT" target="_blank">
+      <img src="assets/deal-phuket.png" alt="Sunwing Kamala Beach">
+      <div>
+        <span>Familieferie</span>
+        <h3>Sunwing Kamala Beach</h3>
+        <p>Perfekt for familier med basseng, strand og trygg atmosfære.</p>
+      </div>
+    </a>
+
+    <a class="mag-card" href="https://www.hotels.com/affiliates/four-seasons-resort-koh-samui-koh-samui-thailand.Xv4jzrt" target="_blank">
+      <img src="assets/deal-phuket.png" alt="Four Seasons Koh Samui">
+      <div>
+        <span>Honeymoon • Koh Samui</span>
+        <h3>Four Seasons Koh Samui</h3>
+        <p>Et av de vakreste resortene i Thailand med private villaer og havutsikt.</p>
+      </div>
+    </a>
+
+    <a class="mag-card" href="https://www.hotels.com/affiliates/rayavadee-krabi-thailand.kBB1eKK" target="_blank">
+      <img src="assets/deal-phuket.png" alt="Rayavadee Krabi">
+      <div>
+        <span>Natur • Krabi</span>
+        <h3>Rayavadee</h3>
+        <p>Ikonisk hotell omgitt av kalksteinsklipper og tropisk natur.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
 </body>
 </html>
