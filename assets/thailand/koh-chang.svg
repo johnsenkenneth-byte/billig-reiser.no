@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
-<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#06233f"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs>
-<rect width="1200" height="700" fill="url(#g)"/>
-<circle cx="930" cy="160" r="90" fill="#f7c75f" opacity=".9"/>
-<path d="M0 520 C180 430 280 590 460 500 C650 405 730 570 930 485 C1060 430 1120 450 1200 410 L1200 700 L0 700 Z" fill="#02111f" opacity=".85"/>
-<path d="M120 520 C260 380 390 380 520 520" stroke="#f7c75f" stroke-width="10" fill="none" opacity=".85"/>
-<text x="70" y="120" font-family="Arial" font-size="58" font-weight="800" fill="#fff">Koh Chang</text>
-<text x="72" y="180" font-family="Arial" font-size="28" fill="#dbeafe">Billig-reiser.no</text>
-</svg>
