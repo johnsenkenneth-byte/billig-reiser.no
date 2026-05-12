@@ -2745,3 +2745,89 @@ body{background:#020712;color:#fff;}
 .hero-thai .hero-inner,.hero-city .hero-inner{background:rgba(2,8,18,.18) !important;border-radius:24px !important;padding:18px 24px !important;backdrop-filter:blur(2px) !important;}
 .footer{color:#aebbd0 !important;font-size:14px !important;}
 @media(max-width:760px){.mag-nav{height:auto !important;min-height:68px !important;padding:10px 14px !important;gap:12px !important;flex-wrap:wrap !important}.mag-nav .brand-logo img{height:44px !important;max-width:165px !important}.mag-menu{gap:10px !important;overflow-x:auto !important;width:100% !important}.hero-mag{min-height:260px !important}.magazine-front-link img{max-height:220px !important;aspect-ratio:16/6.5 !important}}
+
+
+/* =========================================================
+   FINAL HARD FIX 2026-05-13 v3
+   ========================================================= */
+#travelSearch.neon-flight-deck,
+#travelSearch.travel-search,
+form#travelSearch{
+  overflow:visible !important;
+  padding-bottom:22px !important;
+}
+form#travelSearch .search-fields.fields{
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:12px !important;
+  border:0 !important;
+  background:transparent !important;
+  margin-bottom:16px !important;
+}
+form#travelSearch .search-fields.fields label{
+  min-height:78px !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:18px !important;
+  background:rgba(10,16,33,.72) !important;
+  padding:16px 14px 12px 52px !important;
+  overflow:visible !important;
+}
+form#travelSearch .search-actions.single-action,
+form#travelSearch .hero-ctas.search-actions.single-action,
+#travelSearch .search-actions.single-action{
+  position:relative !important;
+  inset:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  left:auto !important;
+  top:auto !important;
+  display:block !important;
+  width:100% !important;
+  margin:10px 0 0 !important;
+  padding:0 !important;
+  z-index:5 !important;
+  clear:both !important;
+}
+form#travelSearch button#searchSubmitButton,
+form#travelSearch .search-launch,
+#searchSubmitButton.search-launch{
+  position:relative !important;
+  width:100% !important;
+  max-width:none !important;
+  min-width:0 !important;
+  min-height:58px !important;
+  height:58px !important;
+  border-radius:16px !important;
+  padding:0 18px !important;
+  transform:none !important;
+  z-index:6 !important;
+  pointer-events:auto !important;
+  cursor:pointer !important;
+  font-size:17px !important;
+}
+form#travelSearch .traveler-field{z-index:20 !important;}
+form#travelSearch .traveler-menu{z-index:200 !important;}
+@media(max-width:1180px){form#travelSearch .search-fields.fields{grid-template-columns:1fr 1fr !important;}}
+@media(max-width:760px){form#travelSearch .search-fields.fields{grid-template-columns:1fr !important;}form#travelSearch button#searchSubmitButton{height:56px !important;}}
+
+/* smaller, cleaner reisemagasin banner on front page */
+.magazine-front-banner{max-width:1040px !important;margin:22px auto 34px !important;padding:0 18px !important;}
+.magazine-front-link{border-radius:20px !important;}
+.magazine-front-link img{width:100% !important;height:auto !important;max-height:235px !important;aspect-ratio:16/3.8 !important;object-fit:cover !important;object-position:center !important;display:block !important;}
+
+/* logo safety everywhere */
+.brand img,
+.topbar .brand img,
+.mag-nav .brand img,
+.mag-nav .brand-logo img,
+header img[src*="logo-main"]{
+  width:auto !important;
+  height:54px !important;
+  max-width:220px !important;
+  max-height:54px !important;
+  object-fit:contain !important;
+  display:block !important;
+}
+.mag-nav .brand,
+.mag-nav .brand-logo{display:flex !important;align-items:center !important;min-width:0 !important;max-width:230px !important;overflow:hidden !important;}
+@media(max-width:760px){.brand img,.topbar .brand img,.mag-nav .brand img,.mag-nav .brand-logo img,header img[src*="logo-main"]{height:44px !important;max-width:168px !important;max-height:44px !important;}.mag-nav .brand,.mag-nav .brand-logo{max-width:175px !important;}}
