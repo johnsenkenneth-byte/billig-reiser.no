@@ -1925,13 +1925,13 @@ header img[src*="logo"]{
 .search-tabs button:last-child{border-right:0 !important;}
 
 #travelSearch [data-search-type="flight"]{
-  background-image:linear-gradient(90deg,rgba(2,10,25,.82),rgba(2,10,25,.45)),url("./assets/wow-tabs/tab-fly.jpg") !important;
+  background-image:linear-gradient(90deg,rgba(2,10,25,.82),rgba(2,10,25,.45)),url("./assets/wow-tabs/tab-fly-v22.jpg") !important;
 }
 #travelSearch [data-search-type="hotel"]{
-  background-image:linear-gradient(90deg,rgba(2,10,25,.84),rgba(2,10,25,.48)),url("./assets/wow-tabs/tab-hotel.jpg") !important;
+  background-image:linear-gradient(90deg,rgba(2,10,25,.84),rgba(2,10,25,.48)),url("./assets/wow-tabs/tab-hotel-v22.jpg") !important;
 }
 #travelSearch [data-search-type="car"]{
-  background-image:linear-gradient(90deg,rgba(2,10,25,.84),rgba(2,10,25,.48)),url("./assets/wow-tabs/tab-car.jpg") !important;
+  background-image:linear-gradient(90deg,rgba(2,10,25,.84),rgba(2,10,25,.48)),url("./assets/wow-tabs/tab-car-v22.jpg") !important;
 }
 
 #travelSearch [data-search-type]::before{
@@ -2879,3 +2879,8 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
 .magazine-hero-fix:before{content:none!important;}
 .city-grid{align-items:stretch!important;}
 .city-card img{height:230px!important;object-fit:cover!important;object-position:center!important;}
+
+/* V22 bilde-fix: cache-busted filnavn, ekte img-elementer og ingen svart overlay når bilder finnes */
+.city-card img,.country-card img,.hotel-card img,.feature-card img{display:block!important;opacity:1!important;visibility:visible!important;background:#07101f!important;filter:none!important;}
+.city-card,.country-card,.hotel-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98))!important;}
+.hero-thai,.hero-city,.mag-hero{background-color:#07101f!important;}
