@@ -1,9 +1,0 @@
-Teknisk sjekk - Thailand hotell-del
-Filer i ZIP: 65
-Thailand-sider bygget på nytt: 7
-Koh Tao/uferdig Thailand-side fjernet: ja
-Random Unsplash-bilder fjernet: ja
-Tomme affiliatekort fjernet: ja
-Dupliserte bilder per Thailand-side: ingen funnet
-Gule/oransje søk/CTA-knapper i magasin/Thailand justert til rosa/lilla/blå profil: ja
-Issues: ingen kritiske funn
