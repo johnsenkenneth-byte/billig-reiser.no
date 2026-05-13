@@ -2872,3 +2872,10 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
   .magazine-front-link{border-radius:20px !important;}
   .magazine-front-link img{width:100% !important;height:auto !important;max-height:none !important;aspect-ratio:auto !important;object-fit:contain !important;}
 }
+
+
+/* FINAL CLEANUP 2026-05-14: Reisemagasin + Thailand cards */
+.magazine-hero-fix{min-height:560px!important;background:linear-gradient(90deg,rgba(1,6,18,.92) 0%,rgba(1,6,18,.74) 42%,rgba(1,6,18,.28) 100%),url('assets/magazine-hero-clean.jpg') center/cover no-repeat!important;}
+.magazine-hero-fix:before{content:none!important;}
+.city-grid{align-items:stretch!important;}
+.city-card img{height:230px!important;object-fit:cover!important;object-position:center!important;}
