@@ -1,0 +1,9 @@
+FIKSET THAILAND-KORTET I REISEMAGASINET
+
+Utført:
+- Byttet bildet/collagen under "Land i reisemagasinet" til nytt Thailand-bilde.
+- Bildet ligger her: assets/hero/thailand-guide-hero-premium.png
+- Affiliate-lenker er ikke endret.
+
+Oppdaterte filer:
+reisemagasinet.html
