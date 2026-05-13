@@ -1,9 +1,0 @@
-{
-  "name": "billig-reiser-no",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "build": "node build.js",
-    "start": "python3 -m http.server 3000"
-  }
-}
