@@ -2,205 +2,26 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "public",
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "cleanUrls": false,
   "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/(.*).js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/(.*).css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
-      ]
-    }
+    {"source": "/assets/(.*)", "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]},
+    {"source": "/(.*).js", "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]},
+    {"source": "/(.*).css", "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]}
   ],
   "rewrites": [
-    {
-      "source": "/reisemagasin/thailand/bangkok",
-      "destination": "/reisemagasin/thailand/bangkok/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/",
-      "destination": "/reisemagasin/thailand/bangkok/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/hotell",
-      "destination": "/reisemagasin/thailand/bangkok/hotell/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/hotell/",
-      "destination": "/reisemagasin/thailand/bangkok/hotell/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/natteliv",
-      "destination": "/reisemagasin/thailand/bangkok/natteliv/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/natteliv/",
-      "destination": "/reisemagasin/thailand/bangkok/natteliv/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/shopping",
-      "destination": "/reisemagasin/thailand/bangkok/shopping/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/shopping/",
-      "destination": "/reisemagasin/thailand/bangkok/shopping/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/restauranter",
-      "destination": "/reisemagasin/thailand/bangkok/restauranter/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/restauranter/",
-      "destination": "/reisemagasin/thailand/bangkok/restauranter/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/familie",
-      "destination": "/reisemagasin/thailand/bangkok/familie/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/familie/",
-      "destination": "/reisemagasin/thailand/bangkok/familie/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/spa",
-      "destination": "/reisemagasin/thailand/bangkok/spa/index.html"
-    },
-    {
-      "source": "/reisemagasin/thailand/bangkok/spa/",
-      "destination": "/reisemagasin/thailand/bangkok/spa/index.html"
-    },
-    {
-      "source": "/thailand/bangkok",
-      "destination": "/reisemagasin/thailand/bangkok/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/",
-      "destination": "/reisemagasin/thailand/bangkok/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/hotell",
-      "destination": "/reisemagasin/thailand/bangkok/hotell/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/hotell/",
-      "destination": "/reisemagasin/thailand/bangkok/hotell/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/natteliv",
-      "destination": "/reisemagasin/thailand/bangkok/natteliv/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/natteliv/",
-      "destination": "/reisemagasin/thailand/bangkok/natteliv/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/shopping",
-      "destination": "/reisemagasin/thailand/bangkok/shopping/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/shopping/",
-      "destination": "/reisemagasin/thailand/bangkok/shopping/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/restauranter",
-      "destination": "/reisemagasin/thailand/bangkok/restauranter/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/restauranter/",
-      "destination": "/reisemagasin/thailand/bangkok/restauranter/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/familie",
-      "destination": "/reisemagasin/thailand/bangkok/familie/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/familie/",
-      "destination": "/reisemagasin/thailand/bangkok/familie/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/spa",
-      "destination": "/reisemagasin/thailand/bangkok/spa/index.html"
-    },
-    {
-      "source": "/thailand/bangkok/spa/",
-      "destination": "/reisemagasin/thailand/bangkok/spa/index.html"
-    },
-    {
-      "source": "/bangkok",
-      "destination": "/reisemagasin/thailand/bangkok/index.html"
-    },
-    {
-      "source": "/bangkok/",
-      "destination": "/reisemagasin/thailand/bangkok/index.html"
-    },
-    {
-      "source": "/bangkok/hotell",
-      "destination": "/reisemagasin/thailand/bangkok/hotell/index.html"
-    },
-    {
-      "source": "/bangkok/hotell/",
-      "destination": "/reisemagasin/thailand/bangkok/hotell/index.html"
-    },
-    {
-      "source": "/bangkok/natteliv",
-      "destination": "/reisemagasin/thailand/bangkok/natteliv/index.html"
-    },
-    {
-      "source": "/bangkok/natteliv/",
-      "destination": "/reisemagasin/thailand/bangkok/natteliv/index.html"
-    },
-    {
-      "source": "/bangkok/shopping",
-      "destination": "/reisemagasin/thailand/bangkok/shopping/index.html"
-    },
-    {
-      "source": "/bangkok/shopping/",
-      "destination": "/reisemagasin/thailand/bangkok/shopping/index.html"
-    },
-    {
-      "source": "/bangkok/restauranter",
-      "destination": "/reisemagasin/thailand/bangkok/restauranter/index.html"
-    },
-    {
-      "source": "/bangkok/restauranter/",
-      "destination": "/reisemagasin/thailand/bangkok/restauranter/index.html"
-    },
-    {
-      "source": "/bangkok/familie",
-      "destination": "/reisemagasin/thailand/bangkok/familie/index.html"
-    },
-    {
-      "source": "/bangkok/familie/",
-      "destination": "/reisemagasin/thailand/bangkok/familie/index.html"
-    },
-    {
-      "source": "/bangkok/spa",
-      "destination": "/reisemagasin/thailand/bangkok/spa/index.html"
-    },
-    {
-      "source": "/bangkok/spa/",
-      "destination": "/reisemagasin/thailand/bangkok/spa/index.html"
-    }
+    {"source": "/bangkok", "destination": "/bangkok.html"},
+    {"source": "/bangkok/", "destination": "/bangkok.html"},
+    {"source": "/bangkok/hotell", "destination": "/bangkok-hotell.html"},
+    {"source": "/bangkok/hotell/", "destination": "/bangkok-hotell.html"},
+    {"source": "/bangkok/natteliv", "destination": "/bangkok-natteliv.html"},
+    {"source": "/bangkok/natteliv/", "destination": "/bangkok-natteliv.html"},
+    {"source": "/bangkok/shopping", "destination": "/bangkok-shopping.html"},
+    {"source": "/bangkok/shopping/", "destination": "/bangkok-shopping.html"},
+    {"source": "/bangkok/restauranter", "destination": "/bangkok-restauranter.html"},
+    {"source": "/bangkok/restauranter/", "destination": "/bangkok-restauranter.html"},
+    {"source": "/bangkok/familie", "destination": "/bangkok-familie.html"},
+    {"source": "/bangkok/familie/", "destination": "/bangkok-familie.html"},
+    {"source": "/bangkok/spa", "destination": "/bangkok-spa.html"},
+    {"source": "/bangkok/spa/", "destination": "/bangkok-spa.html"}
   ]
 }
