@@ -2495,7 +2495,7 @@ header img[src*="logo"]{
 /* Clean final Reisemagasin homepage section */
 .premium-home-magazine{padding:64px 28px;background:linear-gradient(180deg,#f7f3ec,#fff);color:#07111f}
 .clean-mag-home{max-width:1220px;margin:0 auto;display:grid;grid-template-columns:1.35fr .9fr;gap:22px;align-items:stretch}
-.clean-mag-card{min-height:360px;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,rgba(4,12,24,.88),rgba(4,12,24,.38)),url('/assets/hero/reisemagasin-hero-premium-v22.png') center/cover;display:flex;align-items:end;box-shadow:0 22px 60px rgba(9,18,32,.18);border:1px solid rgba(255,255,255,.1)}
+.clean-mag-card{min-height:360px;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,rgba(4,12,24,.88),rgba(4,12,24,.38)),url('/assets/reisemagasin-home-banner.webp') center/cover;display:flex;align-items:end;box-shadow:0 22px 60px rgba(9,18,32,.18);border:1px solid rgba(255,255,255,.1)}
 .clean-mag-overlay{padding:38px;color:white;max-width:720px}
 .clean-mag-overlay h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(34px,5vw,58px);line-height:.98;margin:10px 0 14px;letter-spacing:-.055em}
 .clean-mag-overlay p{font-size:17px;line-height:1.6;color:#eaf0f8;margin-bottom:22px}
@@ -2521,7 +2521,7 @@ header img[src*="logo"]{
   padding:90px 5vw 60px!important;
   background:
     linear-gradient(90deg,rgba(2,5,18,.98) 0%,rgba(8,9,36,.88) 44%,rgba(4,8,22,.28) 72%),
-    url('/assets/hero-neon-universe.png') center right/cover no-repeat!important;
+    url('/assets/reisemagasin-home-banner.webp') center right/cover no-repeat!important;
   overflow:hidden;
 }
 .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 35% 16%,rgba(255,49,210,.28),transparent 35%),radial-gradient(circle at 72% 36%,rgba(49,215,255,.16),transparent 33%);pointer-events:none;}
@@ -2534,9 +2534,9 @@ header img[src*="logo"]{
 .map-card.live-map-card{display:none!important;}
 .travel-pulse-panel{position:relative;z-index:2;margin-top:28px!important;background:rgba(2,6,23,.58)!important;border:1px solid rgba(49,215,255,.18)!important;backdrop-filter:blur(16px);}
 .premium-home-magazine{background:#050816!important;}
-.clean-mag-card{background:linear-gradient(120deg,rgba(3,8,28,.92),rgba(99,20,154,.42)),url('/assets/hero/reisemagasin-hero-premium-v22.png') center/cover no-repeat!important;border:1px solid rgba(49,215,255,.25)!important;box-shadow:0 0 50px rgba(255,49,210,.12)!important;}
+.clean-mag-card{background:linear-gradient(120deg,rgba(3,8,28,.92),rgba(99,20,154,.42)),url('/assets/reisemagasin-home-banner.webp') center/cover no-repeat!important;border:1px solid rgba(49,215,255,.25)!important;box-shadow:0 0 50px rgba(255,49,210,.12)!important;}
 .clean-mag-overlay h2{font-size:clamp(38px,6vw,86px)!important;background:linear-gradient(90deg,#fff,#64e7ff,#ff4cda);-webkit-background-clip:text;background-clip:text;color:transparent!important;}
-@media(max-width:900px){.brand img{width:190px!important}.hero{padding:64px 20px 44px!important;background:linear-gradient(180deg,rgba(2,5,18,.96),rgba(5,8,32,.82)),url('/assets/hero-neon-universe.png') center top/cover no-repeat!important}.hero-title-logo img{width:260px!important}.hero h1{font-size:clamp(48px,16vw,84px)!important}.hero-copy>p{font-size:18px!important}}
+@media(max-width:900px){.brand img{width:190px!important}.hero{padding:64px 20px 44px!important;background:linear-gradient(180deg,rgba(2,5,18,.96),rgba(5,8,32,.82)),url('/assets/reisemagasin-home-banner.webp') center top/cover no-repeat!important}.hero-title-logo img{width:260px!important}.hero h1{font-size:clamp(48px,16vw,84px)!important}.hero-copy>p{font-size:18px!important}}
 
 
 /* === FINAL LOGO FIX: use the real Billig-reiser.no logo, not the temporary neon mark === */
@@ -2699,7 +2699,7 @@ body{background:#020712;color:#fff;}
 .topbar{height:92px;background:rgba(2,7,18,.92)!important;backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);}
 .topbar .brand img,.brand img,header img[src*="logo-main"]{width:min(260px,24vw)!important;max-width:260px!important;max-height:74px!important;height:auto!important;object-fit:contain!important;filter:drop-shadow(0 0 18px rgba(33,215,255,.22)) drop-shadow(0 0 18px rgba(255,37,200,.18))!important;}
 .nav a{letter-spacing:.08em;font-size:13px;color:#dbe7fb!important;opacity:.92}.nav a:hover{color:#21d7ff!important}.top-actions{gap:12px}.top-actions span:not(.avatar){display:none!important}.avatar{display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);}
-.hero{position:relative!important;display:block!important;min-height:auto!important;padding:88px 5vw 42px!important;overflow:hidden!important;background:linear-gradient(90deg,rgba(2,7,18,.98) 0%,rgba(2,7,18,.83) 37%,rgba(2,7,18,.40) 70%,rgba(2,7,18,.75) 100%),url('/assets/hero-clean-globe.webp') center right/cover no-repeat!important;border-bottom:1px solid rgba(255,255,255,.06);}
+.hero{position:relative!important;display:block!important;min-height:auto!important;padding:88px 5vw 42px!important;overflow:hidden!important;background:linear-gradient(90deg,rgba(2,7,18,.98) 0%,rgba(2,7,18,.83) 37%,rgba(2,7,18,.40) 70%,rgba(2,7,18,.75) 100%),url('/assets/reisemagasin-home-banner.webp') center right/cover no-repeat!important;border-bottom:1px solid rgba(255,255,255,.06);}
 .hero:before{content:""!important;position:absolute;inset:0;background:radial-gradient(circle at 18% 20%,rgba(122,68,255,.20),transparent 32%),radial-gradient(circle at 72% 46%,rgba(33,215,255,.16),transparent 36%)!important;pointer-events:none;}
 .hero-copy{position:relative!important;z-index:2!important;max-width:1320px!important;margin:0 auto!important;display:block!important;}
 .hero-copy h1{max-width:650px!important;font-size:clamp(42px,5.6vw,82px)!important;line-height:1.02!important;letter-spacing:-.065em!important;margin:0 0 16px!important;color:#fff!important;text-shadow:0 12px 42px rgba(0,0,0,.45)!important;}
@@ -2740,7 +2740,7 @@ body{background:#020712;color:#fff;}
 .magazine-front-link img{width:100% !important;max-height:285px !important;aspect-ratio:16/4.2 !important;object-fit:cover !important;object-position:center !important;}
 .mag-nav .brand-logo{display:flex !important;align-items:center !important;min-width:0 !important;}
 .mag-nav .brand-logo img{height:52px !important;max-width:210px !important;width:auto !important;object-fit:contain !important;}
-.hero-mag{min-height:420px !important;background:linear-gradient(90deg,rgba(5,10,18,.08),rgba(5,10,18,.14)),url('/assets/hero/reisemagasin-hero-premium-v22.png') center/cover !important;}
+.hero-mag{min-height:420px !important;background:linear-gradient(90deg,rgba(5,10,18,.08),rgba(5,10,18,.14)),url('/assets/reisemagasin-home-banner.webp') center/cover !important;}
 .hero-mag .hero-inner{display:none !important;}
 .hero-thai .hero-inner,.hero-city .hero-inner{background:rgba(2,8,18,.18) !important;border-radius:24px !important;padding:18px 24px !important;backdrop-filter:blur(2px) !important;}
 .footer{color:#aebbd0 !important;font-size:14px !important;}
@@ -2875,7 +2875,7 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
 
 
 /* FINAL CLEANUP 2026-05-14: Reisemagasin + Thailand cards */
-.magazine-hero-fix{min-height:560px!important;background:linear-gradient(90deg,rgba(1,6,18,.92) 0%,rgba(1,6,18,.74) 42%,rgba(1,6,18,.28) 100%),url('/assets/magazine-hero-clean.jpg') center/cover no-repeat!important;}
+.magazine-hero-fix{min-height:560px!important;background:linear-gradient(90deg,rgba(1,6,18,.92) 0%,rgba(1,6,18,.74) 42%,rgba(1,6,18,.28) 100%),url('/assets/reisemagasin-home-banner.webp') center/cover no-repeat!important;}
 .magazine-hero-fix:before{content:none!important;}
 .city-grid{align-items:stretch!important;}
 .city-card img{height:230px!important;object-fit:cover!important;object-position:center!important;}
