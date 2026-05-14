@@ -1,0 +1,8 @@
+Teknisk sjekk v32
+Filer totalt: 92
+Asset-referanser sjekket: 63
+Manglende asset-referanser: 0
+Ingen manglende asset-referanser
+
+Ryddet: gamle thailand-clean-* bilder fjernet og by-/øy-heroer peker nå til assets/destinations/.
+Dupliserte asset-filer funnet: 3 grupper
