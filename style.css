@@ -2884,3 +2884,22 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
 .city-card img,.country-card img,.hotel-card img,.feature-card img{display:block!important;opacity:1!important;visibility:visible!important;background:#07101f!important;filter:none!important;}
 .city-card,.country-card,.hotel-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98))!important;}
 .hero-thai,.hero-city,.mag-hero{background-color:#07101f!important;}
+
+/* Nightlife cards: tekst legges som HTML-overlay, ikke som innbakt bilde, slik at teksten ikke blir kappet ved crop */
+.nightlife-card{overflow:hidden;}
+.nightlife-card .card-image-label{position:relative;margin:0 0 18px;border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:#07101f;border:1px solid rgba(255,255,255,.10);}
+.nightlife-card .card-image-label img{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;display:block;}
+.nightlife-card .card-image-label:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.10) 20%,rgba(0,0,0,.72) 100%);z-index:1;}
+.nightlife-card .card-image-label figcaption{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.75);}
+.nightlife-card .card-image-label strong{display:block;font-size:clamp(24px,3.2vw,42px);line-height:.92;letter-spacing:-.045em;font-weight:950;text-transform:uppercase;}
+.nightlife-card .card-image-label span{display:block;margin-top:8px;color:#fde68a;font-weight:900;font-size:clamp(12px,1.35vw,16px);white-space:normal;}
+@media(max-width:680px){.nightlife-card .card-image-label{aspect-ratio:1.35/1}.nightlife-card .card-image-label figcaption{left:14px;right:14px;bottom:14px}.nightlife-card .card-image-label strong{font-size:30px}}
+
+/* V58 shopping card image overlay */
+.shopping-card .card-image-label{position:relative;margin:0 0 18px;border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:#07101f;border:1px solid rgba(255,255,255,.10);}
+.shopping-card .card-image-label img{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;display:block;}
+.shopping-card .card-image-label:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08) 20%,rgba(0,0,0,.76) 100%);z-index:1;}
+.shopping-card .card-image-label figcaption{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.75);}
+.shopping-card .card-image-label strong{display:block;font-size:clamp(24px,3vw,40px);line-height:.92;letter-spacing:-.045em;font-weight:950;text-transform:uppercase;}
+.shopping-card .card-image-label span{display:block;margin-top:8px;color:#fde68a;font-weight:900;font-size:clamp(12px,1.3vw,16px);white-space:normal;}
+@media(max-width:680px){.shopping-card .card-image-label{aspect-ratio:1.35/1}.shopping-card .card-image-label figcaption{left:14px;right:14px;bottom:14px}.shopping-card .card-image-label strong{font-size:30px}}
