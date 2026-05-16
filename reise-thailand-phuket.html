@@ -1,130 +1,518 @@
-<!doctype html><html lang="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Phuket | Billig-reiser.no</title><link rel="stylesheet" href="style.css"><style>
-:root{--bg:#07101f;--panel:#101b2e;--panel2:#14243a;--text:#f8fafc;--muted:#b8c4d5;--pink:#ff4bb8;--blue:#22d3ee;--orange:#ff7a18;--line:rgba(255,255,255,.12)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body.mag-premium{margin:0;background:radial-gradient(circle at 20% 0%,rgba(34,211,238,.12),transparent 26%),linear-gradient(180deg,#07101f,#0b1220 55%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif}.mag-nav{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(7,15,28,.92);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;backdrop-filter:blur(14px)}.brand-logo{display:flex;align-items:center;max-width:230px;overflow:hidden}.brand-logo img{height:54px;max-width:220px;object-fit:contain}.mag-menu{display:flex;gap:22px;align-items:center}.mag-menu a{color:#dbe4f0;text-decoration:none;font-weight:850;font-size:14px}.mag-menu a:hover,.mag-menu a.active{color:var(--pink)}
-.mag-hero{position:relative;min-height:520px;display:flex;align-items:center;padding:82px clamp(18px,6vw,96px);overflow:hidden;background:linear-gradient(90deg,rgba(5,10,18,.94) 0%,rgba(5,10,18,.70) 42%,rgba(5,10,18,.20)),url('/assets/destinations/phuket-v22.jpg') center right/cover no-repeat;border-bottom:1px solid rgba(255,255,255,.10)}.mag-hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 50%,rgba(255,75,184,.18),transparent 30%);pointer-events:none}.mag-hero-inner{position:relative;z-index:2;max-width:720px}.kicker{color:var(--pink);font-weight:950;text-transform:uppercase;letter-spacing:.18em;margin-bottom:14px;font-size:13px}.mag-hero h1,.hero-city h1,.hero-thai h1{font-size:clamp(42px,7vw,82px);line-height:.92;margin:0 0 18px;letter-spacing:-.06em}.mag-hero p,.hero-city p,.hero-thai p{font-size:clamp(17px,2vw,21px);line-height:1.58;color:#e5edf7;margin:0;max-width:780px}.hero-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:950}.btn.primary{background:linear-gradient(90deg,#ff4bb8,#7c3aed,#22d3ee);color:white;box-shadow:0 18px 46px rgba(255,75,184,.20)}.btn.secondary{background:rgba(255,255,255,.10);color:white;border:1px solid rgba(255,255,255,.18)}.wrap{max-width:1220px;margin:0 auto;padding:58px 24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px}.section-head h2{font-size:clamp(30px,4vw,48px);line-height:.96;margin:0;letter-spacing:-.04em}.lead{color:var(--muted);font-size:17px;line-height:1.7;max-width:820px}.city-grid,.country-grid,.grid,.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}.city-card,.country-card,.hotel-card,.info-card,.feature-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98));border:1px solid rgba(255,255,255,.12);border-radius:26px;overflow:hidden;box-shadow:0 20px 55px rgba(0,0,0,.25)}.city-card img,.country-card img,.hotel-card img{width:100%;height:220px;object-fit:cover;display:block}.city-card div,.country-card div,.hotel-body,.info-card,.feature-card{padding:22px}.city-card h3,.country-card h3,.hotel-card h3,.info-card h3{margin:0 0 8px;font-size:24px}.city-card p,.country-card p,.hotel-card p,.info-card p,.feature-card p{color:var(--muted);line-height:1.6}.city-card a,.country-card a,.hotel-card a{color:#ff7bd2;font-weight:950;text-decoration:none}.region{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;color:#ff7bd2;font-weight:900}.badge{display:inline-flex;background:rgba(255,75,184,.12);color:#ffd1ef;border:1px solid rgba(255,75,184,.25);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:950;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}.hero-thai,.hero-city{min-height:430px;padding:92px clamp(18px,6vw,92px);display:flex;align-items:center;text-align:left;background:linear-gradient(90deg,rgba(5,10,18,.86),rgba(5,10,18,.50),rgba(5,10,18,.25)),var(--city-image) center/cover no-repeat;border-bottom:1px solid rgba(255,255,255,.10)}.hero-thai{--city-image:url('/assets/reisemagasin-home-banner.webp?v=4')}.hero-inner{max-width:780px}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}.tabs a{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:white;text-decoration:none;font-weight:850}.category{margin-top:42px;padding-top:22px;border-top:1px solid var(--line)}.notice{margin-top:26px;background:rgba(255,75,184,.09);border:1px solid rgba(255,75,184,.25);border-radius:22px;padding:22px;color:#ffd1ef}.footer{border-top:1px solid var(--line);padding:30px;text-align:center;color:var(--muted);font-size:14px}.hotel-card img{height:210px}.hotel-body a{display:inline-flex;margin-top:8px;padding:10px 13px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}.story-strip{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}.story-box{border-radius:28px;padding:26px;background:linear-gradient(180deg,rgba(20,36,58,.86),rgba(8,17,31,.76));border:1px solid rgba(255,255,255,.12)}.story-box h3{font-size:28px;margin:0 0 12px}.story-box li{color:var(--muted);line-height:1.75}.soon{opacity:.72;filter:saturate(.65)}.soon-link{color:#9aa8bb;font-weight:950}
-@media(max-width:820px){.mag-nav{height:auto;min-height:68px;padding:10px 14px;gap:12px;flex-wrap:wrap}.brand-logo img{height:44px;max-width:165px}.mag-menu{gap:10px;overflow-x:auto;width:100%;padding-bottom:4px}.mag-hero,.hero-thai,.hero-city{min-height:390px;padding:54px 18px}.section-head,.story-strip{display:block}.city-card img,.country-card img,.hotel-card img{height:190px}.wrap{padding:42px 16px}.mag-hero h1,.hero-city h1,.hero-thai h1{font-size:40px}}
-</style><!-- HERO-BILDER OPPDATERT -->
-<style>/* V22 bilde-fix inline */.city-card img,.country-card img,.hotel-card img,.feature-card img{display:block!important;opacity:1!important;visibility:visible!important;background:#07101f!important;filter:none!important}.city-card,.country-card,.hotel-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98))!important}.hero-thai,.hero-city,.mag-hero{background-color:#07101f!important}</style>
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phuket guide 2026 | Billig-reiser.no</title>
+<link rel="stylesheet" href="style.css">
 <style>
-.phuket-final-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
-.phuket-final-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,16,31,.98));border:1px solid rgba(255,255,255,.12);border-radius:26px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.28)}
-.phuket-final-card img{width:100%;height:230px;object-fit:cover;display:block;background:#13213a;border:0}
-.phuket-final-card .body{padding:20px}
-.phuket-final-card h3{margin:0 0 8px;font-size:23px}
-.phuket-final-card p{color:#b8c4d5;line-height:1.6}
-.phuket-final-card a{display:inline-flex;margin-top:10px;padding:11px 15px;border-radius:14px;background:rgba(255,75,184,.16);border:1px solid rgba(255,75,184,.28);color:#fff;text-decoration:none;font-weight:950}
-.phuket-final-card .tag{display:inline-flex;margin-bottom:10px;padding:6px 10px;border-radius:999px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.22);color:#b9f4ff;font-size:12px;text-transform:uppercase;font-weight:950;letter-spacing:.08em}
+:root{--bg:#07101f;--panel:#101b2e;--text:#f8fafc;--muted:#cbd5e1;--pink:#ff4fd8;--blue:#35c7ff;--line:rgba(255,255,255,.13)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 20% 0%,rgba(53,199,255,.13),transparent 30%),linear-gradient(180deg,#07101f,#0b1220 55%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif}
+a{color:inherit}
+.mag-nav{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(7,15,28,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;backdrop-filter:blur(14px)}
+.brand-logo img{height:52px;max-width:220px;object-fit:contain}
+.mag-nav-links{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.mag-nav-links a{text-decoration:none;color:#e5e7eb;font-weight:700}
+.hero{min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 90px;background:linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.62)),url('assets/phuket-hero-premium.png') center/cover no-repeat;border-radius:0 0 42px 42px}
+.kicker{letter-spacing:5px;color:var(--pink);font-weight:900;text-transform:uppercase}
+.hero h1{font-size:clamp(58px,10vw,120px);line-height:.9;margin:18px 0 22px}
+.hero p{font-size:clamp(19px,2.1vw,30px);line-height:1.65;max-width:950px;margin:0 auto;color:#f3f4f6;text-shadow:0 2px 20px rgba(0,0,0,.45)}
+.wrap{max-width:1220px;margin:0 auto;padding:0 22px}
+.section{padding:74px 0}
+.section h2{font-size:clamp(38px,5vw,72px);line-height:1.02;margin:0 0 22px}
+.lead{font-size:21px;line-height:1.85;color:var(--muted);max-width:980px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:24px;margin-top:34px}
+.info-card,.guide-card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 22px 70px rgba(0,0,0,.22)}
+.info-card{padding:30px}
+.info-card h3,.guide-card h3{font-size:27px;margin:0 0 12px}
+.info-card p,.guide-card p{font-size:17px;line-height:1.7;color:var(--muted);margin:0 0 20px}
+.guide-card img{width:100%;height:230px;object-fit:cover;display:block}
+.guide-card div{padding:24px}
+.tag{display:inline-block;color:var(--pink);font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:12px;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration:none;font-weight:900;background:linear-gradient(90deg,#ff2bd6,#35c7ff);box-shadow:0 12px 35px rgba(255,79,216,.25)}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
+.panel{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:30px;padding:34px}
+.panel ul{font-size:18px;line-height:1.9;color:var(--muted)}
+.note{border-left:4px solid var(--pink);padding:20px 24px;background:rgba(255,255,255,.04);border-radius:18px;color:#e5e7eb;font-size:18px;line-height:1.75}
+@media(max-width:800px){.mag-nav{height:auto;padding:14px 18px;align-items:flex-start;gap:12px;flex-direction:column}.split{grid-template-columns:1fr}.section{padding:52px 0}.guide-card img{height:210px}}
 </style>
+</head>
+<body>
+<nav class="mag-nav">
+  <a class="brand-logo" href="index.html"><img src="assets/logo-main.png" alt="Billig-reiser.no"></a>
+  <div class="mag-nav-links">
+    <a href="reisemagasinet.html">Magasinet</a>
+    <a href="reise-thailand.html">Thailand</a>
+    <a href="index.html">Forside</a>
+    <a href="kontakt.html">Kontakt</a>
+  </div>
+</nav>
 
-</head><body class="mag-premium">
-<section style="
-position:relative;
-height:78vh;
-border-radius:0 0 40px 40px;
-overflow:hidden;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-margin-bottom:60px;
-background:
-linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
-url('./assets/phuket-hero-premium.png') center/cover no-repeat;
-">
-<div style="max-width:1000px;padding:40px;color:white;">
-<div style="letter-spacing:5px;color:#ff4fd8;font-weight:700;margin-bottom:15px;">
-PHUKET PREMIUM GUIDE
-</div>
+<header class="hero">
+  <div>
+    <div class="kicker">Phuket Premium Guide</div>
+    <h1>Phuket</h1>
+    <p>Luksusresorts, beach clubs, øyhopping, spa, natteliv og noen av Thailands vakreste strender – samlet i én komplett guide.</p>
+  </div>
+</header>
 
-<h1 style="
-font-size:96px;
-line-height:0.95;
-margin-bottom:25px;
-font-weight:800;
-">
-Phuket
-</h1>
-
-<p style="
-font-size:28px;
-line-height:1.7;
-max-width:850px;
-margin:0 auto;
-color:#f3f4f6;
-">
-Luksusresorts, beach clubs, øyhopping og noen av Thailands vakreste strender – samlet i én komplett guide til Phuket.
-</p>
-</div>
-</section>
-<nav class="mag-nav"><a class="brand brand-logo" href="index.html"><img src="/assets/logo-main.png" alt="Billig-reiser.no" width="220" height="54"></a><div class="mag-menu"><a href="reisemagasinet.html">Magasinet</a><a href="reise-thailand.html">Thailand</a><a href="index.html">Forside</a><a href="kontakt.html">Kontakt</a></div></nav>
-
-
-<section class="wrap">
-  <div class="section-head"><div><div class="kicker">Premium Phuket</div><h2>Signature Experiences</h2></div></div>
-  <div class="phuket-final-grid">
-    <article class="phuket-final-card"><img src="/assets/phuket-live/yona-beach-club.jpg" alt="Yona Beach Club"><div class="body"><span class="tag">Beach club</span><h3>Yona Beach Club</h3><p>Flytende beach club med infinity pool, DJ, cocktails og premium yacht-vibe på havet.</p><a href="https://klook.tpx.gr/f6kFrA21" target="_blank" rel="sponsored noopener">Book Yona →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/dinner-in-the-sky.jpg" alt="Dinner in the Sky"><div class="body"><span class="tag">Wow dining</span><h3>Dinner in the Sky</h3><p>En av Phukets mest spektakulære middagopplevelser med sunset, utsikt og bucket-list-følelse.</p><a href="https://klook.tpx.gr/yw1463RM" target="_blank" rel="sponsored noopener">Book Dinner in the Sky →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/tu-bar-sri-panwa.jpg" alt="Tu Bar Rooftop at Sri Panwa"><div class="body"><span class="tag">Rooftop</span><h3>Tu Bar Rooftop at Sri Panwa</h3><p>Eksklusiv sunset-rooftop med panoramautsikt, cocktails og ultra premium Phuket-stemning.</p><a href="https://klook.tpx.gr/NJc8j6EK" target="_blank" rel="sponsored noopener">Explore Tu Bar →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/luxury-catamaran.jpg" alt="Phi Phi, Maya & Maiton Luxury Catamaran"><div class="body"><span class="tag">Luxury sea</span><h3>Phi Phi, Maya & Maiton Luxury Catamaran</h3><p>Premium island hopping med katamaran, snorkling, loungefølelse og turkist vann.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book catamaran →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/james-bond-sunset.jpg" alt="James Bond & Phang Nga Luxury Sunset"><div class="body"><span class="tag">Sunset cruise</span><h3>James Bond & Phang Nga Luxury Sunset</h3><p>Luksuriøs sunset cruise gjennom Phang Nga-bukten med James Bond Island og dramatiske kalksteinsklipper.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Sunset cruise →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/three-monkeys.jpg" alt="Three Monkeys Restaurant"><div class="body"><span class="tag">Dining</span><h3>Three Monkeys Restaurant</h3><p>Tropisk jungle-restaurant og lounge med design, cocktails og moderne Phuket-lifestyle.</p><a href="https://klook.tpx.gr/O8PhY1vO" target="_blank" rel="sponsored noopener">Explore Three Monkeys →</a></div></article>
+<main>
+<section class="section wrap">
+  <div class="kicker">Derfor reise til Phuket</div>
+  <h2>En øy med mange ferier i én</h2>
+  <p class="lead">Phuket er ikke bare én type reisemål. Øya kan være rolig luksusferie i Kamala, familieferie i Kata, beach club-liv i Bang Tao, natteliv i Patong eller romantisk honeymoon i en privat pool villa. Det viktigste er å velge riktig område – da blir Phuket mye bedre.</p>
+  <div class="grid">
+    <div class="info-card"><h3>Strender & områder</h3><p>Fra livlige Patong til rolige Nai Harn, Kata Noi, Surin og Bang Tao. Hvert område har sin egen stemning.</p></div>
+    <div class="info-card"><h3>Hoteller for alle</h3><p>Phuket har alt fra familievennlige resorts til noen av Thailands mest eksklusive luksushoteller.</p></div>
+    <div class="info-card"><h3>Opplevelser</h3><p>Øyhopping, Phang Nga Bay, spa, beach clubs, jungelturer, vannparker og rooftopbarer gjør øya komplett.</p></div>
   </div>
 </section>
 
-<section class="wrap">
-  <div class="section-head"><div><div class="kicker">Island Phuket</div><h2>Phi Phi, Maya Bay & Phang Nga</h2></div></div>
-  <div class="phuket-final-grid">
-    <article class="phuket-final-card"><img src="/assets/phuket-live/phi-phi-snorkeling.jpg" alt="Phi Phi, Maya Bay, Khai & Snorkeling"><div class="body"><span class="tag">Classic islands</span><h3>Phi Phi, Maya Bay, Khai & Snorkeling</h3><p>Den klassiske Phuket-drømmen: Maya Bay, Phi Phi, Khai Islands, snorkling og lunsj.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book island hopping →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/phi-phi-bamboo.jpg" alt="Maya, Phi Phi & Bamboo Island"><div class="body"><span class="tag">Island hopping</span><h3>Maya, Phi Phi & Bamboo Island</h3><p>Turkist vann, Bamboo Island, lunsjbuffé og ikoniske laguner på én dag.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book Phi Phi & Bamboo →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/phang-nga-6-islands.jpg" alt="7 Wonders of Phang Nga Bay"><div class="body"><span class="tag">Hidden nature</span><h3>7 Wonders of Phang Nga Bay</h3><p>6-islands tour med laguner, kalksteinsøyer, fotospots og cinematic Thailand-vibe.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Explore Phang Nga →</a></div></article>
+<section class="section wrap">
+  <div class="split">
+    <div>
+      <div class="kicker">Områder</div>
+      <h2>Hvor bør du bo?</h2>
+      <p class="lead">Phuket blir best når området matcher ferien. Her er en enkel guide før du velger hotell.</p>
+    </div>
+    <div class="panel">
+      <ul>
+        <li><b>Kamala:</b> luksus, ro, par og beach clubs.</li>
+        <li><b>Bang Tao / Laguna:</b> premium resorts, familier og moderne restauranter.</li>
+        <li><b>Kata / Karon:</b> trygt valg for familier og førstegangsreisende.</li>
+        <li><b>Patong:</b> natteliv, shopping og action.</li>
+        <li><b>Nai Harn:</b> roligere strandliv og mer lokal følelse.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="wrap">
-  <div class="section-head"><div><div class="kicker">Adventure Phuket</div><h2>Jungle, ATV, Zipline & Action</h2></div></div>
-  <div class="phuket-final-grid">
-    <article class="phuket-final-card"><img src="/assets/phuket-live/rafting-atv-zipline.jpg" alt="Rafting, ATV, Zipline & Jungle Tour"><div class="body"><span class="tag">Adventure</span><h3>Rafting, ATV, Zipline & Jungle Tour</h3><p>White water rafting, ATV, zipline og jungelopplevelse for aktive reisende.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book jungle adventure →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/zipline-atv-patong.jpg" alt="Zipline & ATV at Patong Mountain View"><div class="body"><span class="tag">Mountain view</span><h3>Zipline & ATV at Patong Mountain View</h3><p>Zipline gjennom jungelen og ATV med utsikt over fjellene rundt Patong.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book zipline & ATV →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/paradise-atv.jpg" alt="Paradise Trip ATV Jungle Adventure"><div class="body"><span class="tag">ATV</span><h3>Paradise Trip ATV Jungle Adventure</h3><p>ATV gjennom jungelstier, tropisk natur og utsiktspunkter i Phuket.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book ATV adventure →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/adrenaline-rush-show.jpg" alt="Adrenaline Rush Show"><div class="body"><span class="tag">Show</span><h3>Adrenaline Rush Show</h3><p>Action, stunt, lys og showopplevelse for grupper, par og familier.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book show →</a></div></article>
+<section class="section wrap">
+  <div class="kicker">Hotellguide</div>
+  <h2>Beste hotellvalg i Phuket</h2>
+  <p class="lead">Her ligger hotellene mer strategisk i guiden, med tekst som forklarer hvem de passer for. Legg inn affiliate-lenker etterpå der du har de beste Hotels.com/CJ-lenkene.</p>
+  <div class="grid">
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="InterContinental Phuket Resort">
+        <div>
+          <span class="tag">Kamala</span>
+          <h3>InterContinental Phuket Resort</h3>
+          <p>Et av Phukets mest elegante strandhoteller. Passer for par og luksusreisende som vil ha ro, strand og høy standard.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="SAii Laguna Phuket">
+        <div>
+          <span class="tag">Bang Tao / Laguna</span>
+          <h3>SAii Laguna Phuket</h3>
+          <p>Familievennlig premium-resort i Laguna-området med strand, basseng og kort vei til restauranter og beach clubs.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="Sunwing Kamala Beach">
+        <div>
+          <span class="tag">Kamala</span>
+          <h3>Sunwing Kamala Beach</h3>
+          <p>Et smart valg for barnefamilier som vil bo direkte ved stranden med aktiviteter, basseng og enkel feriehverdag.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="Splash Jungle Waterpark Resort">
+        <div>
+          <span class="tag">Mai Khao</span>
+          <h3>Splash Jungle Waterpark Resort</h3>
+          <p>Passer best for familier som vil kombinere hotellopphold med vannpark og kort vei til flyplassen.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="The Shore at Katathani">
+        <div>
+          <span class="tag">Kata Noi</span>
+          <h3>The Shore at Katathani</h3>
+          <p>Romantisk adults-only resort med private pool villas og utsikt. Et av de beste valgene for honeymoon.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/amari-phuket-v22.jpg" alt="Amari Phuket">
+        <div>
+          <span class="tag">Patong</span>
+          <h3>Amari Phuket</h3>
+          <p>Ligger roligere til enn mye annet i Patong, men fortsatt nær shopping, restauranter og natteliv.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="The Nai Harn">
+        <div>
+          <span class="tag">Nai Harn</span>
+          <h3>The Nai Harn</h3>
+          <p>Et ikonisk hotell for deg som ønsker en vakker strand, roligere atmosfære og premiumfølelse sør på øya.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="Twinpalms Phuket">
+        <div>
+          <span class="tag">Surin</span>
+          <h3>Twinpalms Phuket</h3>
+          <p>Stilrent boutique-hotell nær Surin Beach. Passer for voksne reisende som vil ha design, mat og beach club-stemning.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="Keemala Phuket">
+        <div>
+          <span class="tag">Kamala Hills</span>
+          <h3>Keemala Phuket</h3>
+          <p>Unikt jungelhotell med private villaer og wow-faktor. Perfekt for romantisk ferie og spesielle anledninger.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="Trisara Phuket">
+        <div>
+          <span class="tag">Nordvest Phuket</span>
+          <h3>Trisara Phuket</h3>
+          <p>Et av Phukets mest eksklusive resorts med privat preg, villaer, fine dining og ekstremt høyt servicenivå.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Rosewood Phuket">
+        <div>
+          <span class="tag">Emerald Bay</span>
+          <h3>Rosewood Phuket</h3>
+          <p>Diskré luksus med private villaer, moderne design og fantastisk resortfølelse. Passer for deg som vil ha det aller beste.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="COMO Point Yamu">
+        <div>
+          <span class="tag">Cape Yamu</span>
+          <h3>COMO Point Yamu</h3>
+          <p>Designhotell med utsikt mot Phang Nga Bay. Et godt valg for ro, spa og en mer voksen premiumferie.</p>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="Anantara Layan Phuket">
+        <div>
+          <span class="tag">Layan Beach</span>
+          <h3>Anantara Layan Phuket</h3>
+          <p>Elegant resort ved en roligere strand nordvest på øya. Passer for familier, par og luksusreisende.</p>
+        </div>
+      </article>
+    
   </div>
 </section>
 
-<section class="wrap">
-  <div class="section-head"><div><div class="kicker">Family Phuket</div><h2>Water Parks, Aquarium & Family Fun</h2></div></div>
-  <div class="phuket-final-grid">
-    <article class="phuket-final-card"><img src="/assets/phuket-live/andamanda-water-park.jpg" alt="Andamanda Water Park"><div class="body"><span class="tag">Water park</span><h3>Andamanda Water Park</h3><p>Stor vannpark med sklier, lazy river, pools og heldagsaktivitet for familier.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book tickets →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/aquaria-phuket.jpg" alt="Aquaria Phuket"><div class="body"><span class="tag">Aquarium</span><h3>Aquaria Phuket</h3><p>Undervannstunneler, haier, rokker og marine opplevelser for barn og voksne.</p><a href="https://klook.tpx.gr/r68uj8W6" target="_blank" rel="sponsored noopener">Visit Aquaria →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/club-med-phuket.jpg" alt="Club Med Phuket Resort Pass"><div class="body"><span class="tag">All inclusive</span><h3>Club Med Phuket Resort Pass</h3><p>All inclusive resort-opplevelse med strand, aktiviteter, familievennlig komfort og resort life.</p><a href="https://klook.tpx.gr/D5aUFyCz" target="_blank" rel="sponsored noopener">Explore Club Med →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/elephant-nature-reserve.jpg" alt="Elephant Nature Reserve"><div class="body"><span class="tag">Nature</span><h3>Elephant Nature Reserve</h3><p>Roligere og mer etisk elefantopplevelse i naturlige omgivelser.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book elephant experience →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/egokart.jpg" alt="Phuket Outdoor Arena E-GoKart"><div class="body"><span class="tag">Fun</span><h3>Phuket Outdoor Arena E-GoKart</h3><p>Elektrisk gokart, racing og sosial aktivitet for familier, venner og tenåringer.</p><a href="https://klook.tpx.gr/mYadBDdR" target="_blank" rel="sponsored noopener">Race now →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/somnam-watersports.jpg" alt="Somnam Watersports at Patong Beach"><div class="body"><span class="tag">Watersports</span><h3>Somnam Watersports at Patong Beach</h3><p>Banana boat, jetski, parasailing og klassisk strandenergi i Patong.</p><a href="https://klook.tpx.gr/Wo9prJyt" target="_blank" rel="sponsored noopener">Beach activities →</a></div></article>
+<section class="section wrap">
+  <div class="kicker">Signature experiences</div>
+  <h2>Opplevelser som gjør Phuket spesiell</h2>
+  <p class="lead">Disse opplevelsene passer best når du vil gjøre mer enn å ligge på stranden. De er plassert tidlig i guiden fordi de gir Phuket-siden mer premium-følelse.</p>
+  <div class="grid">
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/yona-beach-club.jpg" alt="Yona Beach Club">
+        <div>
+          <h3>Yona Beach Club</h3>
+          <p>Flytende beach club med basseng, DJ-stemning og utsikt mot havet. Passer best for par, vennegjenger og deg som vil ha en mer eksklusiv dag på sjøen.</p>
+          <a class="btn" href="https://klook.tpx.gr/f6kFrA21" target="_blank" rel="nofollow sponsored noopener">Book Yona →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/dinner-in-the-sky.jpg" alt="Dinner in the Sky">
+        <div>
+          <h3>Dinner in the Sky</h3>
+          <p>En av Phukets mest spesielle middagsopplevelser. Du spiser høyt over bakken med utsikt, service og wow-faktor – perfekt som en overraskelse på parferie.</p>
+          <a class="btn" href="https://klook.tpx.gr/yw1463RM" target="_blank" rel="nofollow sponsored noopener">Book bord →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/tu-bar-sri-panwa.jpg" alt="Tu Bar Rooftop at Sri Panwa">
+        <div>
+          <h3>Tu Bar Rooftop at Sri Panwa</h3>
+          <p>Tu Bar på Sri Panwa er en av Phukets mest ikoniske sunset-spots. Her får du loungefølelse, cocktails og panoramautsikt over Andamanhavet.</p>
+          <a class="btn" href="https://klook.tpx.gr/NJc8j6EK" target="_blank" rel="nofollow sponsored noopener">Se Tu Bar →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/three-monkeys.jpg" alt="Three Monkeys Restaurant">
+        <div>
+          <h3>Three Monkeys Restaurant</h3>
+          <p>Jungelrestaurant med unik arkitektur, tropisk atmosfære og gode fotomuligheter. Et fint valg når du vil kombinere middag med en opplevelse.</p>
+          <a class="btn" href="https://klook.tpx.gr/O8PhY1vO" target="_blank" rel="nofollow sponsored noopener">Se restaurant →</a>
+        </div>
+      </article>
+    
   </div>
 </section>
 
-<section class="wrap">
-  <div class="section-head"><div><div class="kicker">Wellness Phuket</div><h2>Spa, Massage & Tropical Retreats</h2></div></div>
-  <div class="phuket-final-grid">
-    <article class="phuket-final-card"><img src="/assets/phuket-live/oasis-spa-laguna.jpg" alt="Oasis Tropical Retreat Spa at Laguna"><div class="body"><span class="tag">Luxury spa</span><h3>Oasis Tropical Retreat Spa at Laguna</h3><p>Eksklusiv tropisk spaopplevelse ved Laguna med rolig resort-atmosfære.</p><a href="https://klook.tpx.gr/8TNYqHN4" target="_blank" rel="sponsored noopener">Book Oasis Spa →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/makkha-spa.jpg" alt="Makkha Health & Spa at Arches Patong"><div class="body"><span class="tag">Modern spa</span><h3>Makkha Health & Spa at Arches Patong</h3><p>Moderne wellness-spa med premium design, utsikt og rolig Patong-vibe.</p><a href="https://klook.tpx.gr/nGyRB5Ht" target="_blank" rel="sponsored noopener">Book Makkha Spa →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/kims-massage-spa.jpg" alt="Kim's Massage & Spa"><div class="body"><span class="tag">Thai massage</span><h3>Kim's Massage & Spa</h3><p>Thai massasje, aromatherapy og avslapning etter strand, shopping og nightlife.</p><a href="https://klook.tpx.gr/415j0kLg" target="_blank" rel="sponsored noopener">Book Kim's Spa →</a></div></article>
+<section class="section wrap">
+  <div class="kicker">Øyhopping</div>
+  <h2>Phi Phi, Maya Bay og Phang Nga Bay</h2>
+  <p class="lead">Phuket er en av de beste basene i Thailand for øyhopping. Velg katamaran eller mindre gruppe hvis du ønsker en roligere og mer eksklusiv opplevelse.</p>
+  <div class="note">Tips: Reiser du mellom november og april er havet ofte roligere. I regntiden kan turene fortsatt være fine, men vær mer fleksibel med datoer.</div>
+  <div class="grid">
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/luxury-catamaran.jpg" alt="Phi Phi, Maya & Maiton Luxury Catamaran">
+        <div>
+          <h3>Phi Phi, Maya & Maiton Luxury Catamaran</h3>
+          <p>En mer komfortabel måte å oppleve øyene på. Katamaran passer godt for par og familier som ønsker bedre plass, roligere tempo og en mer premium tur.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Book katamaran →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/james-bond-sunset.jpg" alt="James Bond & Phang Nga Luxury Sunset">
+        <div>
+          <h3>James Bond & Phang Nga Luxury Sunset</h3>
+          <p>Phang Nga Bay er kjent for dramatiske kalksteinsklipper, grotter og stille laguner. Sunset-tur gir en mer stemningsfull avslutning på dagen.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Se sunset cruise →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/phi-phi-snorkeling.jpg" alt="Phi Phi, Maya Bay, Khai & Snorkeling">
+        <div>
+          <h3>Phi Phi, Maya Bay, Khai & Snorkeling</h3>
+          <p>Klassisk Phuket-utflukt med snorkling, blått vann og ikoniske strender. Best i høysesong når sjøen er roligere.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Book øyhopping →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/phi-phi-bamboo.jpg" alt="Maya, Phi Phi & Bamboo Island">
+        <div>
+          <h3>Maya, Phi Phi & Bamboo Island</h3>
+          <p>Bamboo Island er ofte roligere og mer avslappet enn de mest kjente stoppene. En fin kombinasjon for deg som vil ha både bilder, snorkling og strandtid.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Se tur →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/phang-nga-6-islands.jpg" alt="7 Wonders of Phang Nga Bay">
+        <div>
+          <h3>7 Wonders of Phang Nga Bay</h3>
+          <p>En av de beste turene for deg som vil se naturen rundt Phuket uten at alt handler om strand. Her får du klipper, grotter, laguner og ekte Thailand-stemning.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Utforsk Phang Nga →</a>
+        </div>
+      </article>
+    
   </div>
 </section>
 
-<section class="wrap">
-  <div class="section-head"><div><div class="kicker">Nightlife & Lifestyle</div><h2>Beach Clubs, Boat Party & Dining</h2></div></div>
-  <div class="phuket-final-grid">
-    <article class="phuket-final-card"><img src="/assets/phuket-live/phuket-boat-party.jpg" alt="Phuket Boat Party"><div class="body"><span class="tag">Nightlife</span><h3>Phuket Boat Party</h3><p>DJ, sunset, foam party og sosial nightlife ute på havet.</p><a href="https://klook.tpx.gr/ZeUFFiBW" target="_blank" rel="sponsored noopener">Join boat party →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/chao-leh-kitchen.jpg" alt="Chao Leh Kitchen at Four Points"><div class="body"><span class="tag">Brunch</span><h3>Chao Leh Kitchen at Four Points</h3><p>Buffet, brunch og resort dining ved Four Points by Sheraton Phuket.</p><a href="https://www.klook.com/activity/51093-chao-leh-kitchen-four-points-sheraton-phuket/?spm=SearchResult.SearchResult_LIST&clickId=8b55887c47" target="_blank" rel="sponsored noopener">Explore Chao Leh →</a></div></article>
+<section class="section wrap">
+  <div class="kicker">Familie & fun</div>
+  <h2>Phuket med barn og ungdom</h2>
+  <p class="lead">Familiedelen er nå flyttet inn som en ekte guide med bilder og tekst, i stedet for korte duplikatbokser uten bilder.</p>
+  <div class="grid">
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/andamanda-water-park.jpg" alt="Andamanda Water Park">
+        <div>
+          <h3>Andamanda Water Park</h3>
+          <p>Phukets største vannpark med sklier, bassenger og familieaktiviteter. Et smart avbrekk fra strandlivet, spesielt for barn og ungdom.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Billetter →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/aquaria-phuket.jpg" alt="Aquaria Phuket">
+        <div>
+          <h3>Aquaria Phuket</h3>
+          <p>Innendørs akvarium med marine opplevelser, undervannstunneler og aktiviteter som passer fint på varme eller regnfulle dager.</p>
+          <a class="btn" href="https://klook.tpx.gr/r68uj8W6" target="_blank" rel="nofollow sponsored noopener">Besøk akvariet →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/club-med-phuket.jpg" alt="Club Med Phuket Resort Pass">
+        <div>
+          <h3>Club Med Phuket Resort Pass</h3>
+          <p>Dagspass kan være perfekt hvis du vil ha resort-følelse uten å bo på hotellet. Passer spesielt godt for familier som ønsker aktiviteter og komfort.</p>
+          <a class="btn" href="https://klook.tpx.gr/D5aUFyCz" target="_blank" rel="nofollow sponsored noopener">Se dagspass →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/elephant-nature-reserve.jpg" alt="Elephant Nature Reserve">
+        <div>
+          <h3>Elephant Nature Reserve</h3>
+          <p>En roligere naturopplevelse der familien kan lære mer om elefanter og dyreliv. Velg alltid seriøse aktører med fokus på dyrevelferd.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Se opplevelse →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/egokart.jpg" alt="Outdoor E-GoKart">
+        <div>
+          <h3>Outdoor E-GoKart</h3>
+          <p>Morsom aktivitet for familier, vennegjenger og ungdom som ønsker noe annet enn strand og basseng.</p>
+          <a class="btn" href="https://klook.tpx.gr/mYadBDdR" target="_blank" rel="nofollow sponsored noopener">Race now →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/somnam-watersports.jpg" alt="Patong Watersports">
+        <div>
+          <h3>Patong Watersports</h3>
+          <p>Banana boat, jetski og strandaktiviteter ved Patong. Passer best for deg som vil ha action og livlig beach energy.</p>
+          <a class="btn" href="https://klook.tpx.gr/Wo9prJyt" target="_blank" rel="nofollow sponsored noopener">Beach activities →</a>
+        </div>
+      </article>
+    
   </div>
 </section>
 
-<section class="wrap">
-  <div class="section-head"><div><div class="kicker">Airport & Arrival</div><h2>Phuket Airport Transfer & VIP Lounge</h2></div></div>
-  <div class="phuket-final-grid">
-    <article class="phuket-final-card"><img src="/assets/phuket-live/phuket-airport-transfer.jpg" alt="Private Phuket Airport Transfer"><div class="body"><span class="tag">Transfer</span><h3>Private Phuket Airport Transfer</h3><p>Privat transport fra Phuket lufthavn til Patong, Kata, Karon, Kamala, Bang Tao, Rawai og Nai Harn.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">Book transfer →</a></div></article>
-    <article class="phuket-final-card"><img src="/assets/phuket-live/airport-vip-lounge.jpg" alt="Phuket Airport VIP Lounge"><div class="body"><span class="tag">VIP airport</span><h3>Phuket Airport VIP Lounge</h3><p>Premium lounge og VIP-service før avreise eller etter ankomst i Phuket.</p><a href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="sponsored noopener">VIP access →</a></div></article>
+<section class="section wrap">
+  <div class="kicker">Jungle & action</div>
+  <h2>ATV, zipline og eventyr</h2>
+  <p class="lead">Når du trenger pause fra strandlivet, har Phuket mange aktiviteter i jungelen og åsene rundt Patong og Kathu.</p>
+  <div class="grid">
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/rafting-atv-zipline.jpg" alt="Rafting, ATV, Zipline & Jungle Tour">
+        <div>
+          <h3>Rafting, ATV, Zipline & Jungle Tour</h3>
+          <p>En aktiv dagstur for deg som vil kombinere jungel, fart og opplevelser. Passer best for vennegjenger og eventyrlystne reisende.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Book adventure →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/zipline-atv-patong.jpg" alt="Zipline & ATV at Patong Mountain View">
+        <div>
+          <h3>Zipline & ATV at Patong Mountain View</h3>
+          <p>Kort vei fra Patong, men en helt annen opplevelse. Her får du utsikt, ATV og zipline i samme pakke.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Book zipline →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/paradise-atv.jpg" alt="Paradise Trip ATV Jungle Adventure">
+        <div>
+          <h3>Paradise Trip ATV Jungle Adventure</h3>
+          <p>ATV i tropisk terreng er en fin kontrast til strandlivet. Passer for deg som ønsker litt mer action i Phuket-programmet.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Book ATV →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/adrenaline-rush-show.jpg" alt="Adrenaline Rush Show">
+        <div>
+          <h3>Adrenaline Rush Show</h3>
+          <p>Et show med tempo og action. Legg det gjerne til en kveld der du vil gjøre noe annet enn restaurant og bar.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Book show →</a>
+        </div>
+      </article>
+    
   </div>
 </section>
 
-<footer class="footer">© 2026 Billig-reiser.no</footer></body></html>
+<section class="section wrap">
+  <div class="kicker">Spa</div>
+  <h2>Massage, spa og tropical retreats</h2>
+  <p class="lead">Spa-opplevelser passer naturlig mellom strand, shopping og øyhopping. Denne delen bør være roligere i uttrykket og ikke føles som bare en linkliste.</p>
+  <div class="grid">
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/oasis-spa-laguna.jpg" alt="Oasis Tropical Retreat Spa at Laguna">
+        <div>
+          <h3>Oasis Tropical Retreat Spa at Laguna</h3>
+          <p>Et godt valg for deg som bor i Bang Tao eller Laguna-området. Rolig tropisk atmosfære og behandlinger som passer perfekt etter strand eller øyhopping.</p>
+          <a class="btn" href="https://klook.tpx.gr/8TNYqHN4" target="_blank" rel="nofollow sponsored noopener">Book Oasis Spa →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/makkha-spa.jpg" alt="Makkha Health & Spa at Arches Patong">
+        <div>
+          <h3>Makkha Health & Spa at Arches Patong</h3>
+          <p>Premium spa-opplevelse i Patong med moderne thai-design. Perfekt når du vil ha høy kvalitet, men fortsatt være nær restauranter og natteliv.</p>
+          <a class="btn" href="https://klook.tpx.gr/nGyRB5Ht" target="_blank" rel="nofollow sponsored noopener">Book Makkha Spa →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/kims-massage-spa.jpg" alt="Kim's Massage & Spa">
+        <div>
+          <h3>Kim's Massage & Spa</h3>
+          <p>Et lett tilgjengelig valg for klassisk massasje og avslapning. Fint for familier, par og deg som ønsker en enkel spa-pause.</p>
+          <a class="btn" href="https://klook.tpx.gr/415j0kLg" target="_blank" rel="nofollow sponsored noopener">Book Kim's Spa →</a>
+        </div>
+      </article>
+    
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="kicker">Mat, natteliv & praktisk</div>
+  <h2>Beach parties, dining og enklere reise</h2>
+  <p class="lead">Her samles opplevelser som passer best mot slutten av guiden: natteliv, restaurant, transport og VIP-lounge. Da blir siden mer ryddig og mindre rotete.</p>
+  <div class="grid">
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/phuket-boat-party.jpg" alt="Phuket Boat Party">
+        <div>
+          <h3>Phuket Boat Party</h3>
+          <p>Foam party, musikk og sunset-vibes på havet. Dette passer best for vennegjenger og deg som vil ha en mer sosial kveld i Phuket.</p>
+          <a class="btn" href="https://klook.tpx.gr/ZeUFFiBW" target="_blank" rel="nofollow sponsored noopener">Join party →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/chao-leh-kitchen.jpg" alt="Chao Leh Kitchen at Four Points">
+        <div>
+          <h3>Chao Leh Kitchen at Four Points</h3>
+          <p>Buffet og resort dining nær Patong Beach. Et praktisk valg hvis du vil ha enkel, komfortabel middag med mange valgmuligheter.</p>
+          <a class="btn" href="https://www.klook.com/activity/51093-chao-leh-kitchen-four-points-sheraton-phuket/?spm=SearchResult.SearchResult_LIST&clickId=share" target="_blank" rel="nofollow sponsored noopener">Se Chao Leh →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/phuket-airport-transfer.jpg" alt="Private Phuket Airport Transfer">
+        <div>
+          <h3>Private Phuket Airport Transfer</h3>
+          <p>Privat transport fra flyplassen gjør ankomsten enklere, spesielt for familier, sene flyvninger eller hvis du bor langt sør på øya.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">Book transfer →</a>
+        </div>
+      </article>
+    
+      <article class="guide-card">
+        <img src="assets/phuket-live/airport-vip-lounge.jpg" alt="Phuket Airport VIP Lounge">
+        <div>
+          <h3>Phuket Airport VIP Lounge</h3>
+          <p>Lounge og VIP-service kan være verdt det på hjemreisen, spesielt hvis du reiser med barn eller har lang ventetid.</p>
+          <a class="btn" href="https://www.getyourguide.no?partner_id=FIQDAEB&cmp=share_to_earn" target="_blank" rel="nofollow sponsored noopener">VIP access →</a>
+        </div>
+      </article>
+    
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="kicker">Når bør du reise?</div>
+  <h2>Beste tid for Phuket</h2>
+  <p class="lead">Den beste perioden er vanligvis november til april, med mest sol, roligere hav og best forhold for øyhopping. Mai til oktober kan gi lavere hotellpriser og færre turister, men været er mer ustabilt.</p>
+  <div class="grid">
+    <div class="info-card"><h3>November–april</h3><p>Beste periode for strand, båtturer, snorkling og solferie.</p></div>
+    <div class="info-card"><h3>Desember–februar</h3><p>Høysesong, høyere priser og mest folk – men også mest stabilt vær.</p></div>
+    <div class="info-card"><h3>Mai–oktober</h3><p>Billigere hoteller, grønnere natur og færre turister, men større sjanse for regn.</p></div>
+  </div>
+</section>
+</main>
+</body>
+</html>
