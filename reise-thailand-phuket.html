@@ -14,7 +14,7 @@ a{color:inherit}
 .brand-logo img{height:52px;max-width:220px;object-fit:contain}
 .mag-nav-links{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
 .mag-nav-links a{text-decoration:none;color:#e5e7eb;font-weight:700}
-.hero{min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 90px;background:linear-gradient(rgba(0,0,0,.16),rgba(0,0,0,.44)),url('assets/phuket-hero-premium.png') center center/cover no-repeat;border-radius:0 0 42px 42px}
+.hero{min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 90px;background:linear-gradient(rgba(0,0,0,.10),rgba(0,0,0,.34)),url('assets/phuket-hero-longtail.jpg') center center/cover no-repeat;border-radius:0 0 42px 42px}
 .kicker{letter-spacing:5px;color:var(--pink);font-weight:900;text-transform:uppercase}
 .hero h1{font-size:clamp(58px,10vw,120px);line-height:.9;margin:18px 0 22px}
 .hero p{font-size:clamp(19px,2.1vw,30px);line-height:1.65;max-width:950px;margin:0 auto;color:#f3f4f6;text-shadow:0 2px 20px rgba(0,0,0,.45)}
@@ -46,11 +46,17 @@ background:linear-gradient(90deg,#ff2bd6,#35c7ff);
 box-shadow:0 12px 35px rgba(255,79,216,.25);
 margin-top:12px;
 }
-align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration:none;font-weight:900;background:linear-gradient(90deg,#ff2bd6,#35c7ff);box-shadow:0 12px 35px rgba(255,79,216,.25)}
 .split{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
 .panel{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:30px;padding:34px}
 .panel ul{font-size:18px;line-height:1.9;color:var(--muted)}
 .note{border-left:4px solid var(--pink);padding:20px 24px;background:rgba(255,255,255,.04);border-radius:18px;color:#e5e7eb;font-size:18px;line-height:1.75}
+
+.quick-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.quick-links a{border:1px solid var(--line);background:rgba(255,255,255,.06);padding:11px 15px;border-radius:999px;text-decoration:none;font-weight:800;color:#f8fafc}
+.editorial-box{margin-top:28px;background:linear-gradient(135deg,rgba(255,79,216,.12),rgba(53,199,255,.08));border:1px solid var(--line);border-radius:30px;padding:30px}
+.editorial-box h3{margin:0 0 12px;font-size:28px}.editorial-box p{color:var(--muted);font-size:18px;line-height:1.75;margin:0}
+.area-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:26px}.area-list div{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:22px;padding:20px}.area-list b{color:#fff}.area-list p{margin:8px 0 0;color:var(--muted);line-height:1.55}
+
 @media(max-width:800px){.mag-nav{height:auto;padding:14px 18px;align-items:flex-start;gap:12px;flex-direction:column}.split{grid-template-columns:1fr}.section{padding:52px 0}.guide-card img{height:210px}}
 </style>
 </head>
@@ -69,7 +75,7 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
   <div>
     <div class="kicker">Phuket Premium Guide</div>
     <h1>Phuket</h1>
-    <p>Luksusresorts, beach clubs, øyhopping, spa, natteliv og noen av Thailands vakreste strender – samlet i én komplett guide.</p>
+    <p>Luksusresorts, beach clubs, øyhopping, spa, natteliv og noen av Thailands vakreste strender – samlet i en ryddig guide for deg som vil velge riktig område, hotell og opplevelser.</p>
   </div>
 </header>
 
@@ -77,11 +83,19 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
 <section class="section wrap">
   <div class="kicker">Derfor reise til Phuket</div>
   <h2>En øy med mange ferier i én</h2>
-  <p class="lead">Phuket er ikke bare én type reisemål. Øya kan være rolig luksusferie i Kamala, familieferie i Kata, beach club-liv i Bang Tao, natteliv i Patong eller romantisk honeymoon i en privat pool villa. Det viktigste er å velge riktig område – da blir Phuket mye bedre.</p>
+  <p class="lead">Phuket er ikke bare én type reisemål. Øya kan være rolig luksusferie i Kamala, familieferie i Kata og Karon, beach club-liv i Bang Tao, natteliv i Patong eller romantisk honeymoon i en privat pool villa. Velger du riktig område først, blir hotellvalget, transporten og hele ferien mye enklere.</p>
   <div class="grid">
     <div class="info-card"><h3>Strender & områder</h3><p>Fra livlige Patong til rolige Nai Harn, Kata Noi, Surin og Bang Tao. Hvert område har sin egen stemning.</p></div>
     <div class="info-card"><h3>Hoteller for alle</h3><p>Phuket har alt fra familievennlige resorts til noen av Thailands mest eksklusive luksushoteller.</p></div>
     <div class="info-card"><h3>Opplevelser</h3><p>Øyhopping, Phang Nga Bay, spa, beach clubs, jungelturer, vannparker og rooftopbarer gjør øya komplett.</p></div>
+  </div>
+  <div class="quick-links">
+    <a href="#hoteller">Hoteller</a>
+    <a href="#beachclubs">Beach clubs</a>
+    <a href="#oyhopping">Øyhopping</a>
+    <a href="#familie">Familie</a>
+    <a href="#spa">Spa</a>
+    <a href="#praktisk">Praktisk</a>
   </div>
 </section>
 
@@ -104,10 +118,25 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
   </div>
 </section>
 
+
 <section class="section wrap">
+  <div class="kicker">Velg riktig base</div>
+  <h2>Phuket blir best når du bor riktig</h2>
+  <p class="lead">De fleste feilbestillinger på Phuket handler ikke om hotellet, men om området. Her er den raske fasiten før du bestemmer deg.</p>
+  <div class="area-list">
+    <div><b>Kamala</b><p>Roligere luksus, par, strand og kort vei til Café del Mar.</p></div>
+    <div><b>Bang Tao / Laguna</b><p>Premium familieferie, beach clubs, restauranter og store resorts.</p></div>
+    <div><b>Kata / Karon</b><p>Trygt førstegangsvalg med strand, mat, shopping og familier.</p></div>
+    <div><b>Patong</b><p>For deg som vil ha natteliv, shopping, action og mest puls.</p></div>
+    <div><b>Nai Harn / Rawai</b><p>Mer lokal følelse, fin strand, roligere kvelder og gode dagsturer.</p></div>
+  </div>
+  <div class="editorial-box"><h3>Vårt tips</h3><p>Skal du ha én uke i Phuket, kombiner gjerne to områder: 3–4 netter i Bang Tao eller Kamala for komfort og beach clubs, og 2–3 netter nær Kata, Nai Harn eller Rawai for strender, utsiktspunkt og båtturer.</p></div>
+</section>
+
+<section class="section wrap" id="hoteller">
   <div class="kicker">Hotellguide</div>
   <h2>Beste hotellvalg i Phuket</h2>
-  <p class="lead">Her ligger hotellene mer strategisk i guiden, med tekst som forklarer hvem de passer for. Legg inn affiliate-lenker etterpå der du har de beste Hotels.com/CJ-lenkene.</p>
+  <p class="lead">Phuket har enorme forskjeller fra område til område. Her er et kuratert utvalg hoteller som dekker familieferie, honeymoon, beach clubs, villa-luksus og klassisk strandferie – med tydelig forklaring på hvem hvert hotell passer best for.</p>
   <div class="grid">
     
       <article class="guide-card">
@@ -288,7 +317,7 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
   </div>
 </section>
 
-<section class="section wrap">
+<section class="section wrap" id="oyhopping">
   <div class="kicker">Øyhopping</div>
   <h2>Phi Phi, Maya Bay og Phang Nga Bay</h2>
   <p class="lead">Phuket er en av de beste basene i Thailand for øyhopping. Velg katamaran eller mindre gruppe hvis du ønsker en roligere og mer eksklusiv opplevelse.</p>
@@ -343,7 +372,7 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
   </div>
 </section>
 
-<section class="section wrap">
+<section class="section wrap" id="familie">
   <div class="kicker">Familie & fun</div>
   <h2>Phuket med barn og ungdom</h2>
   <p class="lead">Familiedelen er nå flyttet inn som en ekte guide med bilder og tekst, i stedet for korte duplikatbokser uten bilder.</p>
@@ -451,7 +480,7 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
   </div>
 </section>
 
-<section class="section wrap">
+<section class="section wrap" id="spa">
   <div class="kicker">Spa</div>
   <h2>Massage, spa og tropical retreats</h2>
   <p class="lead">Spa-opplevelser passer naturlig mellom strand, shopping og øyhopping. Denne delen bør være roligere i uttrykket og ikke føles som bare en linkliste.</p>
@@ -545,7 +574,7 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
   </div>
 </section>
 
-<section class="section wrap">
+<section class="section wrap" id="praktisk">
   <div class="kicker">Når bør du reise?</div>
   <h2>Beste tid for Phuket</h2>
   <p class="lead">Den beste perioden er vanligvis november til april, med mest sol, roligere hav og best forhold for øyhopping. Mai til oktober kan gi lavere hotellpriser og færre turister, men været er mer ustabilt.</p>
@@ -555,6 +584,20 @@ align-items:center;gap:8px;padding:13px 19px;border-radius:999px;text-decoration
     <div class="info-card"><h3>Mai–oktober</h3><p>Billigere hoteller, grønnere natur og færre turister, men større sjanse for regn.</p></div>
   </div>
 </section>
+<section class="section wrap">
+  <div class="kicker">Reis videre</div>
+  <h2>Kombiner Phuket med flere Thailand-guider</h2>
+  <p class="lead">Phuket fungerer perfekt som startpunkt for Sør-Thailand. Bygg reisen videre med øyer, storby og stranddestinasjoner i samme magasin.</p>
+  <div class="quick-links">
+    <a href="reise-thailand-krabi.html">Krabi</a>
+    <a href="reise-thailand-koh-lipe.html">Koh Lipe</a>
+    <a href="reise-thailand-koh-samui.html">Koh Samui</a>
+    <a href="reise-thailand-koh-phangan.html">Koh Phangan</a>
+    <a href="reise-thailand-koh-tao.html">Koh Tao</a>
+    <a href="bangkok.html">Bangkok</a>
+  </div>
+</section>
+
 </main>
 </body>
 </html>
