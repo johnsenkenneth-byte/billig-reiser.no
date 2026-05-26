@@ -120,6 +120,35 @@ margin-top:12px;
   .lux-hotel-media,.lux-main-img{min-height:275px !important;}
 }
 
+/* Fix: remove hotel image flicker/blinking on scroll/hover */
+.lux-hotel-feature,
+.lux-hotel-media,
+.lux-hotel-gallery,
+.lux-hotel-copy{
+  transform:none !important;
+  transition:none !important;
+  animation:none !important;
+}
+.lux-main-img,
+.lux-hotel-gallery img{
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+  transition:none !important;
+  animation:none !important;
+  filter:none !important;
+  backface-visibility:hidden !important;
+  -webkit-backface-visibility:hidden !important;
+  will-change:auto !important;
+  contain:paint !important;
+}
+.lux-hotel-feature:hover,
+.lux-hotel-feature:hover .lux-main-img,
+.lux-hotel-feature:hover .lux-hotel-gallery img{
+  transform:none !important;
+  filter:none !important;
+}
+
 </style>
 </head>
 <body>
@@ -211,13 +240,13 @@ margin-top:12px;
 <div class="lux-hotel-list">
 <article class="lux-hotel-feature" id="phuket-hotel-1">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="InterContinental Phuket Resort" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="InterContinental Phuket Resort" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="InterContinental Phuket Resort galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="InterContinental Phuket Resort galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="InterContinental Phuket Resort galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="InterContinental Phuket Resort galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="InterContinental Phuket Resort galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="InterContinental Phuket Resort galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Kamala</span>
@@ -235,13 +264,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-2">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="SAii Laguna Phuket" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="SAii Laguna Phuket" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="SAii Laguna Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="SAii Laguna Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="SAii Laguna Phuket galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="SAii Laguna Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="SAii Laguna Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="SAii Laguna Phuket galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Bang Tao / Laguna</span>
@@ -259,13 +288,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-3">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="Sunwing Kamala Beach" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="Sunwing Kamala Beach" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="Sunwing Kamala Beach galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="Sunwing Kamala Beach galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/amari-phuket-v22.jpg" alt="Sunwing Kamala Beach galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="Sunwing Kamala Beach galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="Sunwing Kamala Beach galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/amari-phuket-v22.jpg" alt="Sunwing Kamala Beach galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Kamala</span>
@@ -283,13 +312,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-4">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="Splash Jungle Waterpark Resort" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg" alt="Splash Jungle Waterpark Resort" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="Splash Jungle Waterpark Resort galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/amari-phuket-v22.jpg" alt="Splash Jungle Waterpark Resort galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="Splash Jungle Waterpark Resort galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="Splash Jungle Waterpark Resort galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/amari-phuket-v22.jpg" alt="Splash Jungle Waterpark Resort galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="Splash Jungle Waterpark Resort galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Mai Khao</span>
@@ -307,13 +336,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-5">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="The Shore at Katathani" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/the-shore-katathani-v22.jpg" alt="The Shore at Katathani" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/amari-phuket-v22.jpg" alt="The Shore at Katathani galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="The Shore at Katathani galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="The Shore at Katathani galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/amari-phuket-v22.jpg" alt="The Shore at Katathani galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="The Shore at Katathani galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="The Shore at Katathani galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Kata Noi</span>
@@ -331,13 +360,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-6">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/amari-phuket-v22.jpg" alt="Amari Phuket" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/amari-phuket-v22.jpg" alt="Amari Phuket" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="Amari Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="Amari Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="Amari Phuket galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="Amari Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="Amari Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="Amari Phuket galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Patong</span>
@@ -355,13 +384,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-7">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="The Nai Harn" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg" alt="The Nai Harn" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="The Nai Harn galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="The Nai Harn galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="The Nai Harn galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="The Nai Harn galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="The Nai Harn galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="The Nai Harn galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Nai Harn</span>
@@ -379,13 +408,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-8">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="Twinpalms Phuket" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/twinpalms-phuket-v22.jpg" alt="Twinpalms Phuket" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="Twinpalms Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="Twinpalms Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Twinpalms Phuket galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="Twinpalms Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="Twinpalms Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Twinpalms Phuket galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Surin</span>
@@ -403,13 +432,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-9">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="Keemala Phuket" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/keemala-phuket-v22.jpg" alt="Keemala Phuket" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="Keemala Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Keemala Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="Keemala Phuket galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="Keemala Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Keemala Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="Keemala Phuket galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Kamala Hills</span>
@@ -427,13 +456,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-10">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="Trisara Phuket" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/trisara-phuket-v22.jpg" alt="Trisara Phuket" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Trisara Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="Trisara Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="Trisara Phuket galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Trisara Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="Trisara Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="Trisara Phuket galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Nordvest Phuket</span>
@@ -451,13 +480,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-11">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Rosewood Phuket" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/rosewood-phuket-v22.jpg" alt="Rosewood Phuket" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="Rosewood Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="Rosewood Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="Rosewood Phuket galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="Rosewood Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="Rosewood Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="Rosewood Phuket galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Emerald Bay</span>
@@ -475,13 +504,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-12">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="COMO Point Yamu" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/como-point-yamu-v22.jpg" alt="COMO Point Yamu" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="COMO Point Yamu galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="COMO Point Yamu galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="COMO Point Yamu galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="COMO Point Yamu galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="COMO Point Yamu galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="COMO Point Yamu galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Cape Yamu</span>
@@ -499,13 +528,13 @@ margin-top:12px;
 </article>
 <article class="lux-hotel-feature" id="phuket-hotel-13">
   <div class="lux-hotel-media">
-    <img class="lux-main-img" src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="Anantara Layan Phuket" loading="lazy" decoding="async"/>
+    <img class="lux-main-img" src="assets/phuket/cards/anantara-layan-phuket-v22.jpg" alt="Anantara Layan Phuket" loading="eager" decoding="async"/>
     <div class="lux-rating"><strong>★ 9+</strong><span>Premiumvalg</span></div>
   </div>
   <div class="lux-hotel-gallery">
-    <img src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="Anantara Layan Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="Anantara Layan Phuket galleri" loading="lazy" decoding="async"/>
-    <img src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="Anantara Layan Phuket galleri" loading="lazy" decoding="async"/>
+    <img src="assets/phuket/cards/intercontinental-phuket-v22.jpg" alt="Anantara Layan Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/saii-laguna-phuket-v22.jpg" alt="Anantara Layan Phuket galleri" loading="eager" decoding="async"/>
+    <img src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg" alt="Anantara Layan Phuket galleri" loading="eager" decoding="async"/>
   </div>
   <div class="lux-hotel-copy">
     <span class="tag">Layan Beach</span>
