@@ -9,6 +9,11 @@
 <style>
 :root{--bg:#07101f;--panel:#101b2e;--text:#f8fafc;--muted:#cbd5e1;--pink:#ff4fd8;--blue:#35c7ff;--line:rgba(255,255,255,.13)}
 *{box-sizing:border-box}
+
+html{scroll-behavior:smooth;scroll-padding-top:128px}
+section[id],article[id]{scroll-margin-top:128px}
+.anchor-scroll-buffer{height:42vh;min-height:260px}
+@media(max-width:900px){html{scroll-padding-top:28px}section[id],article[id]{scroll-margin-top:28px}.anchor-scroll-buffer{height:22vh;min-height:140px}}
 body{margin:0;background:radial-gradient(circle at 20% 0%,rgba(53,199,255,.13),transparent 30%),linear-gradient(180deg,#07101f,#0b1220 55%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif}
 a{color:inherit}
 .mag-nav{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(7,15,28,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;backdrop-filter:blur(14px)}
@@ -82,6 +87,39 @@ margin-top:12px;
 /* Phuket premium hotel layout - Bangkok style */
 .hotel-luxury-intro{padding-top:74px}.lux-hotel-list{display:grid;gap:34px;margin-top:34px}.lux-hotel-feature{display:grid;grid-template-columns:minmax(300px,.95fr) .38fr minmax(360px,1.05fr);align-items:stretch;background:linear-gradient(135deg,rgba(16,27,46,.96),rgba(7,16,31,.98));border:1px solid rgba(255,209,102,.22);border-radius:30px;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.35)}.lux-hotel-feature:nth-child(even){grid-template-columns:minmax(360px,1.05fr) .38fr minmax(300px,.95fr)}.lux-hotel-feature:nth-child(even) .lux-hotel-copy{grid-column:1;grid-row:1}.lux-hotel-feature:nth-child(even) .lux-hotel-gallery{grid-column:2;grid-row:1}.lux-hotel-feature:nth-child(even) .lux-hotel-media{grid-column:3;grid-row:1}.lux-hotel-media{position:relative;min-height:390px;max-height:520px;overflow:hidden;background:#07101f}.lux-main-img{width:100%;height:100%;min-height:390px;max-height:520px;object-fit:cover;object-position:center;display:block}.lux-rating{position:absolute;top:20px;left:20px;background:rgba(5,8,14,.88);border:1px solid rgba(255,209,102,.28);border-radius:18px;padding:14px 16px;box-shadow:0 16px 40px rgba(0,0,0,.32)}.lux-rating strong{display:block;color:#ffd166;font-size:1.35rem}.lux-rating span{display:block;color:#e8eef7;font-size:.84rem;margin-top:4px}.lux-hotel-gallery{display:grid;grid-template-rows:repeat(3,1fr);gap:6px;padding:6px;background:rgba(0,0,0,.18)}.lux-hotel-gallery img{width:100%;height:100%;min-height:125px;object-fit:cover;object-position:center;display:block;border-radius:12px}.lux-hotel-copy{padding:clamp(24px,3vw,42px);display:flex;flex-direction:column;justify-content:center}.lux-hotel-copy h3{font-size:clamp(2rem,3vw,3.4rem);line-height:.98;margin:14px 0 16px;font-family:Georgia,serif;color:#fff}.lux-intro{font-size:1.08rem;line-height:1.75;color:#d8e2ef}.lux-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin:20px 0;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden}.lux-facts div{padding:16px;background:rgba(7,16,31,.6)}.lux-facts span{display:block;color:#ffd166;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}.lux-facts strong{display:block;color:#fff;font-size:.95rem;line-height:1.35}.lux-why{border:1px solid rgba(255,209,102,.18);background:rgba(255,209,102,.055);border-radius:18px;padding:18px 20px;margin-bottom:18px}.lux-why h4{margin:0 0 10px;color:#ffd166;letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}.lux-why ul{margin:0;padding-left:18px;color:#e7edf6;line-height:1.85}.lux-cta{align-self:flex-start;background:linear-gradient(135deg,#e5b95d,#a87824)!important;color:#111827!important;border:0!important;padding:14px 22px!important;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.family-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.family-meta span{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);border-radius:14px;padding:10px;color:#dbe4f0;font-size:14px}.family-meta b{display:block;color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}@media(max-width:1050px){.lux-hotel-feature,.lux-hotel-feature:nth-child(even){grid-template-columns:1fr}.lux-hotel-feature:nth-child(even) .lux-hotel-copy,.lux-hotel-feature:nth-child(even) .lux-hotel-gallery,.lux-hotel-feature:nth-child(even) .lux-hotel-media{grid-column:auto;grid-row:auto}.lux-hotel-media,.lux-main-img{min-height:300px;max-height:360px}.lux-hotel-gallery{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr}.lux-hotel-gallery img{min-height:105px;max-height:135px}.lux-hotel-copy{padding:24px}}@media(max-width:650px){.lux-hotel-gallery{display:none}.lux-facts,.family-meta{grid-template-columns:1fr}.lux-hotel-copy h3{font-size:2rem}.lux-hotel-media,.lux-main-img{min-height:280px}}
 
+
+/* Final Phuket hotel image fit: Bangkok-style large hero with thumbnails below */
+.lux-hotel-feature,
+.lux-hotel-feature:nth-child(even){
+  display:grid !important;
+  grid-template-columns:minmax(420px,1.08fr) minmax(360px,.92fr) !important;
+  grid-template-rows:auto auto !important;
+  align-items:stretch !important;
+}
+.lux-hotel-feature:nth-child(even) .lux-hotel-copy,
+.lux-hotel-copy{grid-column:2 !important;grid-row:1 / span 2 !important;}
+.lux-hotel-feature:nth-child(even) .lux-hotel-media,
+.lux-hotel-media{grid-column:1 !important;grid-row:1 !important;min-height:420px !important;max-height:none !important;border-radius:0 !important;}
+.lux-main-img{height:100% !important;min-height:420px !important;max-height:none !important;object-fit:cover !important;object-position:center center !important;}
+.lux-hotel-feature:nth-child(even) .lux-hotel-gallery,
+.lux-hotel-gallery{grid-column:1 !important;grid-row:2 !important;display:grid !important;grid-template-columns:repeat(3,1fr) !important;grid-template-rows:1fr !important;gap:12px !important;padding:12px !important;background:rgba(7,16,31,.72) !important;}
+.lux-hotel-gallery img{height:150px !important;min-height:150px !important;max-height:150px !important;border-radius:18px !important;object-fit:cover !important;object-position:center center !important;}
+.lux-hotel-copy{padding:clamp(34px,4vw,58px) !important;justify-content:center !important;}
+@media(max-width:1050px){
+  .lux-hotel-feature,.lux-hotel-feature:nth-child(even){grid-template-columns:1fr !important;grid-template-rows:auto !important;}
+  .lux-hotel-copy,.lux-hotel-feature:nth-child(even) .lux-hotel-copy,
+  .lux-hotel-media,.lux-hotel-feature:nth-child(even) .lux-hotel-media,
+  .lux-hotel-gallery,.lux-hotel-feature:nth-child(even) .lux-hotel-gallery{grid-column:1 !important;grid-row:auto !important;}
+  .lux-hotel-media,.lux-main-img{min-height:320px !important;}
+  .lux-hotel-gallery{grid-template-columns:repeat(3,1fr) !important;}
+  .lux-hotel-gallery img{height:120px !important;min-height:120px !important;max-height:120px !important;}
+}
+@media(max-width:650px){
+  .lux-hotel-gallery{display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:8px !important;padding:8px !important;}
+  .lux-hotel-gallery img{height:82px !important;min-height:82px !important;max-height:82px !important;border-radius:12px !important;}
+  .lux-hotel-media,.lux-main-img{min-height:275px !important;}
+}
+
 </style>
 </head>
 <body>
@@ -109,7 +147,7 @@ margin-top:12px;
 <h2 class="premium-title">Velg riktig Phuket – før du bestiller.</h2>
 <p class="premium-copy">Phuket kan være femstjerners strandferie, rolig familieresort, honeymoon-villa, partyhelg i Patong eller øyhopping i verdensklasse. Denne guiden er bygget for å gjøre valget enkelt: først område, så hotell, så opplevelser.</p>
 <div class="premium-pills">
-<a href="#hoteller">Hoteller</a><a href="#beachclubs">Beach clubs</a><a href="#oyhopping">Øyhopping</a><a href="#familie">Familie</a><a href="#spa">Spa</a><a href="#praktisk">Beste tid</a>
+<a href="#hoteller">Hoteller</a><a href="#beachclubs">Beach clubs</a><a href="#oyhopping">Øyhopping</a><a href="#familie">Familie</a><a href="#eventyr">Eventyr</a><a href="#spa">Spa</a><a href="#praktisk">Beste tid</a>
 </div>
 </div>
 <div class="premium-checklist">
@@ -120,7 +158,7 @@ margin-top:12px;
 </div>
 </div>
 <nav class="phuket-sticky">
-<a href="#hoteller">Hoteller</a><a href="#beachclubs">Beach clubs</a><a href="#oyhopping">Øyhopping</a><a href="#familie">Familie</a><a href="#eventyr">Eventyr</a><a href="#spa">Spa</a><a href="#praktisk">Praktisk</a>
+<a href="#hoteller">Hoteller</a><a href="#beachclubs">Beach clubs</a><a href="#oyhopping">Øyhopping</a><a href="#familie">Familie</a><a href="#eventyr">Eventyr</a><a href="#spa">Spa</a><a href="#praktisk">Beste tid</a>
 </nav>
 </section>
 <section class="section wrap">
@@ -770,6 +808,7 @@ margin-top:12px;
 <a href="bangkok.html">Bangkok</a>
 </div>
 </section>
+<div class="anchor-scroll-buffer" aria-hidden="true"></div>
 </main>
 </body>
 </html>
