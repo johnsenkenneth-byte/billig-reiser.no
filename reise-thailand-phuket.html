@@ -58,6 +58,22 @@ margin-top:12px;
 .editorial-box h3{margin:0 0 12px;font-size:28px}.editorial-box p{color:var(--muted);font-size:18px;line-height:1.75;margin:0}
 .area-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:26px}.area-list div{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:22px;padding:20px}.area-list b{color:#fff}.area-list p{margin:8px 0 0;color:var(--muted);line-height:1.55}
 
+
+.phuket-premium-shell{margin-top:-34px;position:relative;z-index:4}
+.premium-glass{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.16);border-radius:34px;padding:34px;box-shadow:0 28px 90px rgba(0,0,0,.35);backdrop-filter:blur(18px)}
+.premium-row{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:center}
+.premium-title{font-size:clamp(34px,5vw,68px);line-height:.98;margin:0 0 18px;letter-spacing:-.05em}
+.premium-copy{font-size:20px;line-height:1.8;color:var(--muted);margin:0}
+.premium-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.premium-pills a,.premium-pills span{padding:11px 15px;border-radius:999px;text-decoration:none;font-weight:900;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+.premium-checklist{display:grid;gap:12px}.premium-checklist div{padding:16px;border-radius:20px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);color:#e8eef8;line-height:1.55}.premium-checklist b{color:white}
+.phuket-sticky{position:sticky;top:74px;z-index:40;background:rgba(7,16,31,.76);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:10px;margin:24px auto 0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.phuket-sticky a{font-size:14px;text-decoration:none;font-weight:950;padding:10px 14px;border-radius:999px;color:#f8fafc}.phuket-sticky a:hover{background:linear-gradient(90deg,rgba(255,79,216,.28),rgba(53,199,255,.22))}
+.signature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}.signature-card{min-height:230px;border-radius:28px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.14);background:#111}.signature-card:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 10%,rgba(0,0,0,.78));z-index:1}.signature-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.signature-card div{position:absolute;z-index:2;left:20px;right:20px;bottom:20px}.signature-card h3{margin:0 0 8px;font-size:22px}.signature-card p{margin:0;color:#dbe4f0;line-height:1.5}
+.lux-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,79,216,.5),rgba(53,199,255,.45),transparent);margin:8px 0 38px}
+.guide-card{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.guide-card:hover{transform:translateY(-6px);border-color:rgba(255,79,216,.35);box-shadow:0 28px 90px rgba(0,0,0,.38)}
+.info-card{transition:transform .22s ease,border-color .22s ease}.info-card:hover{transform:translateY(-4px);border-color:rgba(53,199,255,.32)}
+@media(max-width:900px){.premium-row{grid-template-columns:1fr}.signature-grid{grid-template-columns:1fr 1fr}.phuket-sticky{position:relative;top:auto;border-radius:24px}.hero{min-height:68vh}.premium-glass{padding:24px}}
+@media(max-width:560px){.signature-grid{grid-template-columns:1fr}.premium-copy{font-size:18px}.phuket-sticky a{width:100%;text-align:center}}
+
 @media(max-width:800px){.mag-nav{height:auto;padding:14px 18px;align-items:flex-start;gap:12px;flex-direction:column}.split{grid-template-columns:1fr}.section{padding:52px 0}.guide-card img{height:210px}}
 
 .master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
@@ -77,26 +93,40 @@ margin-top:12px;
 <div>
 <div class="kicker">Phuket Premium Guide</div>
 <h1>Phuket</h1>
-<p>Luksusresorts, beach clubs, øyhopping, spa, natteliv og noen av Thailands vakreste strender – samlet i en ryddig guide for deg som vil velge riktig område, hotell og opplevelser.</p>
+<p>Phuket gjort som premium reiseguide: riktige områder, de beste hotellene, beach clubs, øyhopping, familieopplevelser, spa og smarte valg – samlet på én ryddig side.</p>
 </div>
 </header>
 <main>
+<section class="section wrap phuket-premium-shell">
+<div class="premium-glass premium-row">
+<div>
+<div class="kicker">Phuket premium guide</div>
+<h2 class="premium-title">Velg riktig Phuket – før du bestiller.</h2>
+<p class="premium-copy">Phuket kan være femstjerners strandferie, rolig familieresort, honeymoon-villa, partyhelg i Patong eller øyhopping i verdensklasse. Denne guiden er bygget for å gjøre valget enkelt: først område, så hotell, så opplevelser.</p>
+<div class="premium-pills">
+<a href="#hoteller">Hoteller</a><a href="#beachclubs">Beach clubs</a><a href="#oyhopping">Øyhopping</a><a href="#familie">Familie</a><a href="#spa">Spa</a><a href="#praktisk">Beste tid</a>
+</div>
+</div>
+<div class="premium-checklist">
+<div><b>Best for luksus:</b> Kamala, Surin, Bang Tao og private pool villas.</div>
+<div><b>Best for familier:</b> Kata, Karon, Laguna og resorter med stor bassengsone.</div>
+<div><b>Best for opplevelser:</b> Phang Nga Bay, Phi Phi, Maya Bay, ATV, zipline og spa.</div>
+<div><b>Best for puls:</b> Patong, beach clubs, rooftop, båtfester og shopping.</div>
+</div>
+</div>
+<nav class="phuket-sticky">
+<a href="#hoteller">Hoteller</a><a href="#beachclubs">Beach clubs</a><a href="#oyhopping">Øyhopping</a><a href="#familie">Familie</a><a href="#eventyr">Eventyr</a><a href="#spa">Spa</a><a href="#praktisk">Praktisk</a>
+</nav>
+</section>
 <section class="section wrap">
 <div class="kicker">Derfor reise til Phuket</div>
 <h2>En øy med mange ferier i én</h2>
-<p class="lead">Phuket er ikke bare én type reisemål. Øya kan være rolig luksusferie i Kamala, familieferie i Kata og Karon, beach club-liv i Bang Tao, natteliv i Patong eller romantisk honeymoon i en privat pool villa. Velger du riktig område først, blir hotellvalget, transporten og hele ferien mye enklere.</p>
-<div class="grid">
-<div class="info-card"><h3>Strender &amp; områder</h3><p>Fra livlige Patong til rolige Nai Harn, Kata Noi, Surin og Bang Tao. Hvert område har sin egen stemning.</p></div>
-<div class="info-card"><h3>Hoteller for alle</h3><p>Phuket har alt fra familievennlige resorts til noen av Thailands mest eksklusive luksushoteller.</p></div>
-<div class="info-card"><h3>Opplevelser</h3><p>Øyhopping, Phang Nga Bay, spa, beach clubs, jungelturer, vannparker og rooftopbarer gjør øya komplett.</p></div>
-</div>
-<div class="quick-links">
-<a href="#hoteller">Hoteller</a>
-<a href="#beachclubs">Beach clubs</a>
-<a href="#oyhopping">Øyhopping</a>
-<a href="#familie">Familie</a>
-<a href="#spa">Spa</a>
-<a href="#praktisk">Praktisk</a>
+<p class="lead">Phuket er best når du planlegger etter reisestil. Øya har rolige premiumområder, familievennlige strender, rå utsiktspunkter, beach clubs, båtturer og enklere transport enn mange andre øyer i Thailand.</p>
+<div class="signature-grid">
+<article class="signature-card"><img alt="Longtailbåt i Phuket" src="assets/phuket-hero-longtail.jpg"/><div><h3>Øyhopping</h3><p>Phi Phi, Maya Bay, Maiton og Phang Nga Bay.</p></div></article>
+<article class="signature-card"><img alt="Premium hotell i Phuket" src="assets/phuket/cards/keemala-phuket-v22.jpg"/><div><h3>Luxury stays</h3><p>Pool villas, designhotell og strandresorts.</p></div></article>
+<article class="signature-card"><img alt="Familieferie i Phuket" src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg"/><div><h3>Familieferie</h3><p>Trygge strender, vannpark og enkle dager.</p></div></article>
+<article class="signature-card"><img alt="Strand i Phuket" src="assets/phuket/cards/the-nai-harn-phuket-v22.jpg"/><div><h3>Strandliv</h3><p>Kata Noi, Nai Harn, Kamala, Surin og Bang Tao.</p></div></article>
 </div>
 </section>
 <section class="section wrap">
@@ -133,44 +163,45 @@ margin-top:12px;
 <section class="section wrap" id="hoteller">
 <div class="kicker">Hotellguide</div>
 <h2>Beste hotellvalg i Phuket</h2>
+<div class="lux-divider"></div>
 <p class="lead">Phuket har enorme forskjeller fra område til område. Her er et kuratert utvalg hoteller som dekker familieferie, honeymoon, beach clubs, villa-luksus og klassisk strandferie – med tydelig forklaring på hvem hvert hotell passer best for.</p>
 <div class="grid">
 <article class="guide-card">
-<img alt="InterContinental Phuket Resort" src="assets/phuket/cards/intercontinental-phuket-v22.jpg"/>
+<img alt="InterContinental Phuket Resort" src="assets/phuket/cards/intercontinental-phuket-v22.jpg">
 <div>
 <span class="tag">Kamala</span>
 <h3>InterContinental Phuket Resort</h3>
 <p>Et av Phukets mest elegante strandhoteller. Passer for par og luksusreisende som vil ha ro, strand og høy standard.</p>
 <a class="btn" href="https://www.hotels.com/affiliates/intercontinental-phuket-resort-an-ihg-hotel-kamala-thailand.4pbB4wq" rel="nofollow sponsored noopener" target="_blank">Se hotell →</a>
 </div>
-</article>
+</img></article>
 <article class="guide-card">
-<img alt="SAii Laguna Phuket" src="assets/phuket/cards/saii-laguna-phuket-v22.jpg"/>
+<img alt="SAii Laguna Phuket" src="assets/phuket/cards/saii-laguna-phuket-v22.jpg">
 <div>
 <span class="tag">Bang Tao / Laguna</span>
 <h3>SAii Laguna Phuket</h3>
 <p>Familievennlig premium-resort i Laguna-området med strand, basseng og kort vei til restauranter og beach clubs.</p>
 <a class="btn" href="https://www.hotels.com/affiliates/saii-laguna-phuket-choeng-thale-thailand.42sEhUz" rel="nofollow sponsored noopener" target="_blank">Se hotell →</a>
 </div>
-</article>
+</img></article>
 <article class="guide-card">
-<img alt="Sunwing Kamala Beach" src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg"/>
+<img alt="Sunwing Kamala Beach" src="assets/phuket/cards/sunwing-kamala-beach-v22.jpg">
 <div>
 <span class="tag">Kamala</span>
 <h3>Sunwing Kamala Beach</h3>
 <p>Et smart valg for barnefamilier som vil bo direkte ved stranden med aktiviteter, basseng og enkel feriehverdag.</p>
 <a class="btn" href="https://www.hotels.com/affiliates/sunwing-kamala-beach-kamala-thailand.3bObPuj" rel="nofollow sponsored noopener" target="_blank">Se hotell →</a>
 </div>
-</article>
+</img></article>
 <article class="guide-card">
-<img alt="Splash Jungle Waterpark Resort" src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg"/>
+<img alt="Splash Jungle Waterpark Resort" src="assets/phuket/cards/splash-jungle-waterpark-v22.jpg">
 <div>
 <span class="tag">Mai Khao</span>
 <h3>Splash Jungle Waterpark Resort</h3>
 <p>Passer best for familier som vil kombinere hotellopphold med vannpark og kort vei til flyplassen.</p>
 <a class="btn" href="https://www.hotels.com/affiliates/splash-beach-resort-mai-khao-phuket-mai-khao-thailand.fRzpGtS" rel="nofollow sponsored noopener" target="_blank">Se hotell →</a>
 </div>
-</article>
+</img></article>
 <article class="guide-card">
 <img alt="The Shore at Katathani" src="assets/phuket/cards/the-shore-katathani-v22.jpg"/>
 <div>
@@ -254,9 +285,10 @@ margin-top:12px;
 </article>
 </div>
 </section>
-<section class="section wrap">
+<section class="section wrap" id="beachclubs">
 <div class="kicker">Signature experiences</div>
 <h2>Opplevelser som gjør Phuket spesiell</h2>
+<div class="lux-divider"></div>
 <p class="lead">Disse opplevelsene passer best når du vil gjøre mer enn å ligge på stranden. De er plassert tidlig i guiden fordi de gir Phuket-siden mer premium-følelse.</p>
 <div class="grid">
 <article class="guide-card">
@@ -296,6 +328,7 @@ margin-top:12px;
 <section class="section wrap" id="oyhopping">
 <div class="kicker">Øyhopping</div>
 <h2>Phi Phi, Maya Bay og Phang Nga Bay</h2>
+<div class="lux-divider"></div>
 <p class="lead">Phuket er en av de beste basene i Thailand for øyhopping. Her har jeg lagt inn lenker på Phi Phi, Maya Bay, Maiton, Phang Nga Bay og de mest populære aktivitetene, slik at knappene åpner direkte hos partner.</p>
 <div class="note">Tips: Reiser du mellom november og april er havet ofte roligere. I regntiden kan turene fortsatt være fine, men vær mer fleksibel med datoer.</div>
 <div class="grid">
@@ -344,6 +377,7 @@ margin-top:12px;
 <section class="section wrap" id="familie">
 <div class="kicker">Familie &amp; fun</div>
 <h2>Phuket med barn og ungdom</h2>
+<div class="lux-divider"></div>
 <p class="lead">Familiedelen er nå flyttet inn som en ekte guide med bilder og tekst, i stedet for korte duplikatbokser uten bilder.</p>
 <div class="grid">
 <article class="guide-card">
@@ -396,7 +430,7 @@ margin-top:12px;
 </article>
 </div>
 </section>
-<section class="section wrap">
+<section class="section wrap" id="eventyr">
 <div class="kicker">Jungle &amp; action</div>
 <h2>ATV, zipline og eventyr</h2>
 <p class="lead">Når du trenger pause fra strandlivet, har Phuket mange aktiviteter i jungelen og åsene rundt Patong og Kathu.</p>
@@ -438,6 +472,7 @@ margin-top:12px;
 <section class="section wrap" id="spa">
 <div class="kicker">Spa</div>
 <h2>Massage, spa og tropical retreats</h2>
+<div class="lux-divider"></div>
 <p class="lead">Spa-opplevelser passer naturlig mellom strand, shopping og øyhopping. Denne delen bør være roligere i uttrykket og ikke føles som bare en linkliste.</p>
 <div class="grid">
 <article class="guide-card">
@@ -466,7 +501,7 @@ margin-top:12px;
 </article>
 </div>
 </section>
-<section class="section wrap">
+<section class="section wrap" id="dining">
 <div class="kicker">Beach parties &amp; dining</div>
 <h2>Beach parties, dining og enklere reise</h2>
 <p class="lead">Her samles opplevelser som passer best mot slutten av guiden: natteliv, restaurant, transport og VIP-lounge.</p>
