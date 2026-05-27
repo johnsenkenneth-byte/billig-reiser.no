@@ -1,36 +1,119 @@
 <!DOCTYPE html>
-<html lang="no"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Reisemagasin | Billig-reiser.no</title><style>
-:root{--bg:#07101f;--panel:#101b2e;--panel2:#14243a;--text:#f8fafc;--muted:#b8c4d5;--pink:#ff4bb8;--blue:#22d3ee;--orange:#ff7a18;--line:rgba(255,255,255,.12)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body.mag-premium{margin:0;background:radial-gradient(circle at 20% 0%,rgba(34,211,238,.12),transparent 26%),linear-gradient(180deg,#07101f,#0b1220 55%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif}.mag-nav{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(7,15,28,.92);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;backdrop-filter:blur(14px)}.brand-logo{display:flex;align-items:center;max-width:230px;overflow:hidden}.brand-logo img{height:54px;max-width:220px;object-fit:contain}.mag-menu{display:flex;gap:22px;align-items:center}.mag-menu a{color:#dbe4f0;text-decoration:none;font-weight:850;font-size:14px}.mag-menu a:hover,.mag-menu a.active{color:var(--pink)}
-.mag-hero{position:relative;min-height:560px;display:flex;align-items:center;padding:82px clamp(18px,6vw,96px);overflow:hidden;background:linear-gradient(90deg,rgba(5,10,18,.94) 0%,rgba(5,10,18,.70) 42%,rgba(5,10,18,.20)),url('/assets/reisemagasin-home-banner.webp') center right/cover no-repeat;border-bottom:1px solid rgba(255,255,255,.10)}.mag-hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 50%,rgba(255,75,184,.18),transparent 30%);pointer-events:none}.mag-hero-inner{position:relative;z-index:2;max-width:720px}.kicker{color:var(--pink);font-weight:950;text-transform:uppercase;letter-spacing:.18em;margin-bottom:14px;font-size:13px}.mag-hero h1,.hero-city h1,.hero-thai h1{font-size:clamp(38px,6vw,72px);line-height:.92;margin:0 0 18px;letter-spacing:-.06em}.mag-hero p,.hero-city p,.hero-thai p{font-size:clamp(17px,2vw,21px);line-height:1.58;color:#e5edf7;margin:0;max-width:780px}.hero-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:950}.btn.primary{background:linear-gradient(90deg,#ff4bb8,#7c3aed,#22d3ee);color:white;box-shadow:0 18px 46px rgba(255,75,184,.20)}.btn.secondary{background:rgba(255,255,255,.10);color:white;border:1px solid rgba(255,255,255,.18)}.wrap{max-width:1220px;margin:0 auto;padding:58px 24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px}.section-head h2{font-size:clamp(30px,4vw,48px);line-height:.96;margin:0;letter-spacing:-.04em}.lead{color:var(--muted);font-size:17px;line-height:1.7;max-width:820px}.city-grid,.country-grid,.grid,.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}.city-card,.country-card,.hotel-card,.info-card,.feature-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98));border:1px solid rgba(255,255,255,.12);border-radius:26px;overflow:hidden;box-shadow:0 20px 55px rgba(0,0,0,.25)}.city-card img,.country-card img,.hotel-card img{width:100%;height:220px;object-fit:cover;display:block}.city-card div,.country-card div,.hotel-body,.info-card,.feature-card{padding:22px}.city-card h3,.country-card h3,.hotel-card h3,.info-card h3{margin:0 0 8px;font-size:24px}.city-card p,.country-card p,.hotel-card p,.info-card p,.feature-card p{color:var(--muted);line-height:1.6}.city-card a,.country-card a,.hotel-card a{color:#ff7bd2;font-weight:950;text-decoration:none}.region{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;color:#ff7bd2;font-weight:900}.badge{display:inline-flex;background:rgba(255,75,184,.12);color:#ffd1ef;border:1px solid rgba(255,75,184,.25);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:950;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}.hero-thai,.hero-city{min-height:430px;padding:92px clamp(18px,6vw,92px);display:flex;align-items:center;text-align:left;background:linear-gradient(90deg,rgba(5,10,18,.86),rgba(5,10,18,.50),rgba(5,10,18,.25)),var(--city-image) center/cover no-repeat;border-bottom:1px solid rgba(255,255,255,.10)}.hero-thai{--city-image:url('/assets/reisemagasin-home-banner.webp')}.hero-inner{max-width:780px}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}.tabs a{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:white;text-decoration:none;font-weight:850}.category{margin-top:42px;padding-top:22px;border-top:1px solid var(--line)}.notice{margin-top:26px;background:rgba(255,75,184,.09);border:1px solid rgba(255,75,184,.25);border-radius:22px;padding:22px;color:#ffd1ef}.footer{border-top:1px solid var(--line);padding:30px;text-align:center;color:var(--muted);font-size:14px}.hotel-card img{height:210px}.hotel-body a{display:inline-flex;margin-top:8px;padding:10px 13px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}.story-strip{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}.story-box{border-radius:28px;padding:26px;background:linear-gradient(180deg,rgba(20,36,58,.86),rgba(8,17,31,.76));border:1px solid rgba(255,255,255,.12)}.story-box h3{font-size:28px;margin:0 0 12px}.story-box li{color:var(--muted);line-height:1.75}.country-grid{grid-template-columns:minmax(280px,560px)}.country-card img{height:300px}.soon{opacity:.72;filter:saturate(.65)}.soon-link{color:#9aa8bb;font-weight:950}
-@media(max-width:820px){.mag-nav{height:auto;min-height:68px;padding:10px 14px;gap:12px;flex-wrap:wrap}.brand-logo img{height:44px;max-width:165px}.mag-menu{gap:10px;overflow-x:auto;width:100%;padding-bottom:4px}.mag-hero,.hero-thai,.hero-city{min-height:390px;padding:54px 18px}.section-head,.story-strip{display:block}.city-card img,.country-card img,.hotel-card img{height:190px}.wrap{padding:42px 16px}.mag-hero h1,.hero-city h1,.hero-thai h1{font-size:40px}}
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reisemagasinet | Billig-reiser.no</title>
+  <meta name="description" content="Reisemagasinet fra Billig-reiser.no samler premium reiseguider til Thailand, Bangkok, Phuket, Koh Samui, Koh Phangan og Koh Tao." />
+  <link rel="canonical" href="https://billig-reiser.no/reisemagasinet.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Billig-reiser.no" />
+  <meta property="og:title" content="Reisemagasinet | Billig-reiser.no" />
+  <meta property="og:description" content="Premium reiseguider, øyguider, hotellvalg og reiseruter samlet på ett sted." />
+  <meta property="og:image" content="https://billig-reiser.no/assets/reisemagasin-home-banner.webp" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{--bg:#07101f;--panel:#101b2e;--panel2:#14243a;--text:#f8fafc;--muted:#b8c4d5;--pink:#ff4bb8;--blue:#22d3ee;--gold:#ffd166;--line:rgba(255,255,255,.12)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#07101f,#0b1220 58%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}
+    .mag-nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px clamp(16px,4vw,48px);background:rgba(7,15,28,.93);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;backdrop-filter:blur(14px)}.brand-logo{display:flex;align-items:center}.brand-logo img{height:54px;width:220px;max-width:42vw;object-fit:contain}.mag-menu{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.mag-menu a{color:#dbe4f0;font-weight:850;font-size:14px}.mag-menu a:hover,.mag-menu a.active{color:var(--pink)}
+    .hub-hero{position:relative;min-height:620px;display:flex;align-items:end;padding:92px clamp(18px,6vw,90px);background:linear-gradient(90deg,rgba(3,8,18,.94) 0%,rgba(3,8,18,.78) 42%,rgba(3,8,18,.30) 100%),url("assets/reisemagasin-home-banner.webp") center/cover no-repeat;border-bottom:1px solid var(--line);overflow:hidden}.hub-hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 52%,rgba(255,75,184,.18),transparent 28%);pointer-events:none}.hub-hero-inner{position:relative;z-index:1;max-width:850px}.kicker{color:var(--pink);font-size:13px;font-weight:950;letter-spacing:.18em;text-transform:uppercase}.hub-hero h1{font-size:clamp(44px,7vw,86px);line-height:.92;letter-spacing:-.06em;margin:16px 0 20px}.hub-hero p{max-width:760px;font-size:clamp(18px,2vw,22px);color:#e5edf7;margin:0}.hub-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:950}.btn.primary{background:linear-gradient(90deg,#ff4bb8,#7c3aed,#22d3ee);box-shadow:0 18px 48px rgba(255,75,184,.20)}.btn.secondary{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18)}
+    .wrap{max-width:1240px;margin:0 auto;padding:62px 24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}.section-head h2{font-size:clamp(31px,4vw,52px);line-height:.98;letter-spacing:-.045em;margin:0}.lead{color:var(--muted);font-size:17px;max-width:760px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98));border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden;box-shadow:0 20px 55px rgba(0,0,0,.24)}.card img{width:100%;height:230px;object-fit:cover;display:block}.card-body{padding:22px}.badge{display:inline-flex;align-items:center;margin-bottom:12px;padding:7px 10px;border-radius:999px;background:rgba(255,75,184,.12);border:1px solid rgba(255,75,184,.25);color:#ffd1ef;font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.card h3{font-size:25px;margin:0 0 8px}.card p{color:var(--muted);margin:0 0 16px}.card a{color:#ff7bd2;font-weight:950}.feature{display:grid;grid-template-columns:1.05fr .95fr;gap:0;border-radius:30px;overflow:hidden;border:1px solid rgba(255,209,102,.20);background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));box-shadow:0 26px 80px rgba(0,0,0,.32)}.feature img{width:100%;height:100%;min-height:430px;object-fit:cover}.feature-copy{padding:clamp(26px,4vw,46px);display:flex;flex-direction:column;justify-content:center}.feature-copy h2{font-size:clamp(34px,5vw,62px);line-height:.96;letter-spacing:-.05em;margin:8px 0 14px}.mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}.mini{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);border-radius:18px;padding:16px}.mini b{display:block;margin-bottom:5px}.mini span{color:var(--muted);font-size:14px}.footer{border-top:1px solid var(--line);padding:30px;text-align:center;color:var(--muted);font-size:14px}
+    @media(max-width:920px){.grid,.feature{grid-template-columns:1fr}.feature img{min-height:290px}.mini-grid{grid-template-columns:1fr 1fr}.section-head{display:block}.mag-nav{align-items:flex-start;flex-direction:column}.mag-menu{gap:12px}.hub-hero{min-height:520px;padding:70px 18px}.wrap{padding:46px 16px}.card img{height:205px}}
+    @media(max-width:560px){.hub-hero h1{font-size:42px}.mini-grid{grid-template-columns:1fr}.btn{width:100%}.brand-logo img{max-width:220px}.mag-menu a{font-size:13px}}
+  </style>
+</head>
+<body>
+  <nav class="mag-nav">
+    <a class="brand-logo" href="index.html"><img src="assets/logo-main.png" alt="Billig-reiser.no" width="220" height="54" /></a>
+    <div class="mag-menu">
+      <a class="active" href="reisemagasinet.html">Magasinet</a>
+      <a href="reise-thailand.html">Thailand</a>
+      <a href="thailand-island-guide.html">Øyguide</a>
+      <a href="bangkok.html">Bangkok</a>
+      <a href="index.html">Forside</a>
+    </div>
+  </nav>
 
-.master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
-</style><!-- HERO-BILDER OPPDATERT -->
-<style>
-.magazine-hero-fix {
-background:
-linear-gradient(90deg, rgba(1,6,18,.88) 0%, rgba(1,6,18,.72) 35%, rgba(1,6,18,.35) 100%),
-url('/assets/reisemagasin-home-banner.webp') center/cover no-repeat !important;
-min-height: 560px;
-border-radius: 0 0 28px 28px;
-}
+  <header class="hub-hero">
+    <div class="hub-hero-inner">
+      <div class="kicker">Reisemagasinet</div>
+      <h1>Premium reiseguider for Thailand.</h1>
+      <p>Start her når du vil finne riktig destinasjon, bygge en smartere reiserute og velge hotell, strender, opplevelser og øyer med litt mer presisjon.</p>
+      <div class="hub-hero-actions">
+        <a class="btn primary" href="reise-thailand.html">Åpne Thailand-guiden</a>
+        <a class="btn secondary" href="#premium">Se premium-guidene</a>
+      </div>
+    </div>
+  </header>
 
-.master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
-</style>
-<style>
-/* Ryddet 2026-05-14: bruker rent hero-bilde uten tekst i selve bildet */
-.magazine-hero-fix{
-  min-height:560px!important;
-  background:linear-gradient(90deg,rgba(1,6,18,.92) 0%,rgba(1,6,18,.74) 42%,rgba(1,6,18,.28) 100%),url('/assets/reisemagasin-home-banner.webp') center/cover no-repeat!important;
-}
-.magazine-hero-fix:before{content:none!important;}
-.mag-hero-inner{max-width:760px!important;}
-.mag-hero h1{text-shadow:0 10px 38px rgba(0,0,0,.55)!important;}
+  <main>
+    <section class="wrap" id="premium">
+      <div class="section-head">
+        <div>
+          <span class="badge">Ferdigstilles først</span>
+          <h2>Reisemagasinets hovedguider</h2>
+        </div>
+        <p class="lead">Disse fem sidene er kjernen i magasinet nå: storby, strand, luxury island, boho island og dykkerøy.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <img src="assets/destinations/bangkok-v22.jpg" alt="Bangkok" loading="lazy" decoding="async" />
+          <div class="card-body"><span class="badge">Storby</span><h3>Bangkok</h3><p>Hoteller, shopping, restauranter, rooftopbarer, natteliv, spa og familieopplevelser.</p><a href="bangkok.html">Åpne Bangkok →</a></div>
+        </article>
+        <article class="card">
+          <img src="assets/destinations/phuket-v22.jpg" alt="Phuket" loading="lazy" decoding="async" />
+          <div class="card-body"><span class="badge">Beach & luxury</span><h3>Phuket</h3><p>Strender, premium resorter, beach clubs, familiehoteller og øyhopping.</p><a href="reise-thailand-phuket.html">Åpne Phuket →</a></div>
+        </article>
+        <article class="card">
+          <img src="assets/destinations/koh-samui-v22.jpg" alt="Koh Samui" loading="lazy" decoding="async" />
+          <div class="card-body"><span class="badge">Luxury island</span><h3>Koh Samui</h3><p>Private pool villas, honeymoon, beach clubs, spa, familiehoteller og island hopping.</p><a href="reise-thailand-koh-samui.html">Åpne Koh Samui →</a></div>
+        </article>
+        <article class="card">
+          <img src="assets/destinations/koh-phangan-v22.jpg" alt="Koh Phangan" loading="lazy" decoding="async" />
+          <div class="card-body"><span class="badge">Boho luxury</span><h3>Koh Phangan</h3><p>Sunset bars, yoga, hidden beaches, boutiquehoteller og Full Moon-energi.</p><a href="reise-thailand-koh-phangan.html">Åpne Koh Phangan →</a></div>
+        </article>
+        <article class="card">
+          <img src="assets/destinations/koh-tao-v22.jpg" alt="Koh Tao" loading="lazy" decoding="async" />
+          <div class="card-body"><span class="badge">Snorkling & dykking</span><h3>Koh Tao</h3><p>Dykking, snorkling, viewpoints, strandliv, sunset cruise og en roligere øyfølelse.</p><a href="reise-thailand-koh-tao.html">Åpne Koh Tao →</a></div>
+        </article>
+        <article class="card">
+          <img src="assets/destinations/krabi-v22.jpg" alt="Thailand guide" loading="lazy" decoding="async" />
+          <div class="card-body"><span class="badge">Oversikt</span><h3>Thailand</h3><p>Samlet inngang til destinasjonene, reiseruter og videre guider i Thailand-universet.</p><a href="reise-thailand.html">Åpne Thailand →</a></div>
+        </article>
+      </div>
+    </section>
 
-.master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
-</style>
-<style>/* V22 bilde-fix inline */.city-card img,.country-card img,.hotel-card img,.feature-card img{display:block!important;opacity:1!important;visibility:visible!important;background:#07101f!important;filter:none!important}.city-card,.country-card,.hotel-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98))!important}.hero-thai,.hero-city,.mag-hero{background-color:#07101f!important}
-.master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
-</style></head><body class="mag-premium"><nav class="mag-nav"><a class="brand brand-logo" href="index.html"><img alt="Billig-reiser.no" height="54" src="assets/logo-main.png" width="220"/></a><div class="mag-menu"><a href="reisemagasinet.html">Magasinet</a><a href="reise-thailand.html">Thailand</a><a href="index.html">Forside</a><a href="kontakt.html">Kontakt</a></div></nav><section class="mag-hero magazine-hero-fix"><div class="mag-hero-inner"><div class="kicker">Reisemagasinet</div><h1>Utforsk verden med Billig-reiser.no</h1><p>Inspirasjon, landguider, byguider, reiseruter og hotellvalg samlet på ett sted. Først ut er Thailand – flere reisemål bygges inn fortløpende.</p><div class="hero-actions"><a class="btn primary" href="reise-thailand.html">Åpne Thailand-guiden →</a><a class="btn secondary" href="#land">Se alle land</a></div></div></section><main><section class="wrap" id="land"><div class="section-head"><div><h2>Land i reisemagasinet</h2><p class="lead">Akkurat nå bygger vi Reisemagasinet steg for steg. Første komplette landguide er Thailand. Flere land legges inn senere når de er klare.</p></div></div><div class="country-grid"><article class="country-card"><img alt="Thailand" loading="lazy" src="assets/destinations/bangkok-v22.jpg"/><div><span class="badge">Første komplette guide</span><h3>Thailand</h3><p>Thailand-guiden er bygget som et eget reiseunivers med Bangkok, Phuket, øyer, strandliv, street food, familieferie, romantiske hotell og premium opplevelser samlet på ett sted.</p><a href="reise-thailand.html">Åpne Thailand-guiden →</a></div></article></div></section><section class="wrap"><div class="feature-grid"><article class="feature-card"><h3>Dette kommer videre</h3><p>Flere land bygges inn etter hvert, men kun når guidene er ryddige nok til å matche resten av nettsiden.</p></article><article class="feature-card"><h3>Thailand først</h3><p>Bangkok, Phuket, Thailand Islands, Chiang Mai, Krabi, Pattaya, Koh Lipe, Khao Lak og Khao Sok ligger inne i Thailand-strukturen.</p></article><article class="feature-card"><h3>Hotellene ligger riktig</h3><p>Hotellkortene ligger inne på hver by/øy, ikke på selve forsiden av Reisemagasinet.</p></article></div></section>
-</main><footer class="footer">© 2026 Billig-reiser.no</footer></body></html>
+    <section class="wrap">
+      <article class="feature">
+        <img src="assets/destinations/koh-samui-v22.jpg" alt="Thailand Islands" loading="lazy" decoding="async" />
+        <div class="feature-copy">
+          <span class="badge">Neste naturlige steg</span>
+          <h2>Bygg reisen som en rute, ikke bare som en liste.</h2>
+          <p class="lead">Magasinet skal hjelpe leseren å velge rekkefølge: Bangkok først, Phuket for strand og resort, eller Samui, Phangan og Tao som en samlet øyrute i Thailandbukta.</p>
+          <div class="hub-hero-actions">
+            <a class="btn primary" href="thailand-island-guide.html">Åpne island guide</a>
+            <a class="btn secondary" href="reise-thailand.html#ruter">Se reiseruter</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="badge">Magasinstruktur</span>
+          <h2>Slik er reisemagasinet bygget</h2>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><b>Hovedguide</b><span>Thailand-siden samler alle destinasjonene.</span></div>
+        <div class="mini"><b>Dybdeguider</b><span>Bangkok, Phuket og øyene har egne premium-sider.</span></div>
+        <div class="mini"><b>Øyruter</b><span>Samui, Phangan og Tao kobles sammen i island-guiden.</span></div>
+        <div class="mini"><b>Publisering</b><span>Metadata, lenker og mobilvisning testes før levering.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Billig-reiser.no</footer>
+</body>
+</html>
