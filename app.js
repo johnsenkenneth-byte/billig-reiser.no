@@ -10,6 +10,7 @@
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
+    tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
     cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
     iberia: "https://www.kqzyfj.com/click-101724638-15735979",
@@ -90,6 +91,7 @@
       ["Pakkereise", "Fly + hotell", "Finn en samlet feriepakke hos Expedia Norge.", "Se pakkereiser", partners.packageTravel],
       ["Cruise", "Cruiseferie", "Sammenlign reiseruter, rederier og varighet hos Expedia.", "Se cruise", partners.cruise],
       ["Feriebolig", "Feriehus og leiligheter", "Finn hytter, villaer og ferieleiligheter hos Interhome.", "Se ferieboliger", partners.interhome],
+      ["Restplass", "Charter og restplasser", "Finn oppdaterte restplasser og sydenturer hos TUI Norge.", "Se restplasser", partners.tuiRestplass],
       ["Reisehack", "eSIM på reisen", "Mobildata uten å bytte fysisk SIM-kort.", "Sjekk datapakker", partners.saily],
       ["Storby", "Oppbevar bagasjen", "Praktisk før innsjekk eller etter utsjekk.", "Finn oppbevaring", partners.radicalStorage],
       ["Flytrøbbel", "Forsinket eller kansellert fly?", "Sjekk om du har krav på erstatning hos Flyforsinkelser.no.", "Sjekk krav", partners.flightDelay]
@@ -281,7 +283,9 @@
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
-    carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909"
+    carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
+    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
+    tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F"
   };
 
   let currentSearchType = "flight";
@@ -289,7 +293,9 @@
   const tabStates = {
     flight: blankTabState(),
     hotel: blankTabState(),
-    car: blankTabState()
+    car: blankTabState(),
+    interhome: blankTabState(),
+    restplass: blankTabState()
   };
 
   const $ = (id) => document.getElementById(id);
@@ -416,8 +422,8 @@
     const base = new Date();
     base.setMonth(base.getMonth() + calendarMonthOffset, 1);
     const next = new Date(base.getFullYear(), base.getMonth() + 1, 1);
-    const departLabel = currentSearchType === "hotel" ? "Innsjekk" : currentSearchType === "car" ? "Hentedato" : "Avreise";
-    const returnLabel = currentSearchType === "hotel" ? "Utsjekk" : currentSearchType === "car" ? "Leveringsdato" : "Retur";
+    const departLabel = currentSearchType === "hotel" ? "Innsjekk" : currentSearchType === "interhome" ? "Ankomst" : currentSearchType === "restplass" ? "Tidligste avreise" : currentSearchType === "car" ? "Hentedato" : "Avreise";
+    const returnLabel = currentSearchType === "hotel" ? "Utsjekk" : currentSearchType === "interhome" ? "Avreise" : currentSearchType === "car" ? "Leveringsdato" : "Retur";
 
     box.innerHTML = `
       <div class="calendar-header">
@@ -517,7 +523,11 @@
     const helper = document.querySelector(".search-help");
 
     if (button) {
-      if (currentSearchType === "hotel") {
+      if (currentSearchType === "interhome") {
+        button.textContent = state.to ? `SØK FERIEBOLIG I ${state.to.toUpperCase()} 🔎` : "SØK FERIEBOLIG 🔎";
+      } else if (currentSearchType === "restplass") {
+        button.textContent = state.to ? `SØK CHARTER TIL ${state.to.toUpperCase()} 🔎` : "SØK CHARTER OG RESTPLASS 🔎";
+      } else if (currentSearchType === "hotel") {
         button.textContent = state.to ? `SØK HOTELL I ${state.to.toUpperCase()} 🔎` : "SØK HOTELL 🔎";
       } else if (currentSearchType === "car") {
         button.textContent = state.from ? `SØK LEIEBIL I ${state.from.toUpperCase()} 🔎` : "SØK LEIEBIL 🔎";
@@ -529,7 +539,11 @@
     }
 
     if (helper) {
-      if (currentSearchType === "hotel") {
+      if (currentSearchType === "interhome") {
+        helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område eller land — så åpnes riktig ferieboligsøk hos Interhome.";
+      } else if (currentSearchType === "restplass") {
+        helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes TUI direkte på charter og restplasser.";
+      } else if (currentSearchType === "hotel") {
         helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} gjester.` : "Skriv byen du vil bo i — så åpnes Hotels.com rett på hotell i den byen.";
       } else if (currentSearchType === "car") {
         helper.textContent = state.from ? `Leiebil: ${state.from} • ${state.depart || "velg hentedato"} til ${state.ret || "velg levering"}.` : "Skriv hentested eller flyplass — så åpnes leiebilpartner med forhåndsutfylt hentested og dato så langt partneren tillater.";
@@ -547,6 +561,12 @@
     // the selected partner receives the search parameters after redirect.
     const separator = baseAffiliateUrl.includes("?") ? "&" : "?";
     return `${baseAffiliateUrl}${separator}url=${encodeURIComponent(targetUrl)}`;
+  }
+
+  function tradeTrackerDeepLink(baseAffiliateUrl, targetUrl) {
+    const url = new URL(baseAffiliateUrl);
+    url.searchParams.set("u", targetUrl);
+    return url.toString();
   }
 
   const AIRPORT_CODES = {
@@ -726,6 +746,8 @@
     kiwiTarget.searchParams.set("to", airportCode(state.to));
     kiwiTarget.searchParams.set("departure", state.depart);
     kiwiTarget.searchParams.set("return", state.ret);
+    kiwiTarget.searchParams.set("adults", state.adults);
+    if (Number(state.children)) kiwiTarget.searchParams.set("children", state.children);
 
     const travelpayouts = new URL(AFFILIATE_LINKS.kiwi);
     travelpayouts.searchParams.set("shmarker", `${TRAVELPAYOUTS_MARKER}.billigreiser_fly`);
@@ -755,6 +777,7 @@
     url.searchParams.set("endDate", state.ret);
     url.searchParams.set("rooms", "1");
     url.searchParams.set("adults", state.adults);
+    if (Number(state.children)) url.searchParams.set("children", state.children);
     url.searchParams.set("locale", "no_NO");
     url.searchParams.set("currency", "NOK");
     url.searchParams.set("pos", "HCOM_NO");
@@ -775,6 +798,49 @@
 
   async function buildCarPartnerUrl(state) {
     return buildCarDirectUrl(state);
+  }
+
+  const INTERHOME_DESTINATIONS = {
+    spania: "5460aeae487f8",
+    italia: "5460aeae078f7",
+    frankrike: "5460aeb1b0bf2",
+    norge: "5460aea85799e",
+    kroatia: "5460aeaaa3139",
+    toscana: "5460aeb357636",
+    "costa blanca": "5460aeae7180f",
+    "costa del sol": "5460aec5cc8ff"
+  };
+
+  const TUI_RESTPLASS_DESTINATIONS = {
+    mallorca: "/feriereiser/spania/mallorca/restplasser/",
+    kreta: "/feriereiser/hellas/kreta/restplasser/",
+    rhodos: "/feriereiser/hellas/rhodos/restplasser/",
+    samos: "/feriereiser/hellas/samos/restplasser/",
+    kypros: "/feriereiser/kypros/restplasser/",
+    tyrkia: "/feriereiser/tyrkia/restplasser/",
+    kroatia: "/feriereiser/kroatia/restplasser/",
+    bulgaria: "/feriereiser/bulgaria/restplasser/"
+  };
+
+  function destinationKey(value) {
+    return normalizeSearch(value).replace(/[^a-z0-9 ]/g, "").trim();
+  }
+
+  function buildInterhomeUrl(state) {
+    const id = INTERHOME_DESTINATIONS[destinationKey(state.to)];
+    const target = id ? `https://www.interhome.no/search/${id}` : "https://www.interhome.no/";
+    return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, target);
+  }
+
+  function buildTuiRestplassUrl(state) {
+    const path = TUI_RESTPLASS_DESTINATIONS[destinationKey(state.to)] || "/tilbud/restplass/";
+    const target = new URL(path, "https://www.tui.no");
+    if (state.depart) {
+      const passengers = Array.from({ length: Math.max(1, Number(state.adults) || 2) }, () => "30").join(",");
+      target.searchParams.set("searchPanelFilters", `STARTDATE:${state.depart}|FLEXIBILITY:7|DURATIONS:7|PASSENGERS:${passengers}|AIRPORTS:|AIRPORTNAMES:`);
+      target.searchParams.set("sortBy", "price");
+    }
+    return tradeTrackerDeepLink(AFFILIATE_LINKS.tuiRestplass, target.toString());
   }
 
   let livePriceTimer = null;
@@ -850,6 +916,15 @@
   function buildPartnerTarget() {
     const state = readSearchState({ forUrl: true });
 
+    if (currentSearchType === "interhome") {
+      if (!state.to) throw new Error("Skriv inn hvor du vil finne feriebolig.");
+      return buildInterhomeUrl(state);
+    }
+
+    if (currentSearchType === "restplass") {
+      return buildTuiRestplassUrl(state);
+    }
+
     if (currentSearchType === "hotel") {
       if (!state.to) throw new Error("Skriv inn byen du vil finne hotell i.");
       return buildHotelUrl(state);
@@ -880,6 +955,9 @@
     document.querySelectorAll("[data-search-type]").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.searchType === currentSearchType);
     });
+    document.querySelectorAll("[data-smart-service]").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.smartService === currentSearchType);
+    });
 
     const fromLabel = $("fromLabel");
     const toLabel = $("toLabel");
@@ -889,7 +967,23 @@
     const from = $("fromCity");
     const to = $("toCity");
 
-    if (currentSearchType === "hotel") {
+    if (currentSearchType === "interhome") {
+      if (fromLabel) fromLabel.textContent = "Område / land";
+      if (toLabel) toLabel.textContent = "Hvor vil du leie feriebolig?";
+      if (departLabel) departLabel.textContent = "Ankomst";
+      if (returnLabel) returnLabel.textContent = "Avreise";
+      if (adultsLabel) adultsLabel.textContent = "Gjester";
+      if (from) from.placeholder = "Valgfritt";
+      if (to) to.placeholder = "Skriv land eller område, f.eks. Toscana";
+    } else if (currentSearchType === "restplass") {
+      if (fromLabel) fromLabel.textContent = "Avreiseflyplass";
+      if (toLabel) toLabel.textContent = "Hvor vil du reise?";
+      if (departLabel) departLabel.textContent = "Tidligste avreise";
+      if (returnLabel) returnLabel.textContent = "Retur";
+      if (adultsLabel) adultsLabel.textContent = "Reisende";
+      if (from) from.placeholder = "Skriv by, f.eks. Oslo";
+      if (to) to.placeholder = "Skriv reisemål, f.eks. Mallorca";
+    } else if (currentSearchType === "hotel") {
       if (fromLabel) fromLabel.textContent = "Land / område";
       if (toLabel) toLabel.textContent = "Hvor vil du bo?";
       if (departLabel) departLabel.textContent = "Innsjekk";
@@ -929,7 +1023,7 @@
     if (!toggle) return;
     if (currentSearchType === "car") {
       toggle.textContent = "";
-    } else if (currentSearchType === "hotel") {
+    } else if (currentSearchType === "hotel" || currentSearchType === "interhome") {
       toggle.textContent = `${adults} voksne${children ? `, ${children} barn` : ""}`;
     } else {
       toggle.textContent = `${adults} voksne, ${children} barn`;
@@ -968,7 +1062,87 @@
         input.dispatchEvent(new Event("input", { bubbles: true }));
       });
     });
+    $("travelerDone")?.addEventListener("click", () => {
+      field.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
     updateTravelerSummary();
+  }
+
+  function smartServiceUrl(service) {
+    const links = window.BR_AFFILIATES || {};
+    return {
+      package: links.packageTravel || "https://www.expedia.no/Fly-Hotell",
+      interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
+      cruise: links.cruise || "https://www.expedia.com/Cruises",
+      restplass: links.tuiRestplass || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F"
+    }[service];
+  }
+
+  function activateSmartService(service) {
+    if (["flight", "hotel", "car", "interhome", "restplass"].includes(service)) {
+      setSearchType(service);
+      (["hotel", "interhome"].includes(service) ? $("toCity") : $("fromCity"))?.focus();
+      return;
+    }
+    const url = smartServiceUrl(service);
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  function runSmartSearch() {
+    const input = $("smartSearchQuery");
+    const query = clean(input?.value).toLowerCase();
+    if (!query) {
+      input?.focus();
+      return;
+    }
+    if (/restplass|charter|syden/.test(query)) {
+      setSearchType("restplass");
+      const destination = query.match(/(?:til|i)\s+(.+)/)?.[1];
+      if (destination && $("toCity")) $("toCity").value = destination.trim();
+      updateSearchPreview();
+      return $("departDate")?.focus();
+    }
+    if (/pakkereise|fly\\s*(\\+|og)\\s*hotell/.test(query)) return activateSmartService("package");
+    if (/feriebolig|feriehus|villa|hytte|leilighet/.test(query)) {
+      setSearchType("interhome");
+      const destination = query.match(/(?:til|i)\s+(.+)/)?.[1];
+      if (destination && $("toCity")) $("toCity").value = destination.trim();
+      updateSearchPreview();
+      return $("toCity")?.focus();
+    }
+    if (/cruise/.test(query)) return activateSmartService("cruise");
+
+    const hotel = query.match(/(?:hotell|hotel)(?:\\s+i)?\\s+(.+)/);
+    if (hotel) {
+      setSearchType("hotel");
+      if ($("toCity")) $("toCity").value = hotel[1].trim();
+      updateSearchPreview();
+      $("toCity")?.focus();
+      return;
+    }
+
+    const car = query.match(/(?:leiebil|bil)(?:\\s+i)?\\s+(.+)/);
+    if (car) {
+      setSearchType("car");
+      if ($("fromCity")) $("fromCity").value = car[1].trim();
+      updateSearchPreview();
+      $("fromCity")?.focus();
+      return;
+    }
+
+    const route = query.match(/(?:fly\\s+)?(?:fra\\s+)?(.+?)\\s+til\\s+(.+)/);
+    setSearchType("flight");
+    if (route) {
+      if ($("fromCity")) $("fromCity").value = route[1].trim();
+      if ($("toCity")) $("toCity").value = route[2].trim();
+      updateSearchPreview();
+      $("departDate")?.focus();
+      return;
+    }
+    if ($("toCity")) $("toCity").value = query;
+    updateSearchPreview();
+    $("fromCity")?.focus();
   }
 
   function initPartnerSearch() {
@@ -983,6 +1157,16 @@
 
     document.querySelectorAll("[data-search-type]").forEach((btn) => {
       btn.addEventListener("click", () => setSearchType(btn.dataset.searchType));
+    });
+    document.querySelectorAll("[data-smart-service]").forEach((btn) => {
+      btn.addEventListener("click", () => activateSmartService(btn.dataset.smartService));
+    });
+    $("smartSearchLaunch")?.addEventListener("click", runSmartSearch);
+    $("smartSearchQuery")?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        runSmartSearch();
+      }
     });
 
     ["fromCity", "toCity", "departDate", "returnDate", "adults", "children"].forEach((id) => {
@@ -1228,8 +1412,17 @@
     });
   }
 
+  function openTuiRestplass() {
+    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F";
+    addMessage("Jeg åpner <b>TUI restplasser</b>. Der finner du oppdaterte chartertilbud og sydenturer.", "bot", {
+      label: "Se restplasser",
+      onClick: () => window.open(url, "_blank", "noopener,noreferrer")
+    });
+  }
+
   function handle(text) {
     const low = text.toLowerCase();
+    if (low.includes("restplass") || low.includes("charter") || low.includes("sydentur") || low.includes("syden")) return openTuiRestplass();
     if (low.includes("forsink") || low.includes("kansell") || low.includes("erstatning")) return openFlightDelay();
     if (low.includes("feriebolig") || low.includes("feriehus") || low.includes("villa") || low.includes("hytte") || low.includes("leilighet")) return openInterhome();
     if (low.includes("pakkereise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel();

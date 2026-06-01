@@ -23,6 +23,7 @@
 <a data-open-search="flight" href="#travelSearch">FLY</a>
 <a data-open-search="hotel" href="#travelSearch">HOTELL</a>
 <a data-open-search="car" href="#travelSearch">LEIEBIL</a>
+<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F" rel="nofollow noopener sponsored" target="_blank">RESTPLASS</a>
 <a href="https://www.expedia.no/Fly-Hotell" rel="nofollow noopener" target="_blank">PAKKEREISE</a>
 <a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">FERIEBOLIG</a>
 <a href="https://www.expedia.com/swift/cruise?siid=1216803&amp;referrer=b4c7d06f-4ebf-4227-bff6-ff91a276ba5e&amp;destinations=15&amp;startdate=&amp;enddate=&amp;maxduration=9&amp;minduration=3" rel="nofollow noopener sponsored" target="_blank">CRUISE</a>
@@ -38,6 +39,7 @@
 <a data-open-search="flight" href="#travelSearch"><span class="modern-tab-icon">✈</span><span>Fly</span></a>
 <a data-open-search="hotel" href="#travelSearch"><span class="modern-tab-icon hotel">⌂</span><span>Hotell</span></a>
 <a data-open-search="car" href="#travelSearch"><span>Leiebil</span></a>
+<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F" rel="nofollow noopener sponsored" target="_blank">☀ Restplass</a>
 <a href="https://www.expedia.no/Fly-Hotell" rel="nofollow noopener" target="_blank">✈ Pakkereise</a>
 <a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">⌂ Feriebolig</a>
 <a href="https://www.expedia.com/swift/cruise?siid=1216803&amp;referrer=b4c7d06f-4ebf-4227-bff6-ff91a276ba5e&amp;destinations=15&amp;startdate=&amp;enddate=&amp;maxduration=9&amp;minduration=3" rel="nofollow noopener sponsored" target="_blank">🚢 Cruise</a>
@@ -62,6 +64,20 @@
 <form autocomplete="on" class="search-card travel-search neon-flight-deck" id="travelSearch">
 <div aria-hidden="true" class="flight-deck-orbit"></div>
 <div class="flight-deck-head compact-head"><span class="deck-kicker">AI-REISEMOTOR</span><em>Søk blant millioner av reiser verden over</em></div>
+<div class="smart-search-main">
+<span class="smart-search-icon">⌕</span>
+<input aria-label="Hva vil du finne?" id="smartSearchQuery" placeholder="Hvor vil du reise, eller hva vil du finne?" type="search"/>
+<button aria-label="Start smart søk" id="smartSearchLaunch" type="button">SØK</button>
+</div>
+<div aria-label="Velg reisetype" class="smart-service-grid">
+<button data-smart-service="flight" type="button"><b>✈</b><span>Fly</span></button>
+<button data-smart-service="hotel" type="button"><b>⌂</b><span>Hotell</span></button>
+<button data-smart-service="package" type="button"><b>◇</b><span>Pakkereise</span></button>
+<button data-smart-service="interhome" type="button"><b>⌂</b><span>Feriebolig</span></button>
+<button data-smart-service="cruise" type="button"><b>≋</b><span>Cruise</span></button>
+<button data-smart-service="restplass" type="button"><b>☀</b><span>Charter</span></button>
+<button data-smart-service="car" type="button"><b>▣</b><span>Leiebil</span></button>
+</div>
 <div aria-label="Velg søketype" class="tabs search-tabs" role="tablist">
 <button class="active" data-search-type="flight" type="button"><span class="tab-emoji">✈</span><span>Fly</span><small>Billige ruter</small></button>
 <button data-search-type="hotel" type="button"><span class="tab-emoji">◆</span><span>Hotell</span><small>Beste opphold</small></button>
@@ -71,6 +87,7 @@
 <button data-ai-chip="Fly Oslo til Bangkok 2 voksne" type="button">Oslo → Bangkok</button>
 <button data-ai-chip="Hotell i Roma" type="button">Hotell i Roma</button>
 <button data-ai-chip="Leiebil i Alicante" type="button">Leiebil Alicante</button>
+<button data-ai-chip="Finn restplass til syden" type="button">Restplass</button>
 <button data-ai-chip="Finn pakkereise med fly og hotell" type="button">Pakkereise</button>
 <button data-ai-chip="Finn feriebolig" type="button">Feriebolig</button>
 <button data-ai-chip="Finn cruise" type="button">Cruise</button>
@@ -80,8 +97,9 @@
 <label class="field-to"><span class="field-icon">✦</span><small id="toLabel">Hvor vil du reise?</small><input id="toCity" name="to" placeholder="Skriv reisemål"/></label>
 <label><span class="field-icon">◐</span><small id="departLabel">Avreise</small><input id="departDate" name="depart" placeholder="Velg dato" type="date"/></label>
 <label><span class="field-icon">◑</span><small id="returnLabel">Retur</small><input id="returnDate" name="return" placeholder="Velg dato" type="date"/></label>
-<label class="traveler-field"><span class="field-icon">◉</span><small id="adultsLabel">Reisende</small><button aria-expanded="false" class="traveler-toggle" id="travelerToggle" type="button">2 voksne, 0 barn</button><div aria-label="Velg reisende" class="traveler-menu" id="travelerMenu"><div class="traveler-row"><span>Voksne</span><div class="stepper"><button aria-label="Færre voksne" class="step-btn" data-step="-1" data-step-target="adults" type="button">−</button><input id="adults" inputmode="numeric" max="9" min="1" name="adults" type="number" value="2"/><button aria-label="Flere voksne" class="step-btn" data-step="1" data-step-target="adults" type="button">+</button></div></div><div class="traveler-row" id="childrenRow"><span>Barn</span><div class="stepper"><button aria-label="Færre barn" class="step-btn" data-step="-1" data-step-target="children" type="button">−</button><input id="children" inputmode="numeric" max="8" min="0" name="children" type="number" value="0"/><button aria-label="Flere barn" class="step-btn" data-step="1" data-step-target="children" type="button">+</button></div></div></div></label>
+<label class="traveler-field"><span class="field-icon">◉</span><small id="adultsLabel">Reisende</small><button aria-expanded="false" class="traveler-toggle" id="travelerToggle" type="button">2 voksne, 0 barn</button><div aria-label="Velg reisende" class="traveler-menu" id="travelerMenu"><div class="traveler-row"><span>Voksne</span><div class="stepper"><button aria-label="Færre voksne" class="step-btn" data-step="-1" data-step-target="adults" type="button">−</button><input id="adults" inputmode="numeric" max="9" min="1" name="adults" type="number" value="2"/><button aria-label="Flere voksne" class="step-btn" data-step="1" data-step-target="adults" type="button">+</button></div></div><div class="traveler-row" id="childrenRow"><span>Barn</span><div class="stepper"><button aria-label="Færre barn" class="step-btn" data-step="-1" data-step-target="children" type="button">−</button><input id="children" inputmode="numeric" max="8" min="0" name="children" type="number" value="0"/><button aria-label="Flere barn" class="step-btn" data-step="1" data-step-target="children" type="button">+</button></div></div><button class="traveler-done" id="travelerDone" type="button">FERDIG</button></div></label>
 </div>
+<div aria-label="Velg reisedatoer" class="live-calendar" id="liveDateCalendar"></div>
 <div class="hero-ctas search-actions single-action">
 <button class="primary search-launch" id="searchSubmitButton" type="submit"><span>START SØKET</span><b>↗</b></button>
 </div>
@@ -259,6 +277,7 @@
 <button data-ai-chip="Fly Oslo til Bangkok 2 voksne 1 barn" type="button">Fly til Bangkok</button>
 <button data-ai-chip="Hotell i Roma" type="button">Hotell Roma</button>
 <button data-ai-chip="Leiebil i Alicante" type="button">Leiebil</button>
+<button data-ai-chip="Finn restplass til syden" type="button">Restplass</button>
 <button data-ai-chip="Finn pakkereise med fly og hotell" type="button">Pakkereise</button>
 <button data-ai-chip="Finn feriebolig" type="button">Feriebolig</button>
 <button data-ai-chip="Finn cruise" type="button">Cruise</button>
