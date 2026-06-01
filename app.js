@@ -294,6 +294,8 @@
     flight: blankTabState(),
     hotel: blankTabState(),
     car: blankTabState(),
+    package: blankTabState(),
+    cruise: blankTabState(),
     interhome: blankTabState(),
     restplass: blankTabState()
   };
@@ -523,7 +525,11 @@
     const helper = document.querySelector(".search-help");
 
     if (button) {
-      if (currentSearchType === "interhome") {
+      if (currentSearchType === "package") {
+        button.textContent = state.to ? `SØK PAKKEREISE TIL ${state.to.toUpperCase()} 🔎` : "SØK PAKKEREISE 🔎";
+      } else if (currentSearchType === "cruise") {
+        button.textContent = "SØK CRUISE 🔎";
+      } else if (currentSearchType === "interhome") {
         button.textContent = state.to ? `SØK FERIEBOLIG I ${state.to.toUpperCase()} 🔎` : "SØK FERIEBOLIG 🔎";
       } else if (currentSearchType === "restplass") {
         button.textContent = state.to ? `SØK CHARTER TIL ${state.to.toUpperCase()} 🔎` : "SØK CHARTER OG RESTPLASS 🔎";
@@ -539,7 +545,11 @@
     }
 
     if (helper) {
-      if (currentSearchType === "interhome") {
+      if (currentSearchType === "package") {
+        helper.textContent = state.to ? `Pakkereise: ${state.from || "velg avreisested"} → ${state.to} • ${state.depart || "velg dato"} til ${state.ret || "velg retur"} • ${state.adults} reisende.` : "Skriv avreisested og reisemål — så åpnes pakkereiser hos Expedia.";
+      } else if (currentSearchType === "cruise") {
+        helper.textContent = `Cruise: ${state.depart || "velg fra-dato"} til ${state.ret || "velg til-dato"} • ${state.adults} reisende.`;
+      } else if (currentSearchType === "interhome") {
         helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område eller land — så åpnes riktig ferieboligsøk hos Interhome.";
       } else if (currentSearchType === "restplass") {
         helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes TUI direkte på charter og restplasser.";
@@ -843,6 +853,26 @@
     return tradeTrackerDeepLink(AFFILIATE_LINKS.tuiRestplass, target.toString());
   }
 
+  function buildPackageUrl(state) {
+    const url = new URL("https://www.expedia.no/Fly-Hotell");
+    if (state.from) url.searchParams.set("origin", state.from);
+    if (state.to) url.searchParams.set("destination", state.to);
+    url.searchParams.set("startDate", state.depart);
+    url.searchParams.set("endDate", state.ret);
+    url.searchParams.set("adults", state.adults);
+    url.searchParams.set("locale", "nb_NO");
+    url.searchParams.set("currency", "NOK");
+    return url.toString();
+  }
+
+  function buildCruiseUrl(state) {
+    const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises";
+    const url = new URL(configured);
+    url.searchParams.set("startdate", state.depart);
+    url.searchParams.set("enddate", state.ret);
+    return url.toString();
+  }
+
   let livePriceTimer = null;
   let livePriceAbort = null;
 
@@ -925,6 +955,15 @@
       return buildTuiRestplassUrl(state);
     }
 
+    if (currentSearchType === "package") {
+      if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål for pakkereisen.");
+      return buildPackageUrl(state);
+    }
+
+    if (currentSearchType === "cruise") {
+      return buildCruiseUrl(state);
+    }
+
     if (currentSearchType === "hotel") {
       if (!state.to) throw new Error("Skriv inn byen du vil finne hotell i.");
       return buildHotelUrl(state);
@@ -967,7 +1006,35 @@
     const from = $("fromCity");
     const to = $("toCity");
 
-    if (currentSearchType === "interhome") {
+    const modeTitle = $("searchModeTitle");
+    const modeCopy = {
+      flight: ["Fly", "Velg avreisested, reisemål, dato og antall reisende."],
+      hotel: ["Hotell", "Finn hotell med innsjekk, utsjekk og antall gjester."],
+      package: ["Pakkereise", "Søk etter fly og hotell samlet hos Expedia."],
+      interhome: ["Feriebolig", "Finn feriehus, villa eller leilighet hos Interhome."],
+      cruise: ["Cruise", "Velg ønsket periode før cruisesøket åpnes hos Expedia."],
+      restplass: ["Charter", "Finn restplass eller charterreise hos TUI."],
+      car: ["Leiebil", "Åpner EconomyBookings sitt eget leiebilsøk."]
+    }[currentSearchType];
+    if (modeTitle && modeCopy) modeTitle.innerHTML = `<b>${modeCopy[0]}</b><span>${modeCopy[1]}</span>`;
+
+    if (currentSearchType === "package") {
+      if (fromLabel) fromLabel.textContent = "Avreisested";
+      if (toLabel) toLabel.textContent = "Reisemål";
+      if (departLabel) departLabel.textContent = "Avreise";
+      if (returnLabel) returnLabel.textContent = "Retur";
+      if (adultsLabel) adultsLabel.textContent = "Reisende";
+      if (from) from.placeholder = "Skriv by eller flyplass";
+      if (to) to.placeholder = "Skriv ønsket reisemål";
+    } else if (currentSearchType === "cruise") {
+      if (fromLabel) fromLabel.textContent = "Avreisehavn";
+      if (toLabel) toLabel.textContent = "Cruiseområde";
+      if (departLabel) departLabel.textContent = "Fra dato";
+      if (returnLabel) returnLabel.textContent = "Til dato";
+      if (adultsLabel) adultsLabel.textContent = "Reisende";
+      if (from) from.placeholder = "Valgfritt, f.eks. Miami";
+      if (to) to.placeholder = "Valgfritt, f.eks. Middelhavet";
+    } else if (currentSearchType === "interhome") {
       if (fromLabel) fromLabel.textContent = "Område / land";
       if (toLabel) toLabel.textContent = "Hvor vil du leie feriebolig?";
       if (departLabel) departLabel.textContent = "Ankomst";
@@ -1080,9 +1147,13 @@
   }
 
   function activateSmartService(service) {
-    if (["flight", "hotel", "car", "interhome", "restplass"].includes(service)) {
+    if (service === "car") {
+      window.open(AFFILIATE_LINKS.economyBookings, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (["flight", "hotel", "package", "cruise", "interhome", "restplass"].includes(service)) {
       setSearchType(service);
-      (["hotel", "interhome"].includes(service) ? $("toCity") : $("fromCity"))?.focus();
+      (["hotel", "interhome"].includes(service) ? $("toCity") : service === "cruise" ? $("departDate") : $("fromCity"))?.focus();
       return;
     }
     const url = smartServiceUrl(service);
@@ -1103,7 +1174,10 @@
       updateSearchPreview();
       return $("departDate")?.focus();
     }
-    if (/pakkereise|fly\\s*(\\+|og)\\s*hotell/.test(query)) return activateSmartService("package");
+    if (/pakkereise|fly\\s*(\\+|og)\\s*hotell/.test(query)) {
+      setSearchType("package");
+      return $("fromCity")?.focus();
+    }
     if (/feriebolig|feriehus|villa|hytte|leilighet/.test(query)) {
       setSearchType("interhome");
       const destination = query.match(/(?:til|i)\s+(.+)/)?.[1];
@@ -1111,7 +1185,10 @@
       updateSearchPreview();
       return $("toCity")?.focus();
     }
-    if (/cruise/.test(query)) return activateSmartService("cruise");
+    if (/cruise/.test(query)) {
+      setSearchType("cruise");
+      return $("departDate")?.focus();
+    }
 
     const hotel = query.match(/(?:hotell|hotel)(?:\\s+i)?\\s+(.+)/);
     if (hotel) {

@@ -70,28 +70,15 @@
 <button aria-label="Start smart søk" id="smartSearchLaunch" type="button">SØK</button>
 </div>
 <div aria-label="Velg reisetype" class="smart-service-grid">
-<button data-smart-service="flight" type="button"><b>✈</b><span>Fly</span></button>
-<button data-smart-service="hotel" type="button"><b>⌂</b><span>Hotell</span></button>
-<button data-smart-service="package" type="button"><b>◇</b><span>Pakkereise</span></button>
-<button data-smart-service="interhome" type="button"><b>⌂</b><span>Feriebolig</span></button>
-<button data-smart-service="cruise" type="button"><b>≋</b><span>Cruise</span></button>
-<button data-smart-service="restplass" type="button"><b>☀</b><span>Charter</span></button>
-<button data-smart-service="car" type="button"><b>▣</b><span>Leiebil</span></button>
+<button data-smart-service="flight" type="button"><b class="service-icon">✈</b><span>Fly</span></button>
+<button data-smart-service="hotel" type="button"><b class="service-icon">⌂</b><span>Hotell</span></button>
+<button data-smart-service="package" type="button"><b class="service-icon">✦</b><span>Pakkereise</span></button>
+<button data-smart-service="interhome" type="button"><b class="service-icon">⌂</b><span>Feriebolig</span></button>
+<button data-smart-service="cruise" type="button"><b class="service-icon">≋</b><span>Cruise</span></button>
+<button data-smart-service="restplass" type="button"><b class="service-icon">☀</b><span>Charter</span></button>
+<button data-smart-service="car" type="button"><b class="service-icon">▣</b><span>Leiebil</span></button>
 </div>
-<div aria-label="Velg søketype" class="tabs search-tabs" role="tablist">
-<button class="active" data-search-type="flight" type="button"><span class="tab-emoji">✈</span><span>Fly</span><small>Billige ruter</small></button>
-<button data-search-type="hotel" type="button"><span class="tab-emoji">◆</span><span>Hotell</span><small>Beste opphold</small></button>
-<button data-search-type="car" type="button"><span class="tab-emoji">▣</span><span>Leiebil</span><small>Frihet på reisen</small></button>
-</div>
-<div aria-label="Smarte forslag" class="smart-prompt">
-<button data-ai-chip="Fly Oslo til Bangkok 2 voksne" type="button">Oslo → Bangkok</button>
-<button data-ai-chip="Hotell i Roma" type="button">Hotell i Roma</button>
-<button data-ai-chip="Leiebil i Alicante" type="button">Leiebil Alicante</button>
-<button data-ai-chip="Finn restplass til syden" type="button">Restplass</button>
-<button data-ai-chip="Finn pakkereise med fly og hotell" type="button">Pakkereise</button>
-<button data-ai-chip="Finn feriebolig" type="button">Feriebolig</button>
-<button data-ai-chip="Finn cruise" type="button">Cruise</button>
-</div>
+<div aria-live="polite" class="search-mode-title" id="searchModeTitle"><b>Fly</b><span>Velg avreisested, reisemål, dato og antall reisende.</span></div>
 <div class="fields search-fields">
 <label class="field-from"><span class="field-icon">⌖</span><small id="fromLabel">Hvor reiser du fra?</small><input id="fromCity" name="from" placeholder="Skriv by eller flyplass"/></label>
 <label class="field-to"><span class="field-icon">✦</span><small id="toLabel">Hvor vil du reise?</small><input id="toCity" name="to" placeholder="Skriv reisemål"/></label>
