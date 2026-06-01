@@ -1597,6 +1597,7 @@ img{
 .cookie-banner{position:fixed;left:18px;right:18px;bottom:18px;z-index:1000;display:none;grid-template-columns:1fr auto;gap:16px;align-items:center;max-width:980px;margin:0 auto;padding:16px 18px;background:rgba(3,9,18,.96);border:1px solid rgba(0,168,255,.42);border-radius:18px;box-shadow:0 20px 70px rgba(0,0,0,.45);backdrop-filter:blur(16px)}
 .cookie-banner.show{display:grid}
 .cookie-banner p{margin:5px 0 0;color:#d7e2f2;line-height:1.45;font-size:14px}
+.cookie-banner a{color:#7dd3ff;font-weight:850}
 .cookie-actions{display:flex;gap:10px}
 .cookie-actions button{border:0;border-radius:12px;padding:12px 14px;font-weight:950;cursor:pointer;color:#fff;background:#152235}
 .cookie-actions button:last-child{background:linear-gradient(90deg,#087cff,#7b3dff)}
