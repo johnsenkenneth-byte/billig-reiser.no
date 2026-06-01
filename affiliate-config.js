@@ -1,7 +1,9 @@
 window.BR_AFFILIATES = Object.freeze({
   travelpayoutsId: "718286",
   cjAccountId: "7925053",
-  expedia: "https://expedia.com/affiliate/PNXtqBW",
+  partnerizePublisherId: "11011426560",
+  expedia: "https://expedia.com/affiliates/expedia-home.aQ57RJF",
+  kiwi: "https://c111.travelpayouts.com/click",
   flights: "https://www.tkqlhce.com/click-101724638-13829856",
   cheapFlights: "https://www.tkqlhce.com/click-101724638-13829856",
   cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",

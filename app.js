@@ -4,8 +4,8 @@
 /* Discovery Engine + Deal Engine */
 (() => {
   const partners = {
-    // Flysøk åpnes hos Aviasales med Travelpayouts-ID. Andre aktive partnere
-    // beholdes som tydelige alternativer for hotell, leiebil og aktiviteter.
+    // Travelpayouts brukes til live prisindikasjon. Flysøk åpnes hos Expedia
+    // gjennom den verifiserte Creator-lenken, mens andre partnere dekker hotell og leiebil.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
     cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
@@ -249,15 +249,16 @@
 
 
 /* Dynamic partner search
-   Flight: direct Aviasales link with Travelpayouts marker and live airport autocomplete.
+   Flight: Kiwi deeplink through Travelpayouts.
    Hotel: Hotels.com affiliate deeplink wrapper.
    Car: direct Enjoy Travel / AutoEurope partner link with selected context.
 */
 (() => {
   const TRAVELPAYOUTS_MARKER = (window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286";
   const AFFILIATE_LINKS = {
-    // Aktive CJ/TP-partnere. Flysøk åpnes hos Aviasales med Travelpayouts-ID,
-    // mens hotell, leiebil og deals bruker egne aktive partnerlenker.
+    // Aktive partnere. Travelpayouts gir live prisindikasjon og sender flysøk
+    // videre til Kiwi med den valgte ruten og markøren vår.
+    kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -543,6 +544,10 @@
     paris: "CDG", cdg: "CDG",
     london: "LON", lon: "LON", heathrow: "LHR", lhr: "LHR",
     roma: "FCO", rome: "FCO", fco: "FCO",
+    athen: "ATH", athens: "ATH", athena: "ATH", hellas: "ATH", ath: "ATH",
+    rhodos: "RHO", rhodes: "RHO", rho: "RHO",
+    kreta: "HER", heraklion: "HER", her: "HER",
+    santorini: "JTR", jtr: "JTR",
     barcelona: "BCN", bcn: "BCN",
     malaga: "AGP", málaga: "AGP", agp: "AGP",
     alicante: "ALC", alc: "ALC",
@@ -580,6 +585,10 @@
     { city:"London", name:"Alle flyplasser", country:"Storbritannia", code:"LON", aliases:["london", "lon", "heathrow", "gatwick", "lhr", "lgw"] },
     { city:"Paris", name:"Alle flyplasser", country:"Frankrike", code:"PAR", aliases:["paris", "par", "cdg", "orly", "ory"] },
     { city:"Roma", name:"Fiumicino", country:"Italia", code:"FCO", aliases:["roma", "rome", "fco"] },
+    { city:"Athen", name:"Eleftherios Venizelos", country:"Hellas", code:"ATH", aliases:["athen", "athens", "athena", "hellas", "ath"] },
+    { city:"Rhodos", name:"Diagoras", country:"Hellas", code:"RHO", aliases:["rhodos", "rhodes", "rho"] },
+    { city:"Kreta", name:"Heraklion", country:"Hellas", code:"HER", aliases:["kreta", "heraklion", "her"] },
+    { city:"Santorini", name:"Santorini", country:"Hellas", code:"JTR", aliases:["santorini", "jtr"] },
     { city:"Barcelona", name:"El Prat", country:"Spania", code:"BCN", aliases:["barcelona", "bcn"] },
     { city:"Malaga", name:"Costa del Sol", country:"Spania", code:"AGP", aliases:["malaga", "málaga", "agp"] },
     { city:"Alicante", name:"Alicante-Elche", country:"Spania", code:"ALC", aliases:["alicante", "alc"] },
@@ -696,21 +705,19 @@
   }
 
   function buildFlightDirectUrl(state) {
-    const from = airportCode(state.from);
-    const to = airportCode(state.to);
-    const aviasalesTarget = new URL("https://search.aviasales.com/flights/");
-    aviasalesTarget.searchParams.set("origin_iata", from);
-    aviasalesTarget.searchParams.set("destination_iata", to);
-    if (state.depart) aviasalesTarget.searchParams.set("depart_date", state.depart);
-    if (state.ret) aviasalesTarget.searchParams.set("return_date", state.ret);
-    aviasalesTarget.searchParams.set("adults", state.adults || "1");
-    aviasalesTarget.searchParams.set("children", state.children || "0");
-    aviasalesTarget.searchParams.set("infants", "0");
-    aviasalesTarget.searchParams.set("trip_class", "0");
-    aviasalesTarget.searchParams.set("locale", "en");
-    aviasalesTarget.searchParams.set("oneway", state.ret ? "0" : "1");
-    aviasalesTarget.searchParams.set("marker", TRAVELPAYOUTS_MARKER);
-    return aviasalesTarget.toString();
+    const kiwiTarget = new URL("https://www.kiwi.com/deep");
+    kiwiTarget.searchParams.set("from", airportCode(state.from));
+    kiwiTarget.searchParams.set("to", airportCode(state.to));
+    kiwiTarget.searchParams.set("departure", state.depart);
+    kiwiTarget.searchParams.set("return", state.ret);
+
+    const travelpayouts = new URL(AFFILIATE_LINKS.kiwi);
+    travelpayouts.searchParams.set("shmarker", `${TRAVELPAYOUTS_MARKER}.billigreiser_fly`);
+    travelpayouts.searchParams.set("promo_id", "3791");
+    travelpayouts.searchParams.set("source_type", "customlink");
+    travelpayouts.searchParams.set("type", "click");
+    travelpayouts.searchParams.set("custom_url", kiwiTarget.toString());
+    return travelpayouts.toString();
   }
 
   function buildFlightUrl(state) {
@@ -719,7 +726,7 @@
   }
 
   async function buildFlightPartnerUrl(state) {
-    // Aviasales registrerer partner-ID fra Travelpayouts i marker-parameteren.
+    // Kiwi-deeplinken åpner valgt rute, mens Travelpayouts beholder sporingen.
     return buildFlightDirectUrl(state);
   }
 
@@ -1033,6 +1040,8 @@
 
   const cityMap = {
     oslo: "Oslo (OSL)", bangkok: "Bangkok (BKK)", roma: "Roma (FCO)", rome: "Roma (FCO)",
+    hellas: "Athen (ATH)", athen: "Athen (ATH)", athens: "Athen (ATH)", athena: "Athen (ATH)",
+    rhodos: "Rhodos (RHO)", rhodes: "Rhodos (RHO)", kreta: "Kreta (HER)", santorini: "Santorini (JTR)",
     paris: "Paris (CDG)", london: "London (LHR)", bali: "Bali / Denpasar (DPS)",
     malaga: "Malaga (AGP)", alicante: "Alicante (ALC)", barcelona: "Barcelona (BCN)",
     nice: "Nice (NCE)", tokyo: "Tokyo (HND)", dubai: "Dubai (DXB)",
@@ -1125,8 +1134,8 @@
     setValue("toCity", data.to || "Bangkok (BKK)");
     setValue("adults", data.adults);
     setValue("children", data.children);
-    addMessage(`Jeg har fylt ut flysøk: <b>${data.from || "Oslo"} → ${data.to || "Bangkok"}</b>, ${data.adults} voksne og ${data.children} barn. Velg dato i kalenderfeltet, eller søk med standarddato.`, "bot", {
-      label: "Søk fly nå",
+    addMessage(`Jeg har fylt ut flysøk: <b>${data.from || "Oslo"} → ${data.to || "Bangkok"}</b>, ${data.adults} voksne og ${data.children} barn. Velg dato i kalenderfeltet, eller åpne et ferdig Kiwi-søk med standarddato.`, "bot", {
+      label: "Åpne Kiwi-søk",
       onClick: () => $("searchSubmitButton")?.click()
     });
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1139,8 +1148,8 @@
     setValue("toCity", place || "Roma");
     setValue("adults", "2");
     setValue("children", "0");
-    addMessage(`Jeg har fylt ut hotellsøk for <b>${place || "Roma"}</b>. Velg innsjekk og utsjekk, eller søk med standarddato.`, "bot", {
-      label: "Søk hotell nå",
+    addMessage(`Jeg har fylt ut hotellsøk for <b>${place || "Roma"}</b>. Velg innsjekk og utsjekk, eller åpne Hotels.com med standarddato.`, "bot", {
+      label: "Åpne Hotels.com",
       onClick: () => $("searchSubmitButton")?.click()
     });
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
