@@ -2682,6 +2682,7 @@ header img[src*="logo-main"]{
   height:auto;
 }
 .magazine-shortcuts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}.magazine-shortcuts a{display:block;padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:linear-gradient(180deg,rgba(20,36,58,.96),rgba(8,17,31,.96));color:#fff;text-decoration:none}.magazine-shortcuts span{display:block;margin-bottom:3px;color:#ff7bd2;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.magazine-shortcuts b{font-size:18px}.magazine-shortcuts a:hover{border-color:rgba(255,75,184,.55);transform:translateY(-1px)}
+.front-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}.front-hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(2,7,18,.94) 0%,rgba(2,7,18,.76) 42%,rgba(2,7,18,.48) 100%)}.hero>.hero-copy,.hero>.map-card,.hero>.travel-pulse-panel{position:relative;z-index:2}
 @media(max-width:900px){
   .magazine-front-banner{padding:24px 14px 34px;}
   .magazine-front-link{border-radius:22px;}
