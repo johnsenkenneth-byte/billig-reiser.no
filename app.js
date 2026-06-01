@@ -4,19 +4,28 @@
 /* Discovery Engine + Deal Engine */
 (() => {
   const partners = {
-    // Travelpayouts brukes til live prisindikasjon. Flysøk åpnes hos Expedia
-    // gjennom den verifiserte Creator-lenken, mens andre partnere dekker hotell og leiebil.
+    // Travelpayouts brukes til live prisindikasjon og Kiwi-søk, mens de øvrige
+    // partnerne dekker hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
+    cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
+    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
     cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
     iberia: "https://www.kqzyfj.com/click-101724638-15735979",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
+    economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoeurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
-    activities: (window.BR_AFFILIATES && window.BR_AFFILIATES.activities) || "https://klook.tpx.gr/Tf7VcyFs",
+    activities: (window.BR_AFFILIATES && window.BR_AFFILIATES.activities) || "https://klook.tpx.gr/Tmj2PfPe",
     kkday: (window.BR_AFFILIATES && window.BR_AFFILIATES.kkday) || "https://kkday.tpx.gr/WlhfXaEZ",
-    transfer: (window.BR_AFFILIATES && window.BR_AFFILIATES.transfer) || "https://gettransfer.tpx.gr/1szV5hHx",
-    airhelp: (window.BR_AFFILIATES && window.BR_AFFILIATES.airhelp) || "https://airhelp.tpx.gr/kX3vy6XB"
+    transfer: (window.BR_AFFILIATES && window.BR_AFFILIATES.transfer) || "https://kiwitaxi.tpx.gr/YjkKJSHa",
+    saily: (window.BR_AFFILIATES && window.BR_AFFILIATES.saily) || "https://saily.tpx.gr/svbOORah",
+    radicalStorage: (window.BR_AFFILIATES && window.BR_AFFILIATES.radicalStorage) || "https://radicalstorage.tpx.gr/9aBeOTqW",
+    tiqets: (window.BR_AFFILIATES && window.BR_AFFILIATES.tiqets) || "https://tiqets.tpx.gr/nL28pCCf",
+    goCity: (window.BR_AFFILIATES && window.BR_AFFILIATES.goCity) || "https://gocity.tpx.gr/QHScpmus",
+    flightDelay: (window.BR_AFFILIATES && window.BR_AFFILIATES.flightDelay) || "https://deals.flyforsinkelser.no/c?c=40284&m=2508483&a=509866&r=&u=",
+    airhelp: (window.BR_AFFILIATES && window.BR_AFFILIATES.airhelp) || "https://airhelp.tpx.gr/ZW3oHL4Z"
   };
 
   const inspiration = {
@@ -45,7 +54,7 @@
       ["Rhodos", "Sol, strand og resortvalg.", "fra 2990 kr", partners.hotels]
     ],
     roadtrip: [
-      ["Toscana", "Perfekt med Enjoy Travel / AutoEurope og fleksibel rute.", "bil fra 249 kr/dag", partners.car],
+      ["Toscana", "Perfekt med EconomyBookings og fleksibel rute.", "bil fra 249 kr/dag", partners.economyBookings],
       ["Sør-Frankrike", "Nice, Provence og Côte d’Azur.", "bil fra 279 kr/dag", partners.autoeurope],
       ["Island", "Natur, fossefall og roadtrip.", "bil fra 399 kr/dag", partners.car],
       ["Portugal", "Lisboa, Porto og kystveier.", "bil fra 229 kr/dag", partners.autoeurope]
@@ -77,7 +86,13 @@
       ["Flydeal", "Oslo → Roma", "Weekendtur med lav inngangpris.", "fra 499 kr", partners.cheapFlights],
       ["Hotell", "Bangkok hotell", "Høy verdi per krone og gode vinterpriser.", "fra 420 kr/natt", partners.hotels],
       ["Opplevelser", "Tokyo aktiviteter", "Attraksjoner, togpass og eSIM.", "fra 129 kr", partners.activities],
-      ["Transport", "Flyplasstransfer", "Fast pris fra flyplassen til hotellet.", "fra 199 kr", partners.transfer]
+      ["Transport", "Flyplasstransfer", "Fast pris fra flyplassen til hotellet.", "fra 199 kr", partners.transfer],
+      ["Pakkereise", "Fly + hotell", "Finn en samlet feriepakke hos Expedia Norge.", "Se pakkereiser", partners.packageTravel],
+      ["Cruise", "Cruiseferie", "Sammenlign reiseruter, rederier og varighet hos Expedia.", "Se cruise", partners.cruise],
+      ["Feriebolig", "Feriehus og leiligheter", "Finn hytter, villaer og ferieleiligheter hos Interhome.", "Se ferieboliger", partners.interhome],
+      ["Reisehack", "eSIM på reisen", "Mobildata uten å bytte fysisk SIM-kort.", "Sjekk datapakker", partners.saily],
+      ["Storby", "Oppbevar bagasjen", "Praktisk før innsjekk eller etter utsjekk.", "Finn oppbevaring", partners.radicalStorage],
+      ["Flytrøbbel", "Forsinket eller kansellert fly?", "Sjekk om du har krav på erstatning hos Flyforsinkelser.no.", "Sjekk krav", partners.flightDelay]
     ];
 
     smartDeals.innerHTML = deals.map((deal) => `
@@ -116,7 +131,7 @@
     { name:"Roma", price:"fra 499 kr", discount:"-52%", lat:41.9028, lng:12.4964, color:"blue", url:partners.cheapFlights },
     { name:"New York", price:"fra 2990 kr", discount:"-28%", lat:40.7128, lng:-74.0060, color:"purple", url:partners.cheapFlights },
     { name:"Dubai", price:"fra 1499 kr", discount:"-31%", lat:25.2048, lng:55.2708, color:"green", url:partners.cheapFlights },
-    { name:"Bali", price:"fra 3290 kr", discount:"-30%", lat:-8.3405, lng:115.0920, color:"purple", url:"https://klook.tpx.gr/Tf7VcyFs" },
+    { name:"Bali", price:"fra 3290 kr", discount:"-30%", lat:-8.3405, lng:115.0920, color:"purple", url:"https://klook.tpx.gr/Tmj2PfPe" },
     { name:"Cape Town", price:"fra 3990 kr", discount:"-24%", lat:-33.9249, lng:18.4241, color:"blue", url:partners.cheapFlights },
     { name:"Rio de Janeiro", price:"fra 5290 kr", discount:"-19%", lat:-22.9068, lng:-43.1729, color:"orange", url:partners.cheapFlights }
   ];
@@ -264,6 +279,7 @@
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
     iberia: "https://www.kqzyfj.com/click-101724638-15735979",
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
+    economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
     carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909"
   };
@@ -747,8 +763,8 @@
   }
 
   function buildCarDirectUrl(state) {
-    // Enjoy Travel/CJ brukes som hovedpartner for leiebil når direkte søk ikke støttes.
-    return AFFILIATE_LINKS.enjoyTravel || AFFILIATE_LINKS.car || "https://www.jdoqocy.com/click-101724638-17010909";
+    // EconomyBookings brukes som hovedpartner for leiebil når direkte søk ikke støttes.
+    return AFFILIATE_LINKS.economyBookings || AFFILIATE_LINKS.enjoyTravel || AFFILIATE_LINKS.car || "https://economybookings.tpx.gr/LT8vc2kD";
   }
 
 
@@ -1180,8 +1196,44 @@
     }
   }
 
+  function openCruise() {
+    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises";
+    addMessage("Jeg åpner cruisesøket hos <b>Expedia Cruise</b>. Der kan du velge dato, havn og reiselengde.", "bot", {
+      label: "Åpne cruise",
+      onClick: () => window.open(url, "_blank", "noopener,noreferrer")
+    });
+  }
+
+  function openPackageTravel() {
+    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell";
+    addMessage("Jeg åpner <b>pakkereiser hos Expedia Norge</b>. Der kan du velge fly, hotell, reisemål og datoer samlet.", "bot", {
+      label: "Åpne pakkereiser",
+      onClick: () => window.open(url, "_blank", "noopener,noreferrer")
+    });
+  }
+
+  function openInterhome() {
+    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=";
+    addMessage("Jeg åpner <b>Interhome</b> for feriehus, villaer, hytter og ferieleiligheter.", "bot", {
+      label: "Åpne Interhome",
+      onClick: () => window.open(url, "_blank", "noopener,noreferrer")
+    });
+  }
+
+  function openFlightDelay() {
+    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.flightDelay) || "https://deals.flyforsinkelser.no/c?c=40284&m=2508483&a=509866&r=&u=";
+    addMessage("Jeg åpner <b>Flyforsinkelser.no</b>. Der kan du sjekke om forsinkelse eller kansellering gir rett til erstatning.", "bot", {
+      label: "Sjekk erstatning",
+      onClick: () => window.open(url, "_blank", "noopener,noreferrer")
+    });
+  }
+
   function handle(text) {
     const low = text.toLowerCase();
+    if (low.includes("forsink") || low.includes("kansell") || low.includes("erstatning")) return openFlightDelay();
+    if (low.includes("feriebolig") || low.includes("feriehus") || low.includes("villa") || low.includes("hytte") || low.includes("leilighet")) return openInterhome();
+    if (low.includes("pakkereise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel();
+    if (low.includes("cruise")) return openCruise();
     if (/(fly|flight|fra|from).*(til|to)/.test(low) || low.includes("bangkok") || low.includes("mallorca")) return fillFlight(text);
     if (low.includes("hotell") || low.includes("hotel") || low.includes("overnatting")) return fillHotel(text);
     if (low.includes("leiebil") || low.includes("rental") || low.includes("bil i") || low.includes("car")) return fillCar(text);
