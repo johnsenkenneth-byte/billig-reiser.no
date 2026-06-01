@@ -4,7 +4,8 @@
 /* Discovery Engine + Deal Engine */
 (() => {
   const partners = {
-    // Safe Kiwi fallback. Dynamic search below uses /api/travelpayouts-link first.
+    // Flysøk åpnes hos Aviasales med Travelpayouts-ID. Andre aktive partnere
+    // beholdes som tydelige alternativer for hotell, leiebil og aktiviteter.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
     cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
@@ -248,15 +249,15 @@
 
 
 /* Dynamic partner search
-   Flight: direct Kiwi.com deep link with live airport autocomplete.
+   Flight: direct Aviasales link with Travelpayouts marker and live airport autocomplete.
    Hotel: Hotels.com affiliate deeplink wrapper.
    Car: direct Enjoy Travel / AutoEurope partner link with selected context.
 */
 (() => {
   const TRAVELPAYOUTS_MARKER = (window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286";
   const AFFILIATE_LINKS = {
-    // CJ/TP-partnere som faktisk er aktive hos deg. Flysøk går primært direkte
-    // til Kiwi for stabilt søk, mens deals/alternativer bruker CJ-partnerne.
+    // Aktive CJ/TP-partnere. Flysøk åpnes hos Aviasales med Travelpayouts-ID,
+    // mens hotell, leiebil og deals bruker egne aktive partnerlenker.
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -525,8 +526,8 @@
   }
 
   function affiliateWrap(baseAffiliateUrl, targetUrl) {
-    // CJ deep links use the url= parameter. We keep the target fully encoded so
-    // Expedia receives all search parameters after the CJ tracking redirect.
+    // CJ deep links use the url= parameter. Keep the target fully encoded so
+    // the selected partner receives the search parameters after redirect.
     const separator = baseAffiliateUrl.includes("?") ? "&" : "?";
     return `${baseAffiliateUrl}${separator}url=${encodeURIComponent(targetUrl)}`;
   }
@@ -697,16 +698,19 @@
   function buildFlightDirectUrl(state) {
     const from = airportCode(state.from);
     const to = airportCode(state.to);
-    const depart = state.depart;
-    const ret = state.ret;
-    const expediaTarget = new URL("https://www.expedia.no/Flights-Search");
-    expediaTarget.searchParams.set("trip", "roundtrip");
-    expediaTarget.searchParams.set("leg1", `from:${from},to:${to},departure:${depart}TANYT`);
-    expediaTarget.searchParams.set("leg2", `from:${to},to:${from},departure:${ret}TANYT`);
-    expediaTarget.searchParams.set("passengers", `adults:${state.adults || "1"},children:${state.children || "0"}`);
-    expediaTarget.searchParams.set("mode", "search");
-    expediaTarget.searchParams.set("options", "cabinclass:economy");
-    return affiliateWrap(AFFILIATE_LINKS.cheapFlights, expediaTarget.toString());
+    const aviasalesTarget = new URL("https://search.aviasales.com/flights/");
+    aviasalesTarget.searchParams.set("origin_iata", from);
+    aviasalesTarget.searchParams.set("destination_iata", to);
+    if (state.depart) aviasalesTarget.searchParams.set("depart_date", state.depart);
+    if (state.ret) aviasalesTarget.searchParams.set("return_date", state.ret);
+    aviasalesTarget.searchParams.set("adults", state.adults || "1");
+    aviasalesTarget.searchParams.set("children", state.children || "0");
+    aviasalesTarget.searchParams.set("infants", "0");
+    aviasalesTarget.searchParams.set("trip_class", "0");
+    aviasalesTarget.searchParams.set("locale", "en");
+    aviasalesTarget.searchParams.set("oneway", state.ret ? "0" : "1");
+    aviasalesTarget.searchParams.set("marker", TRAVELPAYOUTS_MARKER);
+    return aviasalesTarget.toString();
   }
 
   function buildFlightUrl(state) {
@@ -715,7 +719,7 @@
   }
 
   async function buildFlightPartnerUrl(state) {
-    // Flysøk går via stabil CJ-deeplink til Expedia flysøk.
+    // Aviasales registrerer partner-ID fra Travelpayouts i marker-parameteren.
     return buildFlightDirectUrl(state);
   }
 
