@@ -183,17 +183,34 @@
 
 /* Cookie consent +  search hooks */
 (() => {
+  function activateConsentServices() {
+    document.querySelectorAll("[data-consent-src]").forEach((node) => {
+      const source = node.getAttribute("data-consent-src");
+      if (!source || node.dataset.consentLoaded === "true") return;
+      if (node.tagName === "SCRIPT") {
+        const script = document.createElement("script");
+        script.src = source;
+        script.defer = true;
+        node.after(script);
+      } else {
+        node.setAttribute("src", source);
+      }
+      node.dataset.consentLoaded = "true";
+    });
+  }
 
   function showCookieBanner() {
     const banner = document.getElementById("cookieBanner");
     if (!banner) return;
     const choice = localStorage.getItem("br_cookie_choice");
+    if (choice === "accepted") activateConsentServices();
     if (!choice) banner.classList.add("show");
 
     const accept = document.getElementById("cookieAccept");
     const reject = document.getElementById("cookieReject");
     if (accept) accept.addEventListener("click", () => {
       localStorage.setItem("br_cookie_choice", "accepted");
+      activateConsentServices();
       banner.classList.remove("show");
     });
     if (reject) reject.addEventListener("click", () => {
@@ -236,7 +253,7 @@
    Car: direct Enjoy Travel / AutoEurope partner link with selected context.
 */
 (() => {
-  const TRAVELPAYOUTS_MARKER = "517483";
+  const TRAVELPAYOUTS_MARKER = (window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286";
   const AFFILIATE_LINKS = {
     // CJ/TP-partnere som faktisk er aktive hos deg. Flysøk går primært direkte
     // til Kiwi for stabilt søk, mens deals/alternativer bruker CJ-partnerne.
