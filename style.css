@@ -3424,3 +3424,67 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
 .mag-hero>*:not(.thailand-guide-video):not(.thailand-guide-video-shade),
 .bangkok-hero>*:not(.thailand-guide-video):not(.thailand-guide-video-shade),
 .thailand-video-hero>*:not(.thailand-guide-video):not(.thailand-guide-video-shade){position:relative;z-index:1}
+
+/* BR v67: logo-inspired search-field emblems */
+#travelSearch .search-fields .field-icon{
+  width:34px!important;
+  height:34px!important;
+  left:10px!important;
+  overflow:visible;
+  isolation:isolate;
+  border:1px solid rgba(90,232,255,.84)!important;
+  background:
+    radial-gradient(circle at 32% 24%,rgba(89,233,255,.36),transparent 34%),
+    linear-gradient(145deg,rgba(8,105,143,.98),rgba(5,28,70,.98))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 0 0 3px rgba(33,211,255,.08),
+    0 0 18px rgba(44,218,255,.42),
+    0 0 25px rgba(255,59,190,.13)!important;
+}
+#travelSearch .search-fields .field-icon::before{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  z-index:-2;
+  border:1px solid rgba(255,65,190,.42);
+  border-radius:50%;
+  box-shadow:0 0 13px rgba(255,52,184,.2);
+}
+#travelSearch .search-fields .field-icon::after{
+  content:"";
+  position:absolute;
+  top:-5px;
+  right:0;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#ff58c9;
+  box-shadow:0 0 10px rgba(255,69,194,.95);
+}
+#travelSearch .search-fields .field-icon svg{
+  width:23px;
+  height:23px;
+  fill:none;
+  stroke:#e8fdff;
+  stroke-width:1.55;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 4px rgba(104,239,255,.9));
+}
+#travelSearch .search-fields .field-icon-destination svg{
+  stroke:#fff4fc;
+  filter:drop-shadow(0 0 5px rgba(255,119,213,.76));
+}
+#travelSearch .search-fields label{
+  padding-left:57px!important;
+}
+@media(max-width:760px){
+  #travelSearch .search-fields .field-icon{
+    left:12px!important;
+    width:32px!important;
+    height:32px!important;
+  }
+  #travelSearch .search-fields .field-icon svg{width:21px;height:21px}
+  #travelSearch .search-fields label{padding-left:56px!important}
+}

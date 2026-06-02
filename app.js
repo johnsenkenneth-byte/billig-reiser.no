@@ -966,7 +966,7 @@
         <h3>${route.fromCity} → ${route.toCity}</h3>
         <small>${shortLiveDealDate(dates.depart)} – ${shortLiveDealDate(dates.ret)} • ${airline}</small>
         <div><b>${price}</b><em>${offer ? "for 2 voksne" : "hent detaljert søk"}</em></div>
-        <button data-live-route="${liveDealKey(route)}" type="button">VIS PRISER <span>→</span></button>
+        <button data-live-route="${liveDealKey(route)}" type="button">HENT LIVEPRIS I SØKET <span>→</span></button>
       </article>`;
   }
 
@@ -1000,13 +1000,21 @@
   function openLiveDealSearch(route) {
     const dates = liveDealDates(route);
     setSearchType("flight");
-    if ($("fromCity")) $("fromCity").value = `${route.fromCity} (${route.from})`;
-    if ($("toCity")) $("toCity").value = `${route.toCity} (${route.to})`;
+    if ($("fromCity")) {
+      $("fromCity").value = `${route.fromCity} (${route.from})`;
+      $("fromCity").dataset.airportCode = route.from;
+    }
+    if ($("toCity")) {
+      $("toCity").value = `${route.toCity} (${route.to})`;
+      $("toCity").dataset.airportCode = route.to;
+    }
     if ($("departDate")) $("departDate").value = dates.depart;
     if ($("returnDate")) $("returnDate").value = dates.ret;
     updateSearchPreview();
+    setLiveBox(`<div class="tp-row"><span>Henter livepris for <b>${route.from} → ${route.to}</b> …</span><span class="tp-muted">Amadeus</span></div>`);
     $("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setTimeout(() => scheduleLivePriceUpdate(true, readSearchState({ forUrl: true })), 350);
+    scheduleLivePriceUpdate(true, readSearchState({ forUrl: true }));
+    setTimeout(() => $("tpLiveBox")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 180);
   }
 
   function initLiveDeals() {

@@ -19,8 +19,6 @@
 <img alt="Billig-reiser.no" decoding="async" height="220" src="assets/logo-main.png" width="330"/>
 </a>
 <nav aria-label="Hovedmeny" class="nav desktop-nav">
-<a href="#liveDeals">DEALS</a>
-<a data-open-search="flight" href="#travelSearch">SØK REISE</a>
 <a data-open-search="restplass" href="#travelSearch">CHARTER</a>
 <a href="#hack">REISEHACKS</a>
 <a href="reisemagasinet.html">REISEMAGASIN</a>
@@ -30,8 +28,6 @@
 <a aria-label="Åpne meny" class="hamburger" href="#mobile-nav">☰</a>
 </header>
 <nav aria-label="Mobilmeny" class="mobile-nav" id="mobile-nav">
-<a href="#liveDeals">🔥 Deals</a>
-<a data-open-search="flight" href="#travelSearch"><span class="modern-tab-icon">⌕</span><span>Søk reise</span></a>
 <a data-open-search="restplass" href="#travelSearch">☀ Charter og restplass</a>
 <a href="reisemagasinet.html">📖 Reisemagasin</a>
 <a href="reiseradar.html">🌍 Reiseradar</a>
@@ -62,7 +58,7 @@
 <video aria-hidden="true" autoplay="" class="front-hero-video" loop="" muted="" playsinline="" poster="assets/reisemagasin-home-banner.webp" preload="metadata"><source src="https://videos.pexels.com/video-files/17098010/17098010-uhd_2560_1440_30fps.mp4" type="video/mp4"/><source src="assets/video/forside-bakgrunn.mp4" type="video/mp4"/></video>
 <div aria-hidden="true" class="front-hero-shade"></div>
 <div class="hero-copy">
-<h1>Smarte reiser. <span>Bedre priser.</span></h1>
+<h1>Oppdag mer. <span>Reis smartere.</span></h1>
 <p>Finn fly, hotell og leiebil raskt, enkelt og trygt.</p>
 <form autocomplete="on" class="search-card travel-search neon-flight-deck" id="travelSearch">
 <div aria-hidden="true" class="flight-deck-orbit"></div>
@@ -93,11 +89,11 @@
 </div>
 </section>
 <div class="fields search-fields">
-<label class="field-from"><span class="field-icon">⌖</span><small id="fromLabel">Hvor reiser du fra?</small><input id="fromCity" name="from" placeholder="Skriv by eller flyplass"/></label>
-<label class="field-to"><span class="field-icon">✦</span><small id="toLabel">Hvor vil du reise?</small><input id="toCity" name="to" placeholder="Skriv reisemål"/></label>
-<label><span class="field-icon">◐</span><small id="departLabel">Avreise</small><input id="departDate" name="depart" placeholder="Velg dato" type="date"/></label>
-<label><span class="field-icon">◑</span><small id="returnLabel">Retur</small><input id="returnDate" name="return" placeholder="Velg dato" type="date"/></label>
-<label class="traveler-field"><span class="field-icon">◉</span><small id="adultsLabel">Reisende</small><button aria-expanded="false" class="traveler-toggle" id="travelerToggle" type="button">2 voksne, 0 barn</button><div aria-label="Velg reisende" class="traveler-menu" id="travelerMenu"><div class="traveler-row"><span>Voksne</span><div class="stepper"><button aria-label="Færre voksne" class="step-btn" data-step="-1" data-step-target="adults" type="button">−</button><input id="adults" inputmode="numeric" max="9" min="1" name="adults" type="number" value="2"/><button aria-label="Flere voksne" class="step-btn" data-step="1" data-step-target="adults" type="button">+</button></div></div><div class="traveler-row" id="childrenRow"><span>Barn</span><div class="stepper"><button aria-label="Færre barn" class="step-btn" data-step="-1" data-step-target="children" type="button">−</button><input id="children" inputmode="numeric" max="8" min="0" name="children" type="number" value="0"/><button aria-label="Flere barn" class="step-btn" data-step="1" data-step-target="children" type="button">+</button></div></div><button class="traveler-done" id="travelerDone" type="button">FERDIG</button></div></label>
+<label class="field-from"><span class="field-icon field-icon-origin"><svg aria-hidden="true" viewBox="0 0 36 36"><circle cx="18" cy="18" r="8"/><circle cx="18" cy="18" r="2"/><path d="M18 5v7m0 12v7M5 18h7m12 0h7"/></svg></span><small id="fromLabel">Hvor reiser du fra?</small><input id="fromCity" name="from" placeholder="Skriv by eller flyplass"/></label>
+<label class="field-to"><span class="field-icon field-icon-destination"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="m18 6 3.2 8.8L30 18l-8.8 3.2L18 30l-3.2-8.8L6 18l8.8-3.2Z"/><circle cx="18" cy="18" r="2"/></svg></span><small id="toLabel">Hvor vil du reise?</small><input id="toCity" name="to" placeholder="Skriv reisemål"/></label>
+<label><span class="field-icon field-icon-depart"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="M9 11h18v17H9zM13 7v7m10-7v7M9 16h18"/><path d="m14 22 4-3 4 3"/></svg></span><small id="departLabel">Avreise</small><input id="departDate" name="depart" placeholder="Velg dato" type="date"/></label>
+<label><span class="field-icon field-icon-return"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="M9 11h18v17H9zM13 7v7m10-7v7M9 16h18"/><path d="m14 20 4 3 4-3"/></svg></span><small id="returnLabel">Retur</small><input id="returnDate" name="return" placeholder="Velg dato" type="date"/></label>
+<label class="traveler-field"><span class="field-icon field-icon-travelers"><svg aria-hidden="true" viewBox="0 0 36 36"><circle cx="18" cy="13" r="4"/><path d="M10 27c1.5-4 4.2-6 8-6s6.5 2 8 6"/><circle cx="18" cy="18" r="13"/></svg></span><small id="adultsLabel">Reisende</small><button aria-expanded="false" class="traveler-toggle" id="travelerToggle" type="button">2 voksne, 0 barn</button><div aria-label="Velg reisende" class="traveler-menu" id="travelerMenu"><div class="traveler-row"><span>Voksne</span><div class="stepper"><button aria-label="Færre voksne" class="step-btn" data-step="-1" data-step-target="adults" type="button">−</button><input id="adults" inputmode="numeric" max="9" min="1" name="adults" type="number" value="2"/><button aria-label="Flere voksne" class="step-btn" data-step="1" data-step-target="adults" type="button">+</button></div></div><div class="traveler-row" id="childrenRow"><span>Barn</span><div class="stepper"><button aria-label="Færre barn" class="step-btn" data-step="-1" data-step-target="children" type="button">−</button><input id="children" inputmode="numeric" max="8" min="0" name="children" type="number" value="0"/><button aria-label="Flere barn" class="step-btn" data-step="1" data-step-target="children" type="button">+</button></div></div><button class="traveler-done" id="travelerDone" type="button">FERDIG</button></div></label>
 </div>
 <div class="hero-ctas search-actions single-action">
 <button class="primary search-launch" id="searchSubmitButton" type="submit"><span>START SØKET</span><b>↗</b></button>
@@ -129,7 +125,21 @@
 <a href="https://www.dpbolvw.net/click-101724638-17085753" rel="nofollow noopener sponsored" target="_blank">CheapTickets</a>
 <a href="https://www.kqzyfj.com/click-101724638-15735979" rel="nofollow noopener sponsored" target="_blank">Iberia</a>
 <a href="https://www.tkqlhce.com/click-101724638-13829856" rel="nofollow noopener sponsored" target="_blank">Cheapflights</a>
+<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Freise%2Fpakkereiser%2F" rel="nofollow noopener sponsored" target="_blank">TUI</a>
+<a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">Interhome</a>
+<a href="https://economybookings.tpx.gr/LT8vc2kD" rel="nofollow noopener sponsored" target="_blank">EconomyBookings</a>
+<a href="https://autoeurope.tpx.gr/GzEPjKLD" rel="nofollow noopener sponsored" target="_blank">AutoEurope</a>
 <a href="https://www.jdoqocy.com/click-101724638-17010909" rel="nofollow noopener sponsored" target="_blank">EnjoyTravel</a>
+<a href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank">Klook</a>
+<a href="https://kkday.tpx.gr/WlhfXaEZ" rel="nofollow noopener sponsored" target="_blank">KKday</a>
+<a href="https://kiwitaxi.tpx.gr/YjkKJSHa" rel="nofollow noopener sponsored" target="_blank">KiwiTaxi</a>
+<a href="https://gettransfer.tpx.gr/1szV5hHx" rel="nofollow noopener sponsored" target="_blank">GetTransfer</a>
+<a href="https://saily.tpx.gr/svbOORah" rel="nofollow noopener sponsored" target="_blank">Saily</a>
+<a href="https://radicalstorage.tpx.gr/9aBeOTqW" rel="nofollow noopener sponsored" target="_blank">Radical Storage</a>
+<a href="https://tiqets.tpx.gr/nL28pCCf" rel="nofollow noopener sponsored" target="_blank">Tiqets</a>
+<a href="https://gocity.tpx.gr/QHScpmus" rel="nofollow noopener sponsored" target="_blank">Go City</a>
+<a href="https://deals.flyforsinkelser.no/c?c=40284&amp;m=2508483&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">Flyforsinkelser.no</a>
+<a href="https://airhelp.tpx.gr/ZW3oHL4Z" rel="nofollow noopener sponsored" target="_blank">AirHelp</a>
 </div>
 </div>
 <div class="map-card live-map-card">
@@ -201,7 +211,7 @@
 </section>
 <section aria-label="Våre samarbeidspartnere" class="suppliers live-partners">
 <div class="section-head">
-<h2>Vi samarbeider med</h2>
+<h2>Utvalgte samarbeidspartnere</h2>
 <span class="live-partners-status">● LIVE PARTNERE</span>
 </div>
 <div class="partner-marquee">
@@ -231,7 +241,7 @@
 <div class="footer-inner">
 <div class="footer-brand">
 <b>✈ Billig-Reiser.no</b>
-<p>Smarte reiser, magasinet og tilbud fra våre samarbeidspartnere.</p>
+<p>Oppdag mer, reis smartere. Magasinet og tilbud fra våre samarbeidspartnere.</p>
 </div>
 <nav class="footer-links">
 <a href="om-oss.html">Om oss</a>
