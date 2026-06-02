@@ -886,6 +886,14 @@
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function openHotelPick(destination) {
+    setSearchType("hotel");
+    if ($("toCity")) $("toCity").value = destination || "";
+    updateSearchPreview();
+    $("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => $("departDate")?.focus(), 320);
+  }
+
   function buildPackageUrl(state) {
     const url = new URL("https://www.expedia.no/Hotel-Search");
     url.searchParams.set("origin", state.from);
@@ -1436,6 +1444,9 @@
     });
     document.querySelectorAll("[data-charter-open]").forEach((btn) => {
       btn.addEventListener("click", () => openCharterSpotlight(btn.dataset.charterOpen));
+    });
+    document.querySelectorAll("[data-hotel-pick]").forEach((btn) => {
+      btn.addEventListener("click", () => openHotelPick(btn.dataset.hotelPick));
     });
     $("smartSearchLaunch")?.addEventListener("click", runSmartSearch);
     $("smartSearchQuery")?.addEventListener("keydown", (event) => {
