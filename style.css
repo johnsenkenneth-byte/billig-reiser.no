@@ -3212,3 +3212,70 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
   .tui-quick-grid button{flex:0 0 126px}
   .tui-quick-head{align-items:flex-start;flex-direction:column}
 }
+
+/* BR v58: short charter labels and readable field values */
+#travelSearch[data-mode="restplass"] .search-fields small{
+  min-height:auto!important;
+  white-space:nowrap!important;
+}
+#travelSearch[data-mode="restplass"] .search-fields input,
+#travelSearch[data-mode="restplass"] .traveler-toggle{
+  overflow:visible!important;
+  text-overflow:clip!important;
+  font-size:12px!important;
+}
+#travelSearch[data-mode="restplass"] .search-fields input[type="date"]{
+  font-size:11px!important;
+}
+
+/* BR v59: front-page summer charter spotlight */
+.summer-charter-spotlight{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);
+  gap:16px;
+  margin:18px 0 0;
+  padding:17px;
+  overflow:hidden;
+  border:1px solid rgba(86,223,255,.28);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(33,211,255,.18),transparent 34%),
+    radial-gradient(circle at 88% 20%,rgba(255,60,183,.15),transparent 38%),
+    linear-gradient(145deg,rgba(8,39,69,.96),rgba(6,15,33,.98));
+  box-shadow:0 18px 42px rgba(0,0,0,.26);
+}
+.summer-charter-kicker{color:#7ceaff;font-size:10px;font-weight:950;letter-spacing:.14em}
+.summer-charter-copy h2{margin:5px 0 6px;color:#f9fdff;font-size:24px;letter-spacing:-.04em}
+.summer-charter-copy p{max-width:610px;margin:0;color:#b5c9dd;font-size:13px;line-height:1.48}
+.summer-charter-copy>button{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:13px;
+  padding:12px 15px;
+  border:0;
+  border-radius:13px;
+  background:linear-gradient(110deg,#ff25c8,#7a44ff 48%,#21d7ff);
+  color:#fff;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:950;
+  box-shadow:0 10px 28px rgba(70,102,255,.22);
+}
+.summer-charter-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.summer-charter-links button{
+  padding:12px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:14px;
+  background:rgba(255,255,255,.045);
+  color:#f3fbff;
+  cursor:pointer;
+  text-align:left;
+}
+.summer-charter-links button:hover{border-color:rgba(108,231,255,.68);background:rgba(39,171,211,.15)}
+.summer-charter-links b{display:block;font-size:13px}
+.summer-charter-links span{display:block;margin-top:4px;color:#9fb7cd;font-size:10px;font-weight:750}
+@media(max-width:760px){
+  .summer-charter-spotlight{grid-template-columns:1fr;padding:14px;border-radius:18px}
+  .summer-charter-copy h2{font-size:20px}
+}

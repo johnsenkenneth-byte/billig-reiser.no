@@ -830,6 +830,7 @@
     kroatia: "/feriereiser/kroatia/restplasser/",
     bulgaria: "/feriereiser/bulgaria/restplasser/"
   };
+  let tuiQuickTargetPath = "";
 
   function destinationKey(value) {
     return normalizeSearch(value).replace(/[^a-z0-9 ]/g, "").trim();
@@ -842,18 +843,18 @@
   }
 
   function buildTuiRestplassUrl(state) {
-    const path = TUI_RESTPLASS_DESTINATIONS[destinationKey(state.to)] || "/tilbud/restplass/";
+    const path = tuiQuickTargetPath || TUI_RESTPLASS_DESTINATIONS[destinationKey(state.to)] || "/tilbud/restplass/";
     const target = new URL(path, "https://www.tui.no");
-    if (state.depart) {
-      const passengers = Array.from({ length: Math.max(1, Number(state.adults) || 2) }, () => "30").join(",");
-      target.searchParams.set("searchPanelFilters", `STARTDATE:${state.depart}|FLEXIBILITY:7|DURATIONS:7|PASSENGERS:${passengers}|AIRPORTS:|AIRPORTNAMES:`);
-      target.searchParams.set("sortBy", "price");
-    }
     return tradeTrackerDeepLink(AFFILIATE_LINKS.tuiRestplass, target.toString());
   }
 
   function applyTuiQuickChoice(choice) {
     setSearchType("restplass");
+    tuiQuickTargetPath = {
+      week: "/tilbud/restplass/",
+      family: "/reise-med-barn/",
+      "all-inclusive": "/all-inclusive/"
+    }[choice] || "";
     const today = new Date();
     const depart = new Date(today);
     depart.setDate(today.getDate() + (choice === "week" ? 3 : 14));
@@ -878,6 +879,11 @@
     updateSearchPreview();
     if (helper && copy) helper.textContent = copy;
     $("toCity")?.focus();
+  }
+
+  function openCharterSpotlight(choice) {
+    applyTuiQuickChoice(choice);
+    document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function buildPackageUrl(state) {
@@ -1123,13 +1129,13 @@
       if (from) from.placeholder = "Valgfritt";
       if (to) to.placeholder = "Skriv land eller område, f.eks. Toscana";
     } else if (currentSearchType === "restplass") {
-      if (fromLabel) fromLabel.textContent = "Avreiseflyplass";
-      if (toLabel) toLabel.textContent = "Hvor vil du reise?";
-      if (departLabel) departLabel.textContent = "Tidligste avreise";
+      if (fromLabel) fromLabel.textContent = "Fra";
+      if (toLabel) toLabel.textContent = "Reisemål";
+      if (departLabel) departLabel.textContent = "Avreise fra";
       if (returnLabel) returnLabel.textContent = "Retur";
       if (adultsLabel) adultsLabel.textContent = "Reisende";
-      if (from) from.placeholder = "Skriv by, f.eks. Oslo";
-      if (to) to.placeholder = "Skriv reisemål, f.eks. Mallorca";
+      if (from) from.placeholder = "Velg flyplass";
+      if (to) to.placeholder = "Velg reisemål";
     } else if (currentSearchType === "hotel") {
       if (fromLabel) fromLabel.textContent = "Land / område";
       if (toLabel) toLabel.textContent = "Hvor vil du bo?";
@@ -1320,6 +1326,9 @@
     });
     document.querySelectorAll("[data-tui-quick]").forEach((btn) => {
       btn.addEventListener("click", () => applyTuiQuickChoice(btn.dataset.tuiQuick));
+    });
+    document.querySelectorAll("[data-charter-open]").forEach((btn) => {
+      btn.addEventListener("click", () => openCharterSpotlight(btn.dataset.charterOpen));
     });
     $("smartSearchLaunch")?.addEventListener("click", runSmartSearch);
     $("smartSearchQuery")?.addEventListener("keydown", (event) => {
