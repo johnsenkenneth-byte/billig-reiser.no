@@ -537,9 +537,9 @@
       } else if (currentSearchType === "car") {
         button.textContent = state.from ? `SØK LEIEBIL I ${state.from.toUpperCase()} 🔎` : "SØK LEIEBIL 🔎";
       } else if (state.from && state.to) {
-        button.textContent = `SØK FLY ${state.from.toUpperCase()} → ${state.to.toUpperCase()} 🔎`;
+        button.textContent = `VIS FLYPRISER ${state.from.toUpperCase()} → ${state.to.toUpperCase()} 🔎`;
       } else {
-        button.textContent = "SØK FLY 🔎";
+        button.textContent = "VIS FLYPRISER 🔎";
       }
     }
 
@@ -942,7 +942,7 @@
       </section>`;
   }
 
-  function scheduleLivePriceUpdate() {
+  function scheduleLivePriceUpdate(immediate = false) {
     const box = $("tpLiveBox");
     if (!box) return;
     clearTimeout(livePriceTimer);
@@ -985,7 +985,7 @@
       } catch (error) {
         if (error?.name !== "AbortError") setLiveBox("", false);
       }
-    }, 650);
+    }, immediate ? 0 : 650);
   }
 
   function buildPartnerTarget() {
@@ -1318,11 +1318,10 @@
           if (button && oldText) button.textContent = oldText;
         } else if (currentSearchType === "flight") {
           if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
-          const button = $("searchSubmitButton");
-          const oldText = button?.textContent;
-          if (button) button.textContent = "ÅPNER FLYSØK…";
-          target = await buildFlightPartnerUrl(state);
-          if (button && oldText) button.textContent = oldText;
+          if (!state.depart) throw new Error("Velg avreisedato for å hente flypriser.");
+          scheduleLivePriceUpdate(true);
+          setTimeout(() => $("tpLiveBox")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
+          return;
         } else {
           target = buildPartnerTarget();
         }
