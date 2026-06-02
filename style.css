@@ -3621,3 +3621,138 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
   .front-hotel-card img{height:165px}
   .front-hotel-bottom{align-items:start;flex-direction:column}
 }
+
+/* BR v69: one complete partner directory at the bottom of the front page */
+.live-partners .partner-directory{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:9px;
+  margin-top:16px;
+}
+.live-partners .partner-directory a{
+  display:flex;
+  align-items:center;
+  min-height:48px;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:13px;
+  background:
+    radial-gradient(circle at 8% 20%,rgba(43,218,255,.09),transparent 34%),
+    linear-gradient(145deg,rgba(11,29,52,.98),rgba(5,14,30,.98));
+  color:#eef8ff;
+  font-size:12px;
+  font-weight:900;
+  text-decoration:none;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.live-partners .partner-directory a::before{
+  content:"";
+  width:7px;
+  height:7px;
+  margin-right:9px;
+  border-radius:50%;
+  background:#49e5ff;
+  box-shadow:0 0 10px rgba(59,224,255,.75);
+}
+.live-partners .partner-directory a:hover{
+  transform:translateY(-2px);
+  border-color:rgba(104,231,255,.62);
+  background:linear-gradient(145deg,rgba(16,62,91,.98),rgba(10,22,45,.98));
+}
+
+/* BR v70: one date-range card with a guided outbound / return calendar */
+@media(min-width:761px){
+  #travelSearch .search-fields.fields{
+    grid-template-columns:minmax(0,1.08fr) minmax(0,1.08fr) minmax(210px,1.22fr) minmax(158px,.88fr)!important;
+  }
+}
+#travelSearch .date-range-field{
+  cursor:pointer;
+}
+#travelSearch .date-range-toggle{
+  display:flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:25px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:#f7fbff!important;
+  cursor:pointer;
+  font-family:inherit!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  line-height:1.1!important;
+  letter-spacing:-.025em!important;
+  text-align:left!important;
+  white-space:nowrap!important;
+}
+#travelSearch .date-range-toggle span{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#travelSearch .date-range-toggle i{
+  flex:0 0 auto;
+  color:#58e5ff;
+  font-size:14px;
+  font-style:normal;
+  filter:drop-shadow(0 0 5px rgba(80,228,255,.7));
+}
+#travelSearch .field-icon-dates svg{
+  stroke:#f5fbff!important;
+}
+#travelSearch #liveDateCalendar.live-calendar{
+  display:none!important;
+}
+#travelSearch.calendar-open #liveDateCalendar.live-calendar{
+  display:block!important;
+  animation:brCalendarOpen .18s ease-out;
+}
+@keyframes brCalendarOpen{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+#travelSearch .calendar-header strong{
+  color:#f7fcff;
+}
+#travelSearch .calendar-header small{
+  display:block;
+  margin-top:4px;
+  color:#a9bfd4;
+}
+#travelSearch .calendar-controls [data-calendar-pick].active{
+  border-color:rgba(91,232,255,.78);
+  background:linear-gradient(135deg,rgba(25,167,208,.3),rgba(175,48,193,.25));
+  color:#eefdff;
+}
+#travelSearch .traveler-toggle{
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  font-size:12px!important;
+  letter-spacing:-.045em!important;
+}
+@media(max-width:760px){
+  #travelSearch .date-range-toggle{font-size:13px!important}
+  #travelSearch .traveler-toggle{font-size:13px!important}
+}
+@media(min-width:761px) and (max-width:1400px){
+  html body form#travelSearch .search-fields.fields{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  }
+  #travelSearch .date-range-field{
+    grid-column:1!important;
+  }
+  #travelSearch .traveler-field{
+    grid-column:2!important;
+  }
+}
+@media(min-width:1401px){
+  html body form#travelSearch .search-fields.fields{
+    grid-template-columns:minmax(0,1.08fr) minmax(0,1.08fr) minmax(210px,1.22fr) minmax(158px,.88fr)!important;
+  }
+}

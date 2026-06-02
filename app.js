@@ -392,6 +392,33 @@
     return date.toLocaleDateString("nb-NO", { month: "long", year: "numeric" });
   }
 
+  function compactDate(value, fallback) {
+    const date = parseISODate(value);
+    return date ? date.toLocaleDateString("nb-NO", { day: "2-digit", month: "short" }) : fallback;
+  }
+
+  function updateDateRangeSummary() {
+    const form = $("travelSearch");
+    const toggle = $("dateRangeToggle");
+    if ($("dateRangeDepart")) $("dateRangeDepart").textContent = compactDate($("departDate")?.value, "Avreise");
+    if ($("dateRangeReturn")) $("dateRangeReturn").textContent = compactDate($("returnDate")?.value, "Hjemreise");
+    if (toggle) toggle.setAttribute("aria-expanded", form?.classList.contains("calendar-open") ? "true" : "false");
+  }
+
+  function setCalendarOpen(open) {
+    const form = $("travelSearch");
+    if (!form) return;
+    form.classList.toggle("calendar-open", open);
+    updateDateRangeSummary();
+    if (open) renderLiveCalendar();
+  }
+
+  function openDateRangePicker() {
+    calendarPicking = $("departDate")?.value ? "return" : "depart";
+    setCalendarOpen(true);
+    $("dateRangeToggle")?.focus();
+  }
+
   function renderCalendarMonth(baseDate, state) {
     const first = new Date(baseDate.getFullYear(), baseDate.getMonth(), 1);
     const month = first.getMonth();
@@ -419,7 +446,7 @@
     const box = $("liveDateCalendar");
     if (!box) return;
     const rawState = readSearchState();
-    const state = readSearchState({ forUrl: true });
+    const state = rawState;
     const base = new Date();
     base.setMonth(base.getMonth() + calendarMonthOffset, 1);
     const next = new Date(base.getFullYear(), base.getMonth() + 1, 1);
@@ -428,7 +455,7 @@
 
     box.innerHTML = `
       <div class="calendar-header">
-        <div><strong>Velg datoer</strong><small>${departLabel}: ${rawState.depart || "Ikke valgt"} • ${returnLabel}: ${rawState.ret || "Ikke valgt"}</small></div>
+        <div><strong>${calendarPicking === "depart" ? `Velg ${departLabel.toLowerCase()}` : `Velg ${returnLabel.toLowerCase()}`}</strong><small>Velg utreise først, deretter hjemreise i den samme kalenderen.</small></div>
         <div class="calendar-controls">
           <button type="button" data-calendar-pick="depart" class="${calendarPicking === "depart" ? "active" : ""}">${departLabel}</button>
           <button type="button" data-calendar-pick="return" class="${calendarPicking === "return" ? "active" : ""}">${returnLabel}</button>
@@ -461,11 +488,11 @@
     const iso = day.dataset.calendarDate;
     const depart = $("departDate");
     const ret = $("returnDate");
-    const currentDepart = depart?.value || todayISO();
+    const currentDepart = depart?.value || "";
 
-    if (calendarPicking === "depart" || iso <= currentDepart) {
+    if (calendarPicking === "depart" || !currentDepart || iso <= currentDepart) {
       if (depart) depart.value = iso;
-      if (ret && (!ret.value || ret.value <= iso)) ret.value = addDaysToISO(iso, 7);
+      if (ret && ret.value <= iso) ret.value = "";
       calendarPicking = "return";
     } else {
       if (ret) ret.value = iso;
@@ -475,6 +502,7 @@
     ensureFreshDates(false);
     updateSearchPreview();
     renderLiveCalendar();
+    if (ret?.value && calendarPicking === "depart") setCalendarOpen(false);
   }
 
   function saveFormToTabState(type = currentSearchType) {
@@ -499,6 +527,7 @@
     if ($("adults")) $("adults").value = state.adults || "2";
     if ($("children")) $("children").value = state.children || "0";
     updateTravelerSummary();
+    updateDateRangeSummary();
   }
 
   function resetActiveTabSearch() {
@@ -522,6 +551,7 @@
     const state = readSearchState();
     const button = $("searchSubmitButton");
     const helper = document.querySelector(".search-help");
+    updateDateRangeSummary();
 
     if (button) {
       if (currentSearchType === "package") {
@@ -891,7 +921,7 @@
     if ($("toCity")) $("toCity").value = destination || "";
     updateSearchPreview();
     $("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setTimeout(() => $("departDate")?.focus(), 320);
+    setTimeout(openDateRangePicker, 320);
   }
 
   function buildPackageUrl(state) {
@@ -1202,6 +1232,7 @@
     const toLabel = $("toLabel");
     const departLabel = $("departLabel");
     const returnLabel = $("returnLabel");
+    const dateRangeLabel = $("dateRangeLabel");
     const adultsLabel = $("adultsLabel");
     const from = $("fromCity");
     const to = $("toCity");
@@ -1219,6 +1250,7 @@
     if (modeTitle && modeCopy) modeTitle.innerHTML = `<b>${modeCopy[0]}</b><span>${modeCopy[1]}</span>`;
 
     if (currentSearchType === "package") {
+      if (dateRangeLabel) dateRangeLabel.textContent = "Reiseperiode";
       if (fromLabel) fromLabel.textContent = "Avreisested";
       if (toLabel) toLabel.textContent = "Reisemål";
       if (departLabel) departLabel.textContent = "Avreise";
@@ -1227,6 +1259,7 @@
       if (from) from.placeholder = "Skriv by eller flyplass";
       if (to) to.placeholder = "Skriv ønsket reisemål";
     } else if (currentSearchType === "cruise") {
+      if (dateRangeLabel) dateRangeLabel.textContent = "Cruiseperiode";
       if (fromLabel) fromLabel.textContent = "Avreisehavn";
       if (toLabel) toLabel.textContent = "Cruiseområde";
       if (departLabel) departLabel.textContent = "Fra dato";
@@ -1235,6 +1268,7 @@
       if (from) from.placeholder = "Valgfritt, f.eks. Miami";
       if (to) to.placeholder = "Valgfritt, f.eks. Middelhavet";
     } else if (currentSearchType === "interhome") {
+      if (dateRangeLabel) dateRangeLabel.textContent = "Opphold";
       if (fromLabel) fromLabel.textContent = "Område / land";
       if (toLabel) toLabel.textContent = "Hvor vil du leie feriebolig?";
       if (departLabel) departLabel.textContent = "Ankomst";
@@ -1243,6 +1277,7 @@
       if (from) from.placeholder = "Valgfritt";
       if (to) to.placeholder = "Skriv land eller område, f.eks. Toscana";
     } else if (currentSearchType === "restplass") {
+      if (dateRangeLabel) dateRangeLabel.textContent = "Reiseperiode";
       if (fromLabel) fromLabel.textContent = "Fra";
       if (toLabel) toLabel.textContent = "Reisemål";
       if (departLabel) departLabel.textContent = "Avreise fra";
@@ -1251,6 +1286,7 @@
       if (from) from.placeholder = "Velg flyplass";
       if (to) to.placeholder = "Velg reisemål";
     } else if (currentSearchType === "hotel") {
+      if (dateRangeLabel) dateRangeLabel.textContent = "Innsjekk og utsjekk";
       if (fromLabel) fromLabel.textContent = "Land / område";
       if (toLabel) toLabel.textContent = "Hvor vil du bo?";
       if (departLabel) departLabel.textContent = "Innsjekk";
@@ -1259,6 +1295,7 @@
       if (from) from.placeholder = "Valgfritt";
       if (to) to.placeholder = "Skriv by, område eller hotell";
     } else if (currentSearchType === "car") {
+      if (dateRangeLabel) dateRangeLabel.textContent = "Leieperiode";
       if (fromLabel) fromLabel.textContent = "Hvor henter du bilen?";
       if (toLabel) toLabel.textContent = "Leveres samme sted";
       if (departLabel) departLabel.textContent = "Hentedato";
@@ -1267,6 +1304,7 @@
       if (from) from.placeholder = "Skriv by/flyplass, f.eks. Alicante eller OSL";
       if (to) to.placeholder = "Samme sted som henting";
     } else {
+      if (dateRangeLabel) dateRangeLabel.textContent = "Avreise og hjemreise";
       if (fromLabel) fromLabel.textContent = "Hvor reiser du fra?";
       if (toLabel) toLabel.textContent = "Hvor vil du reise?";
       if (departLabel) departLabel.textContent = "Avreise";
@@ -1293,8 +1331,26 @@
     } else if (currentSearchType === "hotel" || currentSearchType === "interhome") {
       toggle.textContent = `${adults} voksne${children ? `, ${children} barn` : ""}`;
     } else {
-      toggle.textContent = `${adults} voksne, ${children} barn`;
+      toggle.textContent = `${adults} voksne${children ? `, ${children} barn` : ""}`;
     }
+  }
+
+  function initDateRangePicker() {
+    const toggle = $("dateRangeToggle");
+    const box = $("liveDateCalendar");
+    if (!toggle || !box || toggle.dataset.ready) return;
+    toggle.dataset.ready = "1";
+    toggle.addEventListener("click", () => {
+      const form = $("travelSearch");
+      setCalendarOpen(!form?.classList.contains("calendar-open"));
+    });
+    document.addEventListener("click", (event) => {
+      const form = $("travelSearch");
+      if (form?.classList.contains("calendar-open") && !toggle.contains(event.target) && !box.contains(event.target)) {
+        setCalendarOpen(false);
+      }
+    });
+    updateDateRangeSummary();
   }
 
   function initTravelerPicker() {
@@ -1354,7 +1410,8 @@
     }
     if (["flight", "hotel", "package", "cruise", "interhome", "restplass"].includes(service)) {
       setSearchType(service);
-      (["hotel", "interhome"].includes(service) ? $("toCity") : service === "cruise" ? $("departDate") : $("fromCity"))?.focus();
+      if (service === "cruise") openDateRangePicker();
+      else (["hotel", "interhome"].includes(service) ? $("toCity") : $("fromCity"))?.focus();
       return;
     }
     const url = smartServiceUrl(service);
@@ -1373,7 +1430,7 @@
       const destination = query.match(/(?:til|i)\s+(.+)/)?.[1];
       if (destination && $("toCity")) $("toCity").value = destination.trim();
       updateSearchPreview();
-      return $("departDate")?.focus();
+      return openDateRangePicker();
     }
     if (/pakkereise|fly\\s*(\\+|og)\\s*hotell/.test(query)) {
       setSearchType("package");
@@ -1388,7 +1445,7 @@
     }
     if (/cruise/.test(query)) {
       setSearchType("cruise");
-      return $("departDate")?.focus();
+      return openDateRangePicker();
     }
 
     const hotel = query.match(/(?:hotell|hotel)(?:\\s+i)?\\s+(.+)/);
@@ -1415,7 +1472,7 @@
       if ($("fromCity")) $("fromCity").value = route[1].trim();
       if ($("toCity")) $("toCity").value = route[2].trim();
       updateSearchPreview();
-      $("departDate")?.focus();
+      openDateRangePicker();
       return;
     }
     if ($("toCity")) $("toCity").value = query;
@@ -1429,6 +1486,7 @@
 
     restoreSearchState();
     initTravelerPicker();
+    initDateRangePicker();
     ensureFreshDates(false);
     attachAirportAutocomplete("fromCity", "Forslag til avreiseflyplass");
     attachAirportAutocomplete("toCity", "Forslag til reisemål");
@@ -1464,7 +1522,10 @@
       }
     });
 
-    $("liveDateCalendar")?.addEventListener("click", handleCalendarClick);
+    $("liveDateCalendar")?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      handleCalendarClick(event);
+    });
     renderLiveCalendar();
 
     form.addEventListener("submit", async (event) => {
