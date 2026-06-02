@@ -3108,3 +3108,45 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
   #travelSearch .search-fields label{min-height:64px!important;padding:9px 11px 8px 49px!important}
   #travelSearch .search-fields .field-icon{left:13px!important;width:26px!important;height:26px!important;font-size:14px!important}
 }
+
+/* BR v53: visible Amadeus prices with partner comparison */
+#travelSearch .tp-live-box{
+  display:none!important;
+  margin:14px 0 0!important;
+  padding:0!important;
+  overflow:hidden;
+  border:1px solid rgba(83,218,255,.34)!important;
+  border-radius:18px!important;
+  background:linear-gradient(180deg,rgba(8,25,47,.98),rgba(4,12,27,.98))!important;
+  box-shadow:0 18px 38px rgba(0,0,0,.34),0 0 22px rgba(32,201,255,.08)!important;
+}
+#travelSearch .tp-live-box.show{display:block!important}
+.amadeus-results header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 15px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(45,208,255,.06);
+}
+.amadeus-results header b{display:block;color:#f7fdff;font-size:15px}
+.amadeus-results header small{display:block;margin-top:3px;color:#9eb4cc;font-size:11px;font-weight:800}
+.amadeus-results header em{font-style:normal;color:#78e8ff;font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+.amadeus-offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px}
+.amadeus-offer{min-width:0;padding:11px;border:1px solid rgba(255,255,255,.1);border-radius:13px;background:rgba(255,255,255,.035)}
+.amadeus-offer.best{border-color:rgba(72,225,255,.52);background:linear-gradient(145deg,rgba(19,105,140,.28),rgba(255,255,255,.035))}
+.amadeus-offer strong{display:block;color:#eaf9ff;font-size:13px}
+.amadeus-offer small{display:block;margin:4px 0 8px;color:#9eb4cc;font-size:10px;line-height:1.3;font-weight:750}
+.amadeus-offer>b{display:block;color:#7deaff;font-size:18px;letter-spacing:-.04em}
+.compare-partners{padding:10px 12px 12px;border-top:1px solid rgba(255,255,255,.08)}
+.compare-partners>strong{display:block;margin-bottom:8px;color:#b4c6dc;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.compare-partners>div{display:flex;flex-wrap:wrap;gap:7px}
+.compare-partners a{display:flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.045);color:#f3fbff;text-decoration:none;font-size:12px;font-weight:900}
+.compare-partners a:hover{border-color:rgba(88,225,255,.7);background:rgba(30,164,208,.15)}
+.compare-partners a small{color:#7deaff;font-size:9px;text-transform:uppercase;letter-spacing:.04em}
+@media(max-width:760px){
+  .amadeus-offers{grid-template-columns:1fr}
+  .amadeus-offer{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .amadeus-offer small{margin-bottom:0}
+}

@@ -274,6 +274,7 @@
   const AFFILIATE_LINKS = {
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
+    expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -900,6 +901,47 @@
     box.classList.toggle("show", Boolean(show && html));
   }
 
+  function renderAmadeusOffers(offers, state, from, to) {
+    const kiwiUrl = buildFlightDirectUrl({ ...state, from, to });
+    const partnerLinks = [
+      ["Kiwi", kiwiUrl],
+      ["Expedia", AFFILIATE_LINKS.expedia],
+      ["CheapTickets", AFFILIATE_LINKS.cheapTickets],
+      ["Cheapflights", AFFILIATE_LINKS.cheapFlights]
+    ];
+    const offerRows = offers.slice(0, 3).map((offer, index) => {
+      const departure = offer.departure_at
+        ? new Date(offer.departure_at).toLocaleString("nb-NO", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })
+        : state.depart;
+      const airline = String(offer.airline || "Flyselskap").replace(/[^A-Za-z0-9 -]/g, "");
+      const seats = Number(offer.bookable_seats) > 0 ? `${Number(offer.bookable_seats)} seter igjen` : "Sjekk tilgjengelighet";
+      return `
+        <article class="amadeus-offer${index === 0 ? " best" : ""}">
+          <div>
+            <strong>${airline}</strong>
+            <small>${departure} • ${seats}</small>
+          </div>
+          <b>${formatNOK(offer.price)}</b>
+        </article>`;
+    }).join("");
+    const compareButtons = partnerLinks.map(([label, href]) => `
+      <a href="${href}" rel="nofollow noopener sponsored" target="_blank">${label}<small>Sammenlign</small></a>
+    `).join("");
+
+    return `
+      <section class="amadeus-results">
+        <header>
+          <span><b>Live flypriser</b><small>${from} → ${to} • Amadeus testmiljø</small></span>
+          <em>Prisindikasjon</em>
+        </header>
+        <div class="amadeus-offers">${offerRows}</div>
+        <div class="compare-partners">
+          <strong>Sjekk også hos våre partnere</strong>
+          <div>${compareButtons}</div>
+        </div>
+      </section>`;
+  }
+
   function scheduleLivePriceUpdate() {
     const box = $("tpLiveBox");
     if (!box) return;
@@ -933,19 +975,13 @@
 
         const response = await fetch(url.toString(), { signal: livePriceAbort.signal });
         const data = await response.json();
-        const offer = data?.offers?.[0];
-        if (!data?.success || !offer) {
+        const offers = data?.offers || [];
+        if (!data?.success || !offers.length) {
           setLiveBox(`<div class="tp-row"><span>Ingen testpris funnet akkurat nå for <b>${from} → ${to}</b>.</span><span class="tp-muted">Søk åpner likevel ferdig hos partner.</span></div>`);
           return;
         }
 
-        const date = offer.departure_at ? new Date(offer.departure_at).toLocaleDateString("nb-NO") : state.depart;
-        setLiveBox(`
-          <div class="tp-row">
-            <span>Prisindikasjon <b>${from} → ${to}</b><small>Billigste testpris hos Amadeus • avreise ${date}${offer.airline ? ` • ${offer.airline}` : ""}</small></span>
-            <span class="tp-price">fra ${formatNOK(offer.price)}</span>
-          </div>
-        `);
+        setLiveBox(renderAmadeusOffers(offers, state, from, to));
       } catch (error) {
         if (error?.name !== "AbortError") setLiveBox("", false);
       }
