@@ -4,8 +4,7 @@
 /* Discovery Engine + Deal Engine */
 (() => {
   const partners = {
-    // Travelpayouts brukes til live prisindikasjon og Kiwi-søk, mens de øvrige
-    // partnerne dekker hotell, aktiviteter og transport.
+    // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
@@ -273,8 +272,7 @@
 (() => {
   const TRAVELPAYOUTS_MARKER = (window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286";
   const AFFILIATE_LINKS = {
-    // Aktive partnere. Travelpayouts gir live prisindikasjon og sender flysøk
-    // videre til Kiwi med den valgte ruten og markøren vår.
+    // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
@@ -854,12 +852,23 @@
   }
 
   function buildPackageUrl(state) {
-    const url = new URL("https://www.expedia.no/Fly-Hotell");
-    if (state.from) url.searchParams.set("origin", state.from);
-    if (state.to) url.searchParams.set("destination", state.to);
+    const url = new URL("https://www.expedia.no/Hotel-Search");
+    url.searchParams.set("origin", state.from);
+    url.searchParams.set("destination", state.to);
     url.searchParams.set("startDate", state.depart);
     url.searchParams.set("endDate", state.ret);
     url.searchParams.set("adults", state.adults);
+    if (Number(state.children)) url.searchParams.set("children", state.children);
+    url.searchParams.set("cabinClass", "COACH");
+    url.searchParams.set("directFlights", "false");
+    url.searchParams.set("infantsInSeats", "0");
+    url.searchParams.set("packageType", "fh");
+    url.searchParams.set("partialStay", "false");
+    url.searchParams.set("searchProduct", "hotel");
+    url.searchParams.set("siteid", "66");
+    url.searchParams.set("sort", "RECOMMENDED");
+    url.searchParams.set("tripType", "ROUND_TRIP");
+    url.searchParams.set("useRewards", "false");
     url.searchParams.set("locale", "nb_NO");
     url.searchParams.set("currency", "NOK");
     return url.toString();
@@ -897,7 +906,7 @@
     clearTimeout(livePriceTimer);
 
     const state = readSearchState();
-    if (currentSearchType !== "flight" || !state.from || !state.to) {
+    if (currentSearchType !== "flight" || !state.from || !state.to || !state.depart) {
       setLiveBox("", false);
       return;
     }
@@ -913,27 +922,27 @@
       try {
         if (livePriceAbort) livePriceAbort.abort();
         livePriceAbort = new AbortController();
-        setLiveBox(`<div class="tp-row"><span>Henter live prisindikasjon for <b>${from} → ${to}</b> …</span><span class="tp-muted">Travelpayouts</span></div>`);
+        setLiveBox(`<div class="tp-row"><span>Henter testpris for <b>${from} → ${to}</b> …</span><span class="tp-muted">Amadeus testmiljø</span></div>`);
 
-        const url = new URL("/api/travelpayouts-prices", window.location.origin);
+        const url = new URL("/api/amadeus-flight-offers", window.location.origin);
         url.searchParams.set("origin", from);
         url.searchParams.set("destination", to);
         url.searchParams.set("depart_date", state.depart);
         url.searchParams.set("return_date", state.ret);
-        url.searchParams.set("currency", "NOK");
+        url.searchParams.set("adults", String(state.adults || 1));
 
         const response = await fetch(url.toString(), { signal: livePriceAbort.signal });
         const data = await response.json();
         const offer = data?.offers?.[0];
         if (!data?.success || !offer) {
-          setLiveBox(`<div class="tp-row"><span>Ingen cached pris funnet akkurat nå for <b>${from} → ${to}</b>.</span><span class="tp-muted">Søk åpner likevel ferdig hos partner.</span></div>`);
+          setLiveBox(`<div class="tp-row"><span>Ingen testpris funnet akkurat nå for <b>${from} → ${to}</b>.</span><span class="tp-muted">Søk åpner likevel ferdig hos partner.</span></div>`);
           return;
         }
 
         const date = offer.departure_at ? new Date(offer.departure_at).toLocaleDateString("nb-NO") : state.depart;
         setLiveBox(`
           <div class="tp-row">
-            <span>Prisindikasjon <b>${from} → ${to}</b><small>Billigste cached pris hos Travelpayouts • avreise ca. ${date}${offer.airline ? ` • ${offer.airline}` : ""}</small></span>
+            <span>Prisindikasjon <b>${from} → ${to}</b><small>Billigste testpris hos Amadeus • avreise ${date}${offer.airline ? ` • ${offer.airline}` : ""}</small></span>
             <span class="tp-price">fra ${formatNOK(offer.price)}</span>
           </div>
         `);
