@@ -531,7 +531,7 @@
       } else if (currentSearchType === "interhome") {
         button.textContent = state.to ? `SØK FERIEBOLIG I ${state.to.toUpperCase()} 🔎` : "SØK FERIEBOLIG 🔎";
       } else if (currentSearchType === "restplass") {
-        button.textContent = state.to ? `SØK CHARTER TIL ${state.to.toUpperCase()} 🔎` : "SØK CHARTER OG RESTPLASS 🔎";
+        button.textContent = state.to ? `SE TUI-PRISER TIL ${state.to.toUpperCase()} ↗` : "SE CHARTER OG RESTPLASS HOS TUI ↗";
       } else if (currentSearchType === "hotel") {
         button.textContent = state.to ? `SØK HOTELL I ${state.to.toUpperCase()} 🔎` : "SØK HOTELL 🔎";
       } else if (currentSearchType === "car") {
@@ -852,6 +852,34 @@
     return tradeTrackerDeepLink(AFFILIATE_LINKS.tuiRestplass, target.toString());
   }
 
+  function applyTuiQuickChoice(choice) {
+    setSearchType("restplass");
+    const today = new Date();
+    const depart = new Date(today);
+    depart.setDate(today.getDate() + (choice === "week" ? 3 : 14));
+    const ret = new Date(depart);
+    ret.setDate(depart.getDate() + 7);
+    const iso = (date) => date.toISOString().slice(0, 10);
+    const destinations = { mallorca: "Mallorca", kreta: "Kreta" };
+
+    if ($("departDate")) $("departDate").value = iso(depart);
+    if ($("returnDate")) $("returnDate").value = iso(ret);
+    if ($("toCity")) $("toCity").value = destinations[choice] || "";
+    if ($("fromCity") && !$("fromCity").value) $("fromCity").value = "Oslo";
+
+    const helper = document.querySelector(".search-help");
+    const copy = {
+      week: "Restplass denne uken: juster reisemål hvis du vil, og åpne dagens priser hos TUI.",
+      mallorca: "Mallorca er valgt. Juster dato og reisende før du åpner TUI-søket.",
+      kreta: "Kreta er valgt. Juster dato og reisende før du åpner TUI-søket.",
+      family: "Familieferie: velg ønsket reisemål og åpne TUIs oppdaterte utvalg.",
+      "all-inclusive": "All Inclusive: velg ønsket reisemål og åpne TUIs oppdaterte utvalg."
+    }[choice];
+    updateSearchPreview();
+    if (helper && copy) helper.textContent = copy;
+    $("toCity")?.focus();
+  }
+
   function buildPackageUrl(state) {
     const url = new URL("https://www.expedia.no/Hotel-Search");
     url.searchParams.set("origin", state.from);
@@ -942,12 +970,12 @@
       </section>`;
   }
 
-  function scheduleLivePriceUpdate(immediate = false) {
+  function scheduleLivePriceUpdate(immediate = false, submittedState = null) {
     const box = $("tpLiveBox");
     if (!box) return;
     clearTimeout(livePriceTimer);
 
-    const state = readSearchState();
+    const state = submittedState || readSearchState();
     if (currentSearchType !== "flight" || !state.from || !state.to || !state.depart) {
       setLiveBox("", false);
       return;
@@ -960,11 +988,15 @@
       return;
     }
 
+    if (immediate) {
+      setLiveBox(`<div class="tp-row"><span>Henter flypriser for <b>${from} → ${to}</b> …</span><span class="tp-muted">Amadeus</span></div>`);
+    }
+
     livePriceTimer = setTimeout(async () => {
       try {
         if (livePriceAbort) livePriceAbort.abort();
         livePriceAbort = new AbortController();
-        setLiveBox(`<div class="tp-row"><span>Henter testpris for <b>${from} → ${to}</b> …</span><span class="tp-muted">Amadeus testmiljø</span></div>`);
+        setLiveBox(`<div class="tp-row"><span>Henter flypriser for <b>${from} → ${to}</b> …</span><span class="tp-muted">Amadeus</span></div>`);
 
         const url = new URL("/api/amadeus-flight-offers", window.location.origin);
         url.searchParams.set("origin", from);
@@ -974,7 +1006,8 @@
         url.searchParams.set("adults", String(state.adults || 1));
 
         const response = await fetch(url.toString(), { signal: livePriceAbort.signal });
-        const data = await response.json();
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data?.error || "Kunne ikke hente flyprisene.");
         const offers = data?.offers || [];
         if (!data?.success || !offers.length) {
           setLiveBox(`<div class="tp-row"><span>Ingen testpris funnet akkurat nå for <b>${from} → ${to}</b>.</span><span class="tp-muted">Søk åpner likevel ferdig hos partner.</span></div>`);
@@ -983,7 +1016,9 @@
 
         setLiveBox(renderAmadeusOffers(offers, state, from, to));
       } catch (error) {
-        if (error?.name !== "AbortError") setLiveBox("", false);
+        if (error?.name !== "AbortError") {
+          setLiveBox(`<div class="tp-row"><span>Vi fikk ikke hentet flyprisene akkurat nå.</span><span class="tp-muted">Prøv igjen om et øyeblikk.</span></div>`);
+        }
       }
     }, immediate ? 0 : 650);
   }
@@ -1283,6 +1318,9 @@
     document.querySelectorAll("[data-smart-service]").forEach((btn) => {
       btn.addEventListener("click", () => activateSmartService(btn.dataset.smartService));
     });
+    document.querySelectorAll("[data-tui-quick]").forEach((btn) => {
+      btn.addEventListener("click", () => applyTuiQuickChoice(btn.dataset.tuiQuick));
+    });
     $("smartSearchLaunch")?.addEventListener("click", runSmartSearch);
     $("smartSearchQuery")?.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
@@ -1319,7 +1357,7 @@
         } else if (currentSearchType === "flight") {
           if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
           if (!state.depart) throw new Error("Velg avreisedato for å hente flypriser.");
-          scheduleLivePriceUpdate(true);
+          scheduleLivePriceUpdate(true, state);
           setTimeout(() => $("tpLiveBox")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
           return;
         } else {
