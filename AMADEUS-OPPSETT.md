@@ -9,9 +9,10 @@ API-noklene skal ligge skjult hos Vercel. Ikke legg dem inn i HTML, JavaScript e
 3. Velg `Environment Variables`.
 4. Opprett variabelen `AMADEUS_API_KEY` og lim inn din Amadeus API Key som verdi.
 5. Opprett variabelen `AMADEUS_API_SECRET` og lim inn din Amadeus API Secret som verdi.
-6. Huk av for `Production`, `Preview` og `Development`.
-7. Trykk `Save`.
-8. Last opp denne prosjektmappen pa nytt eller start en ny deployment fra Vercel.
+6. Opprett variabelen `AMADEUS_API_BASE_URL` med verdien `https://test.travel.api.amadeus.com`.
+7. Huk av for `Production`, `Preview` og `Development`.
+8. Trykk `Save`.
+9. Last opp denne prosjektmappen pa nytt eller start en ny deployment fra Vercel.
 
 ## Test etter publisering
 

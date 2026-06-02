@@ -1,7 +1,7 @@
 let cachedToken = "";
 let cachedTokenExpiresAt = 0;
 
-async function getAccessToken(apiKey, apiSecret) {
+async function getAccessToken(apiBaseUrl, apiKey, apiSecret) {
   if (cachedToken && Date.now() < cachedTokenExpiresAt) return cachedToken;
 
   const body = new URLSearchParams({
@@ -10,7 +10,7 @@ async function getAccessToken(apiKey, apiSecret) {
     client_secret: apiSecret
   });
 
-  const response = await fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
+  const response = await fetch(`${apiBaseUrl}/v1/security/oauth2/token`, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
   try {
     const apiKey = String(process.env.AMADEUS_API_KEY || "").trim();
     const apiSecret = String(process.env.AMADEUS_API_SECRET || "").trim();
+    const apiBaseUrl = String(process.env.AMADEUS_API_BASE_URL || "https://test.travel.api.amadeus.com").trim().replace(/\/+$/, "");
     if (!apiKey || !apiSecret) {
       return res.status(200).json({
         success: false,
@@ -51,8 +52,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, error: "Velg flyplasser og avreisedato." });
     }
 
-    const token = await getAccessToken(apiKey, apiSecret);
-    const url = new URL("https://test.api.amadeus.com/v2/shopping/flight-offers");
+    const token = await getAccessToken(apiBaseUrl, apiKey, apiSecret);
+    const url = new URL(`${apiBaseUrl}/v2/shopping/flight-offers`);
     url.searchParams.set("originLocationCode", origin);
     url.searchParams.set("destinationLocationCode", destination);
     url.searchParams.set("departureDate", departDate);
