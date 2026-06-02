@@ -1,5 +1,5 @@
 (() => {
-  const hero = document.querySelector(".hero-city, .hero-thai, .mag-hero, .bangkok-hero, .hero");
+  const hero = document.querySelector(".destination-hero, .hero-city, .hero-thai, .mag-hero, .bangkok-hero, .hero");
   if (!hero || hero.querySelector("video")) return;
   hero.classList.add("thailand-video-hero");
 
