@@ -3279,3 +3279,148 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
   .summer-charter-spotlight{grid-template-columns:1fr;padding:14px;border-radius:18px}
   .summer-charter-copy h2{font-size:20px}
 }
+
+/* BR v60: date and guest values fit cleanly inside compact cards */
+#travelSearch .search-fields input[type="date"]{
+  width:calc(100% + 4px)!important;
+  max-width:none!important;
+  margin-left:-1px!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  font-size:10px!important;
+  letter-spacing:-.09em!important;
+  font-variant-numeric:tabular-nums!important;
+}
+#travelSearch .traveler-toggle{
+  width:100%!important;
+  max-width:none!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+  font-size:12px!important;
+  letter-spacing:-.04em!important;
+  padding-right:0!important;
+}
+#travelSearch .traveler-toggle::after{
+  display:none!important;
+}
+@media(min-width:761px){
+  #travelSearch .search-fields.fields{
+    grid-template-columns:1.14fr 1.14fr 1.08fr 1.08fr 1.12fr!important;
+  }
+  #travelSearch .search-fields label{
+    padding-left:49px!important;
+    padding-right:7px!important;
+  }
+  #travelSearch .search-fields .field-icon{
+    left:12px!important;
+  }
+}
+
+/* BR v62: Amadeus-powered live deals */
+.live-deals-board{
+  max-width:1480px;
+  margin:0 auto;
+  padding:18px 28px 20px;
+  border-bottom:1px solid rgba(86,223,255,.2);
+  background:
+    radial-gradient(circle at 12% 0,rgba(0,211,255,.12),transparent 30%),
+    radial-gradient(circle at 86% 12%,rgba(255,35,192,.12),transparent 34%),
+    linear-gradient(145deg,rgba(4,21,42,.98),rgba(8,10,31,.98));
+}
+.live-deals-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:13px;
+}
+.live-deals-kicker{color:#6fe7ff;font-size:10px;font-weight:950;letter-spacing:.14em}
+.live-deals-head h2{margin:5px 0 3px;color:#f6fcff;font-size:24px;letter-spacing:-.04em}
+.live-deals-head p{margin:0;color:#a9bfd4;font-size:12px;line-height:1.45}
+.live-deals-head button{
+  flex:0 0 auto;
+  padding:10px 13px;
+  border:1px solid rgba(105,231,255,.42);
+  border-radius:999px;
+  background:rgba(23,153,194,.12);
+  color:#aaf2ff;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.07em;
+}
+.live-deals-head button:hover{background:rgba(35,181,224,.22)}
+.live-deals-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.live-deal-loading{
+  grid-column:1/-1;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:15px;
+  color:#b5c9dc;
+  font-size:13px;
+  font-weight:800;
+}
+.live-deal-card{
+  min-width:0;
+  padding:13px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:16px;
+  background:linear-gradient(145deg,rgba(9,38,68,.86),rgba(10,15,38,.94));
+  box-shadow:0 12px 27px rgba(0,0,0,.17);
+}
+.live-deal-card:hover{border-color:rgba(93,229,255,.52)}
+.live-deal-route{color:#61e2ff;font-size:10px;font-weight:950;letter-spacing:.12em}
+.live-deal-card h3{margin:6px 0 3px;color:#f7fcff;font-size:16px;letter-spacing:-.04em}
+.live-deal-card small{display:block;min-height:15px;color:#a7bdd2;font-size:10px;font-weight:750}
+.live-deal-card div{display:flex;align-items:baseline;gap:7px;margin-top:10px}
+.live-deal-card div b{color:#79ebff;font-size:20px;letter-spacing:-.06em}
+.live-deal-card div em{color:#a8bed1;font-size:9px;font-style:normal;font-weight:850;text-transform:uppercase}
+.live-deal-card button{
+  width:100%;
+  margin-top:11px;
+  padding:9px 10px;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(110deg,#ff28c9,#7846ff 52%,#20d6ff);
+  color:#fff;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.06em;
+}
+.deal-pulse-row a{color:#bceeff;font-size:13px;font-weight:900;text-decoration:none}
+.deal-pulse-row a:hover{text-decoration:underline}
+@media(max-width:900px){
+  .live-deals-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .live-deals-board{padding:15px 14px 17px}
+  .live-deals-head{align-items:flex-start;flex-direction:column}
+  .live-deals-head h2{font-size:21px}
+  .live-deals-grid{display:flex;overflow-x:auto;padding-bottom:4px}
+  .live-deal-card{flex:0 0 242px}
+}
+
+/* BR v65: shared travel-film treatment for Thailand guides */
+.hero-city,.hero-thai,.mag-hero,.bangkok-hero,.thailand-video-hero{position:relative;isolation:isolate;overflow:hidden}
+.thailand-guide-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-3;
+}
+.thailand-guide-video-shade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(5,10,18,.90),rgba(5,10,18,.57),rgba(5,10,18,.25));
+  z-index:-2;
+  pointer-events:none;
+}
+.hero-city>*:not(.thailand-guide-video):not(.thailand-guide-video-shade),
+.hero-thai>*:not(.thailand-guide-video):not(.thailand-guide-video-shade),
+.mag-hero>*:not(.thailand-guide-video):not(.thailand-guide-video-shade),
+.bangkok-hero>*:not(.thailand-guide-video):not(.thailand-guide-video-shade),
+.thailand-video-hero>*:not(.thailand-guide-video):not(.thailand-guide-video-shade){position:relative;z-index:1}

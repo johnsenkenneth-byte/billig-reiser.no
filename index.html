@@ -19,14 +19,9 @@
 <img alt="Billig-reiser.no" decoding="async" height="220" src="assets/logo-main.png" width="330"/>
 </a>
 <nav aria-label="Hovedmeny" class="nav desktop-nav">
-<a href="https://www.dpbolvw.net/click-101724638-17085753" rel="nofollow noopener sponsored" target="_blank">DEALS</a>
-<a data-open-search="flight" href="#travelSearch">FLY</a>
-<a data-open-search="hotel" href="#travelSearch">HOTELL</a>
-<a data-open-search="car" href="#travelSearch">LEIEBIL</a>
-<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F" rel="nofollow noopener sponsored" target="_blank">RESTPLASS</a>
-<a href="https://www.expedia.no/Fly-Hotell" rel="nofollow noopener" target="_blank">PAKKEREISE</a>
-<a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">FERIEBOLIG</a>
-<a href="https://www.expedia.com/swift/cruise?siid=1216803&amp;referrer=b4c7d06f-4ebf-4227-bff6-ff91a276ba5e&amp;destinations=15&amp;startdate=&amp;enddate=&amp;maxduration=9&amp;minduration=3" rel="nofollow noopener sponsored" target="_blank">CRUISE</a>
+<a href="#liveDeals">DEALS</a>
+<a data-open-search="flight" href="#travelSearch">SØK REISE</a>
+<a data-open-search="restplass" href="#travelSearch">CHARTER</a>
 <a href="#hack">REISEHACKS</a>
 <a href="reisemagasinet.html">REISEMAGASIN</a>
 <a href="reiseradar.html">REISERADAR</a>
@@ -35,28 +30,36 @@
 <a aria-label="Åpne meny" class="hamburger" href="#mobile-nav">☰</a>
 </header>
 <nav aria-label="Mobilmeny" class="mobile-nav" id="mobile-nav">
-<a href="https://www.dpbolvw.net/click-101724638-17085753" rel="nofollow noopener sponsored" target="_blank">🔥 Deals</a>
-<a data-open-search="flight" href="#travelSearch"><span class="modern-tab-icon">✈</span><span>Fly</span></a>
-<a data-open-search="hotel" href="#travelSearch"><span class="modern-tab-icon hotel">⌂</span><span>Hotell</span></a>
-<a data-open-search="car" href="#travelSearch"><span>Leiebil</span></a>
-<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F" rel="nofollow noopener sponsored" target="_blank">☀ Restplass</a>
-<a href="https://www.expedia.no/Fly-Hotell" rel="nofollow noopener" target="_blank">✈ Pakkereise</a>
-<a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">⌂ Feriebolig</a>
-<a href="https://www.expedia.com/swift/cruise?siid=1216803&amp;referrer=b4c7d06f-4ebf-4227-bff6-ff91a276ba5e&amp;destinations=15&amp;startdate=&amp;enddate=&amp;maxduration=9&amp;minduration=3" rel="nofollow noopener sponsored" target="_blank">🚢 Cruise</a>
+<a href="#liveDeals">🔥 Deals</a>
+<a data-open-search="flight" href="#travelSearch"><span class="modern-tab-icon">⌕</span><span>Søk reise</span></a>
+<a data-open-search="restplass" href="#travelSearch">☀ Charter og restplass</a>
 <a href="reisemagasinet.html">📖 Reisemagasin</a>
 <a href="reiseradar.html">🌍 Reiseradar</a>
 </nav>
 <main>
 <section aria-label="Live deals" class="ticker">
-<a class="live" href="https://www.dpbolvw.net/click-101724638-17085753" rel="nofollow noopener sponsored" target="_blank">● LIVE DEALS</a>
-<span>Oslo → <b>Roma</b> fra 499 kr <em>-52%</em></span>
-<span>Bergen → <b>Nice</b> fra 649 kr <em>-41%</em></span>
-<span>Stavanger → <b>Krakow</b> fra 399 kr <em>-56%</em></span>
-<span>Trondheim → <b>Bangkok</b> fra 3290 kr <em>-35%</em></span>
-<a class="seeall" href="https://www.tkqlhce.com/click-101724638-13829856" rel="nofollow noopener sponsored" target="_blank">Se alle deals →</a>
+<a class="live" href="#liveDeals">● LIVE DEALS</a>
+<span data-live-deal-ticker="OSL-BKK">Oslo → <b>Bangkok</b> <em>henter livepris</em></span>
+<span data-live-deal-ticker="OSL-ALC">Oslo → <b>Alicante</b> <em>henter livepris</em></span>
+<span data-live-deal-ticker="BGO-AGP">Bergen → <b>Malaga</b> <em>henter livepris</em></span>
+<span data-live-deal-ticker="TRD-FCO">Trondheim → <b>Roma</b> <em>henter livepris</em></span>
+<a class="seeall" href="#liveDeals">Se alle deals →</a>
+</section>
+<section aria-label="Live flypriser fra Amadeus" class="live-deals-board" id="liveDeals">
+<div class="live-deals-head">
+<div>
+<span class="live-deals-kicker">● AMADEUS LIVEPRISER</span>
+<h2>Live deals akkurat nå</h2>
+<p>Ferske flypriser hentet direkte når siden åpnes. Velg en rute for å sammenligne videre.</p>
+</div>
+<button data-live-deals-refresh type="button">OPPDATER PRISER</button>
+</div>
+<div aria-live="polite" class="live-deals-grid" id="liveDealsGrid">
+<article class="live-deal-loading">Henter livepriser fra Amadeus ...</article>
+</div>
 </section>
 <section class="hero">
-<video aria-hidden="true" autoplay="" class="front-hero-video" loop="" muted="" playsinline="" poster="assets/reisemagasin-home-banner.webp" preload="metadata"><source src="assets/video/forside-bakgrunn.mp4" type="video/mp4"/></video>
+<video aria-hidden="true" autoplay="" class="front-hero-video" loop="" muted="" playsinline="" poster="assets/reisemagasin-home-banner.webp" preload="metadata"><source src="https://videos.pexels.com/video-files/17098010/17098010-uhd_2560_1440_30fps.mp4" type="video/mp4"/><source src="assets/video/forside-bakgrunn.mp4" type="video/mp4"/></video>
 <div aria-hidden="true" class="front-hero-shade"></div>
 <div class="hero-copy">
 <h1>Smarte reiser. <span>Bedre priser.</span></h1>
@@ -100,11 +103,9 @@
 <button class="primary search-launch" id="searchSubmitButton" type="submit"><span>START SØKET</span><b>↗</b></button>
 </div>
 <p class="search-help">Søk blant millioner av reiser verden over — vi sender deg videre til riktig partner med valgene dine.</p>
-<div aria-label="Billigste akkurat nå" class="deal-pulse-row">
-<span>🔥 Billigst akkurat nå</span>
-<b>Oslo → Bangkok fra 4 291 kr</b>
-<b>Bergen → Alicante fra 899 kr</b>
-<b>Trondheim → Roma fra 499 kr</b>
+<div aria-label="Live flypriser" class="deal-pulse-row">
+<span>● Live flypriser fra Amadeus</span>
+<a href="#liveDeals">Se oppdaterte deals →</a>
 </div>
 <div aria-live="polite" class="tp-live-box" id="tpLiveBox"></div>
 </form>
@@ -247,7 +248,7 @@
 </div>
 </div>
 </footer>
-<nav aria-label="Raske valg" class="bottom-cta"><a data-open-search="flight" href="#travelSearch">✈<span>Fly</span></a><a data-open-search="hotel" href="#travelSearch">🏨<span>Hotell</span></a><a data-open-search="car" href="#travelSearch">🚗<span>Bil</span></a><a href="https://www.dpbolvw.net/click-101724638-17085753" rel="nofollow noopener sponsored" target="_blank">🔥<span>Deals</span></a></nav>
+<nav aria-label="Raske valg" class="bottom-cta"><a data-open-search="flight" href="#travelSearch">✈<span>Fly</span></a><a data-open-search="hotel" href="#travelSearch">🏨<span>Hotell</span></a><a data-open-search="car" href="#travelSearch">🚗<span>Bil</span></a><a href="#liveDeals">🔥<span>Deals</span></a></nav>
 <img alt="" aria-hidden="true" class="pixel" data-consent-src="https://www.lduhtrp.net/image-101724638-14078638" height="1" width="1"/>
 <img alt="" aria-hidden="true" class="pixel" data-consent-src="https://www.ftjcfx.com/image-101724638-13852710" height="1" width="1"/>
 <script defer="" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

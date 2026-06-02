@@ -527,7 +527,7 @@
       if (currentSearchType === "package") {
         button.textContent = state.to ? `SØK PAKKEREISE TIL ${state.to.toUpperCase()} 🔎` : "SØK PAKKEREISE 🔎";
       } else if (currentSearchType === "cruise") {
-        button.textContent = "SØK CRUISE 🔎";
+        button.textContent = "SJEKK CRUISEPRISER PÅ EXPEDIA.COM ↗";
       } else if (currentSearchType === "interhome") {
         button.textContent = state.to ? `SØK FERIEBOLIG I ${state.to.toUpperCase()} 🔎` : "SØK FERIEBOLIG 🔎";
       } else if (currentSearchType === "restplass") {
@@ -535,7 +535,7 @@
       } else if (currentSearchType === "hotel") {
         button.textContent = state.to ? `SØK HOTELL I ${state.to.toUpperCase()} 🔎` : "SØK HOTELL 🔎";
       } else if (currentSearchType === "car") {
-        button.textContent = state.from ? `SØK LEIEBIL I ${state.from.toUpperCase()} 🔎` : "SØK LEIEBIL 🔎";
+        button.textContent = "SJEKK LEIEBILPRISER PÅ ECONOMYBOOKINGS ↗";
       } else if (state.from && state.to) {
         button.textContent = `VIS FLYPRISER ${state.from.toUpperCase()} → ${state.to.toUpperCase()} 🔎`;
       } else {
@@ -547,7 +547,7 @@
       if (currentSearchType === "package") {
         helper.textContent = state.to ? `Pakkereise: ${state.from || "velg avreisested"} → ${state.to} • ${state.depart || "velg dato"} til ${state.ret || "velg retur"} • ${state.adults} reisende.` : "Skriv avreisested og reisemål — så åpnes pakkereiser hos Expedia.";
       } else if (currentSearchType === "cruise") {
-        helper.textContent = `Cruise: ${state.depart || "velg fra-dato"} til ${state.ret || "velg til-dato"} • ${state.adults} reisende.`;
+        helper.textContent = `Cruise: ${state.depart || "velg fra-dato"} til ${state.ret || "velg til-dato"} • ${state.adults} reisende. Prisene åpnes hos Expedia.com.`;
       } else if (currentSearchType === "interhome") {
         helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område eller land — så åpnes riktig ferieboligsøk hos Interhome.";
       } else if (currentSearchType === "restplass") {
@@ -555,7 +555,7 @@
       } else if (currentSearchType === "hotel") {
         helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} gjester.` : "Skriv byen du vil bo i — så åpnes Hotels.com rett på hotell i den byen.";
       } else if (currentSearchType === "car") {
-        helper.textContent = state.from ? `Leiebil: ${state.from} • ${state.depart || "velg hentedato"} til ${state.ret || "velg levering"}.` : "Skriv hentested eller flyplass — så åpnes leiebilpartner med forhåndsutfylt hentested og dato så langt partneren tillater.";
+        helper.textContent = state.from ? `Leiebil: ${state.from} • ${state.depart || "velg hentedato"} til ${state.ret || "velg levering"}. Prisene åpnes hos EconomyBookings.` : "Skriv hentested eller flyplass — så åpnes leiebilprisene hos EconomyBookings.";
       } else {
         helper.textContent = (state.from && state.to) ? `Flysøk: ${state.from} → ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} reisende.` : "Skriv by eller IATA-kode — velg forslag, så åpnes flypartner med riktig søk.";
       }
@@ -853,7 +853,7 @@
     tuiQuickTargetPath = {
       week: "/tilbud/restplass/",
       family: "/reise-med-barn/",
-      "all-inclusive": "/all-inclusive/"
+      "all-inclusive": "/tilbud/all-inclusive/"
     }[choice] || "";
     const today = new Date();
     const depart = new Date(today);
@@ -928,6 +928,104 @@
     }
   }
 
+  const LIVE_DEAL_ROUTES = [
+    { from: "OSL", fromCity: "Oslo", to: "BKK", toCity: "Bangkok", days: 38, nights: 10 },
+    { from: "OSL", fromCity: "Oslo", to: "ALC", toCity: "Alicante", days: 20, nights: 7 },
+    { from: "BGO", fromCity: "Bergen", to: "AGP", toCity: "Malaga", days: 24, nights: 7 },
+    { from: "TRD", fromCity: "Trondheim", to: "FCO", toCity: "Roma", days: 18, nights: 4 }
+  ];
+
+  function liveDealKey(route) {
+    return `${route.from}-${route.to}`;
+  }
+
+  function liveDealDates(route) {
+    const depart = addDaysISO(route.days);
+    return { depart, ret: addDaysToISO(depart, route.nights) };
+  }
+
+  function shortLiveDealDate(value) {
+    const date = parseISODate(value);
+    return date ? date.toLocaleDateString("nb-NO", { day: "2-digit", month: "short" }) : value;
+  }
+
+  function liveDealTickerText(result) {
+    const ticker = document.querySelector(`[data-live-deal-ticker="${liveDealKey(result.route)}"]`);
+    if (!ticker) return;
+    const price = result.offer ? `fra ${formatNOK(result.offer.price)}` : "sjekk livepris";
+    ticker.innerHTML = `${result.route.fromCity} → <b>${result.route.toCity}</b> <em>${price}</em>`;
+  }
+
+  function renderLiveDealCard(result) {
+    const { route, dates, offer } = result;
+    const price = offer ? formatNOK(offer.price) : "Sjekk livepris";
+    const airline = offer ? String(offer.airline || "Flyselskap").replace(/[^A-Za-z0-9 -]/g, "") : "Amadeus";
+    return `
+      <article class="live-deal-card${offer ? "" : " no-price"}">
+        <span class="live-deal-route">${route.from} → ${route.to}</span>
+        <h3>${route.fromCity} → ${route.toCity}</h3>
+        <small>${shortLiveDealDate(dates.depart)} – ${shortLiveDealDate(dates.ret)} • ${airline}</small>
+        <div><b>${price}</b><em>${offer ? "for 2 voksne" : "hent detaljert søk"}</em></div>
+        <button data-live-route="${liveDealKey(route)}" type="button">VIS PRISER <span>→</span></button>
+      </article>`;
+  }
+
+  async function fetchLiveDeal(route) {
+    const dates = liveDealDates(route);
+    try {
+      const url = new URL("/api/amadeus-flight-offers", window.location.origin);
+      url.searchParams.set("origin", route.from);
+      url.searchParams.set("destination", route.to);
+      url.searchParams.set("depart_date", dates.depart);
+      url.searchParams.set("return_date", dates.ret);
+      url.searchParams.set("adults", "2");
+      const response = await fetch(url.toString());
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data?.success) throw new Error("Livepris utilgjengelig");
+      return { route, dates, offer: data.offers?.[0] || null };
+    } catch (error) {
+      return { route, dates, offer: null };
+    }
+  }
+
+  async function loadLiveDeals() {
+    const grid = $("liveDealsGrid");
+    if (!grid) return;
+    grid.innerHTML = `<article class="live-deal-loading">Henter livepriser fra Amadeus ...</article>`;
+    const results = await Promise.all(LIVE_DEAL_ROUTES.map(fetchLiveDeal));
+    grid.innerHTML = results.map(renderLiveDealCard).join("");
+    results.forEach(liveDealTickerText);
+  }
+
+  function openLiveDealSearch(route) {
+    const dates = liveDealDates(route);
+    setSearchType("flight");
+    if ($("fromCity")) $("fromCity").value = `${route.fromCity} (${route.from})`;
+    if ($("toCity")) $("toCity").value = `${route.toCity} (${route.to})`;
+    if ($("departDate")) $("departDate").value = dates.depart;
+    if ($("returnDate")) $("returnDate").value = dates.ret;
+    updateSearchPreview();
+    $("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => scheduleLivePriceUpdate(true, readSearchState({ forUrl: true })), 350);
+  }
+
+  function initLiveDeals() {
+    const board = $("liveDeals");
+    if (!board || board.dataset.ready) return;
+    board.dataset.ready = "1";
+    board.addEventListener("click", (event) => {
+      const refresh = event.target.closest("[data-live-deals-refresh]");
+      if (refresh) {
+        loadLiveDeals();
+        return;
+      }
+      const button = event.target.closest("[data-live-route]");
+      const route = LIVE_DEAL_ROUTES.find((item) => liveDealKey(item) === button?.dataset.liveRoute);
+      if (route) openLiveDealSearch(route);
+    });
+    loadLiveDeals();
+  }
+
   function setLiveBox(html, show = true) {
     const box = $("tpLiveBox");
     if (!box) return;
@@ -965,7 +1063,7 @@
     return `
       <section class="amadeus-results">
         <header>
-          <span><b>Live flypriser</b><small>${from} → ${to} • Amadeus testmiljø</small></span>
+          <span><b>Live flypriser</b><small>${from} → ${to} • hentet fra Amadeus</small></span>
           <em>Prisindikasjon</em>
         </header>
         <div class="amadeus-offers">${offerRows}</div>
@@ -1016,7 +1114,7 @@
         if (!response.ok) throw new Error(data?.error || "Kunne ikke hente flyprisene.");
         const offers = data?.offers || [];
         if (!data?.success || !offers.length) {
-          setLiveBox(`<div class="tp-row"><span>Ingen testpris funnet akkurat nå for <b>${from} → ${to}</b>.</span><span class="tp-muted">Søk åpner likevel ferdig hos partner.</span></div>`);
+          setLiveBox(`<div class="tp-row"><span>Ingen livepris funnet akkurat nå for <b>${from} → ${to}</b>.</span><span class="tp-muted">Prøv en annen dato eller søk hos partner.</span></div>`);
           return;
         }
 
@@ -1098,9 +1196,9 @@
       hotel: ["Hotell", "Finn hotell med innsjekk, utsjekk og antall gjester."],
       package: ["Pakkereise", "Søk etter fly og hotell samlet hos Expedia."],
       interhome: ["Feriebolig", "Finn feriehus, villa eller leilighet hos Interhome."],
-      cruise: ["Cruise", "Velg ønsket periode før cruisesøket åpnes hos Expedia."],
+      cruise: ["Cruise", "Velg ønsket periode og sjekk cruisepriser hos Expedia.com."],
       restplass: ["Charter", "Finn restplass eller charterreise hos TUI."],
-      car: ["Leiebil", "Åpner EconomyBookings sitt eget leiebilsøk."]
+      car: ["Leiebil", "Velg hentested og dato før leiebilprisene åpnes hos EconomyBookings."]
     }[currentSearchType];
     if (modeTitle && modeCopy) modeTitle.innerHTML = `<b>${modeCopy[0]}</b><span>${modeCopy[1]}</span>`;
 
@@ -1234,7 +1332,8 @@
 
   function activateSmartService(service) {
     if (service === "car") {
-      window.open(AFFILIATE_LINKS.economyBookings, "_blank", "noopener,noreferrer");
+      setSearchType("car");
+      $("fromCity")?.focus();
       return;
     }
     if (["flight", "hotel", "package", "cruise", "interhome", "restplass"].includes(service)) {
@@ -1360,7 +1459,7 @@
           if (!state.from) throw new Error("Skriv inn hvor du vil hente leiebilen.");
           const button = $("searchSubmitButton");
           const oldText = button?.textContent;
-          if (button) button.textContent = "ÅPNER LEIEBILPARTNER…";
+          if (button) button.textContent = "ÅPNER ECONOMYBOOKINGS…";
           target = await buildCarPartnerUrl(state);
           if (button && oldText) button.textContent = oldText;
         } else if (currentSearchType === "flight") {
@@ -1383,6 +1482,7 @@
     });
 
     setSearchType(currentSearchType || "flight");
+    initLiveDeals();
   }
 
   if (document.readyState === "loading") {
