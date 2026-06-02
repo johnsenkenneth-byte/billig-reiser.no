@@ -2959,3 +2959,152 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
 .travel-search[data-mode="hotel"] .field-to,.travel-search[data-mode="interhome"] .field-to{grid-column:1/-1!important;}
 .travel-search[data-mode="cruise"] .field-from,.travel-search[data-mode="cruise"] .field-to{display:none!important;}
 @media(max-width:760px){#travelSearch .search-mode-title{align-items:flex-start;flex-direction:column;gap:3px}#travelSearch .smart-service-grid{grid-template-columns:repeat(7,88px)}#travelSearch .search-fields.fields{grid-template-columns:1fr!important}#travelSearch .search-fields label,#travelSearch .search-fields .field-to{grid-column:1!important}}
+
+/* BR v50: custom travel-service marks and a clean airport suggestion layer */
+#travelSearch .smart-service-grid button{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-height:92px;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(49,205,255,.12),transparent 52%),
+    linear-gradient(180deg,rgba(9,28,54,.98),rgba(5,13,29,.98));
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+#travelSearch .smart-service-grid button::after{
+  content:"";
+  position:absolute;
+  inset:auto 16px 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(99,225,255,.7),transparent);
+  opacity:.3;
+}
+#travelSearch .smart-service-grid button:hover,
+#travelSearch .smart-service-grid button.active{
+  transform:translateY(-3px);
+  border-color:rgba(100,226,255,.8);
+  background:
+    radial-gradient(circle at 50% 0,rgba(72,215,255,.23),transparent 57%),
+    linear-gradient(180deg,rgba(11,52,88,.98),rgba(12,17,48,.98));
+  box-shadow:0 14px 30px rgba(0,0,0,.28),0 0 24px rgba(48,211,255,.16),inset 0 -2px 0 rgba(242,66,187,.52);
+}
+#travelSearch .smart-service-grid .service-icon{
+  width:48px;
+  height:48px;
+  border:1px solid rgba(97,225,255,.62);
+  background:linear-gradient(145deg,rgba(12,60,96,.94),rgba(7,24,52,.98));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 4px rgba(37,211,255,.05),0 0 22px rgba(33,205,255,.2);
+}
+#travelSearch .smart-service-grid button.active .service-icon{
+  border-color:rgba(125,237,255,.95);
+  background:linear-gradient(145deg,rgba(15,116,148,.98),rgba(14,45,94,.98));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 0 0 4px rgba(37,211,255,.1),0 0 25px rgba(33,205,255,.42);
+}
+#travelSearch .smart-service-grid .service-icon svg{
+  width:28px;
+  height:28px;
+  overflow:visible;
+  fill:none;
+  stroke:#e8fdff;
+  stroke-width:1.65;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 4px rgba(80,226,255,.48));
+}
+#travelSearch .smart-service-grid [data-smart-service="flight"] .service-icon svg path:first-child{
+  fill:rgba(232,253,255,.92);
+  stroke-width:1;
+}
+#travelSearch .smart-service-grid .service-icon .spark{
+  stroke:#ff7bd2;
+  filter:drop-shadow(0 0 3px rgba(255,78,187,.8));
+}
+#travelSearch .search-fields{
+  position:relative!important;
+  z-index:120!important;
+}
+#travelSearch .airport-field{
+  z-index:130!important;
+}
+#travelSearch .airport-field:focus-within{
+  z-index:500!important;
+}
+#travelSearch .airport-suggest{
+  z-index:600!important;
+  top:calc(100% + 6px);
+  max-height:280px;
+  padding:7px;
+  border-color:rgba(85,218,255,.55);
+  background:linear-gradient(180deg,rgba(11,29,53,.99),rgba(4,13,29,.99));
+  box-shadow:0 22px 44px rgba(0,0,0,.62),0 0 0 1px rgba(255,255,255,.04);
+}
+#travelSearch .airport-suggest button{
+  padding:9px 10px;
+}
+#travelSearch .search-actions.single-action{
+  z-index:10!important;
+}
+@media(max-width:760px){
+  #travelSearch .smart-service-grid button{min-height:78px}
+  #travelSearch .smart-service-grid .service-icon{width:42px;height:42px}
+  #travelSearch .smart-service-grid .service-icon svg{width:24px;height:24px}
+  #travelSearch .airport-suggest{position:absolute;margin-top:0;max-height:230px}
+}
+
+/* BR v51: balanced field cards */
+#travelSearch .search-fields.fields{
+  gap:10px!important;
+  align-items:stretch!important;
+}
+#travelSearch .search-fields label{
+  min-height:70px!important;
+  padding:11px 12px 10px 52px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:3px!important;
+}
+#travelSearch .search-fields .field-icon{
+  left:14px!important;
+  top:50%!important;
+  width:28px!important;
+  height:28px!important;
+  transform:translateY(-50%)!important;
+  border-radius:50%!important;
+  background:linear-gradient(145deg,rgba(16,103,135,.72),rgba(5,34,68,.86))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 15px rgba(44,218,255,.18)!important;
+}
+#travelSearch .search-fields small{
+  min-height:12px!important;
+  margin:0!important;
+  color:#b6c6dc!important;
+  font-size:9px!important;
+  line-height:1.15!important;
+  letter-spacing:.08em!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#travelSearch .search-fields input,
+#travelSearch .traveler-toggle{
+  height:25px!important;
+  min-height:25px!important;
+  font-size:14px!important;
+  line-height:25px!important;
+  font-weight:850!important;
+}
+#travelSearch .search-fields input[type="date"]{
+  color:#d9eeff!important;
+  font-size:13px!important;
+}
+#travelSearch .traveler-toggle{
+  display:flex!important;
+  align-items:center!important;
+  color:#f5fbff!important;
+  padding-right:12px!important;
+}
+@media(max-width:760px){
+  #travelSearch .search-fields label{min-height:64px!important;padding:9px 11px 8px 49px!important}
+  #travelSearch .search-fields .field-icon{left:13px!important;width:26px!important;height:26px!important;font-size:14px!important}
+}

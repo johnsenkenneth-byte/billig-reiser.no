@@ -32,10 +32,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const apiKey = process.env.AMADEUS_API_KEY;
-    const apiSecret = process.env.AMADEUS_API_SECRET;
+    const apiKey = String(process.env.AMADEUS_API_KEY || "").trim();
+    const apiSecret = String(process.env.AMADEUS_API_SECRET || "").trim();
     if (!apiKey || !apiSecret) {
-      return res.status(200).json({ success: false, error: "Amadeus-nokler mangler hos Vercel." });
+      return res.status(200).json({
+        success: false,
+        error: `Amadeus-nokler mangler hos Vercel: ${!apiKey ? "AMADEUS_API_KEY" : "AMADEUS_API_SECRET"}.`
+      });
     }
 
     const origin = String(req.query.origin || "").toUpperCase().slice(0, 3);

@@ -710,7 +710,7 @@
       const isCarPickup = currentSearchType === "car" && inputId === "fromCity";
       if (currentSearchType !== "flight" && !isCarPickup) { close(); return; }
       const q = normalizeSearch(input.value);
-      if (!q) { close(); return; }
+      if (q.length < 2) { close(); return; }
       const matches = AIRPORT_SUGGESTIONS
         .map((item) => {
           const hay = normalizeSearch(`${item.city} ${item.name} ${item.country} ${item.code} ${item.aliases.join(" ")}`);
@@ -719,7 +719,7 @@
         })
         .filter(Boolean)
         .sort((a,b) => a.score - b.score || a.item.city.localeCompare(b.item.city, "nb"))
-        .slice(0, 7)
+        .slice(0, 5)
         .map(({item}) => item);
 
       if (!matches.length) {
