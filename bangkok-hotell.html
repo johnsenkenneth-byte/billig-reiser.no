@@ -109,10 +109,13 @@
 
 /* Fit fix for mockup hotel cards - keeps cards inside the viewport */
 .mockup-hotel-card{width:min(100%,1380px)!important;max-width:calc(100vw - 48px)!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;padding:20px!important;margin:0 auto 28px!important;border-radius:20px!important;overflow:hidden!important}.mockup-hotel-media{min-height:0!important;height:clamp(360px,39vw,500px)!important}.mockup-hotel-media img{min-height:0!important;height:100%!important}.mockup-hotel-content{min-width:0!important;padding:18px 0 18px clamp(22px,3vw,42px)!important}.mockup-hotel-content h3{font-size:clamp(32px,3.1vw,52px)!important;line-height:1.03!important;margin-bottom:8px!important;max-width:100%!important;overflow-wrap:normal!important;word-break:normal!important}.mockup-stars{font-size:clamp(19px,1.8vw,24px)!important;margin-bottom:8px!important}.mockup-best{font-size:clamp(16px,1.35vw,19px)!important;margin-bottom:18px!important}.mockup-location{grid-template-columns:44px minmax(0,1fr)!important;gap:12px!important;padding-bottom:18px!important}.mockup-location:before{width:42px!important;height:42px!important;font-size:25px!important}.mockup-location span{font-size:16px!important}.mockup-location strong{font-size:16px!important;line-height:1.35!important;overflow-wrap:normal!important;word-break:normal!important}.mockup-facts{margin:18px 0!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}.mockup-facts div{min-width:0!important;min-height:86px!important;padding:14px 8px!important}.mockup-facts span{font-size:clamp(12px,1vw,14px)!important;white-space:normal!important}.mockup-facts strong{font-size:clamp(24px,2.1vw,32px)!important;line-height:1.05!important;overflow-wrap:anywhere!important;word-break:normal!important}.mockup-why{grid-template-columns:44px minmax(0,1fr)!important;gap:12px!important}.mockup-why:before{width:42px!important;height:42px!important;font-size:22px!important}.mockup-why span{font-size:17px!important}.mockup-why p{font-size:16px!important;line-height:1.45!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important}.mockup-tags{gap:8px!important;margin:16px 0 8px!important}.mockup-tags span{font-size:13px!important;padding:7px 11px!important}.mockup-cta{min-height:56px!important;font-size:19px!important;border-radius:14px!important}.mockup-photo-stars{font-size:20px!important;padding:9px 15px!important}@media(max-width:1100px){.mockup-hotel-card{grid-template-columns:1fr!important;max-width:calc(100vw - 28px)!important}.mockup-hotel-media{height:360px!important}.mockup-hotel-content{padding:22px 4px 4px!important}.mockup-facts{grid-template-columns:repeat(2,minmax(0,1fr))!important}.mockup-facts div:nth-child(2){border-right:0!important}}@media(max-width:620px){.mockup-hotel-card{padding:14px!important;max-width:calc(100vw - 20px)!important}.mockup-hotel-media{height:260px!important}.mockup-hotel-content h3{font-size:30px!important}.mockup-location,.mockup-why{grid-template-columns:1fr!important}.mockup-location:before,.mockup-why:before{display:none!important}.mockup-facts{grid-template-columns:1fr!important}.mockup-facts div{border-right:0!important;border-bottom:1px solid rgba(255,255,255,.1)!important}.mockup-facts strong{font-size:28px!important}.mockup-tags span{font-size:12px!important}}
+
+/* Compact equal hotel cards - one column everywhere */
+.mockup-hotel-list,.grid:has(.mockup-hotel-card),.hotel-grid:has(.mockup-hotel-card),.lux-hotel-list:has(.mockup-hotel-card){display:flex!important;flex-direction:column!important;gap:22px!important;grid-template-columns:1fr!important;align-items:stretch!important}.mockup-hotel-card{display:grid!important;grid-template-columns:280px minmax(0,1fr)!important;width:100%!important;max-width:980px!important;min-height:0!important;margin:0 auto 22px!important;padding:14px!important;border-radius:18px!important;border:1px solid rgba(255,209,102,.25)!important;background:linear-gradient(145deg,#07182f,#06101f 72%)!important;box-shadow:0 18px 50px rgba(0,0,0,.32)!important;overflow:hidden!important}.mockup-hotel-media{height:240px!important;min-height:240px!important;border-radius:14px!important}.mockup-hotel-media img{height:240px!important;min-height:240px!important;width:100%!important;object-fit:cover!important}.mockup-photo-stars{top:12px!important;left:12px!important;font-size:15px!important;letter-spacing:.08em!important;padding:7px 11px!important;border-radius:999px!important}.mockup-hotel-content{min-width:0!important;padding:4px 4px 4px 22px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}.mockup-hotel-content h3{font-size:clamp(24px,2.15vw,34px)!important;line-height:1.05!important;margin:0 0 6px!important;letter-spacing:-.025em!important;white-space:normal!important;overflow-wrap:normal!important}.mockup-stars{font-size:17px!important;letter-spacing:.08em!important;margin-bottom:6px!important}.mockup-best{font-size:14px!important;line-height:1.35!important;margin:0 0 10px!important;color:#ffd166!important}.mockup-location{grid-template-columns:28px minmax(0,1fr)!important;gap:9px!important;padding:0 0 10px!important;border-bottom:1px solid rgba(255,255,255,.12)!important}.mockup-location:before{width:26px!important;height:26px!important;font-size:16px!important}.mockup-location span{font-size:13px!important}.mockup-location strong{font-size:13px!important;line-height:1.25!important;white-space:normal!important}.mockup-facts{grid-template-columns:repeat(4,minmax(0,1fr))!important;margin:10px 0!important;border-bottom:1px solid rgba(255,255,255,.12)!important}.mockup-facts div{min-height:58px!important;padding:9px 5px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}.mockup-facts span{font-size:11px!important;line-height:1.15!important;white-space:normal!important}.mockup-facts strong{font-family:Inter,Arial,sans-serif!important;font-size:17px!important;font-weight:850!important;line-height:1.05!important;margin-top:4px!important;max-width:100%!important;overflow-wrap:anywhere!important}.mockup-why{grid-template-columns:28px minmax(0,1fr)!important;gap:9px!important;padding-top:0!important}.mockup-why:before{width:26px!important;height:26px!important;font-size:14px!important}.mockup-why span{font-size:13px!important;font-weight:850!important;margin-bottom:2px!important}.mockup-why p{font-size:13px!important;line-height:1.35!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;margin:0!important}.mockup-tags{gap:6px!important;margin:10px 0 0!important}.mockup-tags span{font-size:11px!important;padding:5px 8px!important}.mockup-cta{min-height:42px!important;margin-top:10px!important;border-radius:12px!important;font-size:15px!important}.wrap:has(.mockup-hotel-card){max-width:1100px!important}.wrap:has(.mockup-hotel-card) .section-head{max-width:980px!important;margin-left:auto!important;margin-right:auto!important}@media(max-width:760px){.mockup-hotel-card{grid-template-columns:1fr!important;max-width:520px!important;padding:12px!important}.mockup-hotel-media,.mockup-hotel-media img{height:220px!important;min-height:220px!important}.mockup-hotel-content{padding:16px 2px 2px!important}.mockup-hotel-content h3{font-size:28px!important}.mockup-location,.mockup-why{grid-template-columns:1fr!important}.mockup-location:before,.mockup-why:before{display:none!important}.mockup-facts{grid-template-columns:repeat(2,minmax(0,1fr))!important}.mockup-facts div:nth-child(2){border-right:0!important}.mockup-facts div{border-bottom:1px solid rgba(255,255,255,.1)!important}.mockup-cta{min-height:46px!important}}@media(max-width:420px){.mockup-hotel-card{max-width:calc(100vw - 24px)!important}.mockup-hotel-media,.mockup-hotel-media img{height:190px!important;min-height:190px!important}.mockup-facts{grid-template-columns:1fr!important}.mockup-facts div{border-right:0!important}.mockup-tags{display:none!important}}
 </style><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bangkok hotell | Billig-reiser.no","description":"Hotellguide til Bangkok sortert etter Riverside, Sukhumvit, Siam, Lumpini, Silom og Sathorn med riktige hotellbilder og hotell-lenker.","author":{"@type":"Organization","name":"Billig-Reiser.no"},"publisher":{"@type":"Organization","name":"Billig-Reiser.no"},"mainEntityOfPage":"https://billig-reiser.no/bangkok-hotell.html"}</script></head><body><nav class="mag-nav"><a class="brand-logo" href="index.html"><img alt="Billig-reiser.no" src="/assets/logo-main.png" width="220" height="54"></a><div class="mag-menu"><a href="bangkok.html">Bangkok</a><a href="bangkok-hotell.html">Hotell</a><a href="bangkok-hvor-bo.html">Hvor bo</a><a href="bangkok-natteliv.html">Natteliv</a><a href="bangkok-shopping.html">Shopping</a><a href="bangkok-restauranter.html">Restauranter</a><a href="bangkok-familie.html">Familie</a><a href="bangkok-spa.html">Spa</a></div></nav><div class="bkk-subnav"><a href="bangkok-hotell.html">Hoteller</a><a href="bangkok-restauranter.html">Michelin & mat</a><a href="bangkok-shopping.html">Shopping</a><a href="bangkok-natteliv.html">Rooftops</a><a href="bangkok-spa.html">Spa</a><a href="bangkok-familie.html">Bangkok med barn</a><a href="bangkok-natteliv.html#hidden">Hidden Bangkok</a></div><section class="hero" style="--hero:url('/assets/bangkok/cards/mandarin-oriental-bangkok-v22.jpg')"><div class="hero-inner"><span class="kicker">Bangkok hotellguide</span><h1>Hotell i Bangkok – sortert etter område</h1><p class="lead">Velg riktig område først. Her er hotellene ryddet etter Riverside, Sukhumvit, Siam/Lumpini og Silom/Sathorn.</p><div class="tabs"><a href="bangkok-hotell.html">Hotell</a><a href="bangkok-natteliv.html">Natteliv</a><a href="bangkok-shopping.html">Shopping</a><a href="bangkok-restauranter.html">Restauranter</a><a href="bangkok-familie.html">Familie</a><a href="bangkok-spa.html">Spa</a></div></div></section><main><section class="wrap"><div class="two"><div><span class="badge">Hotellstrategi</span><h2>Slik velger du riktig hotell i Bangkok</h2><p>Bangkok er en by der hotellvalget nesten alltid bør starte med område, ikke pris. Et femstjerners hotell kan være feil valg hvis du bor langt unna det du faktisk skal gjøre. Derfor har vi sortert hotellene etter bydel og reisestil, slik at Riverside, Sukhumvit, Siam og Silom ikke blandes sammen.</p><p>Skal du ha romantikk, ro og elveutsikt, bør du se mot Riverside. Skal du ha mest mulig praktisk beliggenhet, velg Sukhumvit. Skal du shoppe og reise med familie, er Siam og Ploenchit sterke valg. Skal du ha skyline, rooftop og mer voksen storbyfølelse, fungerer Silom og Sathorn veldig bra.</p><a class="cta" href="bangkok-hvor-bo.html">Les områdeguiden →</a></div><div class="card"><h3>Rask hotellvalg</h3><p><strong>Riverside:</strong> Mandarin Oriental, Capella, The Siam.</p><p><strong>Sukhumvit:</strong> Carlton, Grande Centre Point, 137 Pillars.</p><p><strong>Shopping:</strong> Park Hyatt, Sindhorn, Chatrium Grand.</p><p><strong>Skyline:</strong> The Standard, SO/ Bangkok, Eastin Grand.</p></div></div></section><section class="wrap hotel-luxury-intro">
   <div class="section-head"><span class="badge">Premium hotellprofiler</span><h2>Bangkok-hotellene våre – bygget som luxury guides</h2><p class="lead">Hotellene vises nå som ryddige premiumkort med bilde, beliggenhet, reisestil, nøkkelfakta og beholdte affiliate-lenker.</p></div>
 </section>
-<section class="wrap lux-hotel-list">
+<section class="wrap mockup-hotel-list">
 <article class="mockup-hotel-card">
   <div class="mockup-hotel-media">
     <img src="/assets/bangkok/cards/mandarin-oriental-bangkok-v22.jpg" alt="Mandarin Oriental Bangkok" loading="lazy" decoding="async">
@@ -124,8 +127,8 @@
     <p class="mockup-best">Best for: Par, luksus, elveutsikt</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Chao Phraya</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -145,8 +148,8 @@
     <p class="mockup-best">Best for: Par, ro, luksus</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Riverside</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -166,8 +169,8 @@
     <p class="mockup-best">Best for: Design, par, ro</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Dusit / Riverside</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -187,8 +190,8 @@
     <p class="mockup-best">Best for: Par, familier, førstegangsbesøkende</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Sukhumvit / Asok</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>4-5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -208,8 +211,8 @@
     <p class="mockup-best">Best for: Familier, shopping, enkel logistikk</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Terminal 21 / Asok</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>4-5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -229,8 +232,8 @@
     <p class="mockup-best">Best for: Par, rooftop pool, luxury</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Phrom Phong</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -250,8 +253,8 @@
     <p class="mockup-best">Best for: Spa, ro, luksus</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Lumpini / Langsuan</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -271,8 +274,8 @@
     <p class="mockup-best">Best for: Shopping, par, rooftop</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Central Embassy / Ploenchit</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -292,8 +295,8 @@
     <p class="mockup-best">Best for: Design, luksus, shopping</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Ploenchit</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -313,8 +316,8 @@
     <p class="mockup-best">Best for: Familier, shopping, city break</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Siam</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>4-5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -334,8 +337,8 @@
     <p class="mockup-best">Best for: Voksne, skyline, nightlife</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Silom / Lumpini</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>4-5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -355,8 +358,8 @@
     <p class="mockup-best">Best for: Verdi, transport, pool</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Sathorn</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>4</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
@@ -376,8 +379,8 @@
     <p class="mockup-best">Best for: Design, venner, rooftop</p>
     <div class="mockup-location"><span>Beliggenhet</span><strong>Silom / Sathorn</strong></div>
     <div class="mockup-facts">
-      <div><span>Restauranter</span><strong>Sjekk</strong></div>
-      <div><span>Basseng</span><strong>Sjekk</strong></div>
+      <div><span>Restauranter</span><strong>Info</strong></div>
+      <div><span>Basseng</span><strong>Info</strong></div>
       <div><span>Stjerner</span><strong>5</strong></div>
       <div><span>Spa</span><strong>Ja</strong></div>
     </div>
