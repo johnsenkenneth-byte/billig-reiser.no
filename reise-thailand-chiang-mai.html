@@ -55,8 +55,191 @@
 .premium-hotel-card>img{grid-area:media!important}
 .premium-hotel-card>.hotel-body,.premium-hotel-card>.hotel-copy,.premium-hotel-card>.lux-hotel-copy,.premium-hotel-card>.samui-lux-copy,.premium-hotel-card>.hotel-panel,.premium-hotel-card>.hotel-info{grid-area:copy!important}
 @media(max-width:980px){.premium-hotel-card{grid-template-areas:"media" "copy"!important}}
+
+/* Exact mockup hotel cards */
+.mockup-hotel-card{display:grid;grid-template-columns:minmax(360px,.95fr) minmax(420px,1.05fr);gap:0;max-width:1440px;margin:0 auto 34px;padding:26px;border:1px solid rgba(255,209,102,.28);border-radius:22px;background:radial-gradient(circle at 18% 0%,rgba(34,211,238,.08),transparent 34%),linear-gradient(145deg,#07182f,#06101f 72%);box-shadow:0 28px 90px rgba(0,0,0,.45);overflow:hidden;color:#fff}.mockup-hotel-media{position:relative;min-height:520px;border-radius:18px;overflow:hidden;background:#06101e}.mockup-hotel-media img{width:100%;height:100%;min-height:520px;display:block;object-fit:cover}.mockup-photo-stars{position:absolute;top:22px;left:22px;padding:10px 18px;border-radius:999px;background:rgba(3,13,29,.9);border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 34px rgba(0,0,0,.38);color:#ffd166;font-size:25px;letter-spacing:.1em;line-height:1}.mockup-hotel-content{padding:24px 0 24px clamp(30px,4vw,58px);display:flex;flex-direction:column;justify-content:center}.mockup-hotel-content h3{font-family:Georgia,serif;font-size:clamp(38px,4.6vw,64px);font-weight:500;line-height:1;letter-spacing:-.035em;margin:0 0 12px;color:#fff;text-wrap:balance}.mockup-stars{color:#ffd166;font-size:25px;letter-spacing:.12em;margin-bottom:10px}.mockup-best{margin:0 0 26px;color:#ffd166!important;font-size:19px!important;line-height:1.5!important}.mockup-location{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;padding:0 0 26px;border-bottom:1px solid rgba(255,255,255,.16)}.mockup-location:before{content:"⌖";width:52px;height:52px;border:1px solid #ffd166;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#ffd166;font-size:32px}.mockup-location span{display:block;color:#fff;font-size:18px;font-weight:800}.mockup-location strong{display:block;margin-top:4px;color:#e7edf6;font-size:18px;font-weight:400}.mockup-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:22px 0;border-bottom:1px solid rgba(255,255,255,.16)}.mockup-facts div{min-height:106px;padding:18px 14px;text-align:center;background:rgba(10,34,62,.44);border-right:1px solid rgba(255,255,255,.11)}.mockup-facts div:last-child{border-right:0}.mockup-facts span{display:block;color:#d9e7f7;font-size:14px;font-weight:500}.mockup-facts strong{display:block;margin-top:10px;color:#fff;font-family:Georgia,serif;font-size:36px;font-weight:500;line-height:1}.mockup-why{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:start;padding-top:4px}.mockup-why:before{content:"✪";width:52px;height:52px;border:1px solid #ffd166;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#ffd166;font-size:26px}.mockup-why span{display:block;color:#fff;font-size:19px;font-weight:500;margin-bottom:5px}.mockup-why p{margin:0;color:#e7edf6!important;font-size:18px!important;line-height:1.55!important}.mockup-tags{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 10px}.mockup-tags span{border:1px solid rgba(255,209,102,.36);border-radius:999px;padding:8px 14px;color:#ffd166;background:rgba(255,209,102,.055);font-size:15px}.mockup-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:64px;margin-top:14px;border-radius:16px;background:linear-gradient(180deg,#ffd978,#d99a2b);color:#130c02!important;text-decoration:none!important;font-size:22px;font-weight:900;box-shadow:0 18px 42px rgba(217,154,43,.22)}.mockup-cta:hover{filter:brightness(1.05)}@media(max-width:980px){.mockup-hotel-card{grid-template-columns:1fr;padding:18px}.mockup-hotel-media,.mockup-hotel-media img{min-height:360px}.mockup-hotel-content{padding:26px 4px 4px}.mockup-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.mockup-facts div:nth-child(2){border-right:0}.mockup-facts div{border-bottom:1px solid rgba(255,255,255,.11)}}@media(max-width:620px){.mockup-hotel-content h3{font-size:34px}.mockup-hotel-media,.mockup-hotel-media img{min-height:270px}.mockup-photo-stars,.mockup-stars{font-size:20px}.mockup-location,.mockup-why{grid-template-columns:1fr}.mockup-location:before,.mockup-why:before{display:none}.mockup-facts{grid-template-columns:1fr}.mockup-facts div{border-right:0}.mockup-cta{font-size:20px}}
 </style><!-- HERO-BILDER OPPDATERT -->
 <style>/* V22 bilde-fix inline */.city-card img,.country-card img,.hotel-card img,.feature-card img{display:block!important;opacity:1!important;visibility:visible!important;background:#07101f!important;filter:none!important}.city-card,.country-card,.hotel-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98))!important}.hero-thai,.hero-city,.mag-hero{background-color:#07101f!important}
 .master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Chiang Mai | Billig-reiser.no","description":"Reiseguide fra Billig-Reiser.no","author":{"@type":"Organization","name":"Billig-Reiser.no"},"publisher":{"@type":"Organization","name":"Billig-Reiser.no"},"mainEntityOfPage":"https://billig-reiser.no/reise-thailand-chiang-mai.html"}</script></head><body class="mag-premium"><nav class="mag-nav"><a class="brand brand-logo" href="index.html"><img alt="Billig-reiser.no" height="54" src="assets/logo-main.png" width="220"/></a><div class="mag-menu"><a href="reisemagasinet.html">Magasinet</a><a href="reise-thailand.html">Thailand</a><a href="index.html">Forside</a><a href="kontakt.html">Kontakt</a></div></nav><section class="hero-city" style="--city-image:url('/assets/destinations/chiang-mai-v22.jpg')"><div class="hero-inner"><div class="kicker">Thailand guide</div><h1>Chiang Mai</h1><p>Templer, fjell, markeder, matkurs og boutiquehoteller.</p><div class="hero-actions"><a class="btn primary" href="#hoteller">Se hotellvalg →</a><a class="btn secondary" href="reise-thailand.html">Til Thailand</a></div></div></section><main><section class="wrap"><div class="section-head"><div><h2>Hvorfor reise hit?</h2><p class="lead">Chiang Mai er roligere, grønnere og mer kulturell. Her handler hotellvalget om gamlebyen, elven eller retreat-følelse utenfor sentrum.</p></div></div><div class="grid"><article class="info-card"><span class="badge">Passer for</span><h3>Par og opplevelser</h3><p>Velg hotell etter strand, område og hvor rolig eller aktiv ferie du ønsker.</p></article><article class="info-card"><span class="badge">Tips</span><h3>Bo riktig fra start</h3><p>På Thailand-sidene lenker vi direkte til hotellene som passer best for hver destinasjon.</p></article><article class="info-card"><span class="badge">Reisestil</span><h3>Premium + praktisk</h3><p>Guiden kombinerer inspirerende hotellvalg med konkrete anbefalinger.</p></article></div></section><section class="wrap" id="hoteller"><div class="section-head"><div><h2>Hotell i Chiang Mai</h2><p class="lead">Utvalgte hotell for ulike reisestiler, områder og budsjetter.</p></div></div><div class="grid"><article class="premium-hotel-card"><img alt="137 Pillars House Chiang Mai" loading="lazy" src="assets/destinations/chiang-mai-v22.jpg"/><div class="hotel-body"><span class="badge">Boutique luxury</span><h3>137 Pillars House Chiang Mai</h3><p>Historisk boutique-luksus med rolig atmosfære.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>4-5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/137-pillars-house-chiang-mai-thailand.glCGjBV" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Chala Number 6 Hotel" loading="lazy" src="assets/destinations/chiang-mai-v22.jpg"/><div class="hotel-body"><span class="badge">Old city</span><h3>Chala Number 6 Hotel</h3><p>Sentralt boutiquehotell nær templer og gamlebyen.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/chala-number-6-hotel-chiang-mai-thailand.x5uGYrV" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Melia Chiang Mai" loading="lazy" src="assets/reisemagasin-home-banner.webp"/><div class="hotel-body"><span class="badge">City / value</span><h3>Melia Chiang Mai</h3><p>Moderne hotell med god base for by og marked.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>4-5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/melia-chiang-mai-chiang-mai-thailand.fHtEUGd" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Anantara Chiang Mai Resort" loading="lazy" src="assets/destinations/chiang-mai-v22.jpg"/><div class="hotel-body"><span class="badge">Riverside luxury</span><h3>Anantara Chiang Mai Resort</h3><p>Elegant resort ved elven, rolig og eksklusivt.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/anantara-chiang-mai-resort-chiang-mai-thailand.wqQQhEv" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Shangri-La Chiang Mai" loading="lazy" src="assets/reisemagasin-home-banner.webp"/><div class="hotel-body"><span class="badge">Familie / city</span><h3>Shangri-La Chiang Mai</h3><p>Stor resortfølelse med sentral beliggenhet.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>4-5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/shangri-la-chiang-mai-chiang-mai-thailand.rT69jyx" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Aleenta Retreat Chiang Mai" loading="lazy" src="assets/reisemagasin-home-banner.webp"/><div class="hotel-body"><span class="badge">Wellness</span><h3>Aleenta Retreat Chiang Mai</h3><p>Boutique retreat med roligere preg.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>4-5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/aleenta-retreat-chiang-mai-chiang-mai-thailand.Qd73nHv" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Na Nirand Romantic Boutique Resort" loading="lazy" src="assets/reisemagasin-home-banner.webp"/><div class="hotel-body"><span class="badge">Romantisk</span><h3>Na Nirand Romantic Boutique Resort</h3><p>Sjarmerende boutiquehotell for par.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>4-5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/na-nirand-romantic-boutique-resort-chiang-mai-thailand.tBwZLZd" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Raya Heritage" loading="lazy" src="assets/destinations/chiang-mai-v22.jpg"/><div class="hotel-body"><span class="badge">Design / nature</span><h3>Raya Heritage</h3><p>Stilrent designhotell med nordthailandsk ro.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>4-5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/raya-heritage-mae-rim-thailand.SsmSHWX" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article><article class="premium-hotel-card"><img alt="Four Seasons Resort Chiang Mai" loading="lazy" src="assets/reisemagasin-home-banner.webp"/><div class="hotel-body"><span class="badge">Ultra luxury</span><h3>Four Seasons Resort Chiang Mai</h3><p>Eksklusivt resortliv blant fjell og rismarker.</p><div class="hotel-spec-grid"><div><span>Beliggenhet</span><strong>Se område</strong></div><div><span>Stjerner</span><strong>5</strong></div><div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div><div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div><div><span>Spa</span><strong>Ja</strong></div><div><span>Passer for</span><strong>Se anbefaling</strong></div></div><a href="https://www.hotels.com/affiliates/four-seasons-resort-chiang-mai-mae-rim-thailand.1BA8a2Y" rel="nofollow noopener sponsored" target="_blank">Sjekk pris →</a></div></article></div></section><section class="wrap"><div class="hero-actions"><a class="btn primary" href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank">Finn aktiviteter →</a><a class="btn secondary" href="reise-thailand.html">Flere Thailand-guider</a></div></section>
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Chiang Mai | Billig-reiser.no","description":"Reiseguide fra Billig-Reiser.no","author":{"@type":"Organization","name":"Billig-Reiser.no"},"publisher":{"@type":"Organization","name":"Billig-Reiser.no"},"mainEntityOfPage":"https://billig-reiser.no/reise-thailand-chiang-mai.html"}</script></head><body class="mag-premium"><nav class="mag-nav"><a class="brand brand-logo" href="index.html"><img alt="Billig-reiser.no" height="54" src="assets/logo-main.png" width="220"/></a><div class="mag-menu"><a href="reisemagasinet.html">Magasinet</a><a href="reise-thailand.html">Thailand</a><a href="index.html">Forside</a><a href="kontakt.html">Kontakt</a></div></nav><section class="hero-city" style="--city-image:url('/assets/destinations/chiang-mai-v22.jpg')"><div class="hero-inner"><div class="kicker">Thailand guide</div><h1>Chiang Mai</h1><p>Templer, fjell, markeder, matkurs og boutiquehoteller.</p><div class="hero-actions"><a class="btn primary" href="#hoteller">Se hotellvalg →</a><a class="btn secondary" href="reise-thailand.html">Til Thailand</a></div></div></section><main><section class="wrap"><div class="section-head"><div><h2>Hvorfor reise hit?</h2><p class="lead">Chiang Mai er roligere, grønnere og mer kulturell. Her handler hotellvalget om gamlebyen, elven eller retreat-følelse utenfor sentrum.</p></div></div><div class="grid"><article class="info-card"><span class="badge">Passer for</span><h3>Par og opplevelser</h3><p>Velg hotell etter strand, område og hvor rolig eller aktiv ferie du ønsker.</p></article><article class="info-card"><span class="badge">Tips</span><h3>Bo riktig fra start</h3><p>På Thailand-sidene lenker vi direkte til hotellene som passer best for hver destinasjon.</p></article><article class="info-card"><span class="badge">Reisestil</span><h3>Premium + praktisk</h3><p>Guiden kombinerer inspirerende hotellvalg med konkrete anbefalinger.</p></article></div></section><section class="wrap" id="hoteller"><div class="section-head"><div><h2>Hotell i Chiang Mai</h2><p class="lead">Utvalgte hotell for ulike reisestiler, områder og budsjetter.</p></div></div><div class="grid"><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/destinations/chiang-mai-v22.jpg" alt="137 Pillars House Chiang Mai" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>137 Pillars House Chiang Mai</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Boutique luxury</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>4-5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Historisk boutique-luksus med rolig atmosfære.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/137-pillars-house-chiang-mai-thailand.glCGjBV" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/destinations/chiang-mai-v22.jpg" alt="Chala Number 6 Hotel" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Chala Number 6 Hotel</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Old city</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Sentralt boutiquehotell nær templer og gamlebyen.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/chala-number-6-hotel-chiang-mai-thailand.x5uGYrV" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/reisemagasin-home-banner.webp" alt="Melia Chiang Mai" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Melia Chiang Mai</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>City / value</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>4-5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Moderne hotell med god base for by og marked.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/melia-chiang-mai-chiang-mai-thailand.fHtEUGd" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/destinations/chiang-mai-v22.jpg" alt="Anantara Chiang Mai Resort" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Anantara Chiang Mai Resort</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Riverside luxury</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Elegant resort ved elven, rolig og eksklusivt.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/anantara-chiang-mai-resort-chiang-mai-thailand.wqQQhEv" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/reisemagasin-home-banner.webp" alt="Shangri-La Chiang Mai" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Shangri-La Chiang Mai</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Familie / city</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>4-5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Stor resortfølelse med sentral beliggenhet.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/shangri-la-chiang-mai-chiang-mai-thailand.rT69jyx" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/reisemagasin-home-banner.webp" alt="Aleenta Retreat Chiang Mai" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Aleenta Retreat Chiang Mai</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Wellness</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>4-5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Boutique retreat med roligere preg.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/aleenta-retreat-chiang-mai-chiang-mai-thailand.Qd73nHv" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/reisemagasin-home-banner.webp" alt="Na Nirand Romantic Boutique Resort" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Na Nirand Romantic Boutique Resort</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Romantisk</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>4-5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Sjarmerende boutiquehotell for par.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/na-nirand-romantic-boutique-resort-chiang-mai-thailand.tBwZLZd" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/destinations/chiang-mai-v22.jpg" alt="Raya Heritage" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Raya Heritage</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Design / nature</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>4-5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Stilrent designhotell med nordthailandsk ro.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/raya-heritage-mae-rim-thailand.SsmSHWX" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article><article class="mockup-hotel-card">
+  <div class="mockup-hotel-media">
+    <img src="assets/reisemagasin-home-banner.webp" alt="Four Seasons Resort Chiang Mai" loading="lazy" decoding="async">
+    <div class="mockup-photo-stars">★★★★★</div>
+  </div>
+  <div class="mockup-hotel-content">
+    <h3>Four Seasons Resort Chiang Mai</h3>
+    <div class="mockup-stars">★★★★★</div>
+    <p class="mockup-best">Best for: Se anbefaling</p>
+    <div class="mockup-location"><span>Beliggenhet</span><strong>Ultra luxury</strong></div>
+    <div class="mockup-facts">
+      <div><span>Restauranter</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Basseng</span><strong>Sjekk hotellinfo</strong></div>
+      <div><span>Stjerner</span><strong>5</strong></div>
+      <div><span>Spa</span><strong>Ja</strong></div>
+    </div>
+    <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>Eksklusivt resortliv blant fjell og rismarker.</p></div>
+    <div class="mockup-tags"><span>Se anbefaling</span></div>
+    <a class="mockup-cta" href="https://www.hotels.com/affiliates/four-seasons-resort-chiang-mai-mae-rim-thailand.1BA8a2Y" target="_blank" rel="sponsored noopener">Sjekk pris →</a>
+  </div>
+</article></div></section><section class="wrap"><div class="hero-actions"><a class="btn primary" href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank">Finn aktiviteter →</a><a class="btn secondary" href="reise-thailand.html">Flere Thailand-guider</a></div></section>
 </main><footer class="footer">© 2026 Billig-reiser.no</footer><script defer src="thailand-videos.js"></script></body></html>
