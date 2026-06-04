@@ -275,6 +275,7 @@
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -925,11 +926,12 @@
   }
 
   function buildPackageUrl(state) {
-    const url = new URL("https://www.expedia.no/Hotel-Search");
-    url.searchParams.set("origin", state.from);
-    url.searchParams.set("destination", state.to);
+    const url = new URL("https://www.expedia.no/Packages-Search");
+    url.searchParams.set("origin", airportCode(state.from));
+    url.searchParams.set("destination", airportCode(state.to));
     url.searchParams.set("startDate", state.depart);
     url.searchParams.set("endDate", state.ret);
+    url.searchParams.set("rooms", "1");
     url.searchParams.set("adults", state.adults);
     if (Number(state.children)) url.searchParams.set("children", state.children);
     url.searchParams.set("cabinClass", "COACH");
@@ -944,7 +946,7 @@
     url.searchParams.set("useRewards", "false");
     url.searchParams.set("locale", "nb_NO");
     url.searchParams.set("currency", "NOK");
-    return url.toString();
+    return affiliateWrap(AFFILIATE_LINKS.expedia, url.toString());
   }
 
   function buildCruiseUrl(state) {
@@ -1395,7 +1397,7 @@
   function smartServiceUrl(service) {
     const links = window.BR_AFFILIATES || {};
     return {
-      package: links.packageTravel || "https://www.expedia.no/Fly-Hotell",
+      package: links.packageTravel || links.expedia || "https://www.expedia.no/Fly-Hotell",
       interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
       cruise: links.cruise || "https://www.expedia.com/Cruises",
       restplass: links.tuiRestplass || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F"
@@ -1432,8 +1434,15 @@
       updateSearchPreview();
       return openDateRangePicker();
     }
-    if (/pakkereise|fly\\s*(\\+|og)\\s*hotell/.test(query)) {
+    if (/pakkereise|fly\s*(\+|og)\s*hotell/.test(query)) {
       setSearchType("package");
+      const route = query.match(/(?:fra\s+)?(.+?)\s+til\s+(.+)/);
+      if (route) {
+        if ($("fromCity")) $("fromCity").value = route[1].replace(/pakkereise|fly\s*(\+|og)\s*hotell/g, "").trim() || "Oslo";
+        if ($("toCity")) $("toCity").value = route[2].trim();
+        updateSearchPreview();
+        return openDateRangePicker();
+      }
       return $("fromCity")?.focus();
     }
     if (/feriebolig|feriehus|villa|hytte|leilighet/.test(query)) {
@@ -1448,7 +1457,7 @@
       return openDateRangePicker();
     }
 
-    const hotel = query.match(/(?:hotell|hotel)(?:\\s+i)?\\s+(.+)/);
+    const hotel = query.match(/(?:hotell|hotel)(?:\s+i)?\s+(.+)/);
     if (hotel) {
       setSearchType("hotel");
       if ($("toCity")) $("toCity").value = hotel[1].trim();
@@ -1457,7 +1466,7 @@
       return;
     }
 
-    const car = query.match(/(?:leiebil|bil)(?:\\s+i)?\\s+(.+)/);
+    const car = query.match(/(?:leiebil|bil)(?:\s+i)?\s+(.+)/);
     if (car) {
       setSearchType("car");
       if ($("fromCity")) $("fromCity").value = car[1].trim();
@@ -1466,7 +1475,7 @@
       return;
     }
 
-    const route = query.match(/(?:fly\\s+)?(?:fra\\s+)?(.+?)\\s+til\\s+(.+)/);
+    const route = query.match(/(?:fly\s+)?(?:fra\s+)?(.+?)\s+til\s+(.+)/);
     setSearchType("flight");
     if (route) {
       if ($("fromCity")) $("fromCity").value = route[1].trim();
@@ -1651,6 +1660,67 @@
     return fallback;
   }
 
+  function addDaysISO(days) {
+    const d = new Date();
+    d.setHours(12, 0, 0, 0);
+    d.setDate(d.getDate() + days);
+    return d.toISOString().slice(0, 10);
+  }
+
+  function airportCode(value) {
+    const raw = String(value || "").trim();
+    const parenCode = raw.match(/\(([A-Za-z]{3})\)/);
+    if (parenCode) return parenCode[1].toUpperCase();
+    const directCode = raw.match(/^\s*([A-Za-z]{3})\s*$/);
+    if (directCode) return directCode[1].toUpperCase();
+    const found = findCity(raw, raw);
+    const foundCode = String(found || "").match(/\(([A-Za-z]{3})\)/);
+    return foundCode ? foundCode[1].toUpperCase() : raw;
+  }
+
+  function aiFlightUrl(data) {
+    const depart = $("departDate")?.value || addDaysISO(14);
+    const ret = $("returnDate")?.value || addDaysISO(21);
+    const kiwiTarget = new URL("https://www.kiwi.com/deep");
+    kiwiTarget.searchParams.set("from", airportCode(data.from || "Oslo (OSL)"));
+    kiwiTarget.searchParams.set("to", airportCode(data.to || "Bangkok (BKK)"));
+    kiwiTarget.searchParams.set("departure", depart);
+    kiwiTarget.searchParams.set("return", ret);
+    kiwiTarget.searchParams.set("adults", data.adults || "2");
+    if (Number(data.children)) kiwiTarget.searchParams.set("children", data.children);
+
+    const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click");
+    url.searchParams.set("shmarker", `${(window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286"}.billigreiser_ai_fly`);
+    url.searchParams.set("promo_id", "3791");
+    url.searchParams.set("source_type", "customlink");
+    url.searchParams.set("type", "click");
+    url.searchParams.set("custom_url", kiwiTarget.toString());
+    return url.toString();
+  }
+
+  function expediaAffiliate(targetUrl) {
+    const base = (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706";
+    return `${base}${base.includes("?") ? "&" : "?"}url=${encodeURIComponent(targetUrl)}`;
+  }
+
+  function aiPackageUrl(data) {
+    const depart = $("departDate")?.value || addDaysISO(14);
+    const ret = $("returnDate")?.value || addDaysISO(21);
+    const url = new URL("https://www.expedia.no/Packages-Search");
+    url.searchParams.set("origin", airportCode(data.from || "Oslo (OSL)"));
+    url.searchParams.set("destination", airportCode(data.to || "Bangkok (BKK)"));
+    url.searchParams.set("startDate", depart);
+    url.searchParams.set("endDate", ret);
+    url.searchParams.set("rooms", "1");
+    url.searchParams.set("adults", data.adults || "2");
+    if (Number(data.children)) url.searchParams.set("children", data.children);
+    url.searchParams.set("packageType", "fh");
+    url.searchParams.set("tripType", "ROUND_TRIP");
+    url.searchParams.set("locale", "nb_NO");
+    url.searchParams.set("currency", "NOK");
+    return expediaAffiliate(url.toString());
+  }
+
   function extractFlight(text) {
     const low = text.toLowerCase();
     const route = low.match(/(?:fra|from)\s+([a-zæøå\s]+?)\s+(?:til|to)\s+([a-zæøå\s]+)/i);
@@ -1684,7 +1754,7 @@
     setValue("children", data.children);
     addMessage(`Jeg har fylt ut flysøk: <b>${data.from || "Oslo"} → ${data.to || "Bangkok"}</b>, ${data.adults} voksne og ${data.children} barn. Velg dato i kalenderfeltet, eller åpne et ferdig Kiwi-søk med standarddato.`, "bot", {
       label: "Åpne Kiwi-søk",
-      onClick: () => $("searchSubmitButton")?.click()
+      onClick: () => window.open(aiFlightUrl(data), "_blank", "noopener,noreferrer")
     });
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
@@ -1736,12 +1806,18 @@
     });
   }
 
-  function openPackageTravel() {
-    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell";
-    addMessage("Jeg åpner <b>pakkereiser hos Expedia Norge</b>. Der kan du velge fly, hotell, reisemål og datoer samlet.", "bot", {
-      label: "Åpne pakkereiser",
-      onClick: () => window.open(url, "_blank", "noopener,noreferrer")
+  function openPackageTravel(text = "") {
+    const data = extractFlight(text || "fly oslo til bangkok 2 voksne");
+    setTab("package");
+    setValue("fromCity", data.from || "Oslo (OSL)");
+    setValue("toCity", data.to || "Bangkok (BKK)");
+    setValue("adults", data.adults || "2");
+    setValue("children", data.children || "0");
+    addMessage(`Jeg har fylt ut pakkereise: <b>${data.from || "Oslo"} → ${data.to || "Bangkok"}</b>. Knappen åpner Expedia fly + hotell med standarddato hvis du ikke velger dato selv.`, "bot", {
+      label: "Åpne fly + hotell",
+      onClick: () => window.open(aiPackageUrl(data), "_blank", "noopener,noreferrer")
     });
+    document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   function openInterhome() {
@@ -1773,7 +1849,7 @@
     if (low.includes("restplass") || low.includes("charter") || low.includes("sydentur") || low.includes("syden")) return openTuiRestplass();
     if (low.includes("forsink") || low.includes("kansell") || low.includes("erstatning")) return openFlightDelay();
     if (low.includes("feriebolig") || low.includes("feriehus") || low.includes("villa") || low.includes("hytte") || low.includes("leilighet")) return openInterhome();
-    if (low.includes("pakkereise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel();
+    if (low.includes("pakkereise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel(text);
     if (low.includes("cruise")) return openCruise();
     if (/(fly|flight|fra|from).*(til|to)/.test(low) || low.includes("bangkok") || low.includes("mallorca")) return fillFlight(text);
     if (low.includes("hotell") || low.includes("hotel") || low.includes("overnatting")) return fillHotel(text);
