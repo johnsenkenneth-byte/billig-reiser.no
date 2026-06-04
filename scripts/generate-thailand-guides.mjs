@@ -95,7 +95,22 @@ for (const [slug,file,name,hero,badge,intro,areas,highlights,hotels] of more) {
 for (const [slug,file,name,hero,badge,intro,areas,highlights] of [
   ["koh-mak","reise-thailand-koh-mak.html","Koh Mak","assets/destinations/koh-chang-v22.jpg","Rolig og liten øy","Koh Mak passer når du vil ha korte avstander, sykler og stranddager uten et tett program.",["Ao Kao","Ao Suan Yai","Sørkysten"],["Sykkeltur","Stranddag","Solnedgang"]],
   ["koh-kood","reise-thailand-koh-kood.html","Koh Kood","assets/destinations/koh-chang-v22.jpg","Bukter og lav puls","Koh Kood er et rolig valg øst i Thailand med turkise bukter, fossefall og resortdager.",["Klong Chao","Bang Bao","Ao Phrao"],["Fossefall","Kajakk","Stranddag"]],
-]) destinations.push({file,slug,name,hero,badge,intro,facts:[["Passer best for","Rolig strandferie"],["Legg inn","3-5 netter"],["Kombiner med","Koh Chang eller Koh Mak"]],areas:areas.map(x=>[x,`Se hotell rundt ${x} for en rolig base på øya.`]),highlights:highlights.map(x=>[x,`Legg inn tid til ${x.toLowerCase()} i et rolig tempo.`]),hotels:areas.map((x)=>hotel(`Finn hotell ved ${x}`,hero,fallbackSearch(`${name} ${x}`),"Sammenlign tilgjengelige hotell i dette området."))});
+]) {
+  const easternHotels = slug === "koh-kood"
+    ? [
+      hotel("High Season Pool Villa & Spa",hero,"https://www.hotels.com/affiliates/high-season-pool-villa-spa-ko-kood-thailand.fvmmspy","Villaresort ved Klong Chao med luksus, spa og privat preg."),
+      hotel("Tinkerbell Resort",hero,"https://www.hotels.com/affiliates/tinkerbell-resort-ko-kood-thailand.3JhrF5a","Lite strandresort ved Klong Chao med boutique-følelse."),
+      hotel("Shantaa Resort",hero,"https://www.hotels.com/affiliates/shantaa-resort-ko-kood-thailand.mddjF9s","Rolig boutiquevalg med personlig preg og lavt tempo."),
+      hotel("The Beach Natural Resort Koh Kood",hero,"https://www.hotels.com/affiliates/the-beach-natural-resort-koh-kood-ko-kood-thailand.d4i0EYs","Strandresort i Bang Bao Bay for familie og rolige dager."),
+    ]
+    : [
+      hotel("Mira Montra Resort Koh Mak",hero,"https://www.hotels.com/affiliates/mira-montra-resort-koh-mak-ko-mak-thailand.pCAGUJN","Rolig strandresort med villaer, basseng og god plass."),
+      hotel("Makathanee Resort",hero,"https://www.hotels.com/affiliates/makathanee-resort-ko-mak-thailand.AZOdbwN","Praktisk strandbase ved Ao Kao med enkel øyfølelse."),
+      hotel("Ao Kao White Sand Beach Resort",hero,"https://www.hotels.com/affiliates/ao-kao-white-sand-beach-resort-ko-mak-thailand.fIhRtoQ","Avslappet strandresort med basseng og familievennlig profil."),
+      hotel("Islanda Resort Hotel",hero,"https://www.hotels.com/affiliates/islanda-resort-hotel-ko-mak-thailand.S1LXA3w","Rolig hotell med utsikt og god base for korte utflukter."),
+    ];
+  destinations.push({file,slug,name,hero,badge,intro,facts:[["Passer best for","Rolig strandferie"],["Legg inn","3-5 netter"],["Kombiner med","Koh Chang eller Koh Mak"]],areas:areas.map(x=>[x,`Se hotell rundt ${x} for en rolig base på øya.`]),highlights:highlights.map(x=>[x,`Legg inn tid til ${x.toLowerCase()} i et rolig tempo.`]),hotels:easternHotels});
+}
 
 const related = destinations.map(({name,file})=>({name,file}));
 const esc = (s) => String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
