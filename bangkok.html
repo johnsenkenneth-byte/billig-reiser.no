@@ -1,40 +1,228 @@
-<!doctype html><html lang="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vår Bangkok guide | Billig-reiser.no</title><meta name="description" content="Vår Bangkok guide med hotell, natteliv, shopping, restauranter, familie, spa og områdevalg samlet i én ryddig portal."><link rel="stylesheet" href="style.css"><style>
-:root{--bg:#07101f;--panel:#101b2e;--panel2:#14243a;--text:#f8fafc;--muted:#b8c4d5;--pink:#ff4bb8;--blue:#22d3ee;--gold:#ffd166;--line:rgba(255,255,255,.12)}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 18% 0%,rgba(34,211,238,.11),transparent 28%),linear-gradient(180deg,#07101f,#0b1220 58%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif}a{color:#ff7bd2}.mag-nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px clamp(16px,4vw,48px);background:rgba(7,15,28,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}.brand-logo img{height:54px;max-width:220px;object-fit:contain}.mag-menu{display:flex;gap:14px;flex-wrap:wrap}.mag-menu a,.tabs a{color:#dbe4f0;text-decoration:none;font-weight:850}.mag-menu a:hover,.tabs a:hover{color:var(--pink)}.hero{min-height:440px;padding:82px clamp(18px,6vw,92px);display:flex;align-items:center;background:linear-gradient(90deg,rgba(5,10,18,.92),rgba(5,10,18,.58),rgba(5,10,18,.18)),var(--hero) center/cover no-repeat;border-bottom:1px solid var(--line)}.hero-inner{max-width:880px}.kicker,.badge{color:#ffd1ef;background:rgba(255,75,184,.13);border:1px solid rgba(255,75,184,.24);border-radius:999px;padding:7px 11px;display:inline-flex;font-weight:950;text-transform:uppercase;letter-spacing:.08em;font-size:12px}h1{font-size:clamp(42px,7vw,82px);line-height:.92;margin:18px 0;letter-spacing:-.06em}h2{font-size:clamp(30px,4vw,48px);line-height:.98;margin:0 0 14px;letter-spacing:-.04em}h3{font-size:24px;margin:0 0 8px}h4{font-size:18px;margin:18px 0 6px}p,li{color:var(--muted);line-height:1.7}.lead{font-size:19px;max-width:900px}.wrap{max-width:1220px;margin:0 auto;padding:56px 24px}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.tabs a{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}.two{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start}.card,.hotel-card,.article{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98));border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:0 20px 55px rgba(0,0,0,.25)}.card,.article{padding:26px}.hotel-card img{width:100%;height:230px;object-fit:cover;display:block}.hotel-body{padding:22px}.cta{display:inline-flex;margin-top:8px;padding:12px 15px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-weight:950;text-decoration:none;color:#fff}.cta:hover{background:rgba(255,75,184,.18)}.section-head{margin-bottom:24px}.notice,.tip{margin-top:24px;background:rgba(255,75,184,.09);border:1px solid rgba(255,75,184,.25);border-radius:22px;padding:22px;color:#ffd1ef}.tip{background:rgba(34,211,238,.08);border-color:rgba(34,211,238,.22);color:#d8fbff}.split-list{columns:2;column-gap:34px}.faq details{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin:12px 0}.faq summary{cursor:pointer;font-weight:950;color:#fff}.mini{font-size:14px;color:#9fb0c6}.rank{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,75,184,.18);border:1px solid rgba(255,75,184,.3);margin-right:8px}.footer{border-top:1px solid var(--line);padding:30px;text-align:center;color:var(--muted);font-size:14px}@media(max-width:860px){.mag-nav{align-items:flex-start;flex-direction:column}.brand-logo img{height:44px}.hero{min-height:360px;padding:52px 18px}.wrap{padding:40px 16px}.two{grid-template-columns:1fr}.split-list{columns:1}}
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bangkok guide | Hotell, mat, shopping og opplevelser | Billig-reiser.no</title>
+  <meta name="description" content="Ryddig Bangkok-guide med områder, hotell, restauranter, shopping, natteliv, spa og familieopplevelser samlet på ett sted.">
+  <link rel="canonical" href="https://billig-reiser.no/bangkok.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Billig-reiser.no">
+  <meta property="og:title" content="Bangkok guide | Billig-reiser.no">
+  <meta property="og:description" content="Finn riktig område, hotell og opplevelser i Bangkok.">
+  <meta property="og:image" content="https://billig-reiser.no/assets/bangkok/custom/bangkok-guide-hero.webp">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{--bg:#07101f;--panel:#101b2e;--panel2:#14243a;--text:#f8fafc;--muted:#b8c4d5;--pink:#ff4bb8;--blue:#22d3ee;--gold:#ffd166;--line:rgba(255,255,255,.12)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% 0%,rgba(34,211,238,.12),transparent 30%),linear-gradient(180deg,#07101f,#0b1220 58%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.65}a{color:inherit;text-decoration:none}img{max-width:100%}
+    .mag-nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px clamp(16px,4vw,48px);background:rgba(7,15,28,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}.brand-logo img{height:54px;width:220px;max-width:42vw;object-fit:contain}.mag-menu{display:flex;gap:15px;align-items:center;flex-wrap:wrap}.mag-menu a{color:#dbe4f0;font-weight:850;font-size:14px}.mag-menu a:hover,.mag-menu a.active{color:var(--pink)}
+    .hero{position:relative;min-height:590px;display:flex;align-items:center;padding:88px clamp(18px,6vw,92px);background:linear-gradient(90deg,rgba(5,10,18,.94),rgba(5,10,18,.65) 46%,rgba(5,10,18,.20)),url("assets/bangkok/custom/bangkok-guide-hero.webp") center/cover no-repeat;border-bottom:1px solid var(--line);overflow:hidden}.hero:after{content:"";position:absolute;inset:auto -12% -24% 42%;height:360px;background:radial-gradient(circle,rgba(255,209,102,.18),transparent 62%);pointer-events:none}.hero-inner{position:relative;z-index:1;max-width:870px}.kicker,.badge{display:inline-flex;align-items:center;border-radius:999px;padding:7px 11px;background:rgba(255,75,184,.13);border:1px solid rgba(255,75,184,.24);color:#ffd1ef;font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-size:clamp(44px,7vw,86px);line-height:.92;letter-spacing:-.06em;margin:18px 0}.lead{color:#e4edf8;font-size:clamp(18px,2vw,22px);max-width:810px;margin:0}.hero-actions,.tabs{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn,.tabs a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border-radius:999px;font-weight:950}.btn.primary{background:linear-gradient(90deg,#ff4bb8,#7c3aed,#22d3ee);box-shadow:0 18px 48px rgba(255,75,184,.20)}.btn.secondary,.tabs a{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:#eef6ff}
+    .subnav{position:sticky;top:74px;z-index:15;display:flex;gap:10px;overflow-x:auto;padding:12px clamp(14px,4vw,48px);background:rgba(3,9,18,.92);border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);scrollbar-width:none}.subnav::-webkit-scrollbar{display:none}.subnav a{white-space:nowrap;border:1px solid rgba(255,209,102,.22);background:linear-gradient(180deg,rgba(255,209,102,.08),rgba(255,255,255,.035));border-radius:999px;padding:10px 14px;font-weight:950;font-size:13px;color:#eaf2ff}.subnav a:hover{border-color:rgba(255,209,102,.55)}
+    .wrap{max-width:1220px;margin:0 auto;padding:62px 24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}.section-head h2,.story h2{font-size:clamp(31px,4vw,52px);line-height:.98;letter-spacing:-.045em;margin:0}.section-head p{max-width:720px;color:var(--muted);font-size:17px;margin:0}.story-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}.story,.quick-card,.guide-card,.feature-card,.guide-link,.faq details{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98));border:1px solid var(--line);border-radius:24px;box-shadow:0 20px 55px rgba(0,0,0,.24)}.story,.quick-card,.guide-card,.feature-body,.faq details{padding:26px}.story p,.quick-card p,.guide-card p,.feature-card p,.faq p{color:var(--muted);margin:10px 0 0}.note{margin-top:20px;border:1px solid rgba(255,209,102,.25);background:rgba(255,209,102,.08);border-radius:18px;padding:18px;color:#f7e7b8}.quick-card h3,.guide-card h3,.feature-card h3,.guide-link h3{font-size:24px;margin:0 0 8px}.quick-list{display:grid;gap:12px;margin-top:18px}.quick-list div{padding:14px 16px;border:1px solid rgba(255,255,255,.10);border-radius:16px;background:rgba(255,255,255,.055);color:var(--muted)}.quick-list b{color:#fff}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.feature-card{overflow:hidden}.feature-card img{width:100%;height:240px;object-fit:cover;display:block}.feature-card a,.guide-link a{display:inline-flex;margin-top:16px;font-weight:950;color:#ff8bd9}.guide-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.guide-link{overflow:hidden}.guide-link img{width:100%;height:190px;object-fit:cover;display:block}.guide-link div{padding:22px}.guide-link span{color:var(--gold);font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:.08em}.footer{border-top:1px solid var(--line);padding:30px;text-align:center;color:var(--muted);font-size:14px}.faq details{margin:12px 0}.faq summary{cursor:pointer;font-weight:950;color:#fff}
+    @media(max-width:980px){.story-grid,.feature-grid{grid-template-columns:1fr}.grid,.guide-links{grid-template-columns:1fr 1fr}.section-head{display:block}.section-head p{margin-top:12px}.mag-nav{align-items:flex-start;flex-direction:column}.subnav{top:112px}.hero{min-height:500px;padding:66px 18px}.wrap{padding:48px 16px}}
+    @media(max-width:620px){.grid,.guide-links{grid-template-columns:1fr}.brand-logo img{max-width:220px}.hero h1{font-size:43px}.btn,.tabs a{width:100%}.subnav{top:118px}.feature-card img,.guide-link img{height:210px}.story,.quick-card,.guide-card,.feature-body,.faq details{padding:21px}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bangkok guide","description":"Ryddig Bangkok-guide med områder, hotell, restauranter, shopping, natteliv, spa og familieopplevelser samlet på ett sted.","author":{"@type":"Organization","name":"Billig-Reiser.no"},"publisher":{"@type":"Organization","name":"Billig-Reiser.no"},"mainEntityOfPage":"https://billig-reiser.no/bangkok.html"}</script>
+</head>
+<body>
+  <nav class="mag-nav">
+    <a class="brand-logo" href="index.html"><img alt="Billig-reiser.no" src="assets/logo-main.png" width="220" height="54"></a>
+    <div class="mag-menu">
+      <a class="active" href="bangkok.html">Bangkok</a>
+      <a href="reise-thailand.html">Thailand</a>
+      <a href="bangkok-hotell.html">Hotell</a>
+      <a href="bangkok-hvor-bo.html">Hvor bo</a>
+      <a href="reisemagasinet.html">Magasinet</a>
+    </div>
+  </nav>
 
-.phase2-band{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.premium-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:22px}
-.premium-tile{display:block;min-height:210px;padding:22px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.03));box-shadow:0 20px 55px rgba(0,0,0,.25);color:var(--text);text-decoration:none;position:relative;overflow:hidden}
-.premium-tile:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.16),transparent 35%);opacity:.9;pointer-events:none}
-.premium-tile>*{position:relative}.premium-tile h3{font-size:22px;margin:10px 0}.premium-tile p{color:var(--muted);line-height:1.55;margin:0}.premium-tile small{color:var(--gold);font-weight:950;text-transform:uppercase;letter-spacing:.08em}.premium-tile:hover{transform:translateY(-3px);border-color:rgba(255,209,102,.35)}
-.editorial-list{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start}.editorial-panel{border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.045);padding:26px}.checklist{display:grid;gap:12px;margin-top:16px}.checkitem{padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);color:var(--muted)}.checkitem b{color:var(--text)}
-.link-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.link-pill{border:1px solid rgba(255,209,102,.35);border-radius:999px;padding:10px 14px;color:var(--text);background:rgba(255,209,102,.08);font-weight:900;text-decoration:none}.link-pill:hover{background:rgba(255,209,102,.16)}
-@media(max-width:980px){.premium-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.editorial-list{grid-template-columns:1fr}}
-@media(max-width:620px){.premium-grid{grid-template-columns:1fr}.premium-tile{min-height:auto}.link-row{display:grid}.link-pill{text-align:center}}
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="kicker">Bangkok guide</span>
+      <h1>Bangkok uten rot.</h1>
+      <p class="lead">Start her hvis du vil finne riktig område, hotell, matopplevelser, shopping, natteliv, spa og familieaktiviteter i Bangkok uten å hoppe frem og tilbake.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#velg-guide">Velg guide</a>
+        <a class="btn secondary" href="#plan">Se rask plan</a>
+      </div>
+      <div class="tabs">
+        <a href="bangkok-hotell.html">Hotell</a>
+        <a href="bangkok-restauranter.html">Mat</a>
+        <a href="bangkok-shopping.html">Shopping</a>
+        <a href="bangkok-natteliv.html">Natteliv</a>
+        <a href="bangkok-spa.html">Spa</a>
+        <a href="bangkok-familie.html">Familie</a>
+      </div>
+    </div>
+  </header>
 
-/* Phase 4 premium finish: consistency, sticky subnav, hover, CTA, SEO blocks */
-.bkk-subnav{position:sticky;top:74px;z-index:9;display:flex;gap:10px;overflow-x:auto;padding:12px clamp(14px,4vw,48px);background:rgba(3,9,18,.92);border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);scrollbar-width:none}.bkk-subnav::-webkit-scrollbar{display:none}.bkk-subnav a{white-space:nowrap;text-decoration:none;color:#eaf2ff;border:1px solid rgba(255,209,102,.22);background:linear-gradient(180deg,rgba(255,209,102,.08),rgba(255,255,255,.035));border-radius:999px;padding:10px 14px;font-weight:950;font-size:13px}.bkk-subnav a:hover{border-color:rgba(255,209,102,.55);transform:translateY(-1px);box-shadow:0 10px 28px rgba(255,209,102,.08)}
-.card,.hotel-card,.article,.premium-tile,.editorial-panel{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.hotel-card:hover,.card:hover,.premium-tile:hover,.editorial-panel:hover{transform:translateY(-4px);border-color:rgba(255,209,102,.32);box-shadow:0 28px 75px rgba(0,0,0,.34)}.hotel-card img{transition:transform .45s ease,filter .35s ease}.hotel-card:hover img{transform:scale(1.035);filter:saturate(1.08) contrast(1.04)}.hotel-card{position:relative}.hotel-card .hotel-body{position:relative}.best-tags{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.best-tags span{font-size:12px;font-weight:950;color:#ffe7a6;border:1px solid rgba(255,209,102,.26);background:rgba(255,209,102,.08);border-radius:999px;padding:7px 10px}.cta{background:linear-gradient(90deg,rgba(255,209,102,.18),rgba(255,75,184,.12));border-color:rgba(255,209,102,.28);box-shadow:0 12px 30px rgba(0,0,0,.18)}.cta:hover{background:linear-gradient(90deg,rgba(255,209,102,.28),rgba(255,75,184,.2));border-color:rgba(255,209,102,.52)}
-.lux-band{background:linear-gradient(180deg,rgba(255,209,102,.035),rgba(255,255,255,.012));border-top:0;border-bottom:0;margin-top:8px}.lux-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.lux-strip div{padding:18px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1)}.lux-strip b{display:block;color:#fff;margin-bottom:6px}.michelin-star{color:#ffd166;letter-spacing:.06em;font-weight:950}.faq-schema{margin-top:28px}.faq-schema details{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;margin:10px 0;padding:15px 17px}.faq-schema summary{cursor:pointer;color:#fff;font-weight:950}.hide-on-desktop{display:none}
-@media(max-width:860px){.bkk-subnav{top:112px;padding:10px 14px}.hero{background-position:center}.hotel-card img{height:210px}.lux-strip{grid-template-columns:1fr 1fr}.hide-on-desktop{display:block}.hide-on-mobile{display:none}}
-@media(max-width:560px){.bkk-subnav{top:118px}.lux-strip{grid-template-columns:1fr}.hero h1{font-size:42px}.lead{font-size:16px}.card,.article{padding:20px}.hotel-body{padding:18px}.tabs a{font-size:13px;padding:9px 11px}}
+  <div class="subnav">
+    <a href="#oversikt">Oversikt</a>
+    <a href="#plan">Rask plan</a>
+    <a href="#omrader">Områder</a>
+    <a href="#opplevelser">Opplevelser</a>
+    <a href="#velg-guide">Guidekort</a>
+    <a href="#faq">FAQ</a>
+  </div>
 
-.master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Vår Bangkok guide | Billig-reiser.no","description":"Vår Bangkok guide med hotell, natteliv, shopping, restauranter, familie, spa og områdevalg samlet i én ryddig portal.","author":{"@type":"Organization","name":"Billig-Reiser.no"},"publisher":{"@type":"Organization","name":"Billig-Reiser.no"},"mainEntityOfPage":"https://billig-reiser.no/bangkok.html"}</script></head><body><nav class="mag-nav"><a class="brand-logo" href="index.html"><img alt="Billig-reiser.no" src="/assets/logo-main.png" width="220" height="54"></a><div class="mag-menu"><a href="bangkok.html">Bangkok</a><a href="bangkok-hotell.html">Hotell</a><a href="bangkok-hvor-bo.html">Hvor bo</a><a href="bangkok-natteliv.html">Natteliv</a><a href="bangkok-shopping.html">Shopping</a><a href="bangkok-restauranter.html">Restauranter</a><a href="bangkok-familie.html">Familie</a><a href="bangkok-spa.html">Spa</a></div></nav><div class="bkk-subnav"><a href="bangkok-hotell.html">Hoteller</a><a href="bangkok-restauranter.html">Michelin & mat</a><a href="bangkok-shopping.html">Shopping</a><a href="bangkok-natteliv.html">Rooftops</a><a href="bangkok-spa.html">Spa</a><a href="bangkok-familie.html">Bangkok med barn</a><a href="bangkok-natteliv.html#hidden">Hidden Bangkok</a></div><section class="hero" style="--hero:url('/assets/bangkok/custom/bangkok-guide-hero.webp')"><div class="hero-inner"><span class="kicker">Bangkok guide</span><h1>Bangkok magasin</h1><p class="lead">Hoteller, natteliv, shopping, restauranter, familieopplevelser, spa og områdevalg samlet i én premium Bangkok-portal.</p><div class="tabs"><a href="bangkok-hotell.html">Hotell</a><a href="bangkok-natteliv.html">Natteliv</a><a href="bangkok-shopping.html">Shopping</a><a href="bangkok-restauranter.html">Restauranter</a><a href="bangkok-familie.html">Familie</a><a href="bangkok-spa.html">Spa</a></div></div></section><main>
-<section class="wrap"><div class="two"><div><span class="badge">Bangkok samlet</span><h2>Vår Bangkok guide</h2><p>Bangkok er ikke én type reise. Byen kan være luksus ved elven, rimelig street food i Chinatown, shopping i aircondition, pulserende natteliv i Sukhumvit, spa etter en lang flytur og familieopplevelser som fyller flere dager. Derfor er Bangkok-guiden bygget som et lite reiseunivers, der du kan velge den delen av byen som passer reisen din.</p><p>Start med områdeguiden hvis du er usikker på hvor du bør bo. Gå deretter videre til hotell, shopping, natteliv, restauranter, familie eller spa. Målet er at du skal slippe å hoppe mellom ti forskjellige nettsider for å planlegge Bangkok.</p><a class="cta" href="bangkok-hvor-bo.html">Start med hvor du bør bo →</a></div><div class="card"><h3>Rask Bangkok-plan</h3><p><strong>Første gang:</strong> Sukhumvit eller Siam.</p><p><strong>Luksus:</strong> Riverside, Mandarin Oriental, Capella og The Siam.</p><p><strong>Shopping:</strong> Siam, ICONSIAM, MBK og Chatuchak.</p><p><strong>Mat:</strong> Chinatown, Thonglor og Sukhumvit.</p><p><strong>Kveld:</strong> rooftop først, deretter Thonglor eller Khao San.</p></div></div></section>
-<section class="wrap"><div class="section-head"><h2>Velg guide</h2><p class="lead">Hver underside er bygget som en egen Bangkok-guide med mer tekst, tips, steder og naturlige veier videre.</p></div><div class="grid">
-<article class="hotel-card"><img src="/assets/bangkok/cards/mandarin-oriental-bangkok-v22.jpg" alt="Bangkok hotell" loading="lazy" decoding="async"><div class="hotel-body"><span class="badge">Hotell</span><h3>Hotell i Bangkok</h3><p>Sortert bedre etter område: Riverside, Sukhumvit/Thonglor, Siam/Lumpini og Silom.</p><a class="cta" href="bangkok-hotell.html">Åpne hotellguiden →</a></div></article>
-<article class="hotel-card"><img src="/assets/bangkok/custom/thonglor-skyline.webp" alt="Bangkok natteliv" loading="lazy" decoding="async"><div class="hotel-body"><span class="badge">Kveld</span><h3>Natteliv</h3><p>Rooftopbarer, cocktailbarer, klubber, Khao San, Thonglor, Nana Plaza og Soi Cowboy.</p><a class="cta" href="bangkok-natteliv.html">Åpne natteliv →</a></div></article>
-<article class="hotel-card"><img src="/assets/bangkok/cards/night-foodie-tour-i-chinatown-v22.jpg" alt="Bangkok restauranter" loading="lazy" decoding="async"><div class="hotel-body"><span class="badge">Mat</span><h3>Restauranter</h3><p>Chinatown, Michelin-restauranter, rooftop dining, buffeter og moderne Thonglor.</p><a class="cta" href="bangkok-restauranter.html">Åpne matguiden →</a></div></article>
-<article class="hotel-card"><img src="/assets/bangkok/custom/iconsiam.webp" alt="Shopping i Bangkok" loading="lazy" decoding="async"><div class="hotel-body"><span class="badge">Shopping</span><h3>Shopping</h3><p>ICONSIAM, Siam Paragon, MBK, Chatuchak, Pratunam, vintage og nattmarkeder.</p><a class="cta" href="bangkok-shopping.html">Åpne shopping →</a></div></article>
-<article class="hotel-card"><img src="/assets/bangkok/cards/chao-phraya-dinner-cruise-v22.jpg" alt="Bangkok familie" loading="lazy" decoding="async"><div class="hotel-body"><span class="badge">Familie</span><h3>Bangkok med barn</h3><p>Temaparker, badeland, akvarium, kanalcruise, go-kart og rolige soner.</p><a class="cta" href="bangkok-familie.html">Åpne familieguide →</a></div></article>
-<article class="hotel-card"><img src="/assets/bangkok/cards/spa-and-wellness-bangkok-v22.jpg" alt="Bangkok spa" loading="lazy" decoding="async"><div class="hotel-body"><span class="badge">Wellness</span><h3>Spa og massasje</h3><p>Thai massasje, fotmassasje, luksusspa, parbehandlinger og beste spa-områder.</p><a class="cta" href="bangkok-spa.html">Åpne spa-guide →</a></div></article>
-</div></section>
+  <main>
+    <section class="wrap" id="oversikt" data-thailand-standard="true">
+      <div class="story-grid">
+        <article class="story">
+          <span class="badge">Magasinguide</span>
+          <h2>Derfor reiser du til Bangkok</h2>
+          <p>Bangkok er storbydelen av Thailand-reisen: templer langs Chao Phraya, street food i Chinatown, shopping i Siam, spa i Sukhumvit, rooftopbarer over skyline og hotellopplevelser som kan være en reise i seg selv.</p>
+          <p>Byen fungerer best når du velger område først. Da blir dagene enklere, transporten kortere og opplevelsen mer behagelig. Bruk Bangkok som start på Thailand-reisen, som avslutning før hjemreise, eller som en egen langhelg med mat, shopping og luksus.</p>
+          <div class="note">Kort sagt: Bangkok passer best for deg som vil kombinere mat, storby, shopping, templer og hotellkomfort før eller etter strandferien.</div>
+        </article>
+        <aside class="quick-card" id="plan">
+          <span class="badge">Rask plan</span>
+          <h3>3 netter i Bangkok</h3>
+          <div class="quick-list">
+            <div><b>Dag 1:</b> Sjekk inn, massasje, Chinatown eller rooftop.</div>
+            <div><b>Dag 2:</b> Grand Palace, Wat Pho og elvebåt.</div>
+            <div><b>Dag 3:</b> Shopping i Siam eller ICONSIAM, middag og spa.</div>
+            <div><b>Best base:</b> Sukhumvit første gang, Riverside for luksus, Siam for shopping.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
+    <section class="wrap" id="omrader">
+      <div class="section-head">
+        <div>
+          <span class="badge">Områder</span>
+          <h2>Hvor bør du bo?</h2>
+        </div>
+        <p>Velg området etter hva du vil gjøre mest. Bangkok blir mye mer oversiktlig når hotellet ligger riktig.</p>
+      </div>
+      <div class="grid">
+        <article class="guide-card">
+          <h3>Riverside</h3>
+          <p>Best for luksus, elveutsikt, templer og roligere kvelder. Perfekt hvis hotellet er en viktig del av reisen.</p>
+        </article>
+        <article class="guide-card">
+          <h3>Sukhumvit</h3>
+          <p>Best første gang. Du får skytrain, restauranter, spa, kjøpesentre og enkel transport til mange deler av byen.</p>
+        </article>
+        <article class="guide-card">
+          <h3>Siam</h3>
+          <p>Best for shopping, familier og korte opphold der du vil bo sentralt og ha mye innenfor kort avstand.</p>
+        </article>
+        <article class="guide-card">
+          <h3>Silom og Sathorn</h3>
+          <p>God kombinasjon av skyline, takbarer, park, businesshoteller og kort vei til elv og sentrum.</p>
+        </article>
+        <article class="guide-card">
+          <h3>Chinatown</h3>
+          <p>Best for mat, foto og kveldsstemning. Bo her hvis du vil ha mer lokalt preg enn klassisk hotellområde.</p>
+        </article>
+        <article class="guide-card">
+          <h3>Khao San og gamlebyen</h3>
+          <p>Best for backpackerfølelse, templer og rimeligere kveldsliv. Mindre praktisk for shopping og skytrain.</p>
+        </article>
+      </div>
+    </section>
 
+    <section class="wrap" id="opplevelser">
+      <div class="section-head">
+        <div>
+          <span class="badge">Høydepunkter</span>
+          <h2>Dette bør du få med deg</h2>
+        </div>
+        <p>Hold planen enkel. Bangkok er best når du ikke prøver å rekke alt på én dag.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <img src="assets/bangkok/cards/night-foodie-tour-i-chinatown-v22.jpg" alt="Mat og Chinatown i Bangkok" loading="lazy" decoding="async">
+          <div class="feature-body">
+            <h3>Mat, Chinatown og nattmarked</h3>
+            <p>Bangkok er en av Asias beste matbyer. Velg Chinatown for street food, Thonglor for moderne restauranter og Siam/Sukhumvit for enkel tilgang til mye på kort tid.</p>
+            <a href="bangkok-restauranter.html">Åpne matguiden →</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <img src="assets/bangkok/custom/iconsiam.webp" alt="Shopping i Bangkok" loading="lazy" decoding="async">
+          <div class="feature-body">
+            <h3>Shopping fra Siam til ICONSIAM</h3>
+            <p>Bruk én dag på Siam, MBK eller ICONSIAM. Legg Chatuchak til helgen hvis du liker markeder og vil ha mer lokal stemning.</p>
+            <a href="bangkok-shopping.html">Åpne shoppingguiden →</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <img src="assets/bangkok/cards/rooftop-and-nightlife-v22.jpg" alt="Rooftop og natteliv i Bangkok" loading="lazy" decoding="async">
+          <div class="feature-body">
+            <h3>Rooftop, cocktailbar og kveldsliv</h3>
+            <p>Start med solnedgang på rooftop, spis middag etterpå og velg Thonglor, Sukhumvit eller Khao San etter stemningen du vil ha.</p>
+            <a href="bangkok-natteliv.html">Åpne natteliv →</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <img src="assets/bangkok/cards/spa-and-wellness-bangkok-v22.jpg" alt="Spa og wellness i Bangkok" loading="lazy" decoding="async">
+          <div class="feature-body">
+            <h3>Spa og rolige pauser</h3>
+            <p>Legg inn massasje eller spa tidlig i oppholdet. Det gjør Bangkok mer behagelig, særlig etter lang flyreise eller før reisen går videre.</p>
+            <a href="bangkok-spa.html">Åpne spa-guide →</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
+    <section class="wrap" id="velg-guide">
+      <div class="section-head">
+        <div>
+          <span class="badge">Velg guide</span>
+          <h2>Gå videre til riktig Bangkok-side</h2>
+        </div>
+        <p>Undersidene tar deg rett til det du trenger: hotell, områdevalg, mat, shopping, natteliv, spa eller Bangkok med barn.</p>
+      </div>
+      <div class="guide-links">
+        <article class="guide-link">
+          <img src="assets/bangkok/cards/mandarin-oriental-bangkok-v22.jpg" alt="Hotell i Bangkok" loading="lazy" decoding="async">
+          <div><span>Hotell</span><h3>Hotell i Bangkok</h3><p>Riverside, Sukhumvit, Siam, Silom og luksushoteller samlet.</p><a href="bangkok-hotell.html">Åpne hotellguiden →</a></div>
+        </article>
+        <article class="guide-link">
+          <img src="assets/bangkok/custom/thonglor-skyline.webp" alt="Hvor bo i Bangkok" loading="lazy" decoding="async">
+          <div><span>Områder</span><h3>Hvor bør du bo?</h3><p>Finn riktig base før du velger hotell.</p><a href="bangkok-hvor-bo.html">Åpne områdeguiden →</a></div>
+        </article>
+        <article class="guide-link">
+          <img src="assets/bangkok/cards/luxury-dining-bangkok-v22.jpg" alt="Restauranter i Bangkok" loading="lazy" decoding="async">
+          <div><span>Mat</span><h3>Restauranter</h3><p>Street food, Michelin, rooftop dining og moderne Bangkok.</p><a href="bangkok-restauranter.html">Åpne matguiden →</a></div>
+        </article>
+        <article class="guide-link">
+          <img src="assets/bangkok/custom/chatuchak-weekend-market.webp" alt="Shopping i Bangkok" loading="lazy" decoding="async">
+          <div><span>Shopping</span><h3>Shopping</h3><p>ICONSIAM, Siam, MBK, Chatuchak og nattmarkeder.</p><a href="bangkok-shopping.html">Åpne shopping →</a></div>
+        </article>
+        <article class="guide-link">
+          <img src="assets/bangkok/cards/dining-bars-and-nightlife-v22.jpg" alt="Natteliv i Bangkok" loading="lazy" decoding="async">
+          <div><span>Kveld</span><h3>Natteliv</h3><p>Rooftops, cocktailbarer, Khao San, Thonglor og Sukhumvit.</p><a href="bangkok-natteliv.html">Åpne natteliv →</a></div>
+        </article>
+        <article class="guide-link">
+          <img src="assets/bangkok/custom/family-attractions-premium.png" alt="Bangkok med barn" loading="lazy" decoding="async">
+          <div><span>Familie</span><h3>Bangkok med barn</h3><p>Akvarium, parker, kjøpesentre, båtturer og familievennlige pauser.</p><a href="bangkok-familie.html">Åpne familieguide →</a></div>
+        </article>
+      </div>
+    </section>
 
+    <section class="wrap faq" id="faq">
+      <h2>FAQ – Bangkok</h2>
+      <details>
+        <summary>Hvor mange netter bør man ha i Bangkok?</summary>
+        <p>For første gang passer 2-4 netter godt. Da får du tid til templer, mat, shopping, spa og én roligere kveld uten at byen tar over hele Thailand-reisen.</p>
+      </details>
+      <details>
+        <summary>Hvor bør man bo første gang?</summary>
+        <p>Sukhumvit er mest praktisk for de fleste. Riverside er best for ro og luksus, mens Siam passer godt for shopping og familier.</p>
+      </details>
+      <details>
+        <summary>Hva bør bestilles på forhånd?</summary>
+        <p>Populære hoteller, rooftop-restauranter, dinner cruise, spa og familieaktiviteter bør bestilles tidlig i høysesong.</p>
+      </details>
+    </section>
+  </main>
 
-
-
-<section class="wrap"><div class="faq-schema"><h2>FAQ – Bangkok guide</h2><details><summary>Hvor bør man bo første gang i Bangkok?</summary><p>Sukhumvit, Siam eller Riverside er de tryggeste valgene. Sukhumvit er mest praktisk, Siam best for shopping og familie, mens Riverside passer for roligere luksus.</p></details><details><summary>Hva bør bestilles på forhånd?</summary><p>Populære hoteller, rooftop-restauranter, dinner cruise, spa og familieaktiviteter bør bestilles tidlig i høysesong.</p></details><details><summary>Er Bangkok bra med barn?</summary><p>Ja, hvis man bor sentralt og planlegger pauser. Kjøpesentre, akvarium, elvecruise, parker, badeland og familiehoteller gjør byen enklere enn mange tror.</p></details></div></section>
-</main><footer class="footer">© 2026 Billig-reiser.no</footer><script defer src="thailand-videos.js"></script></body></html>
+  <footer class="footer">© 2026 Billig-reiser.no</footer>
+  <script defer src="thailand-videos.js"></script>
+</body>
+</html>
