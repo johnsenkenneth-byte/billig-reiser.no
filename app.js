@@ -781,11 +781,13 @@
   }
 
   function buildFlightDirectUrl(state) {
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret || fallbackReturnISO(depart);
     const kiwiTarget = new URL("https://www.kiwi.com/deep");
     kiwiTarget.searchParams.set("from", airportCode(state.from));
     kiwiTarget.searchParams.set("to", airportCode(state.to));
-    kiwiTarget.searchParams.set("departure", state.depart);
-    kiwiTarget.searchParams.set("return", state.ret);
+    kiwiTarget.searchParams.set("departure", depart);
+    kiwiTarget.searchParams.set("return", ret);
     kiwiTarget.searchParams.set("adults", state.adults);
     if (Number(state.children)) kiwiTarget.searchParams.set("children", state.children);
 
@@ -842,13 +844,26 @@
 
   const INTERHOME_DESTINATIONS = {
     spania: "5460aeae487f8",
+    spain: "5460aeae487f8",
     italia: "5460aeae078f7",
+    italy: "5460aeae078f7",
     frankrike: "5460aeb1b0bf2",
+    france: "5460aeb1b0bf2",
     norge: "5460aea85799e",
+    norway: "5460aea85799e",
     kroatia: "5460aeaaa3139",
+    croatia: "5460aeaaa3139",
     toscana: "5460aeb357636",
+    tuscany: "5460aeb357636",
     "costa blanca": "5460aeae7180f",
-    "costa del sol": "5460aec5cc8ff"
+    alicante: "5460aeae7180f",
+    benidorm: "5460aeae7180f",
+    calpe: "5460aeae7180f",
+    "costa del sol": "5460aec5cc8ff",
+    malaga: "5460aec5cc8ff",
+    marbella: "5460aec5cc8ff",
+    fuengirola: "5460aec5cc8ff",
+    torremolinos: "5460aec5cc8ff"
   };
 
   const TUI_RESTPLASS_DESTINATIONS = {
@@ -867,9 +882,30 @@
     return normalizeSearch(value).replace(/[^a-z0-9 ]/g, "").trim();
   }
 
+  function interhomeSearchText(value) {
+    return clean(value).replace(/\s*\([A-Z]{3}\)\s*$/i, "").trim();
+  }
+
+  function interhomeDestinationId(value) {
+    const key = destinationKey(value);
+    if (INTERHOME_DESTINATIONS[key]) return INTERHOME_DESTINATIONS[key];
+    const match = Object.keys(INTERHOME_DESTINATIONS)
+      .sort((a, b) => b.length - a.length)
+      .find((item) => key.includes(item));
+    return match ? INTERHOME_DESTINATIONS[match] : "";
+  }
+
   function buildInterhomeUrl(state) {
-    const id = INTERHOME_DESTINATIONS[destinationKey(state.to)];
-    const target = id ? `https://www.interhome.no/search/${id}` : "https://www.interhome.no/";
+    const searchText = interhomeSearchText(state.to || state.from || "");
+    const id = interhomeDestinationId(searchText);
+    let target = "https://www.interhome.no/search/";
+    if (id) {
+      target = `https://www.interhome.no/search/${id}`;
+    } else if (searchText) {
+      const searchUrl = new URL(target);
+      searchUrl.searchParams.set("q", searchText);
+      target = searchUrl.toString();
+    }
     return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, target);
   }
 
@@ -1480,7 +1516,8 @@
       const destination = query.match(/(?:til|i)\s+(.+)/)?.[1];
       if (destination && $("toCity")) $("toCity").value = destination.trim();
       updateSearchPreview();
-      return $("toCity")?.focus();
+      if (!openCurrentSearchTarget()) $("toCity")?.focus();
+      return;
     }
     if (/cruise/.test(query)) {
       setSearchType("cruise");
@@ -1583,10 +1620,9 @@
           if (button && oldText) button.textContent = oldText;
         } else if (currentSearchType === "flight") {
           if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
-          if (!state.depart) throw new Error("Velg avreisedato for å hente flypriser.");
+          target = buildFlightUrl(state);
           scheduleLivePriceUpdate(true, state);
           setTimeout(() => $("tpLiveBox")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
-          return;
         } else {
           target = buildPartnerTarget();
         }
@@ -1780,6 +1816,62 @@
     return expediaAffiliate(url.toString());
   }
 
+  const aiInterhomeDestinations = {
+    spania: "5460aeae487f8",
+    spain: "5460aeae487f8",
+    italia: "5460aeae078f7",
+    italy: "5460aeae078f7",
+    frankrike: "5460aeb1b0bf2",
+    france: "5460aeb1b0bf2",
+    norge: "5460aea85799e",
+    norway: "5460aea85799e",
+    kroatia: "5460aeaaa3139",
+    croatia: "5460aeaaa3139",
+    toscana: "5460aeb357636",
+    tuscany: "5460aeb357636",
+    "costa blanca": "5460aeae7180f",
+    alicante: "5460aeae7180f",
+    benidorm: "5460aeae7180f",
+    "costa del sol": "5460aec5cc8ff",
+    malaga: "5460aec5cc8ff",
+    marbella: "5460aec5cc8ff",
+    fuengirola: "5460aec5cc8ff"
+  };
+
+  function aiDestinationKey(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9 ]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function aiInterhomeDestination(text = "") {
+    const match = String(text).match(/(?:til|i|på)\s+(.+)$/i);
+    return placeName(match?.[1] || text).replace(/^(feriebolig|feriehus|villa|hytte|leilighet)\s+/i, "").trim();
+  }
+
+  function aiInterhomeUrl(text = "") {
+    const place = aiInterhomeDestination(text);
+    const key = aiDestinationKey(place);
+    const directMatch = Object.keys(aiInterhomeDestinations)
+      .sort((a, b) => b.length - a.length)
+      .find((item) => key === item || key.includes(item));
+    let target = "https://www.interhome.no/search/";
+    if (directMatch) {
+      target = `https://www.interhome.no/search/${aiInterhomeDestinations[directMatch]}`;
+    } else if (place) {
+      const searchUrl = new URL(target);
+      searchUrl.searchParams.set("q", place);
+      target = searchUrl.toString();
+    }
+    const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=");
+    url.searchParams.set("u", target);
+    return url.toString();
+  }
+
   function extractFlight(text) {
     const low = text.toLowerCase();
     const route = low.match(/(?:fra|from)\s+([a-zæøå\s]+?)\s+(?:til|to)\s+([a-zæøå\s]+)/i);
@@ -1879,9 +1971,10 @@
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
-  function openInterhome() {
-    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=";
-    addMessage("Jeg åpner <b>Interhome</b> for feriehus, villaer, hytter og ferieleiligheter.", "bot", {
+  function openInterhome(text = "") {
+    const url = aiInterhomeUrl(text);
+    const destination = aiInterhomeDestination(text);
+    addMessage(`Jeg åpner <b>Interhome</b>${destination ? ` med søk på <b>${destination}</b>` : ""} for feriehus, villaer, hytter og ferieleiligheter.`, "bot", {
       label: "Åpne Interhome",
       onClick: () => window.open(url, "_blank", "noopener,noreferrer")
     });
@@ -1907,7 +2000,7 @@
     const low = text.toLowerCase();
     if (low.includes("restplass") || low.includes("charter") || low.includes("sydentur") || low.includes("syden")) return openTuiRestplass();
     if (low.includes("forsink") || low.includes("kansell") || low.includes("erstatning")) return openFlightDelay();
-    if (low.includes("feriebolig") || low.includes("feriehus") || low.includes("villa") || low.includes("hytte") || low.includes("leilighet")) return openInterhome();
+    if (low.includes("feriebolig") || low.includes("feriehus") || low.includes("villa") || low.includes("hytte") || low.includes("leilighet")) return openInterhome(text);
     if (low.includes("pakkereise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel(text);
     if (low.includes("cruise")) return openCruise();
     if (/(fly|flight|fra|from).*(til|to)/.test(low) || low.includes("bangkok") || low.includes("mallorca")) return fillFlight(text);
