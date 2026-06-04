@@ -1420,6 +1420,34 @@
     if (url) window.open(url, "_blank", "noopener,noreferrer");
   }
 
+  function openCurrentSearchTarget() {
+    const state = readSearchState({ forUrl: true });
+    let target = "";
+    if (currentSearchType === "flight") {
+      if (!state.from || !state.to) return false;
+      target = buildFlightUrl(state);
+    } else if (currentSearchType === "hotel") {
+      if (!state.to) return false;
+      target = buildHotelUrl(state);
+    } else if (currentSearchType === "package") {
+      if (!state.from || !state.to) return false;
+      target = buildPackageUrl(state);
+    } else if (currentSearchType === "car") {
+      if (!state.from) return false;
+      target = buildCarUrl(state);
+    } else if (currentSearchType === "restplass") {
+      target = buildTuiRestplassUrl(state);
+    } else if (currentSearchType === "interhome") {
+      if (!state.to) return false;
+      target = buildInterhomeUrl(state);
+    } else if (currentSearchType === "cruise") {
+      target = buildCruiseUrl(state);
+    }
+    if (!target) return false;
+    window.open(target, "_blank", "noopener,noreferrer");
+    return true;
+  }
+
   function runSmartSearch() {
     const input = $("smartSearchQuery");
     const query = clean(input?.value).toLowerCase();
@@ -1432,7 +1460,8 @@
       const destination = query.match(/(?:til|i)\s+(.+)/)?.[1];
       if (destination && $("toCity")) $("toCity").value = destination.trim();
       updateSearchPreview();
-      return openDateRangePicker();
+      if (!openCurrentSearchTarget()) openDateRangePicker();
+      return;
     }
     if (/pakkereise|fly\s*(\+|og)\s*hotell/.test(query)) {
       setSearchType("package");
@@ -1441,7 +1470,8 @@
         if ($("fromCity")) $("fromCity").value = route[1].replace(/pakkereise|fly\s*(\+|og)\s*hotell/g, "").trim() || "Oslo";
         if ($("toCity")) $("toCity").value = route[2].trim();
         updateSearchPreview();
-        return openDateRangePicker();
+        if (!openCurrentSearchTarget()) openDateRangePicker();
+        return;
       }
       return $("fromCity")?.focus();
     }
@@ -1462,7 +1492,7 @@
       setSearchType("hotel");
       if ($("toCity")) $("toCity").value = hotel[1].trim();
       updateSearchPreview();
-      $("toCity")?.focus();
+      if (!openCurrentSearchTarget()) $("toCity")?.focus();
       return;
     }
 
@@ -1471,7 +1501,7 @@
       setSearchType("car");
       if ($("fromCity")) $("fromCity").value = car[1].trim();
       updateSearchPreview();
-      $("fromCity")?.focus();
+      if (!openCurrentSearchTarget()) $("fromCity")?.focus();
       return;
     }
 
@@ -1481,7 +1511,7 @@
       if ($("fromCity")) $("fromCity").value = route[1].trim();
       if ($("toCity")) $("toCity").value = route[2].trim();
       updateSearchPreview();
-      openDateRangePicker();
+      if (!openCurrentSearchTarget()) openDateRangePicker();
       return;
     }
     if ($("toCity")) $("toCity").value = query;
@@ -1640,7 +1670,7 @@
   }
 
   function setTab(type) {
-    const btn = document.querySelector(`[data-search-type="${type}"]`);
+    const btn = document.querySelector(`[data-search-type="${type}"], [data-smart-service="${type}"]`);
     if (btn) btn.click();
   }
 
@@ -1678,6 +1708,10 @@
     return foundCode ? foundCode[1].toUpperCase() : raw;
   }
 
+  function placeName(value) {
+    return String(value || "").replace(/\s*\([A-Za-z]{3}\)\s*$/, "").trim();
+  }
+
   function aiFlightUrl(data) {
     const depart = $("departDate")?.value || addDaysISO(14);
     const ret = $("returnDate")?.value || addDaysISO(21);
@@ -1701,6 +1735,31 @@
   function expediaAffiliate(targetUrl) {
     const base = (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706";
     return `${base}${base.includes("?") ? "&" : "?"}url=${encodeURIComponent(targetUrl)}`;
+  }
+
+  function cjAffiliate(baseUrl, targetUrl) {
+    return `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}url=${encodeURIComponent(targetUrl)}`;
+  }
+
+  function aiHotelUrl(place = "Roma") {
+    const depart = $("departDate")?.value || addDaysISO(14);
+    const ret = $("returnDate")?.value || addDaysISO(21);
+    const url = new URL("https://no.hotels.com/Hotel-Search");
+    url.searchParams.set("destination", placeName(place) || "Roma");
+    url.searchParams.set("startDate", depart);
+    url.searchParams.set("endDate", ret);
+    url.searchParams.set("rooms", "1");
+    url.searchParams.set("adults", $("adults")?.value || "2");
+    url.searchParams.set("locale", "no_NO");
+    url.searchParams.set("currency", "NOK");
+    url.searchParams.set("pos", "HCOM_NO");
+    url.searchParams.set("siteid", "300000012");
+    const base = (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426";
+    return cjAffiliate(base, url.toString());
+  }
+
+  function aiCarUrl() {
+    return (window.BR_AFFILIATES && (window.BR_AFFILIATES.economyBookings || window.BR_AFFILIATES.enjoyTravel || window.BR_AFFILIATES.car)) || "https://economybookings.tpx.gr/LT8vc2kD";
   }
 
   function aiPackageUrl(data) {
@@ -1760,7 +1819,7 @@
   }
 
   function fillHotel(text) {
-    const place = extractPlaceAfter(text, ["hotell", "hotel", "bo"]);
+    const place = placeName(extractPlaceAfter(text, ["hotell", "hotel", "bo"]));
     setTab("hotel");
     setValue("fromCity", "");
     setValue("toCity", place || "Roma");
@@ -1768,7 +1827,7 @@
     setValue("children", "0");
     addMessage(`Jeg har fylt ut hotellsøk for <b>${place || "Roma"}</b>. Velg innsjekk og utsjekk, eller åpne Hotels.com med standarddato.`, "bot", {
       label: "Åpne Hotels.com",
-      onClick: () => $("searchSubmitButton")?.click()
+      onClick: () => window.open(aiHotelUrl(place || "Roma"), "_blank", "noopener,noreferrer")
     });
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
@@ -1778,9 +1837,9 @@
     setTab("car");
     setValue("fromCity", place || "Alicante (ALC)");
     setValue("toCity", "");
-    addMessage(`Jeg har fylt ut leiebilsøk for <b>${place || "Alicante"}</b>. Velg hentedato og leveringsdato før du søker.`, "bot", {
-      label: "Søk leiebil nå",
-      onClick: () => $("searchSubmitButton")?.click()
+    addMessage(`Jeg har fylt ut leiebilsøk for <b>${place || "Alicante"}</b>. Velg dato hvis du vil, eller åpne leiebilpartneren direkte.`, "bot", {
+      label: "Åpne leiebil",
+      onClick: () => window.open(aiCarUrl(), "_blank", "noopener,noreferrer")
     });
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }

@@ -55,7 +55,7 @@
 </div>
 </section>
 <section class="hero">
-<video aria-hidden="true" autoplay="" class="front-hero-video" loop="" muted="" playsinline="" poster="assets/reisemagasin-home-banner.webp" preload="metadata"><source src="https://videos.pexels.com/video-files/17098010/17098010-uhd_2560_1440_30fps.mp4" type="video/mp4"/><source src="assets/video/forside-bakgrunn.mp4" type="video/mp4"/></video>
+<video aria-hidden="true" autoplay="" class="front-hero-video" loop="" muted="" playsinline="" poster="assets/reisemagasin-home-banner.webp" preload="metadata"><source src="assets/video/forside-ny-reisevideo.mp4" type="video/mp4"/></video>
 <div aria-hidden="true" class="front-hero-shade"></div>
 <div class="hero-copy">
 <h1>Oppdag mer. <span>Reis smartere.</span></h1>
@@ -176,56 +176,22 @@
 </div>
 </div>
 </section>
-<section aria-label="Hotellinspirasjon" class="front-hotel-inspiration">
-<div class="front-hotel-head">
-<div>
-<span class="front-hotel-kicker">HÅNDPLUKKET INSPIRASJON</span>
-<h2>Finn et hotell som passer reisen</h2>
-<p>Utforsk populære reisemål og åpne et ferdig hotellsøk. Pris og tilgjengelighet sjekkes hos vår hotellpartner.</p>
+<section aria-label="Reisevelgeren" class="trip-finder-zone">
+<div class="trip-finder-panel">
+<div class="trip-finder-copy">
+<span class="trip-kicker">NYTT PÅ FORSIDEN</span>
+<h2>Hva slags reise vil du ha?</h2>
+<p>Velg stemning først. Vi sender deg rett til riktig søk, partner eller reiseverktøy uten at du må bla gjennom guider.</p>
+<div class="trip-mini-stats"><span>Sol</span><span>Storby</span><span>Familie</span><span>Opplevelser</span></div>
 </div>
-<button data-open-search="hotel" type="button">SØK ALLE HOTELLER <b>↗</b></button>
+<div class="trip-finder-grid">
+<button class="trip-choice hot" data-smart-service="restplass" type="button"><small>Billigst mulig</small><strong>Finn sol og restplass</strong><span>TUI charter og siste-liten tilbud</span></button>
+<button class="trip-choice package" data-smart-service="package" type="button"><small>Alt samlet</small><strong>Fly + hotell</strong><span>Åpne pakkereise-søket</span></button>
+<button class="trip-choice city" data-open-search="flight" type="button"><small>Weekend</small><strong>Storby på 3 dager</strong><span>Start med flysøk</span></button>
+<button class="trip-choice car" data-smart-service="car" type="button"><small>Frihet</small><strong>Roadtrip og leiebil</strong><span>Finn bil før reisen</span></button>
+<a class="trip-choice experience" href="https://www.getyourguide.com/" rel="nofollow noopener" target="_blank"><small>Når du er der</small><strong>Opplevelser og turer</strong><span>GetYourGuide, Klook og billetter</span></a>
+<button class="trip-choice hotel" data-open-search="hotel" type="button"><small>Bo bedre</small><strong>Finn riktig hotellområde</strong><span>Åpne hotellsøk</span></button>
 </div>
-<div class="front-hotel-grid">
-<article class="front-hotel-card">
-<img alt="Bangkok med utsikt over byen" decoding="async" loading="lazy" src="assets/bangkok/cards/the-standard-bangkok-mahanakhon-v22.jpg"/>
-<div>
-<span>STORBYFAVORITT</span>
-<h3>Bangkok</h3>
-<p>Rooftop-barer, shopping og hotell med mye kvalitet for pengene.</p>
-<button data-hotel-pick="Bangkok" type="button">SØK HOTELL I BANGKOK <b>→</b></button>
-</div>
-</article>
-<article class="front-hotel-card">
-<img alt="Resort ved stranden i Phuket" decoding="async" loading="lazy" src="assets/phuket/cards/trisara-phuket-v22.jpg"/>
-<div>
-<span>STRAND OG RESORT</span>
-<h3>Phuket</h3>
-<p>Fra avslappede strandhotell til resorter med basseng og havutsikt.</p>
-<button data-hotel-pick="Phuket" type="button">SØK HOTELL I PHUKET <b>→</b></button>
-</div>
-</article>
-<article class="front-hotel-card">
-<img alt="Hotell og tropisk natur i Krabi" decoding="async" loading="lazy" src="assets/krabi/hotels/rayavadee-krabi.jpg"/>
-<div>
-<span>TROPISK RO</span>
-<h3>Krabi</h3>
-<p>Kalksteinsklipper, rolige strender og stemningsfulle hotellområder.</p>
-<button data-hotel-pick="Krabi" type="button">SØK HOTELL I KRABI <b>→</b></button>
-</div>
-</article>
-<article class="front-hotel-card">
-<img alt="Palmer og strand på Koh Samui" decoding="async" loading="lazy" src="assets/destinations/koh-samui-v22.jpg"/>
-<div>
-<span>ØYLIV</span>
-<h3>Koh Samui</h3>
-<p>Velg mellom små boutiquehotell, familievennlige strender og luksus.</p>
-<button data-hotel-pick="Koh Samui" type="button">SØK HOTELL PÅ KOH SAMUI <b>→</b></button>
-</div>
-</article>
-</div>
-<div class="front-hotel-bottom">
-<span>Redaksjonelle tips fra Billig-Reiser.no</span>
-<a href="reise-thailand.html">Utforsk Thailand-guidene <b>→</b></a>
 </div>
 </section>
 <section aria-label="Reisemagasinet" class="magazine-front-banner" id="reisemagasin-home">
@@ -233,34 +199,53 @@
 <img alt="Åpne Reisemagasinet" decoding="async" height="914" loading="lazy" src="assets/reisemagasin-home-banner.webp" width="1600"/>
 </a>
 </section>
-<section aria-label="Våre samarbeidspartnere" class="suppliers live-partners">
-<div class="section-head">
-<h2>Alle samarbeidspartnere</h2>
-<span class="live-partners-status">● AKTIVE PARTNERE</span>
+<section aria-label="Våre samarbeidspartnere" class="suppliers live-partners partner-hub">
+<div class="partner-hub-head">
+<span class="partner-eyebrow">PARTNERE VI BRUKER I SØKET</span>
+<h2>Alt du trenger før reisen</h2>
+<p>Finn fly, hotell, pakkereiser, leiebil, opplevelser, transfer og praktiske reisetjenester fra ett sted.</p>
 </div>
-<div class="partner-directory">
-<a href="https://www.kqzyfj.com/click-101724638-13852706" rel="nofollow noopener sponsored" target="_blank">Expedia</a>
-<a href="https://www.hotels.com/affiliates/hotelscom-home.wkiMutN" rel="nofollow noopener sponsored" target="_blank">Hotels.com Norway</a>
-<a href="https://www.dpbolvw.net/click-101724638-17085753" rel="nofollow noopener sponsored" target="_blank">CheapTickets</a>
-<a href="https://www.kqzyfj.com/click-101724638-15735979" rel="nofollow noopener sponsored" target="_blank">Iberia</a>
-<a href="https://www.tkqlhce.com/click-101724638-13829856" rel="nofollow noopener sponsored" target="_blank">Cheapflights</a>
-<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Freise%2Fpakkereiser%2F" rel="nofollow noopener sponsored" target="_blank">TUI</a>
-<a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">Interhome</a>
-<a href="https://economybookings.tpx.gr/LT8vc2kD" rel="nofollow noopener sponsored" target="_blank">EconomyBookings</a>
-<a href="https://autoeurope.tpx.gr/GzEPjKLD" rel="nofollow noopener sponsored" target="_blank">AutoEurope</a>
-<a href="https://www.jdoqocy.com/click-101724638-17010909" rel="nofollow noopener sponsored" target="_blank">EnjoyTravel</a>
-<a href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank">Klook</a>
-<a href="https://kkday.tpx.gr/WlhfXaEZ" rel="nofollow noopener sponsored" target="_blank">KKday</a>
-<a href="https://kiwitaxi.tpx.gr/YjkKJSHa" rel="nofollow noopener sponsored" target="_blank">KiwiTaxi</a>
-<a href="https://gettransfer.tpx.gr/1szV5hHx" rel="nofollow noopener sponsored" target="_blank">GetTransfer</a>
-<a href="https://saily.tpx.gr/svbOORah" rel="nofollow noopener sponsored" target="_blank">Saily</a>
-<a href="https://radicalstorage.tpx.gr/9aBeOTqW" rel="nofollow noopener sponsored" target="_blank">Radical Storage</a>
-<a href="https://tiqets.tpx.gr/nL28pCCf" rel="nofollow noopener sponsored" target="_blank">Tiqets</a>
-<a href="https://gocity.tpx.gr/QHScpmus" rel="nofollow noopener sponsored" target="_blank">Go City</a>
-<a href="https://deals.flyforsinkelser.no/c?c=40284&amp;m=2508483&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">Flyforsinkelser.no</a>
-<a href="https://airhelp.tpx.gr/ZW3oHL4Z" rel="nofollow noopener sponsored" target="_blank">AirHelp</a>
+<div class="partner-hub-grid">
+<article class="partner-group is-primary">
+<div><span class="partner-icon">✦</span><small>Bestill reisen</small><h3>Fly, hotell og pakkereiser</h3></div>
+<div class="partner-pills">
+<a href="https://www.kqzyfj.com/click-101724638-13852706" rel="nofollow noopener sponsored" target="_blank"><b>Expedia</b><em>Fly + hotell</em></a>
+<a href="https://www.hotels.com/affiliates/hotelscom-home.wkiMutN" rel="nofollow noopener sponsored" target="_blank"><b>Hotels.com</b><em>Hotell</em></a>
+<a href="https://www.tkqlhce.com/click-101724638-13829856" rel="nofollow noopener sponsored" target="_blank"><b>Cheapflights</b><em>Fly</em></a>
+<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Freise%2Fpakkereiser%2F" rel="nofollow noopener sponsored" target="_blank"><b>TUI</b><em>Charter</em></a>
 </div>
-<p class="partner-live-note">Alle aktive partnerlenker samlet på ett sted.</p>
+</article>
+<article class="partner-group">
+<div><span class="partner-icon">⌁</span><small>På stedet</small><h3>Opplevelser og billetter</h3></div>
+<div class="partner-pills">
+<a href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank"><b>Klook</b><em>Turer</em></a>
+<a href="https://kkday.tpx.gr/WlhfXaEZ" rel="nofollow noopener sponsored" target="_blank"><b>KKday</b><em>Aktiviteter</em></a>
+<a href="https://www.getyourguide.com/" rel="nofollow noopener" target="_blank"><b>GetYourGuide</b><em>Guidede turer</em></a>
+<a href="https://tiqets.tpx.gr/nL28pCCf" rel="nofollow noopener sponsored" target="_blank"><b>Tiqets</b><em>Attraksjoner</em></a>
+<a href="https://gocity.tpx.gr/QHScpmus" rel="nofollow noopener sponsored" target="_blank"><b>Go City</b><em>Bypass</em></a>
+</div>
+</article>
+<article class="partner-group">
+<div><span class="partner-icon">↗</span><small>Transport</small><h3>Leiebil, transfer og feriebolig</h3></div>
+<div class="partner-pills">
+<a href="https://economybookings.tpx.gr/LT8vc2kD" rel="nofollow noopener sponsored" target="_blank"><b>EconomyBookings</b><em>Leiebil</em></a>
+<a href="https://autoeurope.tpx.gr/GzEPjKLD" rel="nofollow noopener sponsored" target="_blank"><b>AutoEurope</b><em>Leiebil</em></a>
+<a href="https://kiwitaxi.tpx.gr/YjkKJSHa" rel="nofollow noopener sponsored" target="_blank"><b>KiwiTaxi</b><em>Transfer</em></a>
+<a href="https://gettransfer.tpx.gr/1szV5hHx" rel="nofollow noopener sponsored" target="_blank"><b>GetTransfer</b><em>Privat transport</em></a>
+<a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank"><b>Interhome</b><em>Feriebolig</em></a>
+</div>
+</article>
+<article class="partner-group">
+<div><span class="partner-icon">◎</span><small>Praktisk hjelp</small><h3>Data, bagasje og flytrøbbel</h3></div>
+<div class="partner-pills">
+<a href="https://saily.tpx.gr/svbOORah" rel="nofollow noopener sponsored" target="_blank"><b>Saily</b><em>eSIM</em></a>
+<a href="https://radicalstorage.tpx.gr/9aBeOTqW" rel="nofollow noopener sponsored" target="_blank"><b>Radical Storage</b><em>Bagasje</em></a>
+<a href="https://deals.flyforsinkelser.no/c?c=40284&amp;m=2508483&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank"><b>Flyforsinkelser</b><em>Erstatning</em></a>
+<a href="https://airhelp.tpx.gr/ZW3oHL4Z" rel="nofollow noopener sponsored" target="_blank"><b>AirHelp</b><em>Flykrav</em></a>
+</div>
+</article>
+</div>
+<p class="partner-live-note">Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg. GetYourGuide er lagt inn uten affiliate-ID til avtalen er klar.</p>
 </section>
 </main>
 <footer class="footer">
