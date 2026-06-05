@@ -6,9 +6,9 @@
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
-    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/launch",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
-    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
+    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -278,7 +278,7 @@
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706",
-    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/launch",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -288,7 +288,7 @@
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
     carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
-    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
+    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
   };
@@ -581,11 +581,11 @@
 
     if (helper) {
       if (currentSearchType === "package") {
-        helper.textContent = state.to ? `Pakkereise: ${state.from || "velg avreisested"} → ${state.to} • ${state.depart || "velg dato"} til ${state.ret || "velg retur"} • ${state.adults} reisende.` : "Skriv avreisested og reisemål — så åpnes pakkereiser hos Expedia.";
+        helper.textContent = state.to ? `Pakkereise: ${state.from || "Oslo"} → ${state.to} • ${state.depart || "velg dato"} til ${state.ret || "velg retur"} • ${state.adults} reisende.` : "Skriv reisemål. Avreisested kan stå tomt, da bruker vi Oslo.";
       } else if (currentSearchType === "cruise") {
         helper.textContent = `Cruise: ${state.depart || "velg fra-dato"} til ${state.ret || "velg til-dato"} • ${state.adults} reisende. Prisene åpnes hos Expedia.com.`;
       } else if (currentSearchType === "interhome") {
-        helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område eller land — så åpnes riktig ferieboligsøk hos Interhome.";
+        helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område, by eller sted — så åpnes riktig ferieboligsøk hos Interhome.";
       } else if (currentSearchType === "restplass") {
         helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes Nazar direkte på charter og pakkereiser.";
       } else if (currentSearchType === "hotel") {
@@ -752,7 +752,8 @@
 
     const render = () => {
       const isCarPickup = currentSearchType === "car" && inputId === "fromCity";
-      if (currentSearchType !== "flight" && !isCarPickup) { close(); return; }
+      const isAirRoute = currentSearchType === "flight" || currentSearchType === "package";
+      if (!isAirRoute && !isCarPickup) { close(); return; }
       const q = normalizeSearch(input.value);
       if (q.length < 2) { close(); return; }
       const matches = AIRPORT_SUGGESTIONS
@@ -897,6 +898,7 @@
   function stripTravelWords(value) {
     return clean(value)
       .replace(/\b(fly\s*(\+|og)\s*hotell|pakkereise|pakke\s*reise|fly|flight|feriebolig|feriehus|villa|hytte|leilighet)\b/gi, " ")
+      .replace(/\b(finn|søk|sok|se|åpne|apne|med|for)\b/gi, " ")
       .replace(/\b\d+\s*(voksen|voksne|adult|adults|barn|child|children)\b/gi, " ")
       .replace(/\s+/g, " ")
       .trim();
@@ -920,6 +922,16 @@
   }
 
   const INTERHOME_PATHS = {
+    spania: "/spania/",
+    spain: "/spania/",
+    italia: "/italia/",
+    italy: "/italia/",
+    frankrike: "/frankrike/",
+    france: "/frankrike/",
+    norge: "/norge/",
+    norway: "/norge/",
+    kroatia: "/kroatia/",
+    croatia: "/kroatia/",
     barcelona: "/spania/barcelona-nordkysten/barcelona/",
     "costa brava": "/spania/costa-brava/",
     lloret: "/spania/costa-brava/lloret-de-mar/",
@@ -984,13 +996,13 @@
     const searchText = interhomeSearchText(state.to || state.from || "");
     const path = interhomeDestinationPath(searchText);
     const id = interhomeDestinationId(searchText);
-    let target = "https://www.interhome.no/sok/";
-    if (path) {
-      target = new URL(path, "https://www.interhome.no").toString();
-    } else if (id) {
+    let target = "https://www.interhome.no/search/5460aeae487f8";
+    if (id) {
       target = `https://www.interhome.no/search/${id}`;
+    } else if (path) {
+      target = new URL(path, "https://www.interhome.no").toString();
     } else if (searchText) {
-      const searchUrl = new URL(target);
+      const searchUrl = new URL("https://www.interhome.no/sok/");
       searchUrl.searchParams.set("destination", searchText);
       target = searchUrl.toString();
     }
@@ -1054,18 +1066,22 @@
   }
 
   function buildPackageUrl(state) {
-    const url = new URL("https://www.expedia.no/Fly-Hotell");
-    url.searchParams.set("origin", airportCode(state.from));
-    url.searchParams.set("destination", airportCode(state.to));
-    if (state.depart) url.searchParams.set("startDate", state.depart);
-    if (state.ret) url.searchParams.set("endDate", state.ret);
-    url.searchParams.set("rooms", "1");
-    url.searchParams.set("adults", state.adults);
-    if (Number(state.children)) url.searchParams.set("children", state.children);
-    url.searchParams.set("packageType", "fh");
-    url.searchParams.set("tripType", "ROUND_TRIP");
-    url.searchParams.set("locale", "nb_NO");
-    url.searchParams.set("currency", "NOK");
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret && state.ret > depart ? state.ret : fallbackReturnISO(depart);
+    const url = new URL(`/go/package/search/FlightHotel/${depart}/${ret}`, "https://www.expedia.no");
+    url.searchParams.set("FromAirport", airportCode(state.from || "Oslo"));
+    url.searchParams.set("Destination", airportCode(state.to));
+    url.searchParams.set("FromTime", "362");
+    url.searchParams.set("ToTime", "362");
+    url.searchParams.set("NumRoom", "1");
+    url.searchParams.set("NumAdult", state.adults);
+    const childCount = Math.max(0, Math.min(4, Number(state.children) || 0));
+    if (childCount) {
+      url.searchParams.set("NumChild", String(childCount));
+      for (let index = 1; index <= childCount; index += 1) {
+        url.searchParams.set(`Room1-Child${index}Age`, "8");
+      }
+    }
     return affiliateWrap(AFFILIATE_LINKS.expedia, url.toString());
   }
 
@@ -1352,7 +1368,7 @@
     const state = readSearchState({ forUrl: true });
 
     if (currentSearchType === "interhome") {
-      if (!state.to) throw new Error("Skriv inn hvor du vil finne feriebolig.");
+      if (!state.to && !state.from) throw new Error("Skriv inn hvor du vil finne feriebolig.");
       return buildInterhomeUrl(state);
     }
 
@@ -1361,7 +1377,7 @@
     }
 
     if (currentSearchType === "package") {
-      if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål for pakkereisen.");
+      if (!state.to) throw new Error("Skriv inn reisemålet for pakkereisen.");
       return buildPackageUrl(state);
     }
 
@@ -1444,13 +1460,13 @@
       if (to) to.placeholder = "Valgfritt, f.eks. Middelhavet";
     } else if (currentSearchType === "interhome") {
       if (dateRangeLabel) dateRangeLabel.textContent = "Opphold";
-      if (fromLabel) fromLabel.textContent = "Område / land";
+      if (fromLabel) fromLabel.textContent = "Valgfritt";
       if (toLabel) toLabel.textContent = "Hvor vil du leie feriebolig?";
       if (departLabel) departLabel.textContent = "Ankomst";
       if (returnLabel) returnLabel.textContent = "Avreise";
       if (adultsLabel) adultsLabel.textContent = "Gjester";
       if (from) from.placeholder = "Valgfritt";
-      if (to) to.placeholder = "Skriv land eller område, f.eks. Toscana";
+      if (to) to.placeholder = "Skriv område, by eller sted, f.eks. Toscana";
     } else if (currentSearchType === "restplass") {
       if (dateRangeLabel) dateRangeLabel.textContent = "Reiseperiode";
       if (fromLabel) fromLabel.textContent = "Fra";
@@ -1570,8 +1586,8 @@
   function smartServiceUrl(service) {
     const links = window.BR_AFFILIATES || {};
     return {
-      package: links.expedia ? affiliateWrap(links.expedia, "https://www.expedia.no/Fly-Hotell") : (links.packageTravel || "https://www.expedia.no/Fly-Hotell"),
-      interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
+      package: links.expedia ? affiliateWrap(links.expedia, "https://www.expedia.no/go/package/launch") : (links.packageTravel || "https://www.expedia.no/go/package/launch"),
+      interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
       cruise: links.cruise || "https://www.expedia.com/Cruises",
       nazar: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
       restplass: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
@@ -1587,7 +1603,15 @@
     if (["flight", "hotel", "package", "cruise", "interhome", "restplass"].includes(service)) {
       setSearchType(service);
       if (service === "cruise") openDateRangePicker();
-      else (["hotel", "interhome"].includes(service) ? $("toCity") : $("fromCity"))?.focus();
+      else if (service === "package") {
+        if ($("fromCity") && !$("fromCity").value) $("fromCity").value = "Oslo";
+        updateSearchPreview();
+        $("toCity")?.focus();
+      } else if (service === "interhome") {
+        if ($("fromCity")) $("fromCity").value = "";
+        updateSearchPreview();
+        $("toCity")?.focus();
+      } else (["hotel", "interhome"].includes(service) ? $("toCity") : $("fromCity"))?.focus();
       return;
     }
     const url = smartServiceUrl(service);
@@ -1604,7 +1628,7 @@
       if (!state.to) return false;
       target = buildHotelUrl(state);
     } else if (currentSearchType === "package") {
-      if (!state.from || !state.to) return false;
+      if (!state.to) return false;
       target = buildPackageUrl(state);
     } else if (currentSearchType === "car") {
       if (!state.from) return false;
@@ -1612,7 +1636,7 @@
     } else if (currentSearchType === "restplass") {
       target = buildNazarCharterUrl(state);
     } else if (currentSearchType === "interhome") {
-      if (!state.to) return false;
+      if (!state.to && !state.from) return false;
       target = buildInterhomeUrl(state);
     } else if (currentSearchType === "cruise") {
       target = buildCruiseUrl(state);
@@ -1648,7 +1672,7 @@
         return;
       }
       updateSearchPreview();
-      const url = smartServiceUrl("package") || AFFILIATE_LINKS.packageTravel || AFFILIATE_LINKS.expedia || "https://www.expedia.no/Fly-Hotell";
+      const url = smartServiceUrl("package") || AFFILIATE_LINKS.packageTravel || AFFILIATE_LINKS.expedia || "https://www.expedia.no/go/package/launch";
       window.open(url, "_blank", "noopener,noreferrer");
       return;
     }
@@ -1893,6 +1917,7 @@
   function stripAiTravelWords(value) {
     return String(value || "")
       .replace(/\b(fly\s*(\+|og)\s*hotell|pakkereise|pakke\s*reise|fly|flight|hotell|hotel|feriebolig|feriehus|villa|hytte|leilighet|leiebil|rental|car|bil)\b/gi, " ")
+      .replace(/\b(finn|søk|sok|se|åpne|apne|med|for)\b/gi, " ")
       .replace(/\b\d+\s*(voksen|voksne|adult|adults|barn|child|children)\b/gi, " ")
       .replace(/[,.!?]+/g, " ")
       .replace(/\s+/g, " ")
@@ -1979,18 +2004,21 @@
     const from = data.from || $("fromCity")?.value || "Oslo (OSL)";
     const to = data.to || $("toCity")?.value || "";
     if (!to) return "";
-    const url = new URL("https://www.expedia.no/Fly-Hotell");
-    url.searchParams.set("origin", airportCode(from));
-    url.searchParams.set("destination", airportCode(to));
-    if (depart) url.searchParams.set("startDate", depart);
-    if (ret) url.searchParams.set("endDate", ret);
-    url.searchParams.set("rooms", "1");
-    url.searchParams.set("adults", data.adults || "2");
-    if (Number(data.children)) url.searchParams.set("children", data.children);
-    url.searchParams.set("packageType", "fh");
-    url.searchParams.set("tripType", "ROUND_TRIP");
-    url.searchParams.set("locale", "nb_NO");
-    url.searchParams.set("currency", "NOK");
+    const end = ret && ret > depart ? ret : addDaysISO(21);
+    const url = new URL(`/go/package/search/FlightHotel/${depart}/${end}`, "https://www.expedia.no");
+    url.searchParams.set("FromAirport", airportCode(from || "Oslo"));
+    url.searchParams.set("Destination", airportCode(to));
+    url.searchParams.set("FromTime", "362");
+    url.searchParams.set("ToTime", "362");
+    url.searchParams.set("NumRoom", "1");
+    url.searchParams.set("NumAdult", data.adults || "2");
+    const childCount = Math.max(0, Math.min(4, Number(data.children) || 0));
+    if (childCount) {
+      url.searchParams.set("NumChild", String(childCount));
+      for (let index = 1; index <= childCount; index += 1) {
+        url.searchParams.set(`Room1-Child${index}Age`, "8");
+      }
+    }
     return expediaAffiliate(url.toString());
   }
 
@@ -2017,6 +2045,16 @@
   };
 
   const aiInterhomePaths = {
+    spania: "/spania/",
+    spain: "/spania/",
+    italia: "/italia/",
+    italy: "/italia/",
+    frankrike: "/frankrike/",
+    france: "/frankrike/",
+    norge: "/norge/",
+    norway: "/norge/",
+    kroatia: "/kroatia/",
+    croatia: "/kroatia/",
     barcelona: "/spania/barcelona-nordkysten/barcelona/",
     "costa brava": "/spania/costa-brava/",
     lloret: "/spania/costa-brava/lloret-de-mar/",
@@ -2084,17 +2122,17 @@
     const directMatch = Object.keys(aiInterhomeDestinations)
       .sort((a, b) => b.length - a.length)
       .find((item) => key === item || key.includes(item));
-    let target = "https://www.interhome.no/sok/";
-    if (pathMatch) {
-      target = new URL(aiInterhomePaths[pathMatch], "https://www.interhome.no").toString();
-    } else if (directMatch) {
+    let target = "https://www.interhome.no/search/5460aeae487f8";
+    if (directMatch) {
       target = `https://www.interhome.no/search/${aiInterhomeDestinations[directMatch]}`;
+    } else if (pathMatch) {
+      target = new URL(aiInterhomePaths[pathMatch], "https://www.interhome.no").toString();
     } else if (place) {
-      const searchUrl = new URL(target);
+      const searchUrl = new URL("https://www.interhome.no/sok/");
       searchUrl.searchParams.set("destination", place);
       target = searchUrl.toString();
     }
-    const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=");
+    const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8");
     url.searchParams.set("u", target);
     return url.toString();
   }
@@ -2196,7 +2234,7 @@
       addMessage("Jeg har valgt pakkereise og satt avreise til <b>Oslo</b>. Du kan åpne Expedia Fly + Hotell direkte, eller skrive reisemålet hvis du vil fylle søket mer presist.", "bot", {
         label: "Åpne Expedia Fly + Hotell",
         onClick: () => {
-          const url = expediaAffiliate("https://www.expedia.no/Fly-Hotell");
+          const url = expediaAffiliate("https://www.expedia.no/go/package/launch");
           window.open(url, "_blank", "noopener,noreferrer");
         }
       });
