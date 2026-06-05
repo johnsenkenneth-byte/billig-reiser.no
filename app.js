@@ -6,7 +6,7 @@
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
-    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/launch",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
@@ -278,7 +278,7 @@
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706",
-    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/launch",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -1068,7 +1068,7 @@
   function buildPackageUrl(state) {
     const depart = state.depart || fallbackDepartISO();
     const ret = state.ret && state.ret > depart ? state.ret : fallbackReturnISO(depart);
-    const url = new URL(`/go/package/search/FlightHotel/${depart}/${ret}`, "https://www.expedia.no");
+    const url = new URL(`/go/package/search/FlightHotel/${depart}/${ret}`, "https://www.expedia.com");
     url.searchParams.set("FromAirport", airportCode(state.from || "Oslo"));
     url.searchParams.set("Destination", airportCode(state.to));
     url.searchParams.set("FromTime", "362");
@@ -1082,7 +1082,7 @@
         url.searchParams.set(`Room1-Child${index}Age`, "8");
       }
     }
-    return affiliateWrap(AFFILIATE_LINKS.expedia, url.toString());
+    return url.toString();
   }
 
   function buildCruiseUrl(state) {
@@ -1586,7 +1586,7 @@
   function smartServiceUrl(service) {
     const links = window.BR_AFFILIATES || {};
     return {
-      package: links.expedia ? affiliateWrap(links.expedia, "https://www.expedia.no/go/package/launch") : (links.packageTravel || "https://www.expedia.no/go/package/launch"),
+      package: "https://www.expedia.no/Fly-Hotell",
       interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
       cruise: links.cruise || "https://www.expedia.com/Cruises",
       nazar: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
@@ -1672,7 +1672,7 @@
         return;
       }
       updateSearchPreview();
-      const url = smartServiceUrl("package") || AFFILIATE_LINKS.packageTravel || AFFILIATE_LINKS.expedia || "https://www.expedia.no/go/package/launch";
+      const url = smartServiceUrl("package") || "https://www.expedia.no/Fly-Hotell";
       window.open(url, "_blank", "noopener,noreferrer");
       return;
     }
@@ -2005,7 +2005,7 @@
     const to = data.to || $("toCity")?.value || "";
     if (!to) return "";
     const end = ret && ret > depart ? ret : addDaysISO(21);
-    const url = new URL(`/go/package/search/FlightHotel/${depart}/${end}`, "https://www.expedia.no");
+    const url = new URL(`/go/package/search/FlightHotel/${depart}/${end}`, "https://www.expedia.com");
     url.searchParams.set("FromAirport", airportCode(from || "Oslo"));
     url.searchParams.set("Destination", airportCode(to));
     url.searchParams.set("FromTime", "362");
@@ -2019,7 +2019,7 @@
         url.searchParams.set(`Room1-Child${index}Age`, "8");
       }
     }
-    return expediaAffiliate(url.toString());
+    return url.toString();
   }
 
   const aiInterhomeDestinations = {
@@ -2234,7 +2234,7 @@
       addMessage("Jeg har valgt pakkereise og satt avreise til <b>Oslo</b>. Du kan åpne Expedia Fly + Hotell direkte, eller skrive reisemålet hvis du vil fylle søket mer presist.", "bot", {
         label: "Åpne Expedia Fly + Hotell",
         onClick: () => {
-          const url = expediaAffiliate("https://www.expedia.no/go/package/launch");
+          const url = "https://www.expedia.no/Fly-Hotell";
           window.open(url, "_blank", "noopener,noreferrer");
         }
       });
