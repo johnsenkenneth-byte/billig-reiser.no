@@ -10,9 +10,11 @@
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
+    nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
     cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
-    iberia: "https://www.kqzyfj.com/click-101724638-15735979",
+    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.kqzyfj.com/click-101724638-15735979",
+    malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
@@ -91,6 +93,7 @@
       ["Cruise", "Cruiseferie", "Sammenlign reiseruter, rederier og varighet hos Expedia.", "Se cruise", partners.cruise],
       ["Feriebolig", "Feriehus og leiligheter", "Finn hytter, villaer og ferieleiligheter hos Interhome.", "Se ferieboliger", partners.interhome],
       ["Restplass", "Charter og restplasser", "Finn oppdaterte restplasser og sydenturer hos TUI Norge.", "Se restplasser", partners.tuiRestplass],
+      ["Pakkereise", "Nazar reiser", "Charter og pakkereiser hos Nazar Norge.", "Se Nazar", partners.nazar],
       ["Reisehack", "eSIM på reisen", "Mobildata uten å bytte fysisk SIM-kort.", "Sjekk datapakker", partners.saily],
       ["Storby", "Oppbevar bagasjen", "Praktisk før innsjekk eller etter utsjekk.", "Finn oppbevaring", partners.radicalStorage],
       ["Flytrøbbel", "Forsinket eller kansellert fly?", "Sjekk om du har krav på erstatning hos Flyforsinkelser.no.", "Sjekk krav", partners.flightDelay]
@@ -279,13 +282,15 @@
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
-    iberia: "https://www.kqzyfj.com/click-101724638-15735979",
+    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.kqzyfj.com/click-101724638-15735979",
+    malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
     carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
-    tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F"
+    tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
+    nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
   };
 
   let currentSearchType = "flight";
@@ -1100,6 +1105,13 @@
     return AIRLINE_NAMES[clean] || clean || "Flyselskap";
   }
 
+  function airlinePartnerLink(code) {
+    const clean = String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 2);
+    if (clean === "IB" && AFFILIATE_LINKS.iberia) return ["Iberia", AFFILIATE_LINKS.iberia];
+    if (clean === "MH" && AFFILIATE_LINKS.malaysiaAirlines) return ["Malaysia Airlines", AFFILIATE_LINKS.malaysiaAirlines];
+    return null;
+  }
+
   const LIVE_DEAL_ROUTES = [
     { from: "OSL", fromCity: "Oslo", to: "BKK", toCity: "Bangkok", days: 38, nights: 10 },
     { from: "OSL", fromCity: "Oslo", to: "MAD", toCity: "Madrid", days: 20, nights: 5, airlineCodes: "IB", airlineLabel: "Iberia" },
@@ -1218,7 +1230,12 @@
 
   function renderAmadeusOffers(offers, state, from, to) {
     const kiwiUrl = buildFlightDirectUrl({ ...state, from, to });
+    const airlineLinks = offers
+      .map((offer) => airlinePartnerLink(offer.airline))
+      .filter(Boolean)
+      .filter((item, index, list) => list.findIndex((other) => other[0] === item[0]) === index);
     const partnerLinks = [
+      ...airlineLinks,
       ["Kiwi", kiwiUrl],
       ["Expedia", AFFILIATE_LINKS.expedia],
       ["CheapTickets", AFFILIATE_LINKS.cheapTickets],
@@ -1535,6 +1552,7 @@
       package: links.packageTravel || links.expedia || "https://www.expedia.no/Fly-Hotell",
       interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
       cruise: links.cruise || "https://www.expedia.com/Cruises",
+      nazar: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
       restplass: links.tuiRestplass || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F"
     }[service];
   }
