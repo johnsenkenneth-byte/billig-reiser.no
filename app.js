@@ -1080,8 +1080,30 @@
     }
   }
 
+  const AIRLINE_NAMES = {
+    IB: "Iberia",
+    MH: "Malaysia Airlines",
+    QR: "Qatar Airways",
+    EK: "Emirates",
+    TK: "Turkish Airlines",
+    KL: "KLM",
+    AF: "Air France",
+    LH: "Lufthansa",
+    SK: "SAS",
+    DY: "Norwegian",
+    AY: "Finnair",
+    TG: "Thai Airways"
+  };
+
+  function airlineName(code) {
+    const clean = String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 2);
+    return AIRLINE_NAMES[clean] || clean || "Flyselskap";
+  }
+
   const LIVE_DEAL_ROUTES = [
     { from: "OSL", fromCity: "Oslo", to: "BKK", toCity: "Bangkok", days: 38, nights: 10 },
+    { from: "OSL", fromCity: "Oslo", to: "MAD", toCity: "Madrid", days: 20, nights: 5, airlineCodes: "IB", airlineLabel: "Iberia" },
+    { from: "OSL", fromCity: "Oslo", to: "KUL", toCity: "Kuala Lumpur", days: 42, nights: 12, airlineCodes: "MH", airlineLabel: "Malaysia Airlines" },
     { from: "OSL", fromCity: "Oslo", to: "ALC", toCity: "Alicante", days: 20, nights: 7 },
     { from: "BGO", fromCity: "Bergen", to: "AGP", toCity: "Malaga", days: 24, nights: 7 },
     { from: "TRD", fromCity: "Trondheim", to: "FCO", toCity: "Roma", days: 18, nights: 4 }
@@ -1111,7 +1133,7 @@
   function renderLiveDealCard(result) {
     const { route, dates, offer } = result;
     const price = offer ? formatNOK(offer.price) : "Sjekk livepris";
-    const airline = offer ? String(offer.airline || "Flyselskap").replace(/[^A-Za-z0-9 -]/g, "") : "Amadeus";
+    const airline = offer ? airlineName(offer.airline) : (route.airlineLabel || "Amadeus");
     return `
       <article class="live-deal-card${offer ? "" : " no-price"}">
         <span class="live-deal-route">${route.from} → ${route.to}</span>
@@ -1131,6 +1153,7 @@
       url.searchParams.set("depart_date", dates.depart);
       url.searchParams.set("return_date", dates.ret);
       url.searchParams.set("adults", "2");
+      if (route.airlineCodes) url.searchParams.set("airline_codes", route.airlineCodes);
       const response = await fetch(url.toString());
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data?.success) throw new Error("Livepris utilgjengelig");
@@ -1205,7 +1228,7 @@
       const departure = offer.departure_at
         ? new Date(offer.departure_at).toLocaleString("nb-NO", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })
         : state.depart;
-      const airline = String(offer.airline || "Flyselskap").replace(/[^A-Za-z0-9 -]/g, "");
+      const airline = airlineName(offer.airline);
       const seats = Number(offer.bookable_seats) > 0 ? `${Number(offer.bookable_seats)} seter igjen` : "Sjekk tilgjengelighet";
       return `
         <article class="amadeus-offer${index === 0 ? " best" : ""}">
