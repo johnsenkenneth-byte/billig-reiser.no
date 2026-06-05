@@ -1068,13 +1068,33 @@
   function buildPackageUrl(state) {
     const depart = state.depart || fallbackDepartISO();
     const ret = state.ret && state.ret > depart ? state.ret : fallbackReturnISO(depart);
-    const url = new URL(`/go/package/search/FlightHotel/${depart}/${ret}`, "https://www.expedia.com");
+    const url = new URL("pakke-reiser.html", window.location.href);
+    url.searchParams.set("from", state.from || "Oslo");
+    url.searchParams.set("to", state.to);
+    url.searchParams.set("depart", depart);
+    url.searchParams.set("return", ret);
+    url.searchParams.set("adults", state.adults);
+    if (Number(state.children)) url.searchParams.set("children", state.children);
+    return url.toString();
+  }
+
+  function buildExpediaPackageSearchUrl(state) {
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret && state.ret > depart ? state.ret : fallbackReturnISO(depart);
+    const departDate = parseISODate(depart) || parseISODate(fallbackDepartISO());
+    const returnDate = parseISODate(ret) || parseISODate(fallbackReturnISO(depart));
+    const today = new Date();
+    today.setHours(12, 0, 0, 0);
+    const daysInFuture = Math.max(1, Math.round((departDate - today) / 86400000));
+    const stayLength = Math.max(1, Math.round((returnDate - departDate) / 86400000));
+    const url = new URL("/go/package/search/FlightHotel/", "https://www.expedia.com");
     url.searchParams.set("FromAirport", airportCode(state.from || "Oslo"));
     url.searchParams.set("Destination", airportCode(state.to));
-    url.searchParams.set("FromTime", "362");
-    url.searchParams.set("ToTime", "362");
     url.searchParams.set("NumRoom", "1");
     url.searchParams.set("NumAdult", state.adults);
+    url.searchParams.set("DaysInFuture", String(daysInFuture));
+    url.searchParams.set("StayLength", String(stayLength));
+    url.searchParams.set("sort", "recommended");
     const childCount = Math.max(0, Math.min(4, Number(state.children) || 0));
     if (childCount) {
       url.searchParams.set("NumChild", String(childCount));
@@ -1672,8 +1692,8 @@
         return;
       }
       updateSearchPreview();
-      const url = smartServiceUrl("package") || "https://www.expedia.no/Fly-Hotell";
-      window.open(url, "_blank", "noopener,noreferrer");
+      showSearchError("Skriv reisemål for pakkereisen først, så åpner vi riktig søk.");
+      $("toCity")?.focus();
       return;
     }
     if (/feriebolig|feriehus|villa|hytte|leilighet/.test(query)) {
@@ -2004,14 +2024,37 @@
     const from = data.from || $("fromCity")?.value || "Oslo (OSL)";
     const to = data.to || $("toCity")?.value || "";
     if (!to) return "";
+    const local = new URL("pakke-reiser.html", window.location.href);
+    local.searchParams.set("from", from || "Oslo (OSL)");
+    local.searchParams.set("to", to);
+    local.searchParams.set("depart", depart);
+    local.searchParams.set("return", ret);
+    local.searchParams.set("adults", data.adults || "2");
+    if (Number(data.children)) local.searchParams.set("children", data.children);
+    return local.toString();
+  }
+
+  function aiExpediaPackageSearchUrl(data) {
+    const depart = $("departDate")?.value || addDaysISO(14);
+    const ret = $("returnDate")?.value || addDaysISO(21);
+    const from = data.from || $("fromCity")?.value || "Oslo (OSL)";
+    const to = data.to || $("toCity")?.value || "";
+    if (!to) return "";
     const end = ret && ret > depart ? ret : addDaysISO(21);
-    const url = new URL(`/go/package/search/FlightHotel/${depart}/${end}`, "https://www.expedia.com");
+    const departDate = new Date(`${depart}T12:00:00`);
+    const returnDate = new Date(`${end}T12:00:00`);
+    const today = new Date();
+    today.setHours(12, 0, 0, 0);
+    const daysInFuture = Math.max(1, Math.round((departDate - today) / 86400000));
+    const stayLength = Math.max(1, Math.round((returnDate - departDate) / 86400000));
+    const url = new URL("/go/package/search/FlightHotel/", "https://www.expedia.com");
     url.searchParams.set("FromAirport", airportCode(from || "Oslo"));
     url.searchParams.set("Destination", airportCode(to));
-    url.searchParams.set("FromTime", "362");
-    url.searchParams.set("ToTime", "362");
     url.searchParams.set("NumRoom", "1");
     url.searchParams.set("NumAdult", data.adults || "2");
+    url.searchParams.set("DaysInFuture", String(daysInFuture));
+    url.searchParams.set("StayLength", String(stayLength));
+    url.searchParams.set("sort", "recommended");
     const childCount = Math.max(0, Math.min(4, Number(data.children) || 0));
     if (childCount) {
       url.searchParams.set("NumChild", String(childCount));
@@ -2231,14 +2274,9 @@
     setValue("adults", data.adults || "2");
     setValue("children", data.children || "0");
     if (!data.to) {
-      addMessage("Jeg har valgt pakkereise og satt avreise til <b>Oslo</b>. Du kan åpne Expedia Fly + Hotell direkte, eller skrive reisemålet hvis du vil fylle søket mer presist.", "bot", {
-        label: "Åpne Expedia Fly + Hotell",
-        onClick: () => {
-          const url = "https://www.expedia.no/Fly-Hotell";
-          window.open(url, "_blank", "noopener,noreferrer");
-        }
-      });
+      addMessage("Jeg har valgt pakkereise og satt avreise til <b>Oslo</b>. Skriv reisemålet i feltet, så åpner knappen et ferdig pakkesøk.", "bot");
       document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      $("toCity")?.focus();
       return;
     }
     addMessage(`Jeg har fylt ut pakkereise: <b>${data.from || "Oslo"} → ${data.to}</b>. Knappen åpner Expedia fly + hotell med standarddato hvis du ikke velger dato selv.`, "bot", {
