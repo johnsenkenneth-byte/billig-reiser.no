@@ -884,7 +884,7 @@
 
   function stripTravelWords(value) {
     return clean(value)
-      .replace(/\b(fly\s*(\+|og)\s*hotell|pakkereise|fly|flight|feriebolig|feriehus|villa|hytte|leilighet)\b/gi, " ")
+      .replace(/\b(fly\s*(\+|og)\s*hotell|pakkereise|pakke\s*reise|fly|flight|feriebolig|feriehus|villa|hytte|leilighet)\b/gi, " ")
       .replace(/\b\d+\s*(voksen|voksne|adult|adults|barn|child|children)\b/gi, " ")
       .replace(/\s+/g, " ")
       .trim();
@@ -1575,7 +1575,7 @@
       if (!openCurrentSearchTarget()) openDateRangePicker();
       return;
     }
-    if (/pakkereise|fly\s*(\+|og)\s*hotell/.test(query)) {
+    if (/pakkereise|pakke\s*reise|fly\s*(\+|og)\s*hotell/.test(query)) {
       setSearchType("package");
       const route = parseRouteQuery(query);
       if (route.to) {
@@ -1585,7 +1585,10 @@
         if (!openCurrentSearchTarget()) openDateRangePicker();
         return;
       }
-      return $("fromCity")?.focus();
+      updateSearchPreview();
+      const url = smartServiceUrl("package") || AFFILIATE_LINKS.packageTravel || AFFILIATE_LINKS.expedia || "https://www.expedia.no/Fly-Hotell";
+      window.open(url, "_blank", "noopener,noreferrer");
+      return;
     }
     if (/feriebolig|feriehus|villa|hytte|leilighet/.test(query)) {
       setSearchType("interhome");
@@ -2126,7 +2129,13 @@
     setValue("adults", data.adults || "2");
     setValue("children", data.children || "0");
     if (!data.to) {
-      addMessage("Jeg har valgt pakkereise og satt avreise til <b>Oslo</b>. Skriv hvor du vil reise, så åpner jeg riktig Expedia fly + hotell-søk.", "bot");
+      addMessage("Jeg har valgt pakkereise og satt avreise til <b>Oslo</b>. Du kan åpne Expedia Fly + Hotell direkte, eller skrive reisemålet hvis du vil fylle søket mer presist.", "bot", {
+        label: "Åpne Expedia Fly + Hotell",
+        onClick: () => {
+          const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell";
+          window.open(url, "_blank", "noopener,noreferrer");
+        }
+      });
       document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
@@ -2170,7 +2179,7 @@
     if (low.includes("restplass") || low.includes("charter") || low.includes("sydentur") || low.includes("syden")) return openTuiRestplass();
     if (low.includes("forsink") || low.includes("kansell") || low.includes("erstatning")) return openFlightDelay();
     if (low.includes("feriebolig") || low.includes("feriehus") || low.includes("villa") || low.includes("hytte") || low.includes("leilighet")) return openInterhome(text);
-    if (low.includes("pakkereise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel(text);
+    if (low.includes("pakkereise") || low.includes("pakke reise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel(text);
     if (low.includes("cruise")) return openCruise();
     if (/(fly|flight|fra|from).*(til|to)/.test(low) || low.includes("bangkok") || low.includes("mallorca")) return fillFlight(text);
     if (low.includes("hotell") || low.includes("hotel") || low.includes("overnatting")) return fillHotel(text);
