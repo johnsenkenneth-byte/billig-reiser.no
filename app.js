@@ -92,7 +92,7 @@
       ["Pakkereise", "Fly + hotell", "Finn en samlet feriepakke hos Expedia Norge.", "Se pakkereiser", partners.packageTravel],
       ["Cruise", "Cruiseferie", "Sammenlign reiseruter, rederier og varighet hos Expedia.", "Se cruise", partners.cruise],
       ["Feriebolig", "Feriehus og leiligheter", "Finn hytter, villaer og ferieleiligheter hos Interhome.", "Se ferieboliger", partners.interhome],
-      ["Restplass", "Charter og restplasser", "Finn oppdaterte restplasser og sydenturer hos TUI Norge.", "Se restplasser", partners.tuiRestplass],
+      ["Charter", "Nazar charter", "Finn charter, pakkereiser og sydenturer hos Nazar Norge.", "Se Nazar", partners.nazar],
       ["Pakkereise", "Nazar reiser", "Charter og pakkereiser hos Nazar Norge.", "Se Nazar", partners.nazar],
       ["Reisehack", "eSIM på reisen", "Mobildata uten å bytte fysisk SIM-kort.", "Sjekk datapakker", partners.saily],
       ["Storby", "Oppbevar bagasjen", "Praktisk før innsjekk eller etter utsjekk.", "Finn oppbevaring", partners.radicalStorage],
@@ -567,7 +567,7 @@
       } else if (currentSearchType === "interhome") {
         button.textContent = state.to ? `SØK FERIEBOLIG I ${state.to.toUpperCase()} 🔎` : "SØK FERIEBOLIG 🔎";
       } else if (currentSearchType === "restplass") {
-        button.textContent = state.to ? `SE TUI-PRISER TIL ${state.to.toUpperCase()} ↗` : "SE CHARTER OG RESTPLASS HOS TUI ↗";
+        button.textContent = state.to ? `SE NAZAR-REISER TIL ${state.to.toUpperCase()} ↗` : "SE CHARTER HOS NAZAR ↗";
       } else if (currentSearchType === "hotel") {
         button.textContent = state.to ? `SØK HOTELL I ${state.to.toUpperCase()} 🔎` : "SØK HOTELL 🔎";
       } else if (currentSearchType === "car") {
@@ -587,7 +587,7 @@
       } else if (currentSearchType === "interhome") {
         helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område eller land — så åpnes riktig ferieboligsøk hos Interhome.";
       } else if (currentSearchType === "restplass") {
-        helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes TUI direkte på charter og restplasser.";
+        helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes Nazar direkte på charter og pakkereiser.";
       } else if (currentSearchType === "hotel") {
         helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} gjester.` : "Skriv byen du vil bo i — så åpnes Hotels.com rett på hotell i den byen.";
       } else if (currentSearchType === "car") {
@@ -604,13 +604,20 @@
   function affiliateWrap(baseAffiliateUrl, targetUrl) {
     // CJ deep links use the url= parameter. Keep the target fully encoded so
     // the selected partner receives the search parameters after redirect.
-    const separator = baseAffiliateUrl.includes("?") ? "&" : "?";
-    return `${baseAffiliateUrl}${separator}url=${encodeURIComponent(targetUrl)}`;
+    const url = new URL(baseAffiliateUrl);
+    url.searchParams.set("url", targetUrl);
+    return url.toString();
   }
 
   function tradeTrackerDeepLink(baseAffiliateUrl, targetUrl) {
     const url = new URL(baseAffiliateUrl);
     url.searchParams.set("u", targetUrl);
+    return url.toString();
+  }
+
+  function tradeDoublerDeepLink(baseAffiliateUrl, targetUrl) {
+    const url = new URL(baseAffiliateUrl);
+    url.searchParams.set("url", targetUrl);
     return url.toString();
   }
 
@@ -996,6 +1003,10 @@
     return tradeTrackerDeepLink(AFFILIATE_LINKS.tuiRestplass, target.toString());
   }
 
+  function buildNazarCharterUrl() {
+    return tradeDoublerDeepLink(AFFILIATE_LINKS.nazar, "https://www.nazar.no/");
+  }
+
   function applyTuiQuickChoice(choice) {
     setSearchType("restplass");
     tuiQuickTargetPath = {
@@ -1018,11 +1029,11 @@
 
     const helper = document.querySelector(".search-help");
     const copy = {
-      week: "Restplass denne uken: juster reisemål hvis du vil, og åpne dagens priser hos TUI.",
-      mallorca: "Mallorca er valgt. Juster dato og reisende før du åpner TUI-søket.",
-      kreta: "Kreta er valgt. Juster dato og reisende før du åpner TUI-søket.",
-      family: "Familieferie: velg ønsket reisemål og åpne TUIs oppdaterte utvalg.",
-      "all-inclusive": "All Inclusive: velg ønsket reisemål og åpne TUIs oppdaterte utvalg."
+      week: "Charter denne uken: juster reisemål hvis du vil, og åpne dagens utvalg hos Nazar.",
+      mallorca: "Mallorca er valgt. Juster dato og reisende før du åpner Nazar.",
+      kreta: "Kreta er valgt. Juster dato og reisende før du åpner Nazar.",
+      family: "Familieferie: velg ønsket reisemål og åpne Nazars oppdaterte utvalg.",
+      "all-inclusive": "All Inclusive: velg ønsket reisemål og åpne Nazars oppdaterte utvalg."
     }[choice];
     updateSearchPreview();
     if (helper && copy) helper.textContent = copy;
@@ -1043,24 +1054,16 @@
   }
 
   function buildPackageUrl(state) {
-    const url = new URL("https://www.expedia.no/Packages-Search");
+    const url = new URL("https://www.expedia.no/Fly-Hotell");
     url.searchParams.set("origin", airportCode(state.from));
     url.searchParams.set("destination", airportCode(state.to));
-    url.searchParams.set("startDate", state.depart);
-    url.searchParams.set("endDate", state.ret);
+    if (state.depart) url.searchParams.set("startDate", state.depart);
+    if (state.ret) url.searchParams.set("endDate", state.ret);
     url.searchParams.set("rooms", "1");
     url.searchParams.set("adults", state.adults);
     if (Number(state.children)) url.searchParams.set("children", state.children);
-    url.searchParams.set("cabinClass", "COACH");
-    url.searchParams.set("directFlights", "false");
-    url.searchParams.set("infantsInSeats", "0");
     url.searchParams.set("packageType", "fh");
-    url.searchParams.set("partialStay", "false");
-    url.searchParams.set("searchProduct", "hotel");
-    url.searchParams.set("siteid", "66");
-    url.searchParams.set("sort", "RECOMMENDED");
     url.searchParams.set("tripType", "ROUND_TRIP");
-    url.searchParams.set("useRewards", "false");
     url.searchParams.set("locale", "nb_NO");
     url.searchParams.set("currency", "NOK");
     return affiliateWrap(AFFILIATE_LINKS.expedia, url.toString());
@@ -1336,7 +1339,7 @@
     }
 
     if (currentSearchType === "restplass") {
-      return buildTuiRestplassUrl(state);
+      return buildNazarCharterUrl(state);
     }
 
     if (currentSearchType === "package") {
@@ -1398,7 +1401,7 @@
       package: ["Pakkereise", "Søk etter fly og hotell samlet hos Expedia."],
       interhome: ["Feriebolig", "Finn feriehus, villa eller leilighet hos Interhome."],
       cruise: ["Cruise", "Velg ønsket periode og sjekk cruisepriser hos Expedia.com."],
-      restplass: ["Charter", "Finn restplass eller charterreise hos TUI."],
+      restplass: ["Charter", "Finn charterreise hos Nazar."],
       car: ["Leiebil", "Velg hentested og dato før leiebilprisene åpnes hos EconomyBookings."]
     }[currentSearchType];
     if (modeTitle && modeCopy) modeTitle.innerHTML = `<b>${modeCopy[0]}</b><span>${modeCopy[1]}</span>`;
@@ -1549,11 +1552,11 @@
   function smartServiceUrl(service) {
     const links = window.BR_AFFILIATES || {};
     return {
-      package: links.packageTravel || links.expedia || "https://www.expedia.no/Fly-Hotell",
+      package: links.expedia ? affiliateWrap(links.expedia, "https://www.expedia.no/Fly-Hotell") : (links.packageTravel || "https://www.expedia.no/Fly-Hotell"),
       interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=",
       cruise: links.cruise || "https://www.expedia.com/Cruises",
       nazar: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
-      restplass: links.tuiRestplass || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F"
+      restplass: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
     }[service];
   }
 
@@ -1589,7 +1592,7 @@
       if (!state.from) return false;
       target = buildCarUrl(state);
     } else if (currentSearchType === "restplass") {
-      target = buildTuiRestplassUrl(state);
+      target = buildNazarCharterUrl(state);
     } else if (currentSearchType === "interhome") {
       if (!state.to) return false;
       target = buildInterhomeUrl(state);
@@ -1922,11 +1925,13 @@
 
   function expediaAffiliate(targetUrl) {
     const base = (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706";
-    return `${base}${base.includes("?") ? "&" : "?"}url=${encodeURIComponent(targetUrl)}`;
+    return cjAffiliate(base, targetUrl);
   }
 
   function cjAffiliate(baseUrl, targetUrl) {
-    return `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}url=${encodeURIComponent(targetUrl)}`;
+    const url = new URL(baseUrl);
+    url.searchParams.set("url", targetUrl);
+    return url.toString();
   }
 
   function aiHotelUrl(place = "Roma") {
@@ -1956,11 +1961,11 @@
     const from = data.from || $("fromCity")?.value || "Oslo (OSL)";
     const to = data.to || $("toCity")?.value || "";
     if (!to) return "";
-    const url = new URL("https://www.expedia.no/Packages-Search");
+    const url = new URL("https://www.expedia.no/Fly-Hotell");
     url.searchParams.set("origin", airportCode(from));
     url.searchParams.set("destination", airportCode(to));
-    url.searchParams.set("startDate", depart);
-    url.searchParams.set("endDate", ret);
+    if (depart) url.searchParams.set("startDate", depart);
+    if (ret) url.searchParams.set("endDate", ret);
     url.searchParams.set("rooms", "1");
     url.searchParams.set("adults", data.adults || "2");
     if (Number(data.children)) url.searchParams.set("children", data.children);
@@ -2173,7 +2178,7 @@
       addMessage("Jeg har valgt pakkereise og satt avreise til <b>Oslo</b>. Du kan åpne Expedia Fly + Hotell direkte, eller skrive reisemålet hvis du vil fylle søket mer presist.", "bot", {
         label: "Åpne Expedia Fly + Hotell",
         onClick: () => {
-          const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell";
+          const url = expediaAffiliate("https://www.expedia.no/Fly-Hotell");
           window.open(url, "_blank", "noopener,noreferrer");
         }
       });
@@ -2208,9 +2213,9 @@
   }
 
   function openTuiRestplass() {
-    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F";
-    addMessage("Jeg åpner <b>TUI restplasser</b>. Der finner du oppdaterte chartertilbud og sydenturer.", "bot", {
-      label: "Se restplasser",
+    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F";
+    addMessage("Jeg åpner <b>Nazar</b>. Der finner du charter, pakkereiser og sydenturer.", "bot", {
+      label: "Se Nazar",
       onClick: () => window.open(url, "_blank", "noopener,noreferrer")
     });
   }
