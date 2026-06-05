@@ -8,7 +8,7 @@
 <meta content="Finn billige fly, hotell og leiebil. Sammenlign reisetilbud fra Expedia, Hotels.com, Enjoy Travel og AutoEurope." name="description"/>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
 <link href="https://billig-reiser.no/" rel="canonical"/>
-<link href="style.css?v=71" rel="stylesheet"/>
+<link href="style.css?v=73" rel="stylesheet"/>
 <meta content="#020913" name="theme-color"/><meta content="website" property="og:type"/><meta content="Billig-Reiser.no" property="og:site_name"/><meta content="Billig-reiser.no | Live reisetilbud" property="og:title"/><meta content="Finn billige fly, hotell og leiebil. Sammenlign reisetilbud fra Expedia, Hotels.com, Enjoy Travel og AutoEurope." property="og:description"/><meta content="https://billig-reiser.no/" property="og:url"/><meta content="https://billig-reiser.no/assets/logo-main.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Billig-reiser.no | Live reisetilbud" name="twitter:title"/><meta content="Finn billige fly, hotell og leiebil. Sammenlign reisetilbud fra Expedia, Hotels.com, Enjoy Travel og AutoEurope." name="twitter:description"/><meta content="https://billig-reiser.no/assets/logo-main.png" name="twitter:image"/><link href="https://unpkg.com" rel="preconnect"/><script data-schema="website" type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Billig-Reiser.no","url":"https://billig-reiser.no/","potentialAction":{"@type":"SearchAction","target":"https://billig-reiser.no/?q={search_term_string}","query-input":"required name=search_term_string"}}</script><!-- HERO-BILDER OPPDATERT -->
 <style>/* V22 bilde-fix inline */.city-card img,.country-card img,.hotel-card img,.feature-card img{display:block!important;opacity:1!important;visibility:visible!important;background:#07101f!important;filter:none!important}.city-card,.country-card,.hotel-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98))!important}.hero-thai,.hero-city,.mag-hero{background-color:#07101f!important}
 .master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
@@ -33,20 +33,20 @@
 <a href="reiseradar.html">🌍 Reiseradar</a>
 </nav>
 <main>
-<section aria-label="Live deals" class="ticker">
-<a class="live" href="#liveDeals">● LIVE DEALS</a>
+<section aria-label="Live prisindikator" class="ticker">
+<a class="live" href="#travelSearch">● LIVEPRISER</a>
 <span data-live-deal-ticker="OSL-BKK">Oslo → <b>Bangkok</b> <em>henter livepris</em></span>
 <span data-live-deal-ticker="OSL-ALC">Oslo → <b>Alicante</b> <em>henter livepris</em></span>
 <span data-live-deal-ticker="BGO-AGP">Bergen → <b>Malaga</b> <em>henter livepris</em></span>
 <span data-live-deal-ticker="TRD-FCO">Trondheim → <b>Roma</b> <em>henter livepris</em></span>
-<a class="seeall" href="#liveDeals">Se alle deals →</a>
+<a class="seeall" href="#travelSearch">Søk fly →</a>
 </section>
-<section aria-label="Live flypriser fra Amadeus" class="live-deals-board" id="liveDeals">
+<section aria-label="Live flypriser fra Amadeus" class="live-deals-board compact" id="liveDeals">
 <div class="live-deals-head">
 <div>
 <span class="live-deals-kicker">● AMADEUS LIVEPRISER</span>
-<h2>Live deals akkurat nå</h2>
-<p>Ferske flypriser hentet direkte når siden åpnes. Velg en rute for å sammenligne videre.</p>
+<h2>Prisindikator for flysøket</h2>
+<p>Brukes som pekepinn og til å fylle søket. Bestilling skjer videre hos flypartnerne.</p>
 </div>
 <button data-live-deals-refresh type="button">OPPDATER PRISER</button>
 </div>
@@ -101,7 +101,7 @@
 <p class="search-help">Søk blant millioner av reiser verden over — vi sender deg videre til riktig partner med valgene dine.</p>
 <div aria-label="Live flypriser" class="deal-pulse-row">
 <span>● Live flypriser fra Amadeus</span>
-<a href="#liveDeals">Se oppdaterte deals →</a>
+<a href="#travelSearch">Bruk i flysøket →</a>
 </div>
 <div aria-live="polite" class="tp-live-box" id="tpLiveBox"></div>
 </form>
@@ -179,17 +179,17 @@
 <section aria-label="Reisevelgeren" class="trip-finder-zone">
 <div class="trip-finder-panel">
 <div class="trip-finder-copy">
-<span class="trip-kicker">NYTT PÅ FORSIDEN</span>
-<h2>Hva slags reise vil du ha?</h2>
-<p>Velg stemning først. Vi sender deg rett til riktig søk, partner eller reiseverktøy uten at du må bla gjennom guider.</p>
-<div class="trip-mini-stats"><span>Sol</span><span>Storby</span><span>Familie</span><span>Opplevelser</span></div>
+<span class="trip-kicker">REISEVELGER</span>
+<h2>Finn riktig reise raskt</h2>
+<p>Velg hva du vil bestille, så åpner vi riktig søk eller riktig partner med færrest mulig steg.</p>
+<div class="trip-mini-stats"><span>Fly</span><span>Hotell</span><span>Pakkereise</span><span>Aktiviteter</span></div>
 </div>
 <div class="trip-finder-grid">
 <button class="trip-choice hot" data-smart-service="restplass" type="button"><small>Billigst mulig</small><strong>Finn sol og charter</strong><span>Nazar charter og pakkereiser</span></button>
 <button class="trip-choice package" data-smart-service="package" type="button"><small>Alt samlet</small><strong>Fly + hotell</strong><span>Åpne pakkereise-søket</span></button>
 <button class="trip-choice city" data-open-search="flight" type="button"><small>Weekend</small><strong>Storby på 3 dager</strong><span>Start med flysøk</span></button>
 <button class="trip-choice car" data-smart-service="car" type="button"><small>Frihet</small><strong>Roadtrip og leiebil</strong><span>Finn bil før reisen</span></button>
-<a class="trip-choice experience" href="https://www.getyourguide.com/" rel="nofollow noopener" target="_blank"><small>Når du er der</small><strong>Opplevelser og turer</strong><span>GetYourGuide, Klook og billetter</span></a>
+<a class="trip-choice experience" href="https://www.getyourguide.com/?partner_id=FIQDAEB&amp;utm_medium=local_partners" rel="nofollow noopener sponsored" target="_blank"><small>Når du er der</small><strong>Opplevelser og turer</strong><span>GetYourGuide, Klook og billetter</span></a>
 <button class="trip-choice hotel" data-open-search="hotel" type="button"><small>Bo bedre</small><strong>Finn riktig hotellområde</strong><span>Åpne hotellsøk</span></button>
 </div>
 </div>
@@ -201,9 +201,9 @@
 </section>
 <section aria-label="Våre samarbeidspartnere" class="suppliers live-partners partner-hub">
 <div class="partner-hub-head">
-<span class="partner-eyebrow">PARTNERE VI BRUKER I SØKET</span>
-<h2>Alt du trenger før reisen</h2>
-<p>Finn fly, hotell, pakkereiser, leiebil, opplevelser, transfer og praktiske reisetjenester fra ett sted.</p>
+<span class="partner-eyebrow">SNARVEIER</span>
+<h2>Nyttige valg før reisen</h2>
+<p>Direktelenker til partnere for bestilling, opplevelser, transport og praktisk reisehjelp.</p>
 </div>
 <div class="partner-hub-grid">
 <article class="partner-group is-primary">
@@ -223,7 +223,7 @@
 <div class="partner-pills">
 <a href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank"><b>Klook</b><em>Turer</em></a>
 <a href="https://kkday.tpx.gr/WlhfXaEZ" rel="nofollow noopener sponsored" target="_blank"><b>KKday</b><em>Aktiviteter</em></a>
-<a href="https://www.getyourguide.com/" rel="nofollow noopener" target="_blank"><b>GetYourGuide</b><em>Guidede turer</em></a>
+<a href="https://www.getyourguide.com/?partner_id=FIQDAEB&amp;utm_medium=local_partners" rel="nofollow noopener sponsored" target="_blank"><b>GetYourGuide</b><em>Guidede turer</em></a>
 <a href="https://tiqets.tpx.gr/nL28pCCf" rel="nofollow noopener sponsored" target="_blank"><b>Tiqets</b><em>Attraksjoner</em></a>
 <a href="https://gocity.tpx.gr/QHScpmus" rel="nofollow noopener sponsored" target="_blank"><b>Go City</b><em>Bypass</em></a>
 </div>
@@ -248,7 +248,7 @@
 </div>
 </article>
 </div>
-<p class="partner-live-note">Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg. GetYourGuide er lagt inn uten affiliate-ID til avtalen er klar.</p>
+<p class="partner-live-note">Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</p>
 </section>
 </main>
 <footer class="footer">
@@ -272,12 +272,12 @@
 </div>
 </div>
 </footer>
-<nav aria-label="Raske valg" class="bottom-cta"><a data-open-search="flight" href="#travelSearch">✈<span>Fly</span></a><a data-open-search="hotel" href="#travelSearch">🏨<span>Hotell</span></a><a data-open-search="car" href="#travelSearch">🚗<span>Bil</span></a><a href="#liveDeals">🔥<span>Deals</span></a></nav>
+<nav aria-label="Raske valg" class="bottom-cta"><a data-open-search="flight" href="#travelSearch">✈<span>Fly</span></a><a data-open-search="hotel" href="#travelSearch">🏨<span>Hotell</span></a><a data-open-search="car" href="#travelSearch">🚗<span>Bil</span></a><a data-open-search="flight" href="#travelSearch">🔥<span>Priser</span></a></nav>
 <img alt="" aria-hidden="true" class="pixel" data-consent-src="https://www.lduhtrp.net/image-101724638-14078638" height="1" width="1"/>
 <img alt="" aria-hidden="true" class="pixel" data-consent-src="https://www.ftjcfx.com/image-101724638-13852710" height="1" width="1"/>
 <script defer="" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script defer="" src="affiliate-config.js"></script>
-<script defer="" src="app.js?v=73"></script>
+<script defer="" src="app.js?v=74"></script>
 <script data-consent-src="https://www.anrdoezrs.net/am/101724638/include/allCj/generate/onLoad/exclude/5275619,6385999,5289022,7211102,6061620,4861279/impressions/page/am.js" type="text/plain"></script>
 <div aria-label="Informasjon om cookies" aria-live="polite" class="cookie-banner" id="cookieBanner" role="dialog">
 <div>

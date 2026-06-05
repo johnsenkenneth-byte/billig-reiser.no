@@ -1221,6 +1221,24 @@
       const route = LIVE_DEAL_ROUTES.find((item) => liveDealKey(item) === button?.dataset.liveRoute);
       if (route) openLiveDealSearch(route);
     });
+    document.querySelectorAll("[data-live-deal-ticker]").forEach((ticker) => {
+      if (ticker.dataset.boundLiveDeal) return;
+      ticker.dataset.boundLiveDeal = "1";
+      ticker.setAttribute("role", "button");
+      ticker.setAttribute("tabindex", "0");
+      ticker.title = "Klikk for å fylle flysøket med denne ruten";
+      const openTickerRoute = () => {
+        const route = LIVE_DEAL_ROUTES.find((item) => liveDealKey(item) === ticker.dataset.liveDealTicker);
+        if (route) openLiveDealSearch(route);
+      };
+      ticker.addEventListener("click", openTickerRoute);
+      ticker.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openTickerRoute();
+        }
+      });
+    });
     loadLiveDeals();
   }
 
