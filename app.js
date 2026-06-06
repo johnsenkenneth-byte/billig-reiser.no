@@ -898,7 +898,7 @@
 
   function stripTravelWords(value) {
     return clean(value)
-      .replace(/\b(fly\s*(\+|og)\s*hotell|pakkereise|pakke\s*reise|fly|flight|feriebolig|feriehus|villa|hytte|leilighet)\b/gi, " ")
+      .replace(/\b(fly\s*(\+|og)\s*hotell|pakkereise|pakke\s*reise|fly|flight|feriebolig|feriehus|ferieboliger|holiday\s*home|holiday\s*rental|villa|hytte|hytter|leilighet|leiligheter)\b/gi, " ")
       .replace(/\b(finn|søk|sok|se|åpne|apne|med|for)\b/gi, " ")
       .replace(/\b\d+\s*(voksen|voksne|adult|adults|barn|child|children)\b/gi, " ")
       .replace(/\s+/g, " ")
@@ -919,7 +919,10 @@
   }
 
   function interhomeSearchText(value) {
-    return stripTravelWords(value).replace(/\s*\([A-Z]{3}\)\s*$/i, "").trim();
+    return stripTravelWords(value)
+      .replace(/\s*\([A-Z]{3}\)\s*$/i, "")
+      .replace(/^(til|to|i|på|pa)\s+/i, "")
+      .trim();
   }
 
   const INTERHOME_PATHS = {
@@ -993,21 +996,45 @@
     return match ? INTERHOME_DESTINATIONS[match] : "";
   }
 
+  function appendInterhomeSearchParams(target, state, searchText = "") {
+    const url = new URL(target);
+    const depart = validISO(state.depart) ? state.depart : fallbackDepartISO();
+    const ret = validISO(state.ret) && state.ret > depart ? state.ret : fallbackReturnISO(depart);
+    const adults = Math.max(1, Math.min(9, Number(state.adults) || 2));
+    const children = Math.max(0, Math.min(8, Number(state.children) || 0));
+    const guests = adults + children;
+
+    if (searchText) {
+      url.searchParams.set("destination", searchText);
+      url.searchParams.set("q", searchText);
+    }
+    url.searchParams.set("arrival", depart);
+    url.searchParams.set("departure", ret);
+    url.searchParams.set("checkin", depart);
+    url.searchParams.set("checkout", ret);
+    url.searchParams.set("adults", String(adults));
+    url.searchParams.set("persons", String(guests));
+    url.searchParams.set("guests", String(guests));
+    if (children) url.searchParams.set("children", String(children));
+
+    return url.toString();
+  }
+
   function buildInterhomeUrl(state) {
     const searchText = interhomeSearchText(state.to || state.from || "");
     const path = interhomeDestinationPath(searchText);
     const id = interhomeDestinationId(searchText);
     let target = "https://www.interhome.no/search/5460aeae487f8";
-    if (id) {
-      target = `https://www.interhome.no/search/${id}`;
-    } else if (path) {
+    if (path) {
       target = new URL(path, "https://www.interhome.no").toString();
+    } else if (id) {
+      target = `https://www.interhome.no/search/${id}`;
     } else if (searchText) {
-      const searchUrl = new URL("https://www.interhome.no/sok/");
+      const searchUrl = new URL("https://www.interhome.no/");
       searchUrl.searchParams.set("destination", searchText);
       target = searchUrl.toString();
     }
-    return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, target);
+    return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, appendInterhomeSearchParams(target, state, searchText));
   }
 
   function buildTuiRestplassUrl(state) {

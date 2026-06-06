@@ -3225,11 +3225,12 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
 /* BR v59: Expedia package shortcut lives inside package search only */
 .package-inline-actions{
   display:none;
-  grid-template-columns:minmax(0,1.25fr) minmax(170px,.75fr);
+  grid-template-columns:1fr;
   gap:9px;
   margin:12px 0 0;
 }
 #travelSearch[data-mode="package"] .package-inline-actions{display:grid}
+#travelSearch[data-mode="package"] .search-actions{display:none!important}
 .package-inline-actions button,
 .package-inline-actions a{
   min-width:0;
@@ -4485,4 +4486,9 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
   .hero-copy h1{
     font-size:34px!important;
   }
+}
+
+form#travelSearch[data-mode="package"] .hero-ctas.search-actions.single-action,
+form#travelSearch[data-mode="package"] #searchSubmitButton.search-launch{
+  display:none!important;
 }
