@@ -4492,3 +4492,18 @@ form#travelSearch[data-mode="package"] .hero-ctas.search-actions.single-action,
 form#travelSearch[data-mode="package"] #searchSubmitButton.search-launch{
   display:none!important;
 }
+
+.soro-blog-section{
+  background:#020913;
+  padding:0 18px 34px;
+}
+
+.soro-blog-shell{
+  max-width:1120px;
+  margin:0 auto;
+  min-height:220px;
+}
+
+#soro-blog{
+  width:100%;
+}
