@@ -4507,3 +4507,49 @@ form#travelSearch[data-mode="package"] #searchSubmitButton.search-launch{
 #soro-blog{
   width:100%;
 }
+
+.trip-choice em{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  margin-top:4px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  color:#f8fbff;
+  font-style:normal;
+  font-size:12px;
+  font-weight:950;
+}
+
+.trip-choice.stay{
+  background:radial-gradient(circle at 82% 10%,rgba(45,212,191,.22),transparent 34%),linear-gradient(145deg,rgba(13,64,59,.9),rgba(8,17,31,.95));
+}
+
+.trip-choice.pass{
+  background:radial-gradient(circle at 82% 10%,rgba(236,72,153,.20),transparent 34%),linear-gradient(145deg,rgba(57,28,84,.92),rgba(8,17,31,.95));
+}
+
+.trip-choice.transfer{
+  background:radial-gradient(circle at 82% 10%,rgba(96,165,250,.21),transparent 34%),linear-gradient(145deg,rgba(18,45,86,.92),rgba(8,17,31,.95));
+}
+
+.trip-choice.esim{
+  background:radial-gradient(circle at 82% 10%,rgba(52,211,153,.22),transparent 34%),linear-gradient(145deg,rgba(13,72,52,.9),rgba(8,17,31,.95));
+}
+
+.trip-choice.luggage{
+  background:radial-gradient(circle at 82% 10%,rgba(251,191,36,.20),transparent 34%),linear-gradient(145deg,rgba(77,55,15,.92),rgba(8,17,31,.95));
+}
+
+.trip-choice.problem{
+  background:radial-gradient(circle at 82% 10%,rgba(248,113,113,.20),transparent 34%),linear-gradient(145deg,rgba(86,30,42,.92),rgba(8,17,31,.95));
+}
+
+@media(min-width:1240px){
+  .trip-choice{
+    min-height:154px;
+  }
+}
