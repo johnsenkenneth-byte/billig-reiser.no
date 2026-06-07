@@ -3171,7 +3171,7 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
 }
 
 /* BR v56: TUI charter and restplass quick panel */
-.tui-quick-panel,.interhome-quick-panel{display:none}
+.tui-quick-panel,.interhome-quick-panel,.cruise-quick-panel{display:none}
 #travelSearch[data-mode="restplass"] .tui-quick-panel{
   display:block;
   margin:0 0 12px;
@@ -3182,6 +3182,15 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{overflow-x:hidden}.topbar{min
   box-shadow:0 14px 32px rgba(0,0,0,.2);
 }
 #travelSearch[data-mode="interhome"] .interhome-quick-panel{
+  display:block;
+  margin:0 0 12px;
+  overflow:hidden;
+  border:1px solid rgba(90,218,255,.3);
+  border-radius:17px;
+  background:linear-gradient(145deg,rgba(11,43,74,.9),rgba(6,17,37,.96));
+  box-shadow:0 14px 32px rgba(0,0,0,.2);
+}
+#travelSearch[data-mode="cruise"] .cruise-quick-panel{
   display:block;
   margin:0 0 12px;
   overflow:hidden;

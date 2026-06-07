@@ -6,7 +6,7 @@ window.BR_AFFILIATES = Object.freeze({
   expedia: "https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly",
   expediaCreator: "https://www.expedia.no/",
   packageTravel: "https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly-Hotell",
-  cruise: "https://www.expedia.com/swift/cruise?siid=1216803&referrer=b4c7d06f-4ebf-4227-bff6-ff91a276ba5e&destinations=15&startdate=&enddate=&maxduration=9&minduration=3",
+  cruise: "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise?siid=1216803&referrer=b4c7d06f-4ebf-4227-bff6-ff91a276ba5e",
   interhome: "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
   tuiRestplass: "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
   tuiPackages: "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Freise%2Fpakkereiser%2F",

@@ -3,11 +3,12 @@
 
 /* Discovery Engine + Deal Engine */
 (() => {
+  const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
-    cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
+    cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || DEFAULT_EXPEDIA_CRUISE_URL,
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
@@ -274,6 +275,7 @@
 */
 (() => {
   const TRAVELPAYOUTS_MARKER = (window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286";
+  const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
   const AFFILIATE_LINKS = {
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
@@ -289,6 +291,7 @@
     autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
     carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
+    cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || DEFAULT_EXPEDIA_CRUISE_URL,
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
   };
@@ -543,6 +546,7 @@
 
   function resetActiveTabSearch() {
     tabStates[currentSearchType] = blankTabState();
+    if (currentSearchType === "cruise") cruiseQuickChoice = "";
     loadTabState(currentSearchType);
     calendarPicking = "depart";
   }
@@ -568,7 +572,8 @@
       if (currentSearchType === "package") {
         button.textContent = state.to ? `SØK PAKKEREISE TIL ${state.to.toUpperCase()} 🔎` : "SØK PAKKEREISE 🔎";
       } else if (currentSearchType === "cruise") {
-        button.textContent = "SJEKK CRUISEPRISER PÅ EXPEDIA.COM ↗";
+        const cruiseChoice = cruiseSearchText(state.from || state.to || cruiseQuickChoice);
+        button.textContent = cruiseChoice ? `SJEKK CRUISE FRA ${cruiseChoice.toUpperCase()} ↗` : "SJEKK CRUISE I EUROPA ↗";
       } else if (currentSearchType === "interhome") {
         button.textContent = state.to ? `SØK FERIEBOLIG I ${state.to.toUpperCase()} 🔎` : "SØK FERIEBOLIG 🔎";
       } else if (currentSearchType === "restplass") {
@@ -588,7 +593,8 @@
       if (currentSearchType === "package") {
         helper.textContent = state.to ? `Pakkereise: ${state.from || "Oslo"} → ${state.to} • ${state.depart || "velg dato"} til ${state.ret || "velg retur"} • ${state.adults} reisende.` : "Skriv reisemål. Avreisested kan stå tomt, da bruker vi Oslo.";
       } else if (currentSearchType === "cruise") {
-        helper.textContent = `Cruise: ${state.depart || "velg fra-dato"} til ${state.ret || "velg til-dato"} • ${state.adults} reisende. Prisene åpnes hos Expedia.com.`;
+        const cruiseChoice = cruiseSearchText(state.from || state.to || cruiseQuickChoice);
+        helper.textContent = cruiseChoice ? `Cruise fra ${cruiseChoice} • ${state.depart || "velg fra-dato"} til ${state.ret || "velg til-dato"} • ${state.adults} reisende. Prisene åpnes hos Expedia.` : "Velg en europeisk avreisehavn, eller søk direkte på cruise i Europa hos Expedia.";
       } else if (currentSearchType === "interhome") {
         helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område, by eller sted — så åpnes riktig ferieboligsøk hos Interhome.";
       } else if (currentSearchType === "restplass") {
@@ -888,8 +894,52 @@
     kroatia: "/feriereiser/kroatia/restplasser/",
     bulgaria: "/feriereiser/bulgaria/restplasser/"
   };
+
+  const CRUISE_PORT_LINKS = {
+    europa: "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
+    europe: "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
+    middelhavet: "https://www.expedia.com/Cruises-from-Barcelona.d179992.Cruise-Departure-Port",
+    mediterranean: "https://www.expedia.com/Cruises-from-Barcelona.d179992.Cruise-Departure-Port",
+    barcelona: "https://www.expedia.com/Cruises-from-Barcelona.d179992.Cruise-Departure-Port",
+    spania: "https://www.expedia.com/Cruises-from-Barcelona.d179992.Cruise-Departure-Port",
+    athen: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    athens: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    pireus: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    piraeus: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    hellas: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    "greske øyer": "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    "greske oyer": "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    københavn: "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    kobenhavn: "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    copenhagen: "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    "nord europa": "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    "northern europe": "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    genova: "https://www.expedia.com/Cruises-from-Genoa.d6055038.Cruise-Departure-Port",
+    genoa: "https://www.expedia.com/Cruises-from-Genoa.d6055038.Cruise-Departure-Port",
+    marseille: "https://www.expedia.com/Cruises-from-Marseille.d179895.Cruise-Departure-Port",
+    napoli: "https://www.expedia.com/Cruises-from-Naples.d6034774.Cruise-Departure-Port",
+    naples: "https://www.expedia.com/Cruises-from-Naples.d6034774.Cruise-Departure-Port",
+    oslo: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    norge: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    norway: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    fjord: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    fjorder: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    "norske fjorder": "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    stockholm: "https://www.expedia.com/Cruises-from-Stockholm.d178311.Cruise-Departure-Port",
+    østersjøen: "https://www.expedia.com/Cruises-from-Stockholm.d178311.Cruise-Departure-Port",
+    ostersjoen: "https://www.expedia.com/Cruises-from-Stockholm.d178311.Cruise-Departure-Port",
+    baltic: "https://www.expedia.com/Cruises-from-Stockholm.d178311.Cruise-Departure-Port",
+    trieste: "https://www.expedia.com/Cruises-from-Province-Of-Trieste.d3536.Cruise-Departure-Port",
+    adriaterhavet: "https://www.expedia.com/Cruises-from-Province-Of-Trieste.d3536.Cruise-Departure-Port",
+    adriatic: "https://www.expedia.com/Cruises-from-Province-Of-Trieste.d3536.Cruise-Departure-Port",
+    valencia: "https://www.expedia.com/Cruises-from-Valencia-Province.d6023332.Cruise-Departure-Port",
+    venezia: "https://www.expedia.com/Cruises-from-Venice.d179981.Cruise-Departure-Port",
+    venice: "https://www.expedia.com/Cruises-from-Venice.d179981.Cruise-Departure-Port"
+  };
+
   let tuiQuickTargetPath = "";
   let charterQuickChoice = "";
+  let cruiseQuickChoice = "";
 
   function destinationKey(value) {
     return normalizeSearch(value).replace(/[^a-z0-9 ]/g, "").trim();
@@ -993,6 +1043,38 @@
       .sort((a, b) => b.length - a.length)
       .find((item) => key.includes(item));
     return match ? INTERHOME_DESTINATIONS[match] : "";
+  }
+
+  function cruiseSearchText(value) {
+    return clean(value)
+      .replace(/\b(cruise|cruises|cruiseferie|cruisetur|cruisereise|havn|havner|port|departure|avreisehavn|søk|sok|finn|se|åpne|apne|fra|from|til|to|i|på|pa)\b/gi, " ")
+      .replace(/\b\d+\s*(voksen|voksne|adult|adults|barn|child|children)\b/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function cruiseTargetUrl(value) {
+    const key = destinationKey(value || "europa");
+    if (CRUISE_PORT_LINKS[key]) return CRUISE_PORT_LINKS[key];
+    const match = Object.keys(CRUISE_PORT_LINKS)
+      .sort((a, b) => b.length - a.length)
+      .find((item) => key === item || key.includes(item));
+    return match ? CRUISE_PORT_LINKS[match] : CRUISE_PORT_LINKS.europa;
+  }
+
+  function withExpediaCruiseTracking(targetUrl, state = {}) {
+    const target = new URL(targetUrl || DEFAULT_EXPEDIA_CRUISE_URL);
+    const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || AFFILIATE_LINKS.cruise || "";
+    try {
+      const source = new URL(configured);
+      ["siid", "referrer"].forEach((param) => {
+        const value = source.searchParams.get(param);
+        if (value && !target.searchParams.has(param)) target.searchParams.set(param, value);
+      });
+    } catch (error) {}
+    if (validISO(state.depart)) target.searchParams.set("startdate", state.depart);
+    if (validISO(state.ret)) target.searchParams.set("enddate", state.ret);
+    return target.toString();
   }
 
   function appendInterhomeSearchParams(target, state, searchText = "") {
@@ -1117,6 +1199,16 @@
     $("toCity")?.focus();
   }
 
+  function applyCruiseQuickChoice(port) {
+    setSearchType("cruise");
+    cruiseQuickChoice = port || "Europa";
+    if ($("fromCity")) $("fromCity").value = cruiseQuickChoice;
+    if ($("toCity")) $("toCity").value = "";
+
+    updateSearchPreview();
+    openDateRangePicker();
+  }
+
   function openHotelPick(destination) {
     setSearchType("hotel");
     if ($("toCity")) $("toCity").value = destination || "";
@@ -1157,11 +1249,8 @@
   }
 
   function buildCruiseUrl(state) {
-    const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises";
-    const url = new URL(configured);
-    url.searchParams.set("startdate", state.depart);
-    url.searchParams.set("enddate", state.ret);
-    return url.toString();
+    const place = cruiseSearchText(state.from || state.to || cruiseQuickChoice || "Europa");
+    return withExpediaCruiseTracking(cruiseTargetUrl(place), state);
   }
 
   let livePriceTimer = null;
@@ -1505,7 +1594,7 @@
       hotel: ["Hotell", "Finn hotell med innsjekk, utsjekk og antall gjester."],
       package: ["Pakkereise", "Søk etter fly og hotell samlet hos Expedia."],
       interhome: ["Feriebolig", "Finn feriehus, villa eller leilighet hos Interhome."],
-      cruise: ["Cruise", "Velg ønsket periode og sjekk cruisepriser hos Expedia.com."],
+      cruise: ["Cruise", "Velg europeisk avreisehavn og sjekk cruisepriser hos Expedia."],
       restplass: ["Charter", "Velg restplass, charter og pakkereiser hos TUI og Nazar."],
       car: ["Leiebil", "Velg hentested og dato før leiebilprisene åpnes hos EconomyBookings."]
     }[currentSearchType];
@@ -1668,7 +1757,7 @@
     return {
       package: "https://www.expedia.no/Fly-Hotell",
       interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
-      cruise: links.cruise || "https://www.expedia.com/Cruises",
+      cruise: links.cruise || DEFAULT_EXPEDIA_CRUISE_URL,
       nazar: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
       restplass: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
     }[service];
@@ -1773,6 +1862,16 @@
     }
     if (/cruise/.test(query)) {
       setSearchType("cruise");
+      const cruiseChoice = cruiseSearchText(query);
+      if (cruiseChoice) {
+        cruiseQuickChoice = cruiseChoice;
+        if ($("fromCity")) $("fromCity").value = cruiseChoice;
+        if ($("toCity")) $("toCity").value = "";
+        updateSearchPreview();
+        if (!openCurrentSearchTarget()) openDateRangePicker();
+        return;
+      }
+      updateSearchPreview();
       return openDateRangePicker();
     }
 
@@ -1830,6 +1929,9 @@
     });
     document.querySelectorAll("[data-interhome-quick]").forEach((btn) => {
       btn.addEventListener("click", () => applyInterhomeQuickChoice(btn.dataset.interhomeQuick));
+    });
+    document.querySelectorAll("[data-cruise-quick]").forEach((btn) => {
+      btn.addEventListener("click", () => applyCruiseQuickChoice(btn.dataset.cruiseQuick));
     });
     document.querySelectorAll("[data-charter-open]").forEach((btn) => {
       btn.addEventListener("click", () => openCharterSpotlight(btn.dataset.charterOpen));
@@ -2137,6 +2239,71 @@
     return url.toString();
   }
 
+  const aiCruiseLinks = {
+    europa: "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
+    europe: "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
+    middelhavet: "https://www.expedia.com/Cruises-from-Barcelona.d179992.Cruise-Departure-Port",
+    mediterranean: "https://www.expedia.com/Cruises-from-Barcelona.d179992.Cruise-Departure-Port",
+    barcelona: "https://www.expedia.com/Cruises-from-Barcelona.d179992.Cruise-Departure-Port",
+    athen: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    athens: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    pireus: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    piraeus: "https://www.expedia.com/Cruises-from-Athens.d178231.Cruise-Departure-Port",
+    københavn: "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    kobenhavn: "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    copenhagen: "https://www.expedia.com/Cruises-from-Copenhagen.d178252.Cruise-Departure-Port",
+    genova: "https://www.expedia.com/Cruises-from-Genoa.d6055038.Cruise-Departure-Port",
+    genoa: "https://www.expedia.com/Cruises-from-Genoa.d6055038.Cruise-Departure-Port",
+    marseille: "https://www.expedia.com/Cruises-from-Marseille.d179895.Cruise-Departure-Port",
+    napoli: "https://www.expedia.com/Cruises-from-Naples.d6034774.Cruise-Departure-Port",
+    naples: "https://www.expedia.com/Cruises-from-Naples.d6034774.Cruise-Departure-Port",
+    oslo: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    fjord: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    fjorder: "https://www.expedia.com/Cruises-from-Oslo.d178295.Cruise-Departure-Port",
+    stockholm: "https://www.expedia.com/Cruises-from-Stockholm.d178311.Cruise-Departure-Port",
+    trieste: "https://www.expedia.com/Cruises-from-Province-Of-Trieste.d3536.Cruise-Departure-Port",
+    valencia: "https://www.expedia.com/Cruises-from-Valencia-Province.d6023332.Cruise-Departure-Port",
+    venezia: "https://www.expedia.com/Cruises-from-Venice.d179981.Cruise-Departure-Port",
+    venice: "https://www.expedia.com/Cruises-from-Venice.d179981.Cruise-Departure-Port"
+  };
+
+  function aiCruiseKey(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9 ]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function aiCruisePlace(text = "") {
+    return String(text || "")
+      .replace(/\b(cruise|cruises|cruiseferie|cruisetur|havn|havner|port|fra|from|til|to|i|på|pa|finn|søk|sok|se|åpne|apne)\b/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function aiCruiseUrl(text = "") {
+    const place = aiCruisePlace(text);
+    const key = aiCruiseKey(place || "europa");
+    const match = Object.keys(aiCruiseLinks)
+      .sort((a, b) => b.length - a.length)
+      .find((item) => key === item || key.includes(item));
+    const target = new URL(aiCruiseLinks[match] || aiCruiseLinks.europa);
+    const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "";
+    try {
+      const source = new URL(configured);
+      ["siid", "referrer"].forEach((param) => {
+        const value = source.searchParams.get(param);
+        if (value && !target.searchParams.has(param)) target.searchParams.set(param, value);
+      });
+    } catch (error) {}
+    target.searchParams.set("startdate", $("departDate")?.value || addDaysISO(14));
+    target.searchParams.set("enddate", $("returnDate")?.value || addDaysISO(21));
+    return target.toString();
+  }
+
   const aiInterhomeDestinations = {
     toscana: "5460aeb357636",
     tuscany: "5460aeb357636",
@@ -2316,9 +2483,10 @@
     }
   }
 
-  function openCruise() {
-    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises";
-    addMessage("Jeg åpner cruisesøket hos <b>Expedia Cruise</b>. Der kan du velge dato, havn og reiselengde.", "bot", {
+  function openCruise(text = "") {
+    const destination = aiCruisePlace(text);
+    const url = aiCruiseUrl(text);
+    addMessage(`Jeg åpner <b>Expedia Cruise</b>${destination ? ` fra <b>${destination}</b>` : " for Europa"}. Der kan du sortere videre på rederi, lugar og varighet.`, "bot", {
       label: "Åpne cruise",
       onClick: () => window.open(url, "_blank", "noopener,noreferrer")
     });
@@ -2378,7 +2546,7 @@
     if (low.includes("forsink") || low.includes("kansell") || low.includes("erstatning")) return openFlightDelay();
     if (low.includes("feriebolig") || low.includes("feriehus") || low.includes("villa") || low.includes("hytte") || low.includes("leilighet")) return openInterhome(text);
     if (low.includes("pakkereise") || low.includes("pakke reise") || low.includes("fly + hotell") || low.includes("fly og hotell")) return openPackageTravel(text);
-    if (low.includes("cruise")) return openCruise();
+    if (low.includes("cruise")) return openCruise(text);
     if (/(fly|flight|fra|from).*(til|to)/.test(low) || low.includes("bangkok") || low.includes("mallorca")) return fillFlight(text);
     if (low.includes("hotell") || low.includes("hotel") || low.includes("overnatting")) return fillHotel(text);
     if (low.includes("leiebil") || low.includes("rental") || low.includes("bil i") || low.includes("car")) return fillCar(text);
