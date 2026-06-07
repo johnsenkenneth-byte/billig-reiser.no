@@ -27,6 +27,19 @@
 .cookie-reset{border:0;border-radius:12px;padding:13px 16px;background:linear-gradient(90deg,#087cff,#7b3dff);color:#fff;font:inherit;font-weight:900;cursor:pointer}
 @media(max-width:680px){.cookie-table{display:block;overflow-x:auto;white-space:nowrap}}
 </style>
+
+<!-- PWA / installerbar app -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="application-name" content="Billig Reiser">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Billig Reiser">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#020913">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<script defer src="/pwa-register.js"></script>
+<link rel="stylesheet" href="/app-features.css">
+<script defer src="/app-features.js"></script>
 </head>
 <body class="legal-page">
 <header class="topbar"><a aria-label="Billig-reiser.no" class="brand" href="index.html"><img alt="Billig-reiser.no" decoding="async" height="180" loading="lazy" src="assets/logo-main.png" width="270"/></a><nav aria-label="Hovedmeny" class="nav desktop-nav"><a href="index.html">HJEM</a><a href="index.html#travelSearch">FLY</a><a data-open-search="hotel" href="index.html#travelSearch">HOTELL</a><a href="index.html#travelSearch">LEIEBIL</a><a href="reisemagasinet.html">REISEMAGASIN</a></nav><div class="top-actions"><span>🔔 Varsler</span><span>♡ Favoritter</span><span class="avatar">◎</span></div></header>
