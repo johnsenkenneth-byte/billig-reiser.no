@@ -1,0 +1,99 @@
+{
+  "lockedAt": "2026-06-07",
+  "reason": "Thailand-guiden og Koh/Thailand-destinasjonssidene er godkjent og skal ikke endres ved andre oppdateringer.",
+  "policy": "Ikke endre disse filene med mindre Kenneth eksplisitt ber om endringer i Thailand-guidene. Hvis filene endres med vilje, oppdater sjekksummene etter godkjenning.",
+  "files": [
+    {
+      "path": "reise-thailand-chiang-mai.html",
+      "sha256": "d95c787140f8c30482c0f062dccead2998e17278001ad10e690e810a3a03360f"
+    },
+    {
+      "path": "reise-thailand-hua-hin.html",
+      "sha256": "ab2dbec5637d9e46e8114d5af861ffbed00b812e4e22045935cc8eb43c7f47d1"
+    },
+    {
+      "path": "reise-thailand-khao-lak.html",
+      "sha256": "e8a2b5991cf75775bd5f42a0cc7ce249c32d755b90bcaeda4473b860e3cf8d0d"
+    },
+    {
+      "path": "reise-thailand-koh-chang.html",
+      "sha256": "290ad8e2332aac0a551119edda09b10736e7820c6c141996dc94dbf455f5fa07"
+    },
+    {
+      "path": "reise-thailand-koh-kood.html",
+      "sha256": "768496e3b8bb087e8cd47fc6efe5a1bfc1cce346a9f557a8a59caae6f05d102d"
+    },
+    {
+      "path": "reise-thailand-koh-lanta.html",
+      "sha256": "292113b8e10efa2ac2b5cbf35bf34ae2994f832d018d4531c378e369ba3b3e6a"
+    },
+    {
+      "path": "reise-thailand-koh-lipe.html",
+      "sha256": "32fc96022c3eea369c2bd82883c0c3717f76f48c55c33b6526181708f82387e1"
+    },
+    {
+      "path": "reise-thailand-koh-mak.html",
+      "sha256": "1b65e084fb67a9a825efdc0c66e2a6101fcb72f7c01c18ea64605bdc59252e61"
+    },
+    {
+      "path": "reise-thailand-koh-phangan.html",
+      "sha256": "4c15cae326194a6cab88f851628afdfd162b6dd62c9dfbd7e95e22a210734507"
+    },
+    {
+      "path": "reise-thailand-koh-phi-phi.html",
+      "sha256": "17f57e636a4f2502bd9985a17d596524ffa42b1b02022b45aaa40c8b7eeff8e0"
+    },
+    {
+      "path": "reise-thailand-koh-samui.html",
+      "sha256": "47bf6d2c1dd1fa3a03e4403ebc06eea5324b5982713528d50598737e20a9e10c"
+    },
+    {
+      "path": "reise-thailand-koh-tao.html",
+      "sha256": "a67aa8c50da385aa88ebf9fee45b496e1a1efa6edbc612d633c445156dd5117f"
+    },
+    {
+      "path": "reise-thailand-krabi.html",
+      "sha256": "08789b15bda29b84f519c636825d46ea175e1e5e8a19cbb5e872aa4e292eeee0"
+    },
+    {
+      "path": "reise-thailand-pattaya.html",
+      "sha256": "7b68a3e80e0090a76f7e7036810c0678de51b6377326855ccca8a6c7198269f6"
+    },
+    {
+      "path": "reise-thailand-phuket.html",
+      "sha256": "2063b94e61932439b01688bd46134e3dc47cc037bc45f694fe24c26de2e6adf6"
+    },
+    {
+      "path": "reise-thailand.html",
+      "sha256": "272aa4a5a058aace73fedb8842dcd775eb0e5615e9b7b0b4747d611b9f35a7bb"
+    },
+    {
+      "path": "thailand-beste-reisetid.html",
+      "sha256": "37368c1896ee44eecc582af2c6b183c85411da9592eccdab80a4759cf5463c86"
+    },
+    {
+      "path": "thailand-eastern-islands.html",
+      "sha256": "80a30733af57c6d6ab02330c213d5304f738b46990e811801e4192c2934aef65"
+    },
+    {
+      "path": "thailand-guide.css",
+      "sha256": "6b59537539ded501bc01686319e0d710cbbf2eec7a3429660e054dc0e2998926"
+    },
+    {
+      "path": "thailand-island-guide.html",
+      "sha256": "bfb513acc01579115fd130d1fd9f8a5896fe7c2234ef3c42bc04af055b1cb392"
+    },
+    {
+      "path": "thailand-rich-guide.css",
+      "sha256": "5a6c2cd2b4097d9df82878962dbc97bc8f619287550605d3357801a25ec6f573"
+    },
+    {
+      "path": "thailand-velg-riktig-oy.html",
+      "sha256": "3c5964286f992df4ff423431c22aa1d8750c68a18c224812d138b78c3270eaff"
+    },
+    {
+      "path": "thailand-videos.js",
+      "sha256": "59598317e15a2cd0c9f3bf465a6c66f46844fbe13ea21687e67e13fff60be3c0"
+    }
+  ]
+}
