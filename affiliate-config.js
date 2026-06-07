@@ -28,6 +28,7 @@ window.BR_AFFILIATES = Object.freeze({
   economyBookings: "https://economybookings.tpx.gr/LT8vc2kD",
   autoEurope: "https://autoeurope.tpx.gr/GzEPjKLD",
   activities: "https://klook.tpx.gr/Tmj2PfPe",
+  klookSearchBase: "https://www.klook.com/nb/search/result/?query=",
   kkday: "https://kkday.tpx.gr/WlhfXaEZ",
   transfer: "https://kiwitaxi.tpx.gr/YjkKJSHa",
   getTransfer: "https://gettransfer.tpx.gr/1szV5hHx",

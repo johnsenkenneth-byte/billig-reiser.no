@@ -22,7 +22,7 @@
 <img alt="Billig-reiser.no" decoding="async" height="220" src="assets/logo-main.png" width="330"/>
 </a>
 <nav aria-label="Hovedmeny" class="nav desktop-nav">
-<a data-open-search="restplass" href="#travelSearch">CHARTER</a>
+<a href="reiseblogg.html">BLOGG</a>
 <a href="#hack">REISEHACKS</a>
 <a href="reisemagasinet.html">REISEMAGASIN</a>
 <a href="reiseradar.html">REISERADAR</a>
@@ -31,7 +31,7 @@
 <a aria-label="Åpne meny" class="hamburger" href="#mobile-nav">☰</a>
 </header>
 <nav aria-label="Mobilmeny" class="mobile-nav" id="mobile-nav">
-<a data-open-search="restplass" href="#travelSearch">☀ Charter og restplass</a>
+<a href="reiseblogg.html">📝 Reiseblogg</a>
 <a href="reisemagasinet.html">📖 Reisemagasin</a>
 <a href="reiseradar.html">🌍 Reiseradar</a>
 </nav>
@@ -218,7 +218,7 @@
 </div>
 </div>
 </section>
-<section aria-label="Reisevelgeren" class="trip-finder-zone">
+<section aria-label="Reisevelgeren" class="trip-finder-zone" id="hack">
 <div class="trip-finder-panel">
 <div class="trip-finder-copy">
 <span class="trip-kicker">REISEVELGER</span>
@@ -227,6 +227,24 @@
 <div class="trip-mini-stats"><span>Restplass</span><span>Feriebolig</span><span>Billetter</span><span>Reisehacks</span></div>
 </div>
 <div class="trip-finder-grid">
+<form class="trip-klook-search" data-klook-search-form>
+<div>
+<small>Klook-søk</small>
+<strong>Finn opplevelser på reisemålet</strong>
+<span>Søk etter turer, billetter, spa, matkurs, transfer og familieaktiviteter.</span>
+</div>
+<label>
+<input aria-label="Søk opplevelser hos Klook" data-klook-search-input placeholder="Bangkok, Phuket, Roma..." type="search"/>
+<button type="submit">Søk Klook</button>
+</label>
+<div class="klook-quick-links" aria-label="Raske Klook-søk">
+<button data-klook-quick="Bangkok activities" type="button">Bangkok</button>
+<button data-klook-quick="Phuket island hopping" type="button">Phuket</button>
+<button data-klook-quick="Krabi boat tour" type="button">Krabi</button>
+<button data-klook-quick="Rome attractions" type="button">Roma</button>
+<button data-klook-quick="Barcelona attractions" type="button">Barcelona</button>
+</div>
+</form>
 <a class="trip-choice hot" href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F" rel="nofollow noopener sponsored" target="_blank"><small>Restplass</small><strong>Solreise nå</strong><span>TUI restplasser, charter og pakkereiser</span><em>Åpne TUI</em></a>
 <a class="trip-choice stay" href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.interhome.no%2F" rel="nofollow noopener sponsored" target="_blank"><small>Bo annerledes</small><strong>Feriebolig</strong><span>Villa, hytte eller leilighet hos Interhome</span><em>Se ferieboliger</em></a>
 <a class="trip-choice experience" href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank"><small>På stedet</small><strong>Opplevelser</strong><span>Turer, aktiviteter og billetter hos Klook</span><em>Finn aktiviteter</em></a>
@@ -243,9 +261,14 @@
 <img alt="Åpne Reisemagasinet" decoding="async" height="914" loading="lazy" src="assets/reisemagasin-home-banner.webp" width="1600"/>
 </a>
 </section>
-<section aria-label="Reiseblogg" class="soro-blog-section">
-<div class="soro-blog-shell">
-<div id="soro-blog"></div>
+<section aria-label="Reiseblogg" class="front-blog-cta-section">
+<div class="front-blog-cta">
+<div>
+<span>REISEBLOGG</span>
+<h2>Les de nyeste reisetipsene</h2>
+<p>Charter, restplass, smarte bookingvinduer og praktiske råd samlet på én egen bloggside.</p>
+</div>
+<a href="reiseblogg.html">Åpne bloggen</a>
 </div>
 </section>
 <section aria-label="Våre samarbeidspartnere" class="suppliers live-partners partner-hub">
@@ -314,6 +337,7 @@
 <a href="vilkar.html">Vilkår</a>
 <a href="disclaimer.html">Affiliate-info</a>
 <a href="reisemagasinet.html">Reisemagasin</a>
+<a href="reiseblogg.html">Reiseblogg</a>
 </nav>
 <div class="footer-meta">
 <span>post@billig-reiser.no</span>
@@ -327,7 +351,6 @@
 <script defer="" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script defer="" src="affiliate-config.js"></script>
 <script defer="" src="app.js?v=80"></script>
-<script defer="" src="https://app.trysoro.com/api/embed/4ac05c55-d2cd-47a4-8633-16d297a39fce"></script>
 <script data-consent-src="https://www.anrdoezrs.net/am/101724638/include/allCj/generate/onLoad/exclude/5275619,6385999,5289022,7211102,6061620,4861279/impressions/page/am.js" type="text/plain"></script>
 <div aria-label="Informasjon om cookies" aria-live="polite" class="cookie-banner" id="cookieBanner" role="dialog">
 <div>

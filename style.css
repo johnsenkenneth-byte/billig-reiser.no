@@ -4526,6 +4526,172 @@ form#travelSearch[data-mode="package"] #searchSubmitButton.search-launch{
   width:100%;
 }
 
+.front-blog-cta-section{
+  padding:0 18px 34px;
+  background:#020913;
+}
+
+.front-blog-cta{
+  max-width:1120px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:22px;
+  padding:22px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(15,34,61,.95),rgba(5,14,29,.97));
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.front-blog-cta span{
+  display:block;
+  color:#7deaff;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.14em;
+}
+
+.front-blog-cta h2{
+  margin:6px 0 8px;
+  color:#f8fbff;
+  font-size:clamp(26px,3vw,38px);
+  line-height:1.02;
+  letter-spacing:-.04em;
+}
+
+.front-blog-cta p{
+  max-width:680px;
+  margin:0;
+  color:#b8c8dd;
+  line-height:1.55;
+}
+
+.front-blog-cta a{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:0 18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff4bb8,#7c3aed,#22d3ee);
+  color:#fff;
+  font-weight:950;
+}
+
+@media(max-width:720px){
+  .front-blog-cta{
+    display:block;
+    padding:18px;
+    border-radius:20px;
+  }
+
+  .front-blog-cta a{
+    width:100%;
+    margin-top:16px;
+  }
+}
+
+.trip-klook-search{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:minmax(220px,.72fr) minmax(260px,.88fr);
+  gap:14px;
+  align-items:center;
+  min-height:142px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(18,39,66,.94),rgba(7,18,34,.96));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035);
+}
+
+.trip-klook-search small{
+  display:block;
+  color:#7deaff;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.trip-klook-search strong{
+  display:block;
+  margin-top:6px;
+  font-size:25px;
+  line-height:1.02;
+  letter-spacing:-.035em;
+}
+
+.trip-klook-search span{
+  display:block;
+  margin-top:8px;
+  color:#b8c8dd;
+  font-size:14px;
+  font-weight:750;
+  line-height:1.4;
+}
+
+.trip-klook-search label{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  margin:0;
+}
+
+.trip-klook-search input{
+  width:100%;
+  min-height:50px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:15px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  padding:0 14px;
+  font:inherit;
+  font-weight:850;
+  outline:0;
+}
+
+.trip-klook-search input::placeholder{
+  color:#91a7bf;
+}
+
+.trip-klook-search button{
+  min-height:44px;
+  border:0;
+  border-radius:14px;
+  background:#0e7af0;
+  color:#fff;
+  padding:0 14px;
+  font:inherit;
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+}
+
+.trip-klook-search button:hover{
+  background:#1095ff;
+}
+
+.klook-quick-links{
+  grid-column:1/-1;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.klook-quick-links button{
+  min-height:34px;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.055);
+  border-radius:999px;
+  color:#e8f3ff;
+  padding:0 11px;
+  font-size:12px;
+}
+
 .trip-choice em{
   position:relative;
   display:inline-flex;
@@ -4570,4 +4736,33 @@ form#travelSearch[data-mode="package"] #searchSubmitButton.search-launch{
   .trip-choice{
     min-height:154px;
   }
+}
+
+@media(max-width:620px){
+  .trip-klook-search{
+    grid-template-columns:1fr;
+    min-height:0;
+    border-radius:20px;
+  }
+
+  .trip-klook-search label{
+    grid-template-columns:1fr;
+  }
+
+.trip-klook-search strong{
+    font-size:22px;
+  }
+}
+
+/* BR v106: remove unused origin field from hotel and holiday-home search */
+html body form#travelSearch[data-mode="hotel"] .search-fields.fields .field-from,
+html body form#travelSearch[data-mode="interhome"] .search-fields.fields .field-from{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+html body form#travelSearch[data-mode="hotel"] .search-fields.fields .field-to,
+html body form#travelSearch[data-mode="interhome"] .search-fields.fields .field-to{
+  grid-column:1/-1!important;
 }

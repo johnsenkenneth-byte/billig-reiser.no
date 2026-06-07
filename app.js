@@ -126,6 +126,53 @@
 })();
 
 
+/* Klook experience search */
+(() => {
+  const affiliateFallback = (window.BR_AFFILIATES && window.BR_AFFILIATES.activities) || "https://klook.tpx.gr/Tmj2PfPe";
+  const searchBase = (window.BR_AFFILIATES && window.BR_AFFILIATES.klookSearchBase) || "https://www.klook.com/nb/search/result/?query=";
+
+  function buildKlookSearchUrl(query) {
+    const text = String(query || "").trim();
+    if (!text) return affiliateFallback;
+    try {
+      const url = new URL(searchBase);
+      url.searchParams.set("query", text);
+      return url.toString();
+    } catch (error) {
+      return `https://www.klook.com/nb/search/result/?query=${encodeURIComponent(text)}`;
+    }
+  }
+
+  function openKlookSearch(query) {
+    window.open(buildKlookSearchUrl(query), "_blank", "noopener");
+  }
+
+  function bindKlookSearch() {
+    document.querySelectorAll("[data-klook-search-form]").forEach((form) => {
+      const input = form.querySelector("[data-klook-search-input]");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        openKlookSearch(input?.value || "");
+      });
+      form.querySelectorAll("[data-klook-quick]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const query = button.getAttribute("data-klook-quick") || "";
+          if (input) input.value = query;
+          openKlookSearch(query);
+        });
+      });
+    });
+  }
+
+  window.BR_buildKlookSearchUrl = buildKlookSearchUrl;
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindKlookSearch);
+  } else {
+    bindKlookSearch();
+  }
+})();
+
+
 /* Robust Leaflet live map repair */
 (function(){
   const partners = {
@@ -370,7 +417,7 @@
     const ret = validISO(rawReturn) && (!depart || rawReturn > depart) ? rawReturn : (useFallback ? fallbackReturnISO(depart || fallbackDepartISO()) : "");
     return {
       type: currentSearchType,
-      from: currentSearchType === "interhome" ? "" : searchFieldForUrl("fromCity"),
+      from: currentSearchType === "hotel" || currentSearchType === "interhome" ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
       depart,
       ret,
@@ -523,7 +570,7 @@
     const key = type || "flight";
     if (!tabStates[key]) return;
     tabStates[key] = {
-      from: key === "interhome" ? "" : searchFieldForUrl("fromCity"),
+      from: key === "hotel" || key === "interhome" ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
       depart: $("departDate")?.value || "",
       ret: $("returnDate")?.value || "",
@@ -1605,8 +1652,9 @@
       fromField.setAttribute("aria-hidden", hideFromField ? "true" : "false");
     }
     if (from) {
-      from.disabled = currentSearchType === "interhome";
-      if (currentSearchType === "interhome") from.value = "";
+      const disableFromField = currentSearchType === "hotel" || currentSearchType === "interhome";
+      from.disabled = disableFromField;
+      if (disableFromField) from.value = "";
     }
 
     if (currentSearchType === "package") {
