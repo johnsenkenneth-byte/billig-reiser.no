@@ -277,7 +277,7 @@
   const AFFILIATE_LINKS = {
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
-    expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706",
+    expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
@@ -803,6 +803,10 @@
     kiwiTarget.searchParams.set("return", ret);
     kiwiTarget.searchParams.set("adults", state.adults);
     if (Number(state.children)) kiwiTarget.searchParams.set("children", state.children);
+    kiwiTarget.searchParams.set("locale", "no");
+    kiwiTarget.searchParams.set("lang", "no");
+    kiwiTarget.searchParams.set("currency", "NOK");
+    kiwiTarget.searchParams.set("partner_market", "NO");
 
     const travelpayouts = new URL(AFFILIATE_LINKS.kiwi);
     travelpayouts.searchParams.set("shmarker", `${TRAVELPAYOUTS_MARKER}.billigreiser_fly`);
@@ -1124,7 +1128,7 @@
     today.setHours(12, 0, 0, 0);
     const daysInFuture = Math.max(1, Math.round((departDate - today) / 86400000));
     const stayLength = Math.max(1, Math.round((returnDate - departDate) / 86400000));
-    const url = new URL("/go/package/search/FlightHotel/", "https://www.expedia.com");
+    const url = new URL("/go/package/search/FlightHotel/", "https://www.expedia.no");
     url.searchParams.set("FromAirport", airportCode(state.from || "Oslo"));
     url.searchParams.set("Destination", airportCode(state.to));
     url.searchParams.set("NumRoom", "1");
@@ -2022,6 +2026,10 @@
     kiwiTarget.searchParams.set("return", ret);
     kiwiTarget.searchParams.set("adults", data.adults || "2");
     if (Number(data.children)) kiwiTarget.searchParams.set("children", data.children);
+    kiwiTarget.searchParams.set("locale", "no");
+    kiwiTarget.searchParams.set("lang", "no");
+    kiwiTarget.searchParams.set("currency", "NOK");
+    kiwiTarget.searchParams.set("partner_market", "NO");
 
     const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click");
     url.searchParams.set("shmarker", `${(window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286"}.billigreiser_ai_fly`);
@@ -2083,7 +2091,7 @@
     today.setHours(12, 0, 0, 0);
     const daysInFuture = Math.max(1, Math.round((departDate - today) / 86400000));
     const stayLength = Math.max(1, Math.round((returnDate - departDate) / 86400000));
-    const url = new URL("/go/package/search/FlightHotel/", "https://www.expedia.com");
+    const url = new URL("/go/package/search/FlightHotel/", "https://www.expedia.no");
     url.searchParams.set("FromAirport", airportCode(from || "Oslo"));
     url.searchParams.set("Destination", airportCode(to));
     url.searchParams.set("NumRoom", "1");
