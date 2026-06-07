@@ -4766,3 +4766,23 @@ html body form#travelSearch[data-mode="hotel"] .search-fields.fields .field-to,
 html body form#travelSearch[data-mode="interhome"] .search-fields.fields .field-to{
   grid-column:1/-1!important;
 }
+
+/* BR v108: static premium hero image instead of front-page video */
+html body .hero{
+  background:
+    linear-gradient(90deg,rgba(2,7,18,.99) 0%,rgba(2,7,18,.88) 34%,rgba(2,7,18,.50) 64%,rgba(2,7,18,.74) 100%),
+    url("assets/front-hero-flight-map.png") center right/cover no-repeat!important;
+}
+
+html body .front-hero-video,
+html body .front-hero-shade{
+  display:none!important;
+}
+
+@media(max-width:820px){
+  html body .hero{
+    background:
+      linear-gradient(180deg,rgba(2,7,18,.95) 0%,rgba(2,7,18,.83) 46%,rgba(2,7,18,.74) 100%),
+      url("assets/front-hero-flight-map.png") 58% center/cover no-repeat!important;
+  }
+}
