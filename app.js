@@ -8,7 +8,7 @@
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.expedia.com/Cruises",
-    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
+    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -288,7 +288,7 @@
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
     carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
-    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
+    interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
   };
@@ -860,16 +860,6 @@
   }
 
   const INTERHOME_DESTINATIONS = {
-    spania: "5460aeae487f8",
-    spain: "5460aeae487f8",
-    italia: "5460aeae078f7",
-    italy: "5460aeae078f7",
-    frankrike: "5460aeb1b0bf2",
-    france: "5460aeb1b0bf2",
-    norge: "5460aea85799e",
-    norway: "5460aea85799e",
-    kroatia: "5460aeaaa3139",
-    croatia: "5460aeaaa3139",
     toscana: "5460aeb357636",
     tuscany: "5460aeb357636",
     "costa blanca": "5460aeae7180f",
@@ -1028,17 +1018,20 @@
     const searchText = interhomeSearchText(state.to || state.from || "");
     const path = interhomeDestinationPath(searchText);
     const id = interhomeDestinationId(searchText);
-    let target = "https://www.interhome.no/search/5460aeae487f8";
+    let target = "https://www.interhome.no/";
+    let freeTextSearch = searchText;
     if (path) {
       target = new URL(path, "https://www.interhome.no").toString();
+      freeTextSearch = "";
     } else if (id) {
       target = `https://www.interhome.no/search/${id}`;
+      freeTextSearch = "";
     } else if (searchText) {
-      const searchUrl = new URL("https://www.interhome.no/");
+      const searchUrl = new URL("https://www.interhome.no/sok/");
       searchUrl.searchParams.set("destination", searchText);
       target = searchUrl.toString();
     }
-    return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, appendInterhomeSearchParams(target, state, searchText));
+    return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, appendInterhomeSearchParams(target, state, freeTextSearch));
   }
 
   function buildTuiRestplassUrl(state) {
@@ -1105,6 +1098,25 @@
   function openCharterSpotlight(choice) {
     applyTuiQuickChoice(choice);
     window.open(buildCharterUrl(readSearchState({ forUrl: true })), "_blank", "noopener,noreferrer");
+  }
+
+  function applyInterhomeQuickChoice(destination) {
+    setSearchType("interhome");
+    if ($("fromCity")) $("fromCity").value = "";
+    if ($("toCity")) $("toCity").value = destination || "";
+
+    const today = new Date();
+    const depart = new Date(today);
+    depart.setDate(today.getDate() + 14);
+    const ret = new Date(depart);
+    ret.setDate(depart.getDate() + 7);
+    const iso = (date) => date.toISOString().slice(0, 10);
+
+    if ($("departDate") && !$("departDate").value) $("departDate").value = iso(depart);
+    if ($("returnDate") && !$("returnDate").value) $("returnDate").value = iso(ret);
+
+    updateSearchPreview();
+    $("toCity")?.focus();
   }
 
   function openHotelPick(destination) {
@@ -1648,7 +1660,7 @@
     const links = window.BR_AFFILIATES || {};
     return {
       package: "https://www.expedia.no/Fly-Hotell",
-      interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8",
+      interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
       cruise: links.cruise || "https://www.expedia.com/Cruises",
       nazar: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
       restplass: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
@@ -1712,6 +1724,13 @@
     const query = clean(input?.value).toLowerCase();
     if (!query) {
       input?.focus();
+      return;
+    }
+    if (currentSearchType === "interhome" && !/fly|flight|hotell|hotel|pakkereise|pakke\s*reise|leiebil|rental|car|bil|charter|restplass|cruise/.test(query)) {
+      const destination = interhomeSearchText(query);
+      if (destination && $("toCity")) $("toCity").value = destination;
+      updateSearchPreview();
+      if (!openCurrentSearchTarget()) $("toCity")?.focus();
       return;
     }
     if (/restplass|charter|syden/.test(query)) {
@@ -1802,6 +1821,9 @@
     });
     document.querySelectorAll("[data-tui-quick]").forEach((btn) => {
       btn.addEventListener("click", () => applyTuiQuickChoice(btn.dataset.tuiQuick));
+    });
+    document.querySelectorAll("[data-interhome-quick]").forEach((btn) => {
+      btn.addEventListener("click", () => applyInterhomeQuickChoice(btn.dataset.interhomeQuick));
     });
     document.querySelectorAll("[data-charter-open]").forEach((btn) => {
       btn.addEventListener("click", () => openCharterSpotlight(btn.dataset.charterOpen));
@@ -2110,16 +2132,6 @@
   }
 
   const aiInterhomeDestinations = {
-    spania: "5460aeae487f8",
-    spain: "5460aeae487f8",
-    italia: "5460aeae078f7",
-    italy: "5460aeae078f7",
-    frankrike: "5460aeb1b0bf2",
-    france: "5460aeb1b0bf2",
-    norge: "5460aea85799e",
-    norway: "5460aea85799e",
-    kroatia: "5460aeaaa3139",
-    croatia: "5460aeaaa3139",
     toscana: "5460aeb357636",
     tuscany: "5460aeb357636",
     "costa blanca": "5460aeae7180f",
@@ -2209,17 +2221,17 @@
     const directMatch = Object.keys(aiInterhomeDestinations)
       .sort((a, b) => b.length - a.length)
       .find((item) => key === item || key.includes(item));
-    let target = "https://www.interhome.no/search/5460aeae487f8";
-    if (directMatch) {
-      target = `https://www.interhome.no/search/${aiInterhomeDestinations[directMatch]}`;
-    } else if (pathMatch) {
+    let target = "https://www.interhome.no/";
+    if (pathMatch) {
       target = new URL(aiInterhomePaths[pathMatch], "https://www.interhome.no").toString();
+    } else if (directMatch) {
+      target = `https://www.interhome.no/search/${aiInterhomeDestinations[directMatch]}`;
     } else if (place) {
       const searchUrl = new URL("https://www.interhome.no/sok/");
       searchUrl.searchParams.set("destination", place);
       target = searchUrl.toString();
     }
-    const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8");
+    const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F");
     url.searchParams.set("u", target);
     return url.toString();
   }
