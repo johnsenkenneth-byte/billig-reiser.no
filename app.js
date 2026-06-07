@@ -308,6 +308,11 @@
   const $ = (id) => document.getElementById(id);
   const clean = (value, fallback = "") => (String(value || "").trim() || fallback);
   const cityForUrl = (value) => clean(value).replace(/\s+/g, " ");
+  const searchFieldForUrl = (id) => {
+    const value = cityForUrl($(id)?.value);
+    const key = value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, "").trim();
+    return key === "valgfritt" || key === "optional" ? "" : value;
+  };
 
   function addDaysISO(days) {
     const d = new Date();
@@ -362,8 +367,8 @@
     const ret = validISO(rawReturn) && (!depart || rawReturn > depart) ? rawReturn : (useFallback ? fallbackReturnISO(depart || fallbackDepartISO()) : "");
     return {
       type: currentSearchType,
-      from: cityForUrl($("fromCity")?.value),
-      to: cityForUrl($("toCity")?.value),
+      from: currentSearchType === "interhome" ? "" : searchFieldForUrl("fromCity"),
+      to: searchFieldForUrl("toCity"),
       depart,
       ret,
       adults: adultsRaw.replace(/\D/g, "") || "2",
@@ -515,8 +520,8 @@
     const key = type || "flight";
     if (!tabStates[key]) return;
     tabStates[key] = {
-      from: $("fromCity")?.value || "",
-      to: $("toCity")?.value || "",
+      from: key === "interhome" ? "" : searchFieldForUrl("fromCity"),
+      to: searchFieldForUrl("toCity"),
       depart: $("departDate")?.value || "",
       ret: $("returnDate")?.value || "",
       adults: $("adults")?.value || "2",
@@ -1015,23 +1020,16 @@
   }
 
   function buildInterhomeUrl(state) {
-    const searchText = interhomeSearchText(state.to || state.from || "");
+    const searchText = interhomeSearchText(state.to || "");
     const path = interhomeDestinationPath(searchText);
     const id = interhomeDestinationId(searchText);
     let target = "https://www.interhome.no/";
-    let freeTextSearch = searchText;
     if (path) {
       target = new URL(path, "https://www.interhome.no").toString();
-      freeTextSearch = "";
     } else if (id) {
       target = `https://www.interhome.no/search/${id}`;
-      freeTextSearch = "";
-    } else if (searchText) {
-      const searchUrl = new URL("https://www.interhome.no/sok/");
-      searchUrl.searchParams.set("destination", searchText);
-      target = searchUrl.toString();
     }
-    return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, appendInterhomeSearchParams(target, state, freeTextSearch));
+    return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, target);
   }
 
   function buildTuiRestplassUrl(state) {
@@ -1441,7 +1439,6 @@
     const state = readSearchState({ forUrl: true });
 
     if (currentSearchType === "interhome") {
-      if (!state.to && !state.from) throw new Error("Skriv inn hvor du vil finne feriebolig.");
       return buildInterhomeUrl(state);
     }
 
@@ -1500,6 +1497,7 @@
     const adultsLabel = $("adultsLabel");
     const from = $("fromCity");
     const to = $("toCity");
+    const fromField = from?.closest(".field-from");
 
     const modeTitle = $("searchModeTitle");
     const modeCopy = {
@@ -1512,6 +1510,15 @@
       car: ["Leiebil", "Velg hentested og dato før leiebilprisene åpnes hos EconomyBookings."]
     }[currentSearchType];
     if (modeTitle && modeCopy) modeTitle.innerHTML = `<b>${modeCopy[0]}</b><span>${modeCopy[1]}</span>`;
+    if (fromField) {
+      const hideFromField = currentSearchType === "hotel" || currentSearchType === "interhome";
+      fromField.hidden = hideFromField;
+      fromField.setAttribute("aria-hidden", hideFromField ? "true" : "false");
+    }
+    if (from) {
+      from.disabled = currentSearchType === "interhome";
+      if (currentSearchType === "interhome") from.value = "";
+    }
 
     if (currentSearchType === "package") {
       if (dateRangeLabel) dateRangeLabel.textContent = "Reiseperiode";
@@ -1533,12 +1540,12 @@
       if (to) to.placeholder = "Valgfritt, f.eks. Middelhavet";
     } else if (currentSearchType === "interhome") {
       if (dateRangeLabel) dateRangeLabel.textContent = "Opphold";
-      if (fromLabel) fromLabel.textContent = "Valgfritt";
+      if (fromLabel) fromLabel.textContent = "";
       if (toLabel) toLabel.textContent = "Hvor vil du leie feriebolig?";
       if (departLabel) departLabel.textContent = "Ankomst";
       if (returnLabel) returnLabel.textContent = "Avreise";
       if (adultsLabel) adultsLabel.textContent = "Gjester";
-      if (from) from.placeholder = "Valgfritt";
+      if (from) from.placeholder = "";
       if (to) to.placeholder = "Skriv område, by eller sted, f.eks. Toscana";
     } else if (currentSearchType === "restplass") {
       if (dateRangeLabel) dateRangeLabel.textContent = "Reiseperiode";
@@ -1709,7 +1716,6 @@
     } else if (currentSearchType === "restplass") {
       target = buildCharterUrl(state);
     } else if (currentSearchType === "interhome") {
-      if (!state.to && !state.from) return false;
       target = buildInterhomeUrl(state);
     } else if (currentSearchType === "cruise") {
       target = buildCruiseUrl(state);
@@ -2226,10 +2232,6 @@
       target = new URL(aiInterhomePaths[pathMatch], "https://www.interhome.no").toString();
     } else if (directMatch) {
       target = `https://www.interhome.no/search/${aiInterhomeDestinations[directMatch]}`;
-    } else if (place) {
-      const searchUrl = new URL("https://www.interhome.no/sok/");
-      searchUrl.searchParams.set("destination", place);
-      target = searchUrl.toString();
     }
     const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F");
     url.searchParams.set("u", target);
