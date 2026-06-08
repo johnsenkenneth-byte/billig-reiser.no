@@ -7,7 +7,7 @@
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
-    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || DEFAULT_EXPEDIA_CRUISE_URL,
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
@@ -18,7 +18,7 @@
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
-    economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
+    economyBookings: (window.BR_AFFILIATES && (window.BR_AFFILIATES.economyBookingsEurope || window.BR_AFFILIATES.economyBookings)) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoeurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
     activities: (window.BR_AFFILIATES && window.BR_AFFILIATES.activities) || "https://klook.tpx.gr/Tmj2PfPe",
     kkday: (window.BR_AFFILIATES && window.BR_AFFILIATES.kkday) || "https://kkday.tpx.gr/WlhfXaEZ",
@@ -327,7 +327,7 @@
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly",
-    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/Fly-Hotell",
+    packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
@@ -335,6 +335,9 @@
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
+    economyBookingsClick: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookingsClick) || "https://c10.travelpayouts.com/click",
+    economyBookingsPromoId: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookingsPromoId) || "2018",
+    economyBookingsEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookingsEurope) || "https://c10.travelpayouts.com/click?shmarker=718286.billigreiser_car_europe&promo_id=2018&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.economybookings.com%2Fcar-rental%2Feurope",
     autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
     carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
@@ -902,14 +905,49 @@
     return affiliateWrap(AFFILIATE_LINKS.hotels, url.toString());
   }
 
+  function travelpayoutsCustomLink(clickBase, promoId, targetUrl, markerSuffix) {
+    const url = new URL(clickBase || "https://c10.travelpayouts.com/click");
+    url.searchParams.set("shmarker", `${TRAVELPAYOUTS_MARKER}.${markerSuffix}`);
+    url.searchParams.set("promo_id", promoId || "2018");
+    url.searchParams.set("source_type", "customlink");
+    url.searchParams.set("type", "click");
+    url.searchParams.set("custom_url", targetUrl);
+    return url.toString();
+  }
+
+  function cleanPickupPlace(value) {
+    return clean(value)
+      .replace(/\s*\([A-Za-z]{3}\)\s*$/i, "")
+      .replace(/\b(lufthavn|airport|flyplass)\b/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function buildEconomyBookingsTarget(state) {
+    const pickup = clean(state.from);
+    const code = airportCode(pickup);
+    const target = new URL("https://www.economybookings.com/en");
+    if (/^[A-Z]{3}$/.test(code)) {
+      target.searchParams.set("idpickval", code);
+    } else {
+      target.searchParams.set("idpick", cleanPickupPlace(pickup) || "Alicante");
+    }
+    return target.toString();
+  }
+
   function buildCarDirectUrl(state) {
-    // EconomyBookings brukes som hovedpartner for leiebil når direkte søk ikke støttes.
-    return AFFILIATE_LINKS.economyBookings || AFFILIATE_LINKS.enjoyTravel || AFFILIATE_LINKS.car || "https://economybookings.tpx.gr/LT8vc2kD";
+    if (!state?.from) return AFFILIATE_LINKS.economyBookingsEurope || AFFILIATE_LINKS.economyBookings || "https://economybookings.tpx.gr/LT8vc2kD";
+    return travelpayoutsCustomLink(
+      AFFILIATE_LINKS.economyBookingsClick,
+      AFFILIATE_LINKS.economyBookingsPromoId,
+      buildEconomyBookingsTarget(state),
+      "billigreiser_car"
+    );
   }
 
 
   function buildCarUrl(state) {
-    // Send brukeren til leiebilpartner. Enjoy/AutoEurope håndterer faktisk søk på sin side.
+    // EconomyBookings støtter forhåndsutfylt hentested via Travelpayouts deep link.
     return buildCarDirectUrl(state);
   }
 
@@ -918,17 +956,47 @@
   }
 
   const INTERHOME_DESTINATIONS = {
+    spania: "5460aeae487f8",
+    spain: "5460aeae487f8",
+    italia: "5460aeae078f7",
+    italy: "5460aeae078f7",
+    frankrike: "5460aeb1b0bf2",
+    france: "5460aeb1b0bf2",
+    norge: "5460aea85799e",
+    norway: "5460aea85799e",
+    kroatia: "5460aeaaa3139",
+    croatia: "5460aeaaa3139",
+    danmark: "5460aeb07b41a",
+    denmark: "5460aeb07b41a",
+    portugal: "5460aecfccf0c",
+    sveits: "5460aea910151",
+    switzerland: "5460aea910151",
+    sverige: "5460aea8a7782",
+    sweden: "5460aea8a7782",
     toscana: "5460aeb357636",
     tuscany: "5460aeb357636",
-    "costa blanca": "5460aeae7180f",
-    alicante: "5460aeae7180f",
-    benidorm: "5460aeae7180f",
+    "costa blanca": "5460aeae7e340",
+    alicante: "5460aeae7e340",
+    benidorm: "5460aeae7e340",
     calpe: "5460aeae7180f",
-    "costa del sol": "5460aec5cc8ff",
-    malaga: "5460aec5cc8ff",
-    marbella: "5460aec5cc8ff",
-    fuengirola: "5460aec5cc8ff",
-    torremolinos: "5460aec5cc8ff"
+    "calpe calp": "5460aeae7180f",
+    denia: "5adf5aac56557",
+    dénia: "5adf5aac56557",
+    javea: "594b56d5b4c99",
+    "jávea": "594b56d5b4c99",
+    "costa del sol": "5460aecaa212c",
+    malaga: "5460aecaa212c",
+    marbella: "5460aecaa212c",
+    fuengirola: "5460aecaa212c",
+    torremolinos: "5460aecaa212c",
+    mallorca: "5460aec60bc58",
+    palma: "5460aec60bc58",
+    "costa brava": "5460aeae704b7",
+    "cote d azur": "5460aec0514e4",
+    "côte d azur": "5460aec0514e4",
+    "côte d'azur": "5460aec0514e4",
+    dalmatia: "5460aeb3581cb",
+    dalmatiaen: "5460aeb3581cb"
   };
 
   const TUI_RESTPLASS_DESTINATIONS = {
@@ -1137,6 +1205,7 @@
       url.searchParams.set("q", searchText);
     }
     url.searchParams.set("arrival", depart);
+    url.searchParams.set("duration", String(Math.max(1, Math.round(((parseISODate(ret) || new Date(ret)) - (parseISODate(depart) || new Date(depart))) / 86400000) || 7)));
     url.searchParams.set("departure", ret);
     url.searchParams.set("checkin", depart);
     url.searchParams.set("checkout", ret);
@@ -1150,14 +1219,9 @@
 
   function buildInterhomeUrl(state) {
     const searchText = interhomeSearchText(state.to || "");
-    const path = interhomeDestinationPath(searchText);
     const id = interhomeDestinationId(searchText);
-    let target = "https://www.interhome.no/";
-    if (path) {
-      target = new URL(path, "https://www.interhome.no").toString();
-    } else if (id) {
-      target = `https://www.interhome.no/search/${id}`;
-    }
+    let target = id ? `https://www.interhome.no/search/${id}` : "https://www.interhome.no/search/";
+    target = appendInterhomeSearchParams(target, state, searchText);
     return tradeTrackerDeepLink(AFFILIATE_LINKS.interhome, target);
   }
 
@@ -1803,7 +1867,7 @@
   function smartServiceUrl(service) {
     const links = window.BR_AFFILIATES || {};
     return {
-      package: "https://www.expedia.no/Fly-Hotell",
+      package: links.packageTravel || "https://www.expedia.no/go/package/search/FlightHotel/",
       interhome: links.interhome || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
       cruise: links.cruise || DEFAULT_EXPEDIA_CRUISE_URL,
       nazar: links.nazar || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
@@ -2246,8 +2310,37 @@
     return cjAffiliate(base, url.toString());
   }
 
-  function aiCarUrl() {
-    return (window.BR_AFFILIATES && (window.BR_AFFILIATES.economyBookings || window.BR_AFFILIATES.enjoyTravel || window.BR_AFFILIATES.car)) || "https://economybookings.tpx.gr/LT8vc2kD";
+  function aiTravelpayoutsCustomLink(clickBase, promoId, targetUrl, markerSuffix) {
+    const marker = (window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286";
+    const url = new URL(clickBase || "https://c10.travelpayouts.com/click");
+    url.searchParams.set("shmarker", `${marker}.${markerSuffix}`);
+    url.searchParams.set("promo_id", promoId || "2018");
+    url.searchParams.set("source_type", "customlink");
+    url.searchParams.set("type", "click");
+    url.searchParams.set("custom_url", targetUrl);
+    return url.toString();
+  }
+
+  function aiEconomyBookingsTarget(place = "") {
+    const target = new URL("https://www.economybookings.com/en");
+    const code = airportCode(place);
+    if (/^[A-Z]{3}$/.test(code)) {
+      target.searchParams.set("idpickval", code);
+    } else {
+      target.searchParams.set("idpick", placeName(place) || "Alicante");
+    }
+    return target.toString();
+  }
+
+  function aiCarUrl(place = "") {
+    const links = window.BR_AFFILIATES || {};
+    if (!place) return links.economyBookingsEurope || links.economyBookings || "https://economybookings.tpx.gr/LT8vc2kD";
+    return aiTravelpayoutsCustomLink(
+      links.economyBookingsClick || "https://c10.travelpayouts.com/click",
+      links.economyBookingsPromoId || "2018",
+      aiEconomyBookingsTarget(place),
+      "billigreiser_ai_car"
+    );
   }
 
   function aiPackageUrl(data) {
@@ -2353,15 +2446,47 @@
   }
 
   const aiInterhomeDestinations = {
+    spania: "5460aeae487f8",
+    spain: "5460aeae487f8",
+    italia: "5460aeae078f7",
+    italy: "5460aeae078f7",
+    frankrike: "5460aeb1b0bf2",
+    france: "5460aeb1b0bf2",
+    norge: "5460aea85799e",
+    norway: "5460aea85799e",
+    kroatia: "5460aeaaa3139",
+    croatia: "5460aeaaa3139",
+    danmark: "5460aeb07b41a",
+    denmark: "5460aeb07b41a",
+    portugal: "5460aecfccf0c",
+    sveits: "5460aea910151",
+    switzerland: "5460aea910151",
+    sverige: "5460aea8a7782",
+    sweden: "5460aea8a7782",
     toscana: "5460aeb357636",
     tuscany: "5460aeb357636",
-    "costa blanca": "5460aeae7180f",
-    alicante: "5460aeae7180f",
-    benidorm: "5460aeae7180f",
-    "costa del sol": "5460aec5cc8ff",
-    malaga: "5460aec5cc8ff",
-    marbella: "5460aec5cc8ff",
-    fuengirola: "5460aec5cc8ff"
+    "costa blanca": "5460aeae7e340",
+    alicante: "5460aeae7e340",
+    benidorm: "5460aeae7e340",
+    calpe: "5460aeae7180f",
+    "calpe calp": "5460aeae7180f",
+    denia: "5adf5aac56557",
+    dénia: "5adf5aac56557",
+    javea: "594b56d5b4c99",
+    "jávea": "594b56d5b4c99",
+    "costa del sol": "5460aecaa212c",
+    malaga: "5460aecaa212c",
+    marbella: "5460aecaa212c",
+    fuengirola: "5460aecaa212c",
+    torremolinos: "5460aecaa212c",
+    mallorca: "5460aec60bc58",
+    palma: "5460aec60bc58",
+    "costa brava": "5460aeae704b7",
+    "cote d azur": "5460aec0514e4",
+    "côte d azur": "5460aec0514e4",
+    "côte d'azur": "5460aec0514e4",
+    dalmatia: "5460aeb3581cb",
+    dalmatiaen: "5460aeb3581cb"
   };
 
   const aiInterhomePaths = {
@@ -2436,20 +2561,29 @@
   function aiInterhomeUrl(text = "") {
     const place = aiInterhomeDestination(text);
     const key = aiDestinationKey(place);
-    const pathMatch = Object.keys(aiInterhomePaths)
-      .sort((a, b) => b.length - a.length)
-      .find((item) => key === item || key.includes(item));
     const directMatch = Object.keys(aiInterhomeDestinations)
       .sort((a, b) => b.length - a.length)
       .find((item) => key === item || key.includes(item));
-    let target = "https://www.interhome.no/";
-    if (pathMatch) {
-      target = new URL(aiInterhomePaths[pathMatch], "https://www.interhome.no").toString();
-    } else if (directMatch) {
-      target = `https://www.interhome.no/search/${aiInterhomeDestinations[directMatch]}`;
+    let target = directMatch ? `https://www.interhome.no/search/${aiInterhomeDestinations[directMatch]}` : "https://www.interhome.no/search/";
+    const targetUrl = new URL(target);
+    const depart = $("departDate")?.value || addDaysISO(14);
+    const ret = $("returnDate")?.value || addDaysISO(21);
+    const departDate = new Date(`${depart}T12:00:00`);
+    const returnDate = new Date(`${ret}T12:00:00`);
+    const duration = Math.max(1, Math.round((returnDate - departDate) / 86400000) || 7);
+    const adults = Math.max(1, Math.min(9, Number($("adults")?.value || 2)));
+    const children = Math.max(0, Math.min(8, Number($("children")?.value || 0)));
+    if (place) {
+      targetUrl.searchParams.set("destination", place);
+      targetUrl.searchParams.set("q", place);
     }
+    targetUrl.searchParams.set("arrival", depart);
+    targetUrl.searchParams.set("duration", String(duration));
+    targetUrl.searchParams.set("adults", String(adults));
+    targetUrl.searchParams.set("persons", String(adults + children));
+    if (children) targetUrl.searchParams.set("children", String(children));
     const url = new URL((window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F");
-    url.searchParams.set("u", target);
+    url.searchParams.set("u", targetUrl.toString());
     return url.toString();
   }
 
@@ -2513,7 +2647,7 @@
     setValue("toCity", "");
     addMessage(`Jeg har fylt ut leiebilsøk for <b>${place || "Alicante"}</b>. Velg dato hvis du vil, eller åpne leiebilpartneren direkte.`, "bot", {
       label: "Åpne leiebil",
-      onClick: () => window.open(aiCarUrl(), "_blank", "noopener,noreferrer")
+      onClick: () => window.open(aiCarUrl(place || "Alicante (ALC)"), "_blank", "noopener,noreferrer")
     });
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
