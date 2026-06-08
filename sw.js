@@ -1,14 +1,14 @@
-const CACHE_VERSION = "billig-reiser-pwa-v1";
+const CACHE_VERSION = "billig-reiser-pwa-v114-logo";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=75",
+  "/style.css?v=114",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
-  "/assets/logo-main.png"
+  "/assets/billig-reiser-logo-v114.png"
 ];
 
 self.addEventListener("install", event => {

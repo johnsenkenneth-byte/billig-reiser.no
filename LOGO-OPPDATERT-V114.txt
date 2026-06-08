@@ -1,0 +1,1 @@
+Ny logo er satt som eneste hovedlogo. Gamle logo-filer er fjernet. Header bruker assets/billig-reiser-logo-v114.png. PWA-cache er bumpet til v114.
