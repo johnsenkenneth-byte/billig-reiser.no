@@ -11,7 +11,7 @@ const KLOOK_FALLBACK = "https://klook.tpx.gr/Tmj2PfPe";
 const GYG_HOME = "https://www.getyourguide.com/?partner_id=FIQDAEB&utm_medium=local_partners";
 const HERO_IMAGE = "/spania/assets/spania-hero.png";
 const TODAY = "2026-06-09";
-const SPAIN_CSS_VERSION = "126";
+const SPAIN_CSS_VERSION = "129";
 const HOTEL_DEEP_LINKS = {
   "Barcelona|H10 Madison Barcelona": "https://www.hotels.com/affiliates/h10-madison-barcelona-spania.FHqIi8c",
   "Barcelona|Aparthotel Arai 4 Superior": "https://www.hotels.com/affiliates/arai-aparthotel-barcelona-spania.L7Y7QPw",
@@ -71,6 +71,69 @@ const HOTEL_DEEP_LINKS = {
   "Gran Canaria|Seaside Grand Hotel Residencia": "https://www.hotels.com/affiliates/seaside-grand-hotel-residencia-san-bartolome-de-tirajana-spania.hPZ0BNM",
   "Gran Canaria|TC Hotel Dona Luisa": "https://www.hotels.com/affiliates/hotel-dona-luisa-las-palmas-de-gran-canaria-spania.F1UTzBG",
   "Gran Canaria|Radisson Blu Resort & Spa Gran Canaria Mogan": "https://www.hotels.com/affiliates/radisson-blu-resort-spa-gran-canaria-mogan-mogan-spania.Ub9bGdO"
+};
+
+const HOTEL_IMAGES = {
+  "Barcelona|H10 Madison Barcelona": "https://pro-static.h10hotels.com/gallery/T4D3/13_HMDTerrassadelGotic.jpg",
+  "Barcelona|Aparthotel Arai 4 Superior": "https://api.fishhotels.com/api/sites/cd158fb4-9389-47d1-bc89-e401b5da7ca3/media-images/ar-piscina-2.jpg?cw=2000&ch=1126&cx=0&cy=34&s=xl&w=1200&h=676",
+  "Barcelona|Hotel Arts Barcelona": "https://cache.marriott.com/content/dam/marriott-digital/rz/emea/hws/b/bcnrz/en_us/photo/unlimited/assets/rz-bcnrz-hotel-tower-11556.jpg",
+  "Barcelona|Motel One Barcelona-Ciutadella": "https://image.motel-one.com/fileadmin/dam/_processed_/a/a/csm_hotel_barcelona_ciutadella_motel_one.JPG_d70bbb97d3.jpeg?h=1920&quality=78",
+  "Barcelona|Novotel Barcelona City": "https://www.ahstatic.com/photos/5560_ho_00_p_2048x1536.jpg",
+  "Madrid|Only YOU Boutique Hotel Madrid": "https://images.trvl-media.com/lodging/7000000/6430000/6427300/6427217/bd98624e.jpg?impolicy=resizecrop&ra=fit&rw=598",
+  "Madrid|Suites Viena Plaza de Espana": "https://www.hotelscombined.com/rimg/himg/28/ed/d9/expedia_group-163078-264656514-968759.jpg?crop=true&height=607&width=968",
+  "Madrid|Four Seasons Hotel Madrid": "https://www.fourseasons.com/alt/img-opt/~75.701.0,0000-0,0000-1600,0000-900,0000/publish/content/dam/fourseasons/images/web/MMD/MMD_1096_aspect16x9.jpg",
+  "Madrid|Hotel Regina Madrid": "https://www.hotelreginamadrid.com/wp-content/uploads/2025/05/regina-intro-edit.jpg",
+  "Madrid|Novotel Madrid Center": "https://www.ahstatic.com/photos/9298_ho_00_p_2048x1536.jpg",
+  "Valencia|Hospes Palau de la Mar": "https://www.hospes.com/wp-content/uploads/sites/1676/nggallery/new-palau//hotel-header.jpg",
+  "Valencia|Barcelo Valencia": "https://static.barcelo.com/content/dam/bhg/master/es/hoteles/spain/valencia/barcelo-valencia/main-photos/hotel/bval_view_19.jpg",
+  "Valencia|Las Arenas Balneario Resort": "https://www.hotelvalencialasarenas.com/wp-content/blogs.dir/1493/files/home//home_placer_descansar.jpg",
+  "Valencia|Venecia Plaza Centro": "https://hotelvenecia.com/wp-content/uploads/IMG_8344-1200x800.jpg",
+  "Valencia|Ilunion Aqua 4": "https://objectstore.true.nl/prijsvrij%3Aaccommodations/626x416/70XGSG97N17TPN7LO5L33YDGB019V29QBA37PKLA.jpg",
+  "Sevilla|Hotel Casa 1800 Sevilla": "https://www.americanexpress.com/en-us/travel/discover/photos/482863/89656/1600/HOTEL-CASA-1800-SEVILLA-HABITACION-DELUXE-PREMIUM.jpg?ch=560",
+  "Sevilla|H10 Casa de la Plata": "https://pro-static.h10hotels.com/gallery/T4D3/07_HCTAtriumDoubleRoom2.jpg",
+  "Sevilla|Hotel Alfonso XIII": "https://www.americanexpress.com/en-us/travel/discover/photos/911/152828/530/Exterior_day-3650.jpg?ch=310",
+  "Sevilla|Hotel Becquer": "https://static-resources-elementor.mirai.com/wp-content/uploads/sites/1523/menu-bg-hotel002-2048x1152-1.webp",
+  "Sevilla|Novotel Sevilla": "https://www.ahstatic.com/photos/3210_ho_00_p_2048x1536.jpg",
+  "Malaga|Palacio Solecio": "https://b4283699.smushcdn.com/4283699/wp-content/uploads/2020/10/Suite_Torre_Hero_Shot-1200x800.jpg?lossy=2&strip=1&webp=1",
+  "Malaga|Barcelo Malaga": "https://static.barcelo.com/content/dam/bhg/master/es/hoteles/spain/andalucia/malaga/barcelo-malaga/main-photos/hotel/BMAL_POOL_001.jpg",
+  "Malaga|Gran Hotel Miramar": "https://www.granhotelmiramarmalaga.com/wp-content/blogs.dir/1833/files/home//home-alojese-bajo-el-sol.jpg",
+  "Malaga|Casual del Mar Malaga": "https://images.trvl-media.com/lodging/19000000/18770000/18760200/18760144/6886b762.jpg?impolicy=resizecrop&ra=fit&rw=598",
+  "Malaga|Sol Guadalmar": "https://dam.melia.com/melia/accounts/f8/4000018/projects/127/assets/31/29897/1fe882fb0ff5b2d9cd772a23efc02982-1600695413.jpg?im=RegionOfInterestCrop=(11,15),regionOfInterest=(1771.5,454)",
+  "Marbella|Amare Beach Hotel Marbella": "https://www.amarehotels.com/wp-content/uploads/2025/11/galeria-principal-amare-marbella-11.jpg",
+  "Marbella|Marriott's Marbella Beach Resort": "https://content.vistana.com/files/live/sites/vistana-digital-content-manager/files/images/properties/Marriott%20Vacation%20Club/MB/SUP-11876_MarbellaBeachClub_exterior_HERO_mvcAGPMBex-204670_16x9.jpg",
+  "Marbella|Puente Romano Beach Resort": "https://www.puenteromano.com/media/moypxst1/grand-suites-heropuenteromano_z31_imperial_suite_livingroom.jpg?rxy=0.4664710225491733,0.6341079663474728&width=420&height=290&quality=80&v=1d9af3001755ce0",
+  "Marbella|Ona Marbella Inn": "https://oh-inn.hotels-andalucia.com/data/Pictures/150x150w/12727/1272773/1272773809/marbella-ona-marbella-inn-picture-14.JPEG",
+  "Marbella|AluaSun Marbella Park": "https://gips.ltur.com/gips/scalr/666x528/pics.tui.com/pics/pics1600x1200/tui/5/514a7910-e8b2-46c9-9f74-b755b4557a71.jpg",
+  "Alicante|Hospes Amerigo": "https://www.hospes.com/wp-content/uploads/sites/1676/nggallery/new-amerigo//recep.jpg",
+  "Alicante|Melia Alicante": "https://dam.melia.com/melia/accounts/f8/4000018/projects/127/assets/78/25181/6f9ca02f6567d43e3f7357fbbba89df4-1600597881.jpg?im=RegionOfInterestCrop=(15,8),regionOfInterest=(1181,1771.5)",
+  "Alicante|Hotel Casa Alberola Alicante": "https://x.cdrst.com/foto/hotel-sf/13ff7305/granderesp/foto-hotel-13ff685b.jpg",
+  "Alicante|Hotel Maya Alicante": "https://maya-hotel-alicante.hotel-dir.com/data/Photos/OriginalPhoto/2204/220464/220464809.JPEG",
+  "Alicante|Port Alicante City & Beach": "https://cdn2.paraty.es/port-corpo/images/dfb88ad11dcf566%3Ds1900",
+  "Benidorm|Villa Venecia Hotel Boutique Gourmet": "https://www.hotelvillavenecia.com/media/uploads/cms_apps/imagenes/Screenshot_8_8kGWdx6.png?q=pr:sharp/rs:fill/w:1920/h:500/g:ce/f:jpg",
+  "Benidorm|Hotel RH Princesa": "https://www.hotelesrh.com/content/dam/rhhoteles/assets/hoteles/benidorm/rh-princesa/imagenes/hotel/multimosaico-princesa-01.jpg/_jcr_content/renditions/mobile-jpg.jpeg",
+  "Benidorm|Asia Gardens Hotel & Thai Spa": "https://www.wellbeingescapes.com/images/hotel/233x100/d33153215e5ed7f072da94a095cf4230.webp",
+  "Benidorm|Hotel Helios Benidorm": "https://images.trvl-media.com/lodging/39000000/38570000/38569400/38569375/1e2fe63f.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Benidorm|Magic Robin Hood Resort": "https://images.trvl-media.com/lodging/68000000/67430000/67420800/67420769/22c04cc9.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Palma og Mallorca|Hotel Can Cera": "https://images.trvl-media.com/lodging/5000000/4330000/4326800/4326722/a3f50543.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Palma og Mallorca|Zafiro Palace Palmanova": "https://images.trvl-media.com/lodging/2000000/1210000/1200300/1200269/9427a0a7.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Palma og Mallorca|Cap Rocat": "https://b4412011.smushcdn.com/4412011/wp-content/uploads/2019/04/caprocat_exterior_vertical_MEDIA-768x1024.jpg?lossy=2&strip=1&webp=1",
+  "Palma og Mallorca|Hotel Almudaina": "https://www.hotelalmudaina.com/dms/monoHotel-Almudaina-New/GaleriaSkyBar/sky-bar-vistas-2.jpg",
+  "Palma og Mallorca|Zafiro Palace Alcudia": "https://media-cdn.holidaycheck.com/w_1280%2Ch_720%2Cc_fit%2Cq_auto%2Cf_auto/ugc/images/fed58cd1-0667-435a-82d4-1b590964471e",
+  "Ibiza|Hotel Mirador de Dalt Vila": "https://images2.neobookings.com/cms/devel.www.hotelmiradoribiza.com/section/quality-accommodation-br-in-formentera-and-ibiza/pics/quality-accommodation-br-in-formentera-and-ibiza-dm1lkk7lrz.jpeg?width=1920&height=1080&aspect_ratio=1.7778:1&quality=80",
+  "Ibiza|Grand Palladium Palace Ibiza Resort & Spa": "https://images.trvl-media.com/lodging/2000000/1440000/1439800/1439711/a5011072.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Ibiza|Hotel Gran Sol": "https://images.trvl-media.com/lodging/3000000/2010000/2005100/2005081/b2133dbc.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Ibiza|Six Senses Ibiza": "https://media.sixsenses.com/B60H3R33/at/3mr4fqhv5t73vwbk3mtf53/Swimming_Pool_aerial.jpg??format=webp&width=1600",
+  "Ibiza|Invisa Hotel Club Cala Verde": "https://www.invisahoteles.com/uploads/cms_apps/imagenes/inner-invisa-c_1_1_bkGtrSd_IQ5Uy7A.jpg",
+  "Tenerife|Royal Hideaway Corales Beach": "https://images.trvl-media.com/lodging/19000000/18750000/18741400/18741335/9d06b917.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Tenerife|GF Victoria": "https://images.trvl-media.com/lodging/21000000/20460000/20455000/20454982/d17f2f51.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Tenerife|The Ritz-Carlton Tenerife, Abama": "https://cache.marriott.com/content/dam/marriott-renditions/TFSRZ/tfsrz-lobby-bar-4984-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1200px:*",
+  "Tenerife|MYND Adeje": "https://www.myndhotels.com/media/uploads/cms_apps/imagenes/bg.jpg?q=pr:sharp/rs:fill/w:1920/h:800/f:jpg",
+  "Tenerife|Bahia del Duque": "https://images.trvl-media.com/lodging/1000000/860000/859500/859471/217fbc20.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+  "Gran Canaria|Bohemia Suites & Spa": "https://bohemia-grancanaria.com/media/6254/home-suite.jpg?anchor=center&mode=crop&width=884&height=1013&rnd=133910050270000000",
+  "Gran Canaria|Lopesan Baobab Resort": "https://www.lopesan.com/documents/49789/1471305/2%2BLODGE%2BZONE%2B%285%29.jpg/9ade769d-6e00-5797-feae-bf57e4a65ab5?t=1762949494019&version=4.0",
+  "Gran Canaria|Seaside Grand Hotel Residencia": "https://www.grand-hotel-residencia.com/sites/default/files/styles/imagen_slider_y_galeria_pequ_400x250_/public/Seaside_GHR_Pool_2%20%281%29_0.jpg?itok=x0w3mNL3",
+  "Gran Canaria|TC Hotel Dona Luisa": "https://trujillocastellanos.com/_images/sites/trujillo-castellanos1625/img/61-recepcion-dona-luisa-700x410.jpg?c=0&h=410&w=700",
+  "Gran Canaria|Radisson Blu Resort & Spa Gran Canaria Mogan": "https://images.trvl-media.com/lodging/17000000/16090000/16085800/16085753/fc23d9d4.jpg?impolicy=resizecrop&rw=1200&ra=fit"
 };
 const ACTIVITY_DEEP_LINKS = {
   "Sevilla|Alcazar Sevilla": "https://klook.tpx.gr/QehAvSfc",
@@ -742,12 +805,12 @@ const P = {
 const photoLibrary = {
   Barcelona: {
     hero: [P.barcelona],
-    hotels: [P.barcelona, P.boqueria, P.sagrada, P.parkGuell, P.casaBatllo],
-    areas: [P.barcelona, P.boqueria, P.parkGuell],
-    food: [P.boqueria, P.tapas, P.barcelona, P.casaBatllo],
-    shopping: [P.casaBatllo, P.boqueria, P.barcelona],
+    hotels: [P.barcelona, P.sagrada, P.parkGuell, P.casaBatllo, P.montserrat],
+    areas: [P.barcelona, P.sagrada, P.parkGuell],
+    food: [P.tapas, P.casaBatllo, P.sagrada, P.barcelona],
+    shopping: [P.casaBatllo, P.barcelona, P.parkGuell],
     beaches: [P.barcelona, P.parkGuell, P.montserrat],
-    gems: [P.montserrat, P.parkGuell, P.barcelona, P.boqueria],
+    gems: [P.montserrat, P.parkGuell, P.sagrada, P.barcelona],
     activities: [P.sagrada, P.parkGuell, P.casaBatllo, P.montserrat, P.tapas, P.barcelona]
   },
   Madrid: {
@@ -772,7 +835,7 @@ const photoLibrary = {
   },
   Sevilla: {
     hero: [P.seville],
-    hotels: [P.seville, P.giralda, P.triana, P.tapas, P.seville],
+    hotels: [P.seville, P.giralda, P.triana, P.seville, P.ronda],
     areas: [P.seville, P.giralda, P.triana],
     food: [P.tapas, P.triana, P.seville, P.giralda],
     shopping: [P.triana, P.seville, P.giralda],
@@ -782,7 +845,7 @@ const photoLibrary = {
   },
   Malaga: {
     hero: [P.malaga],
-    hotels: [P.malaga, P.alcazaba, P.caminito, P.ronda, P.tapas],
+    hotels: [P.malaga, P.alcazaba, P.caminito, P.ronda, P.malaga],
     areas: [P.malaga, P.alcazaba, P.tapas],
     food: [P.tapas, P.malaga, P.alcazaba, P.ronda],
     shopping: [P.malaga, P.tapas, P.alcazaba],
@@ -802,7 +865,7 @@ const photoLibrary = {
   },
   Alicante: {
     hero: [P.alicante],
-    hotels: [P.alicante, P.guadalest, P.valencia, P.tapas, P.alicante],
+    hotels: [P.alicante, P.guadalest, P.valencia, P.alicante, P.guadalest],
     areas: [P.alicante, P.guadalest, P.valencia],
     food: [P.tapas, P.paella, P.alicante, P.guadalest],
     shopping: [P.alicante, P.tapas, P.valencia],
@@ -907,6 +970,10 @@ function hotelDeepLink(city, hotel) {
   return HOTEL_DEEP_LINKS[`${city}|${hotel}`] || "";
 }
 
+function hotelPhoto(city, hotel, index) {
+  return HOTEL_IMAGES[`${city.name}|${hotel}`] || cityPhoto(city, "hotels", index);
+}
+
 function klookLink(query) {
   const url = new URL("https://www.klook.com/nb/search/result/");
   url.searchParams.set("query", `${query} Spain`);
@@ -986,31 +1053,17 @@ function renderHotels(city) {
     const directHref = hotelDeepLink(city.name, name);
     const hotelHref = directHref || cjHotelLink(city.name, name);
     const hotelCta = directHref ? "Sjekk pris hos Hotels.com →" : "Søk hos Hotels.com →";
-    const tone = [
-      "linear-gradient(135deg, rgba(255, 209, 102, .28), rgba(34, 211, 238, .18))",
-      "linear-gradient(135deg, rgba(34, 211, 238, .28), rgba(255, 75, 184, .16))",
-      "linear-gradient(135deg, rgba(255, 107, 107, .24), rgba(255, 209, 102, .2))",
-      "linear-gradient(135deg, rgba(20, 184, 166, .24), rgba(34, 211, 238, .16))",
-      "linear-gradient(135deg, rgba(124, 58, 237, .24), rgba(255, 209, 102, .18))"
-    ][index % 5];
     return `
         <article class="mockup-hotel-card">
-          <div class="mockup-hotel-media" style="--hotel-tone:${tone}">
-            <img src="${escapeHtml(cityPhoto(city, "hotels", index))}" alt="${escapeHtml(`${name} i ${city.name}`)}" loading="lazy" decoding="async" />
+          <div class="mockup-hotel-media">
+            <img src="${escapeHtml(hotelPhoto(city, name, index))}" alt="${escapeHtml(`${name} i ${city.name}`)}" loading="lazy" decoding="async" />
             <div class="mockup-photo-stars">${stars(level)}</div>
           </div>
           <div class="mockup-hotel-content">
             <h3>${escapeHtml(name)}</h3>
-            <div class="mockup-stars">${stars(level)}</div>
-            <p class="mockup-best">Best for: ${escapeHtml(best)}</p>
-            <div class="mockup-location"><span>Beliggenhet</span><strong>${escapeHtml(area)}</strong></div>
-            <div class="mockup-facts">
-              <div><span>Stil</span><strong>${escapeHtml(style)}</strong></div>
-              <div><span>Nivå</span><strong>${escapeHtml(level)}</strong></div>
-              <div><span>Sterk på</span><strong>${escapeHtml(strength)}</strong></div>
-              <div><span>By</span><strong>${escapeHtml(city.name)}</strong></div>
-            </div>
-            <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>${escapeHtml(why)}</p></div>
+            <p class="mockup-best">${escapeHtml(best)} · ${escapeHtml(style)} · ${stars(level)}</p>
+            <div class="mockup-location"><span>${escapeHtml(area)}</span></div>
+            <p class="mockup-why">${escapeHtml(why)}</p>
             <div class="mockup-tags"><span>${escapeHtml(best)}</span><span>${escapeHtml(area)}</span><span>${escapeHtml(strength)}</span></div>
             <a class="mockup-cta" href="${escapeHtml(hotelHref)}" target="_blank" rel="nofollow sponsored noopener">${hotelCta}</a>
           </div>
@@ -1025,14 +1078,14 @@ function renderActivities(city) {
     const href = deepLink || (fallbackProvider === "Klook" ? klookLink(activity) : gygLink(activity));
     const provider = activityProviderFromUrl(href, fallbackProvider);
     const text = provider === "Klook"
-      ? "Åpne dyp lenke til billetter, dagsutflukter og praktiske opplevelser hos Klook."
-      : "Åpne dyp lenke til guidede turer, skip-the-line og dagsutflukter hos GetYourGuide.";
+      ? "Billetter, dagsutflukter og praktiske opplevelser som passer godt inn i reiseruten."
+      : "Guidede turer, skip-the-line og dagsturer med en enkel vei videre til booking.";
     return `
         <article class="activity-card">
           ${renderPhoto(cityPhoto(city, "activities", index), `${activity} i ${city.name}`, "activity-photo")}
           <span class="badge">${provider}</span>
           <h3>${escapeHtml(activity)}</h3>
-          <p>${escapeHtml(text)} Bruk dette som startpunkt og velg tidspunkt, språk og avbestilling før du booker.</p>
+          <p>${escapeHtml(text)}</p>
           <a href="${escapeHtml(href)}" target="_blank" rel="nofollow sponsored noopener">Se ${escapeHtml(activity)} →</a>
         </article>`;
   }).join("");
@@ -1151,12 +1204,9 @@ function renderCityPage(city) {
           <span class="badge">Hotels.com</span>
           <h2>Beste hotellvalg i ${escapeHtml(city.name)}</h2>
         </div>
-        <p class="lead">Fem hotellkort i samme stil som Thailand-guidene: par, familie, luksus, billig og bra, og barnevennlig.</p>
+        <p class="lead">Fem håndplukkede valg for ulike reisetyper, med kort forklaring på hvem hotellet passer best for.</p>
       </div>
       <div class="hotel-list">${renderHotels(city)}</div>
-      <div class="hero-actions">
-        <a class="btn primary" href="${escapeHtml(HOTELS_CREATOR)}" target="_blank" rel="nofollow sponsored noopener">Åpne Hotels.com-avtalen</a>
-      </div>
     </section>
 
     <section class="wrap" id="restauranter">
@@ -1165,7 +1215,7 @@ function renderCityPage(city) {
           <span class="badge">Mat</span>
           <h2>Restauranter og matområder</h2>
         </div>
-        <p class="lead">Dette er ikke en låst fasit, men sterke startpunkt som gjør det enklere å velge riktig kveld.</p>
+        <p class="lead">Gode steder å starte når du vil spise bedre enn nærmeste turistmeny.</p>
       </div>
       <div class="grid">${renderList(city.food, city, "food")}</div>
     </section>
@@ -1203,16 +1253,12 @@ function renderCityPage(city) {
     <section class="wrap" id="opplevelser">
       <div class="section-head">
         <div>
-          <span class="badge">Klook + GetYourGuide</span>
+          <span class="badge">Opplevelser</span>
           <h2>Opplevelser i ${escapeHtml(city.name)}</h2>
         </div>
-        <p class="lead">Bruk kortene til å finne billetter, guidede turer, dagsturer, familieaktiviteter og transport. Sjekk språk, hentested og avbestilling før booking.</p>
+        <p class="lead">Billetter, guidede turer og dagsturer som gjør det enklere å få mer ut av dagene.</p>
       </div>
       <div class="activity-grid">${renderActivities(city)}</div>
-      <div class="hero-actions">
-        <a class="btn primary" href="${escapeHtml(KLOOK_FALLBACK)}" target="_blank" rel="nofollow sponsored noopener">Åpne Klook-avtalen</a>
-        <a class="btn secondary" href="${escapeHtml(GYG_HOME)}" target="_blank" rel="nofollow sponsored noopener">Åpne GetYourGuide-avtalen</a>
-      </div>
     </section>
 
     <section class="wrap">
@@ -1228,7 +1274,7 @@ function renderCityPage(city) {
     </section>
   </main>
 
-  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg. Bilder: åpne stedbilder fra Wikimedia Commons/Wikipedia der tilgjengelig.</footer>
+  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</footer>
 </body>
 </html>
 `;
@@ -1274,7 +1320,7 @@ function renderIndex() {
     <div class="hero-inner">
       <div class="kicker">Spania · stor guide</div>
       <h1>Spania by for by.</h1>
-      <p>Dette er den nye Spania-guiden: egne bysider med hotellkort, områder, restauranter, shopping, strender, hidden gems og Klook/GetYourGuide-opplevelser.</p>
+      <p>Velg riktig by, riktig område og riktig hotelltype før du booker reisen.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#byer">Se alle byguider</a>
         <a class="btn secondary" href="/index.html#travelSearch">Søk reise</a>
@@ -1286,17 +1332,17 @@ function renderIndex() {
     <section class="wrap" id="slik-bruker-du">
       <div class="story-grid">
         <article class="story-box">
-          <span class="badge">Ny struktur</span>
-          <h2>Mer som Phuket, bare for Spania</h2>
-          <p>Hver guide har samme premium-oppsett: først forklarer vi hvem byen passer for, så velger vi riktige områder, deretter fem hotellkort og egne deler for mat, shopping, strender, skjulte perler og opplevelser.</p>
-          <p>Dette gjør Spania-sidene mye bedre å bruke for både Google, besøkende og affiliate-klikk: folk får riktig by, riktig hotelltype og riktige aktiviteter på samme side.</p>
+          <span class="badge">Reisevalg</span>
+          <h2>Finn byen som passer reisen</h2>
+          <p>Barcelona, Valencia og Málaga passer når du vil kombinere byliv med strand. Madrid og Sevilla er sterkere på kultur, mat og kveldsstemning. Øyene gir roligere dager, bassengliv og enklere familieferie.</p>
+          <p>Hver byguide samler områdevalg, hotell, mat, shopping, strender, skjulte perler og opplevelser på ett sted.</p>
         </article>
         <aside class="facts-box">
-          <span class="badge">Dekker nå</span>
+          <span class="badge">I guiden</span>
           <ul>
             <li>12 store Spania-guider</li>
-            <li>60 hotellkort med Hotels.com-søk</li>
-            <li>Klook- og GetYourGuide-kort på hver byside</li>
+            <li>60 hotellvalg for ulike reisetyper</li>
+            <li>Billetter, turer og dagsturer på hver byside</li>
             <li>Restauranter, shopping, strender og hidden gems</li>
           </ul>
         </aside>
@@ -1325,7 +1371,7 @@ ${cities.map((city) => `        <article class="city-card" style="--card-image:u
     </section>
   </main>
 
-  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg. Bilder: åpne stedbilder fra Wikimedia Commons/Wikipedia der tilgjengelig.</footer>
+  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</footer>
 </body>
 </html>
 `;

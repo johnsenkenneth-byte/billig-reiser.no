@@ -157,9 +157,9 @@ a {
 }
 
 .btn.primary {
-  color: #111827;
-  background: linear-gradient(90deg, #ffd166, #ff9f1c);
-  box-shadow: 0 18px 48px rgba(255, 159, 28, .22);
+  color: #03101e;
+  background: linear-gradient(90deg, #5eead4, #38bdf8);
+  box-shadow: 0 18px 48px rgba(34, 211, 238, .2);
 }
 
 .btn.secondary,
@@ -312,32 +312,33 @@ a {
 .city-card a,
 .activity-card a,
 .guide-card a {
-  color: var(--gold);
+  color: #67e8f9;
   font-weight: 950;
 }
 
 .hotel-list {
   display: grid;
-  gap: 26px;
-  margin-top: 30px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
 }
 
 .mockup-hotel-card {
   display: grid;
-  grid-template-columns: minmax(330px, .94fr) minmax(420px, 1.06fr);
+  grid-template-columns: minmax(190px, .78fr) minmax(0, 1fr);
   gap: 0;
-  padding: 20px;
-  border: 1px solid rgba(255, 209, 102, .28);
-  border-radius: 22px;
-  background: radial-gradient(circle at 18% 0%, rgba(34, 211, 238, .08), transparent 34%), linear-gradient(145deg, #07182f, #06101f 72%);
-  box-shadow: 0 26px 80px rgba(0, 0, 0, .42);
+  padding: 12px;
+  border: 1px solid rgba(34, 211, 238, .22);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(14, 26, 45, .96), rgba(6, 16, 31, .98));
+  box-shadow: 0 18px 46px rgba(0, 0, 0, .28);
   overflow: hidden;
 }
 
 .mockup-hotel-media {
   position: relative;
-  min-height: 360px;
-  border-radius: 18px;
+  min-height: 235px;
+  border-radius: 14px;
   overflow: hidden;
   background: #06101e;
 }
@@ -345,7 +346,7 @@ a {
 .mockup-hotel-media img {
   width: 100%;
   height: 100%;
-  min-height: 360px;
+  min-height: 235px;
   object-fit: cover;
   display: block;
 }
@@ -354,78 +355,73 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--hotel-tone, linear-gradient(135deg, rgba(34, 211, 238, .24), rgba(255, 107, 107, .18)));
-  mix-blend-mode: screen;
+  background: linear-gradient(180deg, transparent 55%, rgba(3, 10, 24, .52));
+  pointer-events: none;
 }
 
 .mockup-photo-stars {
   position: absolute;
   z-index: 1;
-  top: 18px;
-  left: 18px;
-  padding: 8px 14px;
+  top: 12px;
+  left: 12px;
+  padding: 7px 11px;
   border-radius: 999px;
   background: rgba(3, 13, 29, .9);
   border: 1px solid rgba(255, 255, 255, .14);
-  color: var(--gold);
-  font-size: 19px;
+  color: #67e8f9;
+  font-size: 15px;
   line-height: 1;
 }
 
 .mockup-hotel-content {
-  padding: 24px 0 24px 42px;
+  padding: 10px 4px 10px 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 0;
 }
 
 .mockup-hotel-content h3 {
-  margin: 0 0 8px;
-  font-family: Georgia, serif;
-  font-size: 42px;
-  font-weight: 500;
-  line-height: 1.04;
+  margin: 0 0 7px;
+  font-size: 25px;
+  font-weight: 950;
+  line-height: 1.08;
   letter-spacing: 0;
 }
 
 .mockup-stars {
-  color: var(--gold);
+  color: #67e8f9;
   font-size: 20px;
   margin-bottom: 8px;
 }
 
 .mockup-best {
-  margin: 0 0 18px;
-  color: var(--gold);
-  font-size: 18px;
+  margin: 0 0 10px;
+  color: #a5f3fc;
+  font-size: 14px;
+  font-weight: 850;
 }
 
 .mockup-location {
-  display: grid;
-  grid-template-columns: 42px 1fr;
-  gap: 12px;
-  align-items: center;
-  padding: 0 0 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, .16);
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border: 1px solid rgba(34, 211, 238, .2);
+  border-radius: 999px;
+  background: rgba(34, 211, 238, .08);
 }
 
 .mockup-location::before {
-  content: "⌖";
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold);
-  font-size: 24px;
+  content: "";
+  display: none;
 }
 
 .mockup-location span {
   display: block;
-  color: #ffffff;
-  font-size: 15px;
+  color: #dff8ff;
+  font-size: 13px;
   font-weight: 850;
 }
 
@@ -472,34 +468,6 @@ a {
   line-height: 1.2;
 }
 
-.mockup-why {
-  display: grid;
-  grid-template-columns: 42px 1fr;
-  gap: 12px;
-  align-items: start;
-}
-
-.mockup-why::before {
-  content: "✪";
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold);
-  font-size: 20px;
-}
-
-.mockup-why span {
-  display: block;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 850;
-  margin-bottom: 4px;
-}
-
 .mockup-why p {
   margin: 0;
   color: #e7edf6;
@@ -507,20 +475,27 @@ a {
   line-height: 1.48;
 }
 
+.mockup-why {
+  margin: 0;
+  color: #e7edf6;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
 .mockup-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 18px 0 8px;
+  margin: 14px 0 8px;
 }
 
 .mockup-tags span {
-  border: 1px solid rgba(255, 209, 102, .36);
+  border: 1px solid rgba(103, 232, 249, .24);
   border-radius: 999px;
-  padding: 7px 11px;
-  color: #ffe4a3;
-  background: rgba(255, 209, 102, .055);
-  font-size: 13px;
+  padding: 6px 9px;
+  color: #c9f7ff;
+  background: rgba(34, 211, 238, .06);
+  font-size: 12px;
   font-weight: 850;
 }
 
@@ -528,12 +503,12 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  margin-top: 12px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, #ffd978, #d99a2b);
-  color: #130c02;
-  font-size: 18px;
+  min-height: 44px;
+  margin-top: 10px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #5eead4, #38bdf8);
+  color: #03101e;
+  font-size: 15px;
   font-weight: 950;
 }
 
@@ -581,7 +556,8 @@ a {
 
   .grid,
   .city-grid,
-  .activity-grid {
+  .activity-grid,
+  .hotel-list {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -590,7 +566,7 @@ a {
   }
 
   .mockup-hotel-content {
-    padding: 24px 4px 4px;
+    padding: 16px 4px 4px;
   }
 }
 
@@ -617,7 +593,8 @@ a {
 
   .grid,
   .city-grid,
-  .activity-grid {
+  .activity-grid,
+  .hotel-list {
     grid-template-columns: 1fr;
   }
 
@@ -629,21 +606,11 @@ a {
 
   .mockup-hotel-media,
   .mockup-hotel-media img {
-    min-height: 235px;
+    min-height: 220px;
   }
 
   .mockup-hotel-content h3 {
-    font-size: 30px;
-  }
-
-  .mockup-location,
-  .mockup-why {
-    grid-template-columns: 1fr;
-  }
-
-  .mockup-location::before,
-  .mockup-why::before {
-    display: none;
+    font-size: 24px;
   }
 
   .mockup-facts {
