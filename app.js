@@ -6,13 +6,13 @@
   const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
-    flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856",
+    flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || DEFAULT_EXPEDIA_CRUISE_URL,
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
-    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
+    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.kqzyfj.com/click-101724638-15735979",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
@@ -176,8 +176,8 @@
 /* Robust Leaflet live map repair */
 (function(){
   const partners = {
-    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
-    flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://www.tkqlhce.com/click-101724638-13829856"
+    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
+    flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F"
   };
   const dealPins = [
     { name:"Roma", price:"fra 499 kr", discount:"-52%", lat:41.9028, lng:12.4964, color:"blue", url:partners.cheapFlights },
@@ -330,7 +330,7 @@
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
-    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://www.tkqlhce.com/click-101724638-13829856",
+    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.kqzyfj.com/click-101724638-15735979",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
@@ -1339,7 +1339,7 @@
   }
 
   function buildPackageUrl(state) {
-    return isCreatorAffiliateUrl(AFFILIATE_LINKS.packageTravel) ? AFFILIATE_LINKS.packageTravel : buildExpediaPackageSearchUrl(state);
+    return buildExpediaPackageSearchUrl(state);
   }
 
   function buildExpediaPackageSearchUrl(state) {
@@ -1556,8 +1556,7 @@
       ...airlineLinks,
       ["Kiwi", kiwiUrl],
       ["Expedia", AFFILIATE_LINKS.expedia],
-      ["CheapTickets", AFFILIATE_LINKS.cheapTickets],
-      ["Cheapflights", AFFILIATE_LINKS.cheapFlights]
+      ["CheapTickets", AFFILIATE_LINKS.cheapTickets]
     ];
     const offerRows = offers.slice(0, 3).map((offer, index) => {
       const departure = offer.departure_at
@@ -2365,8 +2364,6 @@
   function aiPackageUrl(data) {
     const to = data.to || $("toCity")?.value || "";
     if (!to) return "";
-    const configured = window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel;
-    if (isAiCreatorAffiliateUrl(configured)) return configured;
     return aiExpediaPackageSearchUrl(data);
   }
 

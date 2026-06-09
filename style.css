@@ -4978,3 +4978,48 @@ html body header img[src*="billig-reiser-logo-v115"]{
     width:min(315px,82vw)!important;
   }
 }
+
+/* BR v122: remove the bulky Amadeus strip, keep header logo uncut, and prevent partner names from breaking mid-word */
+html body .live-deals-board.compact{
+  display:none!important;
+}
+
+html body .topbar .brand{
+  max-width:min(168px,44vw)!important;
+  overflow:visible!important;
+}
+
+html body .topbar .brand img,
+html body .brand img,
+html body header img[src*="billig-reiser-logo-v115"]{
+  width:min(158px,40vw)!important;
+  max-width:158px!important;
+  max-height:44px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+
+html body .partner-pills b,
+html body .partner-pills em{
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+
+html body .partner-pills b{
+  white-space:normal!important;
+}
+
+@media(max-width:420px){
+  html body .topbar .brand{
+    max-width:min(122px,36vw)!important;
+  }
+
+  html body .topbar .brand img,
+  html body .brand img,
+  html body header img[src*="billig-reiser-logo-v115"]{
+    width:min(122px,36vw)!important;
+    max-width:122px!important;
+    max-height:36px!important;
+  }
+}

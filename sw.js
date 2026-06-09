@@ -1,12 +1,12 @@
-const CACHE_VERSION = "billig-reiser-pwa-v121-creator-links";
+const CACHE_VERSION = "billig-reiser-pwa-v123-package-search";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=118",
-  "/affiliate-config.js?v=121",
-  "/app.js?v=121",
+  "/style.css?v=122",
+  "/affiliate-config.js?v=123",
+  "/app.js?v=123",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
