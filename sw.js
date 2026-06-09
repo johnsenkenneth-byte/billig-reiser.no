@@ -1,12 +1,12 @@
-const CACHE_VERSION = "billig-reiser-pwa-v120-expedia-package";
+const CACHE_VERSION = "billig-reiser-pwa-v121-creator-links";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
   "/style.css?v=118",
-  "/affiliate-config.js?v=120",
-  "/app.js?v=120",
+  "/affiliate-config.js?v=121",
+  "/app.js?v=121",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",

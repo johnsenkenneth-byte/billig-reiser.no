@@ -666,8 +666,17 @@
     // CJ deep links use the url= parameter. Keep the target fully encoded so
     // the selected partner receives the search parameters after redirect.
     const url = new URL(baseAffiliateUrl);
+    if (url.pathname.includes("/affiliates/")) return url.toString();
     url.searchParams.set("url", targetUrl);
     return url.toString();
+  }
+
+  function isCreatorAffiliateUrl(value) {
+    try {
+      return new URL(value).pathname.includes("/affiliates/");
+    } catch (error) {
+      return false;
+    }
   }
 
   function tradeTrackerDeepLink(baseAffiliateUrl, targetUrl) {
@@ -1180,6 +1189,7 @@
   function withExpediaCruiseTracking(targetUrl, state = {}) {
     const target = new URL(targetUrl || DEFAULT_EXPEDIA_CRUISE_URL);
     const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || AFFILIATE_LINKS.cruise || "";
+    if (isCreatorAffiliateUrl(configured)) return configured;
     try {
       const source = new URL(configured);
       ["siid", "referrer"].forEach((param) => {
@@ -1329,7 +1339,7 @@
   }
 
   function buildPackageUrl(state) {
-    return buildExpediaPackageSearchUrl(state);
+    return isCreatorAffiliateUrl(AFFILIATE_LINKS.packageTravel) ? AFFILIATE_LINKS.packageTravel : buildExpediaPackageSearchUrl(state);
   }
 
   function buildExpediaPackageSearchUrl(state) {
@@ -2058,7 +2068,7 @@
         $("toCity")?.focus();
         return;
       }
-      window.open(buildExpediaPackageSearchUrl(state), "_blank", "noopener,noreferrer");
+      window.open(buildPackageUrl(state), "_blank", "noopener,noreferrer");
     });
     $("smartSearchLaunch")?.addEventListener("click", runSmartSearch);
     $("smartSearchQuery")?.addEventListener("keydown", (event) => {
@@ -2289,8 +2299,17 @@
 
   function cjAffiliate(baseUrl, targetUrl) {
     const url = new URL(baseUrl);
+    if (url.pathname.includes("/affiliates/")) return url.toString();
     url.searchParams.set("url", targetUrl);
     return url.toString();
+  }
+
+  function isAiCreatorAffiliateUrl(value) {
+    try {
+      return new URL(value).pathname.includes("/affiliates/");
+    } catch (error) {
+      return false;
+    }
   }
 
   function aiHotelUrl(place = "Roma") {
@@ -2346,6 +2365,8 @@
   function aiPackageUrl(data) {
     const to = data.to || $("toCity")?.value || "";
     if (!to) return "";
+    const configured = window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel;
+    if (isAiCreatorAffiliateUrl(configured)) return configured;
     return aiExpediaPackageSearchUrl(data);
   }
 
@@ -2433,6 +2454,7 @@
       .find((item) => key === item || key.includes(item));
     const target = new URL(aiCruiseLinks[match] || aiCruiseLinks.europa);
     const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "";
+    if (isAiCreatorAffiliateUrl(configured)) return configured;
     try {
       const source = new URL(configured);
       ["siid", "referrer"].forEach((param) => {
