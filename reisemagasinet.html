@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reisemagasinet | Reiseguider | Billig-reiser.no</title>
+  <meta name="description" content="Reisemagasinet fra Billig-reiser.no samler reiseguider til Thailand og Spania på én ryddig forside." />
+  <link rel="canonical" href="https://billig-reiser.no/reisemagasinet.html" />
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Billig-reiser.no" />
+  <meta property="og:title" content="Reisemagasinet | Reiseguider" />
+  <meta property="og:description" content="Velg Thailand eller Spania, og gå rett videre til guidene." />
+  <meta property="og:image" content="https://billig-reiser.no/assets/reisemagasin-multi-country-hero.png" />
+  <link rel="stylesheet" href="style.css?v=74" />
+  <style>
+    :root{--bg:#07101f;--panel:#101b2e;--text:#f8fafc;--muted:#b8c4d5;--pink:#ff4bb8;--blue:#22d3ee;--gold:#ffd166;--line:rgba(255,255,255,.12)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#07101f,#0b1220 58%,#07101f);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}
+    .mag-nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px clamp(16px,4vw,48px);background:rgba(7,15,28,.93);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;backdrop-filter:blur(14px)}.brand-logo{display:flex;align-items:center}.brand-logo img{height:54px;width:220px;max-width:42vw;object-fit:contain}.mag-menu{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.mag-menu a{color:#dbe4f0;font-weight:850;font-size:14px}.mag-menu a:hover,.mag-menu a.active{color:var(--pink)}
+    .hub-hero{position:relative;min-height:590px;display:flex;align-items:end;padding:92px clamp(18px,6vw,90px);background:linear-gradient(90deg,rgba(3,8,18,.96) 0%,rgba(3,8,18,.78) 44%,rgba(3,8,18,.22) 100%),url("assets/reisemagasin-multi-country-hero.png") center/cover no-repeat;border-bottom:1px solid var(--line);overflow:hidden}.hub-hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 52%,rgba(255,75,184,.10),transparent 28%);pointer-events:none}.hub-hero-inner{position:relative;z-index:1;max-width:880px}.kicker{color:var(--pink);font-size:13px;font-weight:950;letter-spacing:.18em;text-transform:uppercase}.hub-hero h1{font-size:clamp(44px,7vw,86px);line-height:.92;letter-spacing:-.06em;margin:16px 0 20px}.hub-hero p{max-width:760px;font-size:clamp(18px,2vw,22px);color:#e5edf7;margin:0}.hub-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:950}.btn.primary{background:linear-gradient(90deg,#ff4bb8,#7c3aed,#22d3ee);box-shadow:0 18px 48px rgba(255,75,184,.20)}.btn.secondary{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18)}
+    .wrap{max-width:1240px;margin:0 auto;padding:62px 24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}.section-head h2{font-size:clamp(31px,4vw,52px);line-height:.98;letter-spacing:-.045em;margin:0}.lead{color:var(--muted);font-size:17px;max-width:760px}
+    .country-card{display:grid;grid-template-columns:1.04fr .96fr;border-radius:32px;overflow:hidden;border:1px solid rgba(34,211,238,.24);background:linear-gradient(145deg,rgba(20,36,58,.98),rgba(8,17,31,.98));box-shadow:0 26px 80px rgba(0,0,0,.34),0 0 70px rgba(34,211,238,.08)}.country-card img{width:100%;height:100%;min-height:430px;object-fit:cover;display:block}.country-copy{padding:clamp(26px,4vw,48px);display:flex;flex-direction:column;justify-content:center}.country-copy h2{font-size:clamp(38px,5vw,68px);line-height:.94;letter-spacing:-.055em;margin:8px 0 14px}.country-copy p{color:#dce7f6;font-size:18px;margin:0 0 22px}.quick-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}.quick-links a{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.06);border-radius:999px;padding:10px 14px;color:#e8f2ff;font-weight:900;font-size:14px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98));border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden;box-shadow:0 20px 55px rgba(0,0,0,.24)}.card img{width:100%;height:220px;object-fit:cover;display:block}.card-body{padding:22px}.badge{display:inline-flex;align-items:center;margin-bottom:12px;padding:7px 10px;border-radius:999px;background:rgba(255,75,184,.12);border:1px solid rgba(255,75,184,.25);color:#ffd1ef;font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.card h3{font-size:25px;margin:0 0 8px}.card p{color:var(--muted);margin:0 0 16px}.card a{color:#ff7bd2;font-weight:950}
+    .simple-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.simple-list a{display:block;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);border-radius:18px;padding:18px;font-weight:950;color:#f8fafc}.simple-list span{display:block;color:var(--muted);font-size:13px;font-weight:800;margin-top:4px}.note{border:1px solid rgba(255,209,102,.22);background:rgba(255,209,102,.07);border-radius:24px;padding:24px;color:#f6e8c2}.footer{border-top:1px solid var(--line);padding:30px;text-align:center;color:var(--muted);font-size:14px}
+    @media(max-width:980px){.grid,.country-card{grid-template-columns:1fr}.simple-list{grid-template-columns:1fr 1fr}.country-card img{min-height:290px}.section-head{display:block}.mag-nav{align-items:flex-start;flex-direction:column}.mag-menu{gap:12px}.hub-hero{min-height:520px;padding:70px 18px}.wrap{padding:46px 16px}.card img{height:205px}}
+    @media(max-width:560px){.hub-hero h1{font-size:42px}.simple-list{grid-template-columns:1fr}.btn{width:100%}.brand-logo img{max-width:220px}.mag-menu a{font-size:13px}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","headline":"Reisemagasinet | Reiseguider","description":"Ryddig forside for reiseguidene fra Billig-reiser.no.","publisher":{"@type":"Organization","name":"Billig-Reiser.no"},"mainEntityOfPage":"https://billig-reiser.no/reisemagasinet.html"}</script>
+
+<!-- PWA / installerbar app -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="application-name" content="Billig Reiser">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Billig Reiser">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#020913">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<script defer src="/pwa-register.js"></script>
+<link rel="stylesheet" href="/app-features.css">
+<script defer src="/app-features.js"></script>
+</head>
+<body>
+  <nav class="mag-nav">
+    <a class="brand-logo" href="index.html"><img src="assets/billig-reiser-logo-v115.png" alt="Billig-reiser.no" width="220" height="54" /></a>
+    <div class="mag-menu">
+      <a class="active" href="reisemagasinet.html">Reisemagasinet</a>
+      <a href="spania/">Spania</a>
+      <a href="reise-thailand.html">Thailand</a>
+      <a href="index.html">Forside</a>
+    </div>
+  </nav>
+
+  <header class="hub-hero">
+    <div class="hub-hero-inner">
+      <div class="kicker">Reisemagasinet</div>
+      <h1>Finn riktig reiseguide.</h1>
+      <p>Velg landet du planlegger, og gå videre til guider for byer, øyer, strender og reiseruter. Her samler vi de viktigste valgene på en enklere måte.</p>
+      <div class="hub-hero-actions">
+        <a class="btn primary" href="#spania">Velg Spania</a>
+        <a class="btn secondary" href="#thailand">Velg Thailand</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap" id="spania">
+      <article class="country-card">
+        <img src="spania/assets/spania-hero.png" alt="Spania" loading="lazy" decoding="async" />
+        <div class="country-copy">
+          <span class="badge">Landsguide</span>
+          <h2>Spania</h2>
+          <p>Spania-guiden samler Costa del Sol, Mallorca, Alicante, Barcelona, Kanariøyene og enkle reiseruter etter sesong og reisestil.</p>
+          <div class="hub-hero-actions">
+            <a class="btn primary" href="spania/">Åpne Spania-guiden</a>
+            <a class="btn secondary" href="index.html#travelSearch">Søk Spania-reise</a>
+          </div>
+          <div class="quick-links" aria-label="Snarveier til populære Spania-valg">
+            <a href="spania/#costa-del-sol">Costa del Sol</a>
+            <a href="spania/#mallorca">Mallorca</a>
+            <a href="spania/#alicante">Alicante</a>
+            <a href="spania/#barcelona">Barcelona</a>
+            <a href="spania/#kanarioyene">Kanariøyene</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="wrap" id="thailand">
+      <article class="country-card">
+        <img src="assets/destinations/bangkok-v22.jpg" alt="Thailand" loading="lazy" decoding="async" />
+        <div class="country-copy">
+          <span class="badge">Landsguide</span>
+          <h2>Thailand</h2>
+          <p>Finn Thailand-reisen som passer deg: beste sesong, smarte reiseruter, Bangkok, Phuket, Krabi, Chiang Mai, Khao Lak, Hua Hin og øyene samlet på ett sted.</p>
+          <div class="hub-hero-actions">
+            <a class="btn primary" href="reise-thailand.html">Åpne Thailand-guiden</a>
+          </div>
+          <div class="quick-links" aria-label="Snarveier til populære Thailand-guider">
+            <a href="bangkok.html">Bangkok</a>
+            <a href="reise-thailand-phuket.html">Phuket</a>
+            <a href="reise-thailand-krabi.html">Krabi</a>
+            <a href="reise-thailand-khao-lak.html">Khao Lak</a>
+            <a href="reise-thailand-koh-lanta.html">Koh Lanta</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  
+    
+  </main>
+
+  <footer class="footer">© 2026 Billig-reiser.no</footer>
+</body>
+</html>
