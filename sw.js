@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v125-spain-guides";
+const CACHE_VERSION = "billig-reiser-pwa-v126-spain-magazine-images";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -14,7 +14,7 @@ const APP_SHELL = [
   "/assets/billig-reiser-logo-full-v115.png",
   "/assets/video/front-hero-v116.mp4",
   "/spania/",
-  "/spania/spania-city.css?v=125"
+  "/spania/spania-city.css?v=126"
 ];
 
 self.addEventListener("install", event => {

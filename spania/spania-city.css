@@ -223,6 +223,32 @@ a {
   padding: 24px;
 }
 
+.guide-card,
+.activity-card {
+  overflow: hidden;
+}
+
+.guide-card-photo,
+.activity-photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, .13);
+  background: #0a1424;
+}
+
+.activity-photo {
+  aspect-ratio: 4 / 3;
+}
+
+.magazine-card p {
+  font-size: 17px;
+  line-height: 1.62;
+}
+
 .story-box p {
   color: var(--muted);
   font-size: 18px;

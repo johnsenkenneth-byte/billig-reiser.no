@@ -11,6 +11,105 @@ const KLOOK_FALLBACK = "https://klook.tpx.gr/Tmj2PfPe";
 const GYG_HOME = "https://www.getyourguide.com/?partner_id=FIQDAEB&utm_medium=local_partners";
 const HERO_IMAGE = "/spania/assets/spania-hero.png";
 const TODAY = "2026-06-09";
+const SPAIN_CSS_VERSION = "126";
+const HOTEL_DEEP_LINKS = {
+  "Barcelona|H10 Madison Barcelona": "https://www.hotels.com/affiliates/h10-madison-barcelona-spania.FHqIi8c",
+  "Barcelona|Aparthotel Arai 4 Superior": "https://www.hotels.com/affiliates/arai-aparthotel-barcelona-spania.L7Y7QPw",
+  "Barcelona|Hotel Arts Barcelona": "https://www.hotels.com/affiliates/hotel-arts-barcelona-barcelona-spania.JmWQEaS",
+  "Barcelona|Motel One Barcelona-Ciutadella": "https://www.hotels.com/affiliates/motel-one-barcelona-ciutadella-barcelona-spania.sP4tD0p",
+  "Barcelona|Novotel Barcelona City": "https://www.hotels.com/affiliates/novotel-barcelona-city-barcelona-spania.abjoGV0",
+  "Madrid|Only YOU Boutique Hotel Madrid": "https://www.hotels.com/affiliates/only-you-hotel-atocha-madrid-spania.sLaWtyO",
+  "Madrid|Suites Viena Plaza de Espana": "https://www.hotels.com/affiliates/suites-viena-plaza-de-espana-madrid-spania.1lNa3DV",
+  "Madrid|Four Seasons Hotel Madrid": "https://www.hotels.com/affiliates/four-seasons-hotel-madrid-madrid-spania.tPa95Ij",
+  "Madrid|Hotel Regina Madrid": "https://www.hotels.com/affiliates/hotel-regina-madrid-spania.OAembPm",
+  "Madrid|Novotel Madrid Center": "https://www.hotels.com/affiliates/novotel-madrid-center-madrid-spania.sqNQGy9",
+  "Valencia|Hospes Palau de la Mar": "https://www.hotels.com/affiliates/hotel-hospes-palau-de-la-mar-valencia-spania.ldKuvZ5",
+  "Valencia|Barcelo Valencia": "https://www.hotels.com/affiliates/barcelo-valencia-hotel-valencia-spania.nb7aXBw",
+  "Valencia|Las Arenas Balneario Resort": "https://www.hotels.com/affiliates/hotel-las-arenas-balneario-resort-valencia-spania.fFhXn1Q",
+  "Valencia|Venecia Plaza Centro": "https://www.hotels.com/affiliates/venecia-plaza-centro-valencia-spania.fDjS5AF",
+  "Valencia|Ilunion Aqua 4": "https://www.hotels.com/affiliates/hotel-ilunion-aqua-4-valencia-spania.V3Kf6yq",
+  "Sevilla|H10 Casa de la Plata": "https://www.hotels.com/affiliates/h10-casa-de-la-plata-sevilla-spania.rbpnyuP",
+  "Sevilla|Hotel Alfonso XIII": "https://www.hotels.com/affiliates/hotel-alfonso-xiii-a-luxury-collection-hotel-seville-sevilla-spania.6KOJONZ",
+  "Sevilla|Hotel Becquer": "https://www.hotels.com/affiliates/becquer-hotel-sevilla-spania.p7IGqy7",
+  "Sevilla|Novotel Sevilla": "https://www.hotels.com/affiliates/novotel-sevilla-sevilla-spania.ATjuoQ7",
+  "Malaga|Palacio Solecio": "https://www.hotels.com/affiliates/palacio-solecio-malaga-spania.Ep9Tcre",
+  "Malaga|Barcelo Malaga": "https://www.hotels.com/affiliates/barcelo-malaga-hotel-malaga-spania.3eb8YwM",
+  "Malaga|Gran Hotel Miramar": "https://www.hotels.com/affiliates/gran-hotel-miramar-gl-malaga-spania.WX10HA1",
+  "Malaga|Casual del Mar Malaga": "https://www.hotels.com/affiliates/casual-del-mar-malaga-malaga-spania.3nIRCo3",
+  "Malaga|Sol Guadalmar": "https://www.hotels.com/affiliates/sol-guadalmar-hotel-malaga-spania.0tR7PPh",
+  "Marbella|Amare Beach Hotel Marbella": "https://www.hotels.com/affiliates/amare-beach-hotel-marbella-marbella-spania.iQgNXTw",
+  "Marbella|Marriott's Marbella Beach Resort": "https://www.hotels.com/affiliates/marriott-s-marbella-beach-resort-marbella-spania.4SH2GLB",
+  "Marbella|Puente Romano Beach Resort": "https://www.hotels.com/affiliates/puente-romano-beach-resort-marbella-spania.9uXezl8",
+  "Marbella|Ona Marbella Inn": "https://www.hotels.com/affiliates/marbella-inn-marbella-spania.fzNvqEV",
+  "Alicante|Hospes Amerigo": "https://www.hotels.com/affiliates/hotel-hospes-amerigo-alicante-spania.gSpL6XZ",
+  "Alicante|Melia Alicante": "https://www.hotels.com/affiliates/melia-alicante-alicante-spania.fZ98PLL",
+  "Alicante|Hotel Casa Alberola Alicante": "https://www.hotels.com/affiliates/casa-alberola-alicante-curio-collection-by-hilton-alicante-spania.ZybjKQp",
+  "Alicante|Hotel Maya Alicante": "https://www.hotels.com/affiliates/hotel-maya-alicante-spania.jMHDmTx",
+  "Alicante|Port Alicante City & Beach": "https://www.hotels.com/affiliates/port-hotel-alicante-playa-de-san-juan-alicante-spania.370coFD",
+  "Benidorm|Villa Venecia Hotel Boutique Gourmet": "https://www.hotels.com/affiliates/villa-venecia-hotel-boutique-benidorm-spania.QunpOVe",
+  "Benidorm|Hotel RH Princesa": "https://www.hotels.com/affiliates/hotel-rh-princesa-benidorm-spania.kLXTPBR",
+  "Benidorm|Asia Gardens Hotel & Thai Spa": "https://www.hotels.com/affiliates/asia-gardens-hotel-thai-spa-a-royal-hideaway-hotel-golf-bahia-spania.QdFXatY",
+  "Benidorm|Hotel Helios Benidorm": "https://www.hotels.com/affiliates/helios-benidorm.wS6HXPW",
+  "Benidorm|Magic Robin Hood Resort": "https://www.hotels.com/affiliates/magic-robin-hood-waterpark-lodge-resort-l-alfas-del-pi-spania.Q6bku6Y",
+  "Palma og Mallorca|Hotel Can Cera": "https://www.hotels.com/affiliates/hotel-can-cera-adults-only-palma-de-mallorca-spania.DcfZhyW",
+  "Palma og Mallorca|Zafiro Palace Palmanova": "https://www.hotels.com/affiliates/zafiro-palmanova-calvia-spania.ErOFyCR",
+  "Palma og Mallorca|Cap Rocat": "https://www.hotels.com/affiliates/cap-rocat-llucmajor-spania.keCZGYO",
+  "Palma og Mallorca|Hotel Almudaina": "https://www.hotels.com/affiliates/hotel-almudaina-palma-de-mallorca-spania.nOiyd9v",
+  "Palma og Mallorca|Zafiro Palace Alcudia": "https://www.hotels.com/affiliates/zafiro-tropic-alcudia-spania.NFY73dd",
+  "Ibiza|Hotel Mirador de Dalt Vila": "https://www.hotels.com/affiliates/mirador-de-dalt-vila-relais-chateaux-ibiza-by-spania.xfAlkkv",
+  "Ibiza|Grand Palladium Palace Ibiza Resort & Spa": "https://www.hotels.com/affiliates/grand-palladium-palace-ibiza-resort-spa-sant-josep-de-sa-talaia-spania.mQmpJ5S",
+  "Ibiza|Six Senses Ibiza": "https://www.hotels.com/affiliates/six-senses-ibiza-sant-joan-de-labritja-spania.UjRwEAH",
+  "Ibiza|Hotel Gran Sol": "https://www.hotels.com/affiliates/hotel-gran-sol-ibiza-sant-antoni-de-portmany-spania.O19vW9U",
+  "Ibiza|Invisa Hotel Club Cala Verde": "https://www.hotels.com/affiliates/invisa-hotel-club-cala-verde-santa-eulalia-del-rio-spania.QEnjEIO",
+  "Tenerife|Royal Hideaway Corales Beach": "https://www.hotels.com/affiliates/royal-hideaway-corales-beach-part-of-barcelo-hotel-group-adults-only-adeje-spania.k0JoumK",
+  "Tenerife|GF Victoria": "https://www.hotels.com/affiliates/gf-victoria-adeje-spania.I6mPwXI",
+  "Tenerife|The Ritz-Carlton Tenerife, Abama": "https://www.hotels.com/affiliates/the-ritz-carlton-abama-guia-de-isora-spania.5qVkIRW",
+  "Tenerife|MYND Adeje": "https://www.hotels.com/affiliates/mynd-adeje-adeje-spania.jydTSVP",
+  "Tenerife|Bahia del Duque": "https://www.hotels.com/affiliates/bahia-del-duque-adeje-spania.unynpUu",
+  "Gran Canaria|Bohemia Suites & Spa": "https://www.hotels.com/affiliates/bohemia-suites-spa-adults-only-san-bartolome-de-tirajana-spania.JPW1wIG",
+  "Gran Canaria|Lopesan Baobab Resort": "https://www.hotels.com/affiliates/lopesan-baobab-resort-san-bartolome-de-tirajana-spania.6pGGxfe",
+  "Gran Canaria|Seaside Grand Hotel Residencia": "https://www.hotels.com/affiliates/seaside-grand-hotel-residencia-san-bartolome-de-tirajana-spania.hPZ0BNM",
+  "Gran Canaria|TC Hotel Dona Luisa": "https://www.hotels.com/affiliates/hotel-dona-luisa-las-palmas-de-gran-canaria-spania.F1UTzBG",
+  "Gran Canaria|Radisson Blu Resort & Spa Gran Canaria Mogan": "https://www.hotels.com/affiliates/radisson-blu-resort-spa-gran-canaria-mogan-mogan-spania.Ub9bGdO"
+};
+const ACTIVITY_DEEP_LINKS = {
+  "Sevilla|Alcazar Sevilla": "https://klook.tpx.gr/QehAvSfc",
+  "Sevilla|Flamenco Sevilla": "https://klook.tpx.gr/lfaBEUZW",
+  "Sevilla|Triana walking tour": "https://klook.tpx.gr/Bb4CuQOd",
+  "Barcelona|Sagrada Familia": "https://klook.tpx.gr/Za88OISd",
+  "Barcelona|Casa Batllo": "https://klook.tpx.gr/bXPIhKAt",
+  "Barcelona|Tapas og vinsmaking": "https://klook.tpx.gr/ebDbimPN",
+  "Alicante|Santa Barbara Castle Alicante": "https://klook.tpx.gr/0PuA77ig",
+  "Alicante|Guadalest and Algar waterfalls": "https://klook.tpx.gr/ZTD3leWf",
+  "Alicante|Alicante wine tour": "https://gyg.me/KvGjOCfA",
+  "Benidorm|Terra Mitica": "https://klook.tpx.gr/Vsot3Gyi",
+  "Benidorm|Mundomar Benidorm": "https://klook.tpx.gr/IQ0R68wY",
+  "Benidorm|Guadalest and Algar from Benidorm": "https://klook.tpx.gr/5huW3ICh",
+  "Malaga|Caminito del Rey from Malaga": "https://klook.tpx.gr/PnMiFptv",
+  "Malaga|Malaga Alcazaba": "https://klook.tpx.gr/1EXCNksC",
+  "Malaga|Malaga tapas tour": "https://klook.tpx.gr/jaxlFHkp",
+  "Marbella|Marbella yacht": "https://klook.tpx.gr/LJgrS1IC",
+  "Marbella|Ronda from Marbella": "https://klook.tpx.gr/tZ4y6Gm3",
+  "Marbella|Marbella tapas tour": "https://klook.tpx.gr/lza1N7fw",
+  "Ibiza|Formentera boat from Ibiza": "https://klook.tpx.gr/faFUfMcO",
+  "Ibiza|Ibiza sunset cruise": "https://gyg.me/keM6Kxn0",
+  "Ibiza|Ibiza beach hopping": "https://gyg.me/d0vxwRhZ",
+  "Gran Canaria|Maspalomas dunes": "https://klook.tpx.gr/NfLvOhRB",
+  "Gran Canaria|Roque Nublo tour": "https://klook.tpx.gr/Pnoo4WCO",
+  "Gran Canaria|Gran Canaria buggy tour": "https://gyg.me/6gXLoxTv",
+  "Tenerife|Teide National Park": "https://klook.tpx.gr/L1Acz1gQ",
+  "Tenerife|Siam Park Tenerife": "https://klook.tpx.gr/qjRGjnU1",
+  "Tenerife|Anaga rural park": "https://gyg.me/U2qtuMzI",
+  "Madrid|Prado Museum": "https://klook.tpx.gr/fdmkYQ4S",
+  "Madrid|Toledo dagstur": "https://klook.tpx.gr/ihp8uQWy",
+  "Madrid|Tapasvandring": "https://klook.tpx.gr/QewZSbpp",
+  "Palma og Mallorca|Palma Cathedral": "https://klook.tpx.gr/4RZNDJdS",
+  "Palma og Mallorca|Drach Caves Mallorca": "https://klook.tpx.gr/BM4nTnZJ",
+  "Palma og Mallorca|Mallorca boat trip": "https://klook.tpx.gr/RiV3knvH",
+  "Valencia|Oceanografic Valencia": "https://klook.tpx.gr/hVe4ifYB",
+  "Valencia|Paella cooking class": "https://klook.tpx.gr/dZNtREgo",
+  "Valencia|Valencia bike tour": "https://klook.tpx.gr/AnAtN3sr"
+};
 
 const cities = [
   {
@@ -591,12 +690,198 @@ const cities = [
   }
 ];
 
+const P = {
+  barcelona: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Aerial_view_of_Barcelona%2C_Spain_%2851227309370%29_edited.jpg/1280px-Aerial_view_of_Barcelona%2C_Spain_%2851227309370%29_edited.jpg",
+  madrid: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Plaza_Mayor_De_Madrid_%28215862629%29_edited.jpeg/1280px-Plaza_Mayor_De_Madrid_%28215862629%29_edited.jpeg",
+  valencia: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Malvarrosa_Beach%2C_Valencia%2C_Spain_%2829812271043%29.jpg/1280px-Malvarrosa_Beach%2C_Valencia%2C_Spain_%2829812271043%29.jpg",
+  seville: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Sevilla_Cathedral_-_Southeast.jpg/1280px-Sevilla_Cathedral_-_Southeast.jpg",
+  malaga: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Da_Gibralfaro_%28cropped%292.jpg/1280px-Da_Gibralfaro_%28cropped%292.jpg",
+  marbella: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Captivating_Views_of_Old_Town_Marbella.jpg/1280px-Captivating_Views_of_Old_Town_Marbella.jpg",
+  alicante: "https://upload.wikimedia.org/wikipedia/commons/8/85/Alicante%2C_Spain.jpg",
+  benidorm: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Benidorm-pano-160410.jpg/1280px-Benidorm-pano-160410.jpg",
+  palma: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Kathedrale_von_Palma_II.jpg/1280px-Kathedrale_von_Palma_II.jpg",
+  ibiza: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Ibiza_City_seaport_from_Dalt_Vila_asv2023-04_img2.jpg/1280px-Ibiza_City_seaport_from_Dalt_Vila_asv2023-04_img2.jpg",
+  tenerife: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Teide_qtl1.jpg/1280px-Teide_qtl1.jpg",
+  granCanaria: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/GC_Dunas_de_Maspalomas_R04.jpg/1280px-GC_Dunas_de_Maspalomas_R04.jpg",
+  sagrada: "https://upload.wikimedia.org/wikipedia/commons/e/ef/SF_maig_2_cropped.jpg",
+  parkGuell: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Parc_guell_-_panoramio.jpg/1280px-Parc_guell_-_panoramio.jpg",
+  casaBatllo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Casa_Batllo_roof.JPG/1280px-Casa_Batllo_roof.JPG",
+  montserrat: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/MontserratMonastery02.jpg/1280px-MontserratMonastery02.jpg",
+  boqueria: "https://upload.wikimedia.org/wikipedia/commons/b/be/La_Boqueria.JPG",
+  tapas: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/TapasenBarcelona.JPG/1280px-TapasenBarcelona.JPG",
+  prado: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Museo_del_Prado_%28Madrid%29_06.jpg/1280px-Museo_del_Prado_%28Madrid%29_06.jpg",
+  royalPalace: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Royal_Palace_of_Madrid_01.jpg/1280px-Royal_Palace_of_Madrid_01.jpg",
+  bernabeu: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Estadio_Santiago_Bernab%C3%A9u_-_01.jpg/1280px-Estadio_Santiago_Bernab%C3%A9u_-_01.jpg",
+  sanMiguel: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Mercado_de_San_Miguel_-_Madrid.png/1280px-Mercado_de_San_Miguel_-_Madrid.png",
+  oceanografic: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Oceanografic.JPG/1280px-Oceanografic.JPG",
+  artsSciences: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/L%27Umbracle%2C_Valencia%2C_Spain_-_Jan_2007.jpg/1280px-L%27Umbracle%2C_Valencia%2C_Spain_-_Jan_2007.jpg",
+  albufera: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/ES_Valencia_Albufera.jpg/1280px-ES_Valencia_Albufera.jpg",
+  paella: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/01_Paella_Valenciana_original.jpg/1280px-01_Paella_Valenciana_original.jpg",
+  giralda: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Plaza_Virgen_de_los_Reyes%2C_Seville%2C_Spain_-_Sep_2009.jpg/1280px-Plaza_Virgen_de_los_Reyes%2C_Seville%2C_Spain_-_Sep_2009.jpg",
+  triana: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Triana_embankment_Seville_Spain.jpg/1280px-Triana_embankment_Seville_Spain.jpg",
+  caminito: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Caminito_del_Rey%2C_M%C3%A1laga%2C_Espa%C3%B1a%2C_2023-05-18%2C_DD_46.jpg/1280px-Caminito_del_Rey%2C_M%C3%A1laga%2C_Espa%C3%B1a%2C_2023-05-18%2C_DD_46.jpg",
+  ronda: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/View_of_Puente_Nuevo_bridge_in_Ronda_Spain.jpg/1280px-View_of_Puente_Nuevo_bridge_in_Ronda_Spain.jpg",
+  alcazaba: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Spain_Andalusia_Malaga_BW_2015-10-24_14-59-25.jpg/1280px-Spain_Andalusia_Malaga_BW_2015-10-24_14-59-25.jpg",
+  puertoBanus: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Puerto_Ban%C3%BAs_3.jpg/1280px-Puerto_Ban%C3%BAs_3.jpg",
+  guadalest: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/View_of_the_Guadalest_Castle%2C_Alicante_%28Valencia%2C_Spain%29_I.jpg/1280px-View_of_the_Guadalest_Castle%2C_Alicante_%28Valencia%2C_Spain%29_I.jpg",
+  terraMitica: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Magnus_Colossus_tematizaci%C3%B3n.JPG/1280px-Magnus_Colossus_tematizaci%C3%B3n.JPG",
+  aqualandia: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Aqualandia.jpg",
+  mundomar: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/MundoMar_Benidorm_%2815382242782%29.jpg/1280px-MundoMar_Benidorm_%2815382242782%29.jpg",
+  drach: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Interior_de_las_Cuevas_del_Drach.jpg/1280px-Interior_de_las_Cuevas_del_Drach.jpg",
+  tramuntana: "https://upload.wikimedia.org/wikipedia/commons/8/8b/SerraTramuntana2.jpg",
+  calaComte: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Balearen%2C_Ibiza%2C_Wanderung_NW_Cala_Codolar_-_Cala_Comte_-_Punta_de_sa_Torre_-_panoramio.jpg/1280px-Balearen%2C_Ibiza%2C_Wanderung_NW_Cala_Codolar_-_Cala_Comte_-_Punta_de_sa_Torre_-_panoramio.jpg",
+  formentera: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Formentera_beach_restaurant.jpg/1280px-Formentera_beach_restaurant.jpg",
+  siam: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/A0455_Tenerife%2C_Siam_Park_aerial_view.jpg/1280px-A0455_Tenerife%2C_Siam_Park_aerial_view.jpg",
+  anaga: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Parque_rural_de_Anaga%2C_Tenerife%2C_Espa%C3%B1a%2C_2022-01-09%2C_DD_57-59_HDR.jpg/1280px-Parque_rural_de_Anaga%2C_Tenerife%2C_Espa%C3%B1a%2C_2022-01-09%2C_DD_57-59_HDR.jpg",
+  masca: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Masca_auf_Teneriffa_%28Zuschnitt%29.jpg/1280px-Masca_auf_Teneriffa_%28Zuschnitt%29.jpg",
+  roqueNublo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Roque_Nublo_-_Gran_Canaria.JPG/1280px-Roque_Nublo_-_Gran_Canaria.JPG",
+  puertoMogan: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Playa_puerto_mogan_gran_canaria.jpg/1280px-Playa_puerto_mogan_gran_canaria.jpg",
+  lasCanteras: "https://upload.wikimedia.org/wikipedia/commons/1/1d/Playa_de_las_canteras_24_Dec2006_palmas_gran_canaria.jpg"
+};
+
+const photoLibrary = {
+  Barcelona: {
+    hero: [P.barcelona],
+    hotels: [P.barcelona, P.boqueria, P.sagrada, P.parkGuell, P.casaBatllo],
+    areas: [P.barcelona, P.boqueria, P.parkGuell],
+    food: [P.boqueria, P.tapas, P.barcelona, P.casaBatllo],
+    shopping: [P.casaBatllo, P.boqueria, P.barcelona],
+    beaches: [P.barcelona, P.parkGuell, P.montserrat],
+    gems: [P.montserrat, P.parkGuell, P.barcelona, P.boqueria],
+    activities: [P.sagrada, P.parkGuell, P.casaBatllo, P.montserrat, P.tapas, P.barcelona]
+  },
+  Madrid: {
+    hero: [P.madrid],
+    hotels: [P.madrid, P.sanMiguel, P.royalPalace, P.prado, P.bernabeu],
+    areas: [P.madrid, P.sanMiguel, P.royalPalace],
+    food: [P.sanMiguel, P.tapas, P.madrid, P.prado],
+    shopping: [P.madrid, P.royalPalace, P.sanMiguel],
+    beaches: [P.madrid, P.royalPalace, P.valencia],
+    gems: [P.royalPalace, P.prado, P.sanMiguel, P.madrid],
+    activities: [P.prado, P.royalPalace, P.madrid, P.bernabeu, P.tapas, P.sanMiguel]
+  },
+  Valencia: {
+    hero: [P.artsSciences],
+    hotels: [P.valencia, P.artsSciences, P.oceanografic, P.paella, P.albufera],
+    areas: [P.valencia, P.artsSciences, P.albufera],
+    food: [P.paella, P.valencia, P.oceanografic, P.albufera],
+    shopping: [P.artsSciences, P.valencia, P.paella],
+    beaches: [P.valencia, P.albufera, P.artsSciences],
+    gems: [P.albufera, P.valencia, P.artsSciences, P.oceanografic],
+    activities: [P.oceanografic, P.artsSciences, P.paella, P.albufera, P.valencia, P.oceanografic]
+  },
+  Sevilla: {
+    hero: [P.seville],
+    hotels: [P.seville, P.giralda, P.triana, P.tapas, P.seville],
+    areas: [P.seville, P.giralda, P.triana],
+    food: [P.tapas, P.triana, P.seville, P.giralda],
+    shopping: [P.triana, P.seville, P.giralda],
+    beaches: [P.seville, P.triana, P.giralda],
+    gems: [P.giralda, P.triana, P.seville, P.tapas],
+    activities: [P.seville, P.giralda, P.tapas, P.triana, P.triana, P.ronda]
+  },
+  Malaga: {
+    hero: [P.malaga],
+    hotels: [P.malaga, P.alcazaba, P.caminito, P.ronda, P.tapas],
+    areas: [P.malaga, P.alcazaba, P.tapas],
+    food: [P.tapas, P.malaga, P.alcazaba, P.ronda],
+    shopping: [P.malaga, P.tapas, P.alcazaba],
+    beaches: [P.malaga, P.alcazaba, P.caminito],
+    gems: [P.alcazaba, P.caminito, P.ronda, P.malaga],
+    activities: [P.caminito, P.ronda, P.alcazaba, P.malaga, P.tapas, P.malaga]
+  },
+  Marbella: {
+    hero: [P.marbella],
+    hotels: [P.marbella, P.puertoBanus, P.ronda, P.marbella, P.caminito],
+    areas: [P.marbella, P.puertoBanus, P.ronda],
+    food: [P.tapas, P.marbella, P.puertoBanus, P.ronda],
+    shopping: [P.puertoBanus, P.marbella, P.ronda],
+    beaches: [P.marbella, P.puertoBanus, P.ronda],
+    gems: [P.marbella, P.ronda, P.caminito, P.puertoBanus],
+    activities: [P.puertoBanus, P.marbella, P.ronda, P.caminito, P.tapas, P.caminito]
+  },
+  Alicante: {
+    hero: [P.alicante],
+    hotels: [P.alicante, P.guadalest, P.valencia, P.tapas, P.alicante],
+    areas: [P.alicante, P.guadalest, P.valencia],
+    food: [P.tapas, P.paella, P.alicante, P.guadalest],
+    shopping: [P.alicante, P.tapas, P.valencia],
+    beaches: [P.alicante, P.guadalest, P.valencia],
+    gems: [P.guadalest, P.alicante, P.valencia, P.tapas],
+    activities: [P.alicante, P.guadalest, P.guadalest, P.tapas, P.paella, P.alicante]
+  },
+  Benidorm: {
+    hero: [P.benidorm],
+    hotels: [P.benidorm, P.terraMitica, P.aqualandia, P.mundomar, P.guadalest],
+    areas: [P.benidorm, P.terraMitica, P.guadalest],
+    food: [P.tapas, P.benidorm, P.guadalest, P.mundomar],
+    shopping: [P.benidorm, P.terraMitica, P.aqualandia],
+    beaches: [P.benidorm, P.guadalest, P.mundomar],
+    gems: [P.guadalest, P.benidorm, P.terraMitica, P.mundomar],
+    activities: [P.terraMitica, P.aqualandia, P.mundomar, P.benidorm, P.guadalest, P.benidorm]
+  },
+  "Palma og Mallorca": {
+    hero: [P.palma],
+    hotels: [P.palma, P.tramuntana, P.drach, P.calaComte, P.palma],
+    areas: [P.palma, P.tramuntana, P.drach],
+    food: [P.paella, P.tapas, P.palma, P.tramuntana],
+    shopping: [P.palma, P.tapas, P.tramuntana],
+    beaches: [P.calaComte, P.tramuntana, P.drach],
+    gems: [P.tramuntana, P.palma, P.drach, P.calaComte],
+    activities: [P.palma, P.tramuntana, P.drach, P.tramuntana, P.calaComte, P.paella]
+  },
+  Ibiza: {
+    hero: [P.ibiza],
+    hotels: [P.ibiza, P.calaComte, P.formentera, P.ibiza, P.calaComte],
+    areas: [P.ibiza, P.calaComte, P.formentera],
+    food: [P.tapas, P.ibiza, P.calaComte, P.formentera],
+    shopping: [P.ibiza, P.calaComte, P.formentera],
+    beaches: [P.calaComte, P.formentera, P.ibiza],
+    gems: [P.ibiza, P.calaComte, P.formentera, P.ibiza],
+    activities: [P.formentera, P.ibiza, P.calaComte, P.formentera, P.calaComte, P.ibiza]
+  },
+  Tenerife: {
+    hero: [P.tenerife],
+    hotels: [P.tenerife, P.siam, P.anaga, P.masca, P.tenerife],
+    areas: [P.tenerife, P.siam, P.anaga],
+    food: [P.tapas, P.tenerife, P.masca, P.anaga],
+    shopping: [P.tenerife, P.siam, P.anaga],
+    beaches: [P.tenerife, P.siam, P.anaga],
+    gems: [P.masca, P.anaga, P.tenerife, P.siam],
+    activities: [P.tenerife, P.tenerife, P.siam, P.masca, P.anaga, P.tenerife]
+  },
+  "Gran Canaria": {
+    hero: [P.granCanaria],
+    hotels: [P.granCanaria, P.roqueNublo, P.puertoMogan, P.lasCanteras, P.granCanaria],
+    areas: [P.granCanaria, P.lasCanteras, P.puertoMogan],
+    food: [P.tapas, P.lasCanteras, P.puertoMogan, P.roqueNublo],
+    shopping: [P.lasCanteras, P.granCanaria, P.puertoMogan],
+    beaches: [P.granCanaria, P.lasCanteras, P.puertoMogan],
+    gems: [P.roqueNublo, P.puertoMogan, P.granCanaria, P.lasCanteras],
+    activities: [P.granCanaria, P.lasCanteras, P.roqueNublo, P.lasCanteras, P.granCanaria, P.puertoMogan]
+  }
+};
+
 function escapeHtml(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function cssUrl(value) {
+  return String(value || HERO_IMAGE).replaceAll("'", "%27").replaceAll(")", "%29");
+}
+
+function cityPhoto(city, section = "hero", index = 0) {
+  const photos = photoLibrary[city.name] || {};
+  const set = photos[section] || photos.hero || [HERO_IMAGE];
+  return set[index % set.length] || HERO_IMAGE;
+}
+
+function renderPhoto(src, alt, className) {
+  return `<img class="${className}" src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async" />`;
 }
 
 function stars(value = "4*") {
@@ -618,6 +903,10 @@ function cjHotelLink(city, hotel) {
   return url.toString();
 }
 
+function hotelDeepLink(city, hotel) {
+  return HOTEL_DEEP_LINKS[`${city}|${hotel}`] || "";
+}
+
 function klookLink(query) {
   const url = new URL("https://www.klook.com/nb/search/result/");
   url.searchParams.set("query", `${query} Spain`);
@@ -632,17 +921,71 @@ function gygLink(query) {
   return url.toString();
 }
 
-function renderList(items) {
-  return items.map(([title, text]) => `
+function activityDeepLink(city, activity) {
+  return ACTIVITY_DEEP_LINKS[`${city.name}|${activity}`] || "";
+}
+
+function activityProviderFromUrl(url, fallbackProvider) {
+  if (url.includes("gyg.me") || url.includes("getyourguide.")) return "GetYourGuide";
+  if (url.includes("klook.")) return "Klook";
+  return fallbackProvider;
+}
+
+function renderList(items, city, section) {
+  return items.map(([title, text], index) => `
         <article class="guide-card">
+          ${renderPhoto(cityPhoto(city, section, index), `${title} i ${city.name}`, "guide-card-photo")}
           <h3>${escapeHtml(title)}</h3>
           <p>${escapeHtml(text)}</p>
+        </article>`).join("");
+}
+
+function renderMagazine(city) {
+  const area = city.areas[0];
+  const secondArea = city.areas[1] || area;
+  const food = city.food[0];
+  const beach = city.beaches[0];
+  const gem = city.gems[0];
+  const activity = city.activities[0];
+  const familyHotel = city.hotels.find((hotel) => hotel[1] === "Familie") || city.hotels[1];
+  const valueHotel = city.hotels.find((hotel) => hotel[1] === "Billig og bra") || city.hotels[3];
+  const luxuryHotel = city.hotels.find((hotel) => hotel[1] === "Luksus") || city.hotels[2];
+  const cards = [
+    {
+      title: `Slik føles ${city.name}`,
+      photo: cityPhoto(city, "areas", 0),
+      text: `${city.name} fungerer best når du lar dagene få en tydelig rytme: bo i eller nær ${area[0]} hvis du vil ha de enkleste kveldene, bruk ${secondArea[0]} når du vil se mer av hverdagsbyen, og legg inn pauser som faktisk passer reisefølget. Det er denne miksen av områdevalg, måltider og korte stopp som gjør guiden mer nyttig enn en vanlig liste over severdigheter.`
+    },
+    {
+      title: "En god første dag",
+      photo: cityPhoto(city, "food", 0),
+      text: `Start rolig med kaffe og en spasertur i ${area[0]}, legg lunsjen rundt ${food[0]}, og bruk ettermiddagen på ${activity}. Mot kvelden kan du velge mellom ${beach[0]} for en enklere pause eller ${gem[0]} hvis du vil ha en mer lokal opplevelse. Denne rekkefølgen gir mindre transport og mer feriefølelse.`
+    },
+    {
+      title: "Slik velger du hotell",
+      photo: cityPhoto(city, "hotels", 2),
+      text: `Hotellvalget bør styres av reisetypen, ikke bare stjerner. ${familyHotel[0]} passer når logistikk og plass betyr mest, ${valueHotel[0]} er et bedre valg når budsjettet skal tåle flere middager og aktiviteter, mens ${luxuryHotel[0]} er riktig når hotellet skal være en stor del av selve reisen.`
+    },
+    {
+      title: "Book smartere",
+      photo: cityPhoto(city, "activities", 0),
+      text: `Bruk ${city.season.toLowerCase()} som pekepinn når du planlegger. De mest populære restaurantene og aktivitetene bør sjekkes før avreise, mens strand, shopping og små hidden gems ofte blir bedre når du lar været og dagsformen bestemme. Kombiner én booket opplevelse per dag med åpne lommer i programmet.`
+    }
+  ];
+  return cards.map((card) => `
+        <article class="guide-card magazine-card">
+          ${renderPhoto(card.photo, card.title, "guide-card-photo")}
+          <h3>${escapeHtml(card.title)}</h3>
+          <p>${escapeHtml(card.text)}</p>
         </article>`).join("");
 }
 
 function renderHotels(city) {
   return city.hotels.map((hotel, index) => {
     const [name, best, area, style, level, strength, why] = hotel;
+    const directHref = hotelDeepLink(city.name, name);
+    const hotelHref = directHref || cjHotelLink(city.name, name);
+    const hotelCta = directHref ? "Sjekk pris hos Hotels.com →" : "Søk hos Hotels.com →";
     const tone = [
       "linear-gradient(135deg, rgba(255, 209, 102, .28), rgba(34, 211, 238, .18))",
       "linear-gradient(135deg, rgba(34, 211, 238, .28), rgba(255, 75, 184, .16))",
@@ -653,7 +996,7 @@ function renderHotels(city) {
     return `
         <article class="mockup-hotel-card">
           <div class="mockup-hotel-media" style="--hotel-tone:${tone}">
-            <img src="${HERO_IMAGE}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" />
+            <img src="${escapeHtml(cityPhoto(city, "hotels", index))}" alt="${escapeHtml(`${name} i ${city.name}`)}" loading="lazy" decoding="async" />
             <div class="mockup-photo-stars">${stars(level)}</div>
           </div>
           <div class="mockup-hotel-content">
@@ -669,7 +1012,7 @@ function renderHotels(city) {
             </div>
             <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>${escapeHtml(why)}</p></div>
             <div class="mockup-tags"><span>${escapeHtml(best)}</span><span>${escapeHtml(area)}</span><span>${escapeHtml(strength)}</span></div>
-            <a class="mockup-cta" href="${escapeHtml(cjHotelLink(city.name, name))}" target="_blank" rel="nofollow sponsored noopener">Sjekk pris hos Hotels.com →</a>
+            <a class="mockup-cta" href="${escapeHtml(hotelHref)}" target="_blank" rel="nofollow sponsored noopener">${hotelCta}</a>
           </div>
         </article>`;
   }).join("");
@@ -677,13 +1020,16 @@ function renderHotels(city) {
 
 function renderActivities(city) {
   return city.activities.map((activity, index) => {
-    const provider = index % 2 === 0 ? "Klook" : "GetYourGuide";
-    const href = provider === "Klook" ? klookLink(activity) : gygLink(activity);
+    const fallbackProvider = index % 2 === 0 ? "Klook" : "GetYourGuide";
+    const deepLink = activityDeepLink(city, activity);
+    const href = deepLink || (fallbackProvider === "Klook" ? klookLink(activity) : gygLink(activity));
+    const provider = activityProviderFromUrl(href, fallbackProvider);
     const text = provider === "Klook"
-      ? "Søk etter billetter, dagsutflukter og praktiske opplevelser hos Klook."
-      : "Søk etter guidede turer, skip-the-line og dagsutflukter hos GetYourGuide.";
+      ? "Åpne dyp lenke til billetter, dagsutflukter og praktiske opplevelser hos Klook."
+      : "Åpne dyp lenke til guidede turer, skip-the-line og dagsutflukter hos GetYourGuide.";
     return `
         <article class="activity-card">
+          ${renderPhoto(cityPhoto(city, "activities", index), `${activity} i ${city.name}`, "activity-photo")}
           <span class="badge">${provider}</span>
           <h3>${escapeHtml(activity)}</h3>
           <p>${escapeHtml(text)} Bruk dette som startpunkt og velg tidspunkt, språk og avbestilling før du booker.</p>
@@ -708,9 +1054,9 @@ function renderCityPage(city) {
   <meta property="og:site_name" content="Billig-reiser.no" />
   <meta property="og:title" content="${escapeHtml(city.name)} guide 2026 | Billig-reiser.no" />
   <meta property="og:description" content="${escapeHtml(city.intro[0])}" />
-  <meta property="og:image" content="https://billig-reiser.no/spania/assets/spania-hero.png" />
+  <meta property="og:image" content="${escapeHtml(cityPhoto(city, "hero", 0))}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="/spania/spania-city.css?v=125" />
+  <link rel="stylesheet" href="/spania/spania-city.css?v=${SPAIN_CSS_VERSION}" />
   <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
@@ -739,7 +1085,7 @@ function renderCityPage(city) {
     </div>
   </nav>
 
-  <header class="hero-city" style="--hero-image:url('${HERO_IMAGE}')">
+  <header class="hero-city" style="--hero-image:url('${cssUrl(cityPhoto(city, "hero", 0))}')">
     <div class="hero-inner">
       <div class="kicker">${escapeHtml(city.region)} · ${escapeHtml(city.type)}</div>
       <h1>${escapeHtml(city.name)}</h1>
@@ -750,7 +1096,7 @@ function renderCityPage(city) {
       </div>
       <div class="quick-links">
         <a href="#omrader">Hvor bo</a>
-        <a href="#mat">Restauranter</a>
+        <a href="#restauranter">Restauranter</a>
         <a href="#shopping">Shopping</a>
         <a href="#strender">Strender</a>
         <a href="#hidden-gems">Hidden gems</a>
@@ -777,6 +1123,17 @@ function renderCityPage(city) {
       </div>
     </section>
 
+    <section class="wrap" id="magasin">
+      <div class="section-head">
+        <div>
+          <span class="badge">Magasin</span>
+          <h2>Reis smartere i ${escapeHtml(city.name)}</h2>
+        </div>
+        <p class="lead">Mer enn en sjekkliste: dette er rytmen, valgene og smågrepene som gjør byen enklere å bruke.</p>
+      </div>
+      <div class="grid">${renderMagazine(city)}</div>
+    </section>
+
     <section class="wrap" id="omrader">
       <div class="section-head">
         <div>
@@ -785,7 +1142,7 @@ function renderCityPage(city) {
         </div>
         <p class="lead">Velg område før hotell. Det er den enkleste måten å få riktig ferie, riktigere pris og mindre transport.</p>
       </div>
-      <div class="grid">${renderList(city.areas)}</div>
+      <div class="grid">${renderList(city.areas, city, "areas")}</div>
     </section>
 
     <section class="wrap wide-wrap" id="hoteller">
@@ -810,7 +1167,7 @@ function renderCityPage(city) {
         </div>
         <p class="lead">Dette er ikke en låst fasit, men sterke startpunkt som gjør det enklere å velge riktig kveld.</p>
       </div>
-      <div class="grid">${renderList(city.food)}</div>
+      <div class="grid">${renderList(city.food, city, "food")}</div>
     </section>
 
     <section class="wrap" id="shopping">
@@ -820,7 +1177,7 @@ function renderCityPage(city) {
           <h2>Shopping som passer byen</h2>
         </div>
       </div>
-      <div class="grid">${renderList(city.shopping)}</div>
+      <div class="grid">${renderList(city.shopping, city, "shopping")}</div>
     </section>
 
     <section class="wrap" id="strender">
@@ -830,7 +1187,7 @@ function renderCityPage(city) {
           <h2>Strender og badepauser</h2>
         </div>
       </div>
-      <div class="grid">${renderList(city.beaches)}</div>
+      <div class="grid">${renderList(city.beaches, city, "beaches")}</div>
     </section>
 
     <section class="wrap" id="hidden-gems">
@@ -840,7 +1197,7 @@ function renderCityPage(city) {
           <h2>Smartere stopp når du vil litt utenfor løypa</h2>
         </div>
       </div>
-      <div class="grid">${renderList(city.gems)}</div>
+      <div class="grid">${renderList(city.gems, city, "gems")}</div>
     </section>
 
     <section class="wrap" id="opplevelser">
@@ -871,7 +1228,7 @@ function renderCityPage(city) {
     </section>
   </main>
 
-  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</footer>
+  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg. Bilder: åpne stedbilder fra Wikimedia Commons/Wikipedia der tilgjengelig.</footer>
 </body>
 </html>
 `;
@@ -892,9 +1249,9 @@ function renderIndex() {
   <meta property="og:site_name" content="Billig-reiser.no" />
   <meta property="og:title" content="Spania guide 2026 | Billig-reiser.no" />
   <meta property="og:description" content="Velg riktig Spania-by og finn hotell, mat, shopping, strender og opplevelser." />
-  <meta property="og:image" content="https://billig-reiser.no/spania/assets/spania-hero.png" />
+  <meta property="og:image" content="${escapeHtml(P.barcelona)}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="/spania/spania-city.css?v=125" />
+  <link rel="stylesheet" href="/spania/spania-city.css?v=${SPAIN_CSS_VERSION}" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#020913" />
   <script defer src="/pwa-register.js"></script>
@@ -913,7 +1270,7 @@ function renderIndex() {
     </div>
   </nav>
 
-  <header class="hero-city" style="--hero-image:url('${HERO_IMAGE}')">
+  <header class="hero-city" style="--hero-image:url('${cssUrl(P.valencia)}')">
     <div class="hero-inner">
       <div class="kicker">Spania · stor guide</div>
       <h1>Spania by for by.</h1>
@@ -955,7 +1312,7 @@ function renderIndex() {
         <p class="lead">Start med reisestil. Barcelona og Valencia passer når du vil ha storby og strand. Malaga, Alicante og Benidorm er enkle solvalg. Madrid og Sevilla er sterkest på mat, kultur og kvelder.</p>
       </div>
       <div class="city-grid">
-${cities.map((city) => `        <article class="city-card">
+${cities.map((city) => `        <article class="city-card" style="--card-image:url('${cssUrl(cityPhoto(city, "hero", 0))}')">
           <div class="city-card-media"></div>
           <div class="city-card-body">
             <span class="badge">${escapeHtml(city.region)}</span>
@@ -968,7 +1325,7 @@ ${cities.map((city) => `        <article class="city-card">
     </section>
   </main>
 
-  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</footer>
+  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg. Bilder: åpne stedbilder fra Wikimedia Commons/Wikipedia der tilgjengelig.</footer>
 </body>
 </html>
 `;
