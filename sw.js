@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v123-package-search";
+const CACHE_VERSION = "billig-reiser-pwa-v125-spain-guides";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -6,13 +6,15 @@ const APP_SHELL = [
   "/manifest.webmanifest",
   "/style.css?v=122",
   "/affiliate-config.js?v=123",
-  "/app.js?v=123",
+  "/app.js?v=125",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
   "/assets/billig-reiser-logo-v115.png",
   "/assets/billig-reiser-logo-full-v115.png",
-  "/assets/video/front-hero-v116.mp4"
+  "/assets/video/front-hero-v116.mp4",
+  "/spania/",
+  "/spania/spania-city.css?v=125"
 ];
 
 self.addEventListener("install", event => {

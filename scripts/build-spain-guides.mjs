@@ -1,0 +1,1002 @@
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(__dirname, "..");
+
+const HOTELS_CJ = "https://www.tkqlhce.com/click-101724638-14361426";
+const HOTELS_CREATOR = "https://www.hotels.com/affiliates/hotelscom-home.rEFvN68";
+const KLOOK_FALLBACK = "https://klook.tpx.gr/Tmj2PfPe";
+const GYG_HOME = "https://www.getyourguide.com/?partner_id=FIQDAEB&utm_medium=local_partners";
+const HERO_IMAGE = "/spania/assets/spania-hero.png";
+const TODAY = "2026-06-09";
+
+const cities = [
+  {
+    name: "Barcelona",
+    path: "spania/barcelona-nordkysten/barcelona",
+    region: "Catalonia",
+    type: "Storby + strand",
+    intro: [
+      "Barcelona er Spania-guiden som nesten alle bør lese først. Byen gir deg arkitektur i verdensklasse, sterke matområder, shopping, strand, fotball, museer og dagsturer til fjell eller vinland.",
+      "Den vanligste feilen er å bo tilfeldig. Eixample, El Born, Barri Gotic, Barceloneta og Poblenou gir helt ulike ferier. Velg område etter rytmen du vil ha, ikke bare laveste pris."
+    ],
+    best: "3-5 netter, vår og høst, par, venner og førstegangsreisende",
+    airport: "Barcelona El Prat, cirka 25-35 minutter til sentrum",
+    season: "April-juni og september-oktober er best. Juli og august er varmest og travlest.",
+    areas: [
+      ["Eixample", "Beste allround-område for arkitektur, shopping, metro og pene hotellvalg."],
+      ["El Born og Gotiske kvarter", "Best for tapas, gamlebyen, små butikker og første byhelg."],
+      ["Barceloneta og Poblenou", "Best når strand, promenader og litt mer luft betyr mest."]
+    ],
+    hotels: [
+      ["H10 Madison Barcelona", "Par", "Gothic Quarter", "Boutique", "4*", "Takterrasse", "Svært sentralt hotell med utsikt, takterrasse og kort vei til gamlebyen, Born og shopping."],
+      ["Aparthotel Arai 4 Superior", "Familie", "Gothic Quarter", "Leilighetshotell", "4*", "Kjøkken", "Et smart valg når familien vil bo midt i byen, men trenger mer plass enn et vanlig rom."],
+      ["Hotel Arts Barcelona", "Luksus", "Port Olimpic", "Resortby", "5*", "Havutsikt", "Stort luksushotell ved stranden, med basseng, spa, restauranter og mer resortfølelse enn sentrumshotellene."],
+      ["Motel One Barcelona-Ciutadella", "Billig og bra", "El Born/Ciutadella", "Designbudsjett", "3*", "Park", "God verdi for deg som vil bo nær Born, strandretning og sentrum uten luksuspris."],
+      ["Novotel Barcelona City", "Barnevennlig", "Glories/Poblenou", "Familiebase", "4*", "Basseng", "Praktisk hotell med familierom, takbasseng og kort vei til metro, strand og shopping på Glories."]
+    ],
+    food: [
+      ["Bar Canete", "Livlig tapas og sjømat i Raval. Bestill bord hvis du vil spise sent."],
+      ["El Xampanyet", "Klassiker i Born for cava, ansjos og enkel tapasstemning."],
+      ["Disfrutar", "Verdensklasse for matinteresserte. Dette er planleggingsrestaurant, ikke spontanvalg."],
+      ["La Boqueria og Sant Antoni", "Bra for snacks, frokost og matvandring når du vil se flere smaker på kort tid."]
+    ],
+    shopping: [
+      ["Passeig de Gracia", "Luksus, kjeder, arkitektur og hotellbar-pauser i samme område."],
+      ["El Born", "Små butikker, design, sko, smykker og kveldsvennlige gater."],
+      ["Portal de l'Angel", "Praktisk shoppinggate nær Placa Catalunya for kjeder og raske kjøp."]
+    ],
+    beaches: [
+      ["Barceloneta", "Nærmest sentrum og mest livlig. Best for kort strandpause, ikke total ro."],
+      ["Bogatell", "Bedre plass og mer lokalfølelse. Godt valg for familier og par."],
+      ["Ocata", "Togtur ut av byen for lengre sandstrand og roligere dag."]
+    ],
+    gems: [
+      ["Bunkers del Carmel", "Utsikt over hele byen. Dra tidlig eller mot solnedgang."],
+      ["Sant Pau Modernista", "Vakkert modernistisk anlegg som ofte er roligere enn Gaudi-klassikerne."],
+      ["Gracia", "Små plasser, kaféer og lokal kveld uten samme turisttrykk."],
+      ["Poble-sec", "Bra tapasområde når du vil ut av de mest åpenbare gatene."]
+    ],
+    activities: ["Sagrada Familia", "Park Guell", "Casa Batllo", "Montserrat dagstur", "Tapas og vinsmaking", "Sykkeltur i Barcelona"]
+  },
+  {
+    name: "Madrid",
+    path: "spania/madrid",
+    region: "Madrid",
+    type: "Mat, museer og storby",
+    intro: [
+      "Madrid er Spania for deg som vil ha museer, parker, tapasbarer, fotball, shopping og kvelder som starter sent. Byen har ikke strand, men den har en veldig sterk storbyrytme.",
+      "Bo sentralt hvis du er førstegangsreisende. Sol, Gran Via, Letras, Chueca og Salamanca gir forskjellige opplevelser, men alle gjør det lett å gå, spise og bruke metro."
+    ],
+    best: "3-4 netter, vår og høst, mat, museer, fotball og par",
+    airport: "Madrid Barajas, cirka 25-40 minutter til sentrum",
+    season: "Mars-juni og september-november er mest behagelig. Sommeren kan bli svært varm.",
+    areas: [
+      ["Barrio de las Letras", "Best for museer, tapas og klassisk Madrid-stemning."],
+      ["Chueca og Malasana", "Best for restauranter, barer, vintage og yngre byliv."],
+      ["Salamanca", "Best for luksushotell, shopping og roligere gater."]
+    ],
+    hotels: [
+      ["Only YOU Boutique Hotel Madrid", "Par", "Chueca", "Boutique", "4*", "Design", "Romantisk, sentralt og stilig hotell med sterk byfølelse og kort vei til restauranter."],
+      ["Suites Viena Plaza de Espana", "Familie", "Plaza de Espana", "Leilighetshotell", "3*", "Kjøkken", "Godt valg for familier som vil ha mer plass, enkel metro og kort vei til parker og sentrum."],
+      ["Four Seasons Hotel Madrid", "Luksus", "Centro Canalejas", "Grand hotel", "5*", "Spa", "Et av byens mest komplette luksushotellvalg med topp beliggenhet, spa og shopping rett utenfor."],
+      ["Hotel Regina Madrid", "Billig og bra", "Sol/Sevilla", "Sentrumshotell", "4*", "Metro", "Sterk verdi for deg som vil bo midt i Madrid og bruke pengene på mat og opplevelser."],
+      ["Novotel Madrid Center", "Barnevennlig", "Salamanca/Retiro", "Familiebase", "4*", "Basseng", "Trygt og praktisk hotell for barn, Retiro-parken, metro og litt roligere kvelder."]
+    ],
+    food: [
+      ["Sobrino de Botin", "Historisk Madrid-restaurant kjent for klassisk kastiljansk mat."],
+      ["Casa Lucio", "Kjent for huevos rotos og klassisk La Latina-kveld."],
+      ["Sala de Despiece", "Moderne, uformell og morsom matopplevelse i Chamberi."],
+      ["Mercado de San Miguel", "Turistisk, men praktisk for første smaksrunde i byen."]
+    ],
+    shopping: [
+      ["Gran Via", "Kjeder, varehus, kinoer og enkel shopping mellom hotell og severdigheter."],
+      ["Salamanca og Calle Serrano", "Luksus, spanske merker og finere handlegater."],
+      ["El Rastro", "Søndagsmarked i La Latina. Best tidlig før gatene blir fulle."]
+    ],
+    beaches: [
+      ["Madrid Rio", "Ikke strand, men bra for sykkel, lekeplasser og pause ved elven."],
+      ["Casa de Campo", "Stor grønn lomme for gondol, piknik og ro fra sentrum."],
+      ["Valencia med tog", "Hvis du vil ha strand, tar hurtigtoget deg til Middelhavet på rundt to timer."]
+    ],
+    gems: [
+      ["Templo de Debod", "Solnedgang, utsikt og rolig pause vest i sentrum."],
+      ["Sorolla-museet", "Vakkert kunstnerhjem som ofte føles mer personlig enn de store museene."],
+      ["Matadero Madrid", "Kultur, utstillinger og lokal helgestemning ved Madrid Rio."],
+      ["Chamberi spøkelsesstasjon", "Nedlagt metrostasjon som gir et lite historisk sidespor."]
+    ],
+    activities: ["Prado Museum", "Royal Palace Madrid", "Toledo dagstur", "Santiago Bernabeu", "Tapasvandring", "Flamenco i Madrid"]
+  },
+  {
+    name: "Valencia",
+    path: "spania/valencia",
+    region: "Valencia",
+    type: "Strand + storby",
+    intro: [
+      "Valencia er et av de smarteste Spania-valgene akkurat nå: lavere tempo enn Barcelona, bedre strandkobling enn Madrid og en gammelby som er lett å bruke.",
+      "Byen passer spesielt godt for familier, par og matglade reisende. Du får paella, sykkelvennlige parker, akvarium, moderne arkitektur og brede strender uten å måtte velge bort storbyfølelsen."
+    ],
+    best: "4-6 netter, familier, par, strand og mat",
+    airport: "Valencia Airport, cirka 20-30 minutter til sentrum",
+    season: "April-juni og september-oktober. Sommeren er strandvennlig, men varm.",
+    areas: [
+      ["Ciutat Vella", "Best for første tur, gamlebyen, markeder og kvelder til fots."],
+      ["Ruzafa", "Best for restauranter, barer, design og mer lokal energi."],
+      ["Malvarrosa og Cabanyal", "Best for strand, sjømat og ferie uten full storbypuls."]
+    ],
+    hotels: [
+      ["Hospes Palau de la Mar", "Par", "Eixample", "Boutique", "5*", "Spa", "Elegant og rolig hotell med kort vei til gamlebyen, Turia-parken og restauranter."],
+      ["Barcelo Valencia", "Familie", "City of Arts", "Praktisk", "4*", "Takterrasse", "Smart base for Oceanografic, parker og familier som vil ha moderne område."],
+      ["Las Arenas Balneario Resort", "Luksus", "Malvarrosa", "Strandresort", "5*", "Basseng", "Byens klassiske luksusvalg ved stranden, godt for deg som vil ha resort og storby i samme tur."],
+      ["Venecia Plaza Centro", "Billig og bra", "Plaza del Ayuntamiento", "Sentrum", "2-3*", "Gåavstand", "Enkelt, sentralt og praktisk når beliggenhet betyr mer enn store fasiliteter."],
+      ["Ilunion Aqua 4", "Barnevennlig", "Aqua/Arts", "Familiebase", "4*", "Akvarium", "Rimelig og enkel base nær Oceanografic, shopping og buss mot strand."]
+    ],
+    food: [
+      ["Casa Carmela", "Klassisk paella ved stranden. Bestill på forhånd."],
+      ["La Pepica", "Historisk strandrestaurant med paella og sjømat."],
+      ["Central Bar", "Godt stopp inne i Mercado Central."],
+      ["Ricard Camarena", "For matinteresserte som vil ha en større restaurantopplevelse."]
+    ],
+    shopping: [
+      ["Mercado Central", "Mat, råvarer, keramikk, smågaver og en av byens fineste bygninger."],
+      ["Colon og Calle Jorge Juan", "Butikker, kaféer og penere shopping nær sentrum."],
+      ["Aqua og El Saler", "Praktisk shopping nær City of Arts and Sciences."]
+    ],
+    beaches: [
+      ["Malvarrosa", "Den mest kjente stranden, enkel å nå og fin for familier."],
+      ["Patacona", "Litt roligere nordover med gode strandbarer."],
+      ["El Saler", "Mer naturlig strand sør for byen, fin med bil eller utflukt."]
+    ],
+    gems: [
+      ["Jardin del Turia", "Den gamle elveleien er byens beste transportåre for sykkel og gåturer."],
+      ["Cabanyal", "Fargerike hus, strandfølelse og mer lokal mat."],
+      ["Albufera", "Lagune, risåkre og solnedgang utenfor byen."],
+      ["Centro del Carmen", "Kulturhus med utstillinger og rolig gårdsrom."]
+    ],
+    activities: ["Oceanografic Valencia", "City of Arts and Sciences", "Paella cooking class", "Albufera sunset", "Valencia bike tour", "Bioparc Valencia"]
+  },
+  {
+    name: "Sevilla",
+    path: "spania/andalucia/sevilla",
+    region: "Andalusia",
+    type: "Kultur og romantikk",
+    intro: [
+      "Sevilla er flamenco, appelsintrær, palasser, tapasbarer og varme kvelder. Byen er mindre strandferie og mer atmosfære, mat, arkitektur og rolig vandring.",
+      "Første gang bør du bo nær Santa Cruz, El Arenal eller Centro. Da ligger Alcazar, katedralen, Giralda, Triana og de beste kveldsområdene innenfor en enkel tur."
+    ],
+    best: "3-4 netter, vår og høst, par, kultur og mat",
+    airport: "Sevilla Airport, cirka 20-30 minutter til sentrum",
+    season: "Mars-mai og oktober-november er best. Juli og august kan bli veldig varmt.",
+    areas: [
+      ["Santa Cruz", "Best for første besøk, romantiske gater og kort vei til Alcazar."],
+      ["El Arenal", "Best for sentrum, elven, tapas og klassiske severdigheter."],
+      ["Triana", "Best for keramikk, lokal kveld, flamenco og litt mer nabolagsfølelse."]
+    ],
+    hotels: [
+      ["Hotel Casa 1800 Sevilla", "Par", "Santa Cruz", "Historisk", "4*", "Takterrasse", "Romantisk hotell i gamlebyen med klassisk Sevilla-følelse og kort vei til alt."],
+      ["H10 Casa de la Plata", "Familie", "Centro", "Boutique", "4*", "Basseng", "Godt familievalg med sentral beliggenhet, moderne rom og en enkel base for varme dager."],
+      ["Hotel Alfonso XIII", "Luksus", "Centro", "Palasshotell", "5*", "Ikonisk", "Sevillas store luksusklassiker, perfekt hvis hotellet skal være en del av opplevelsen."],
+      ["Hotel Becquer", "Billig og bra", "Centro", "Verdi", "4*", "Takbasseng", "Svært praktisk hotell med god beliggenhet og takbasseng uten luksuspris."],
+      ["Novotel Sevilla", "Barnevennlig", "Nervion", "Familiebase", "4*", "Basseng", "Bra med barn når du vil ha basseng, enklere logistikk og metro/taxi til sentrum."]
+    ],
+    food: [
+      ["El Rinconcillo", "Historisk tapasbar og godt første stopp."],
+      ["Eslava", "Populært tapasvalg med høy kvalitet og livlig stemning."],
+      ["Casa Morales", "Klassisk baropplevelse nær katedralområdet."],
+      ["Abantal", "Michelin-nivå for deg som vil gjøre én stor middag."]
+    ],
+    shopping: [
+      ["Calle Sierpes og Tetuan", "Klassiske handlegater i sentrum."],
+      ["Triana keramikk", "Fliser, keramikk og lokale gaver på andre siden av elven."],
+      ["Mercado de Triana", "Mat, småbutikker og lokal hverdagsfølelse."]
+    ],
+    beaches: [
+      ["Matalascanas", "Nærmeste strandretning for en lang dagstur fra Sevilla."],
+      ["Cadiz", "By og strand med tog. Bedre hvis du har en ekstra dag."],
+      ["Bolonia", "Spektakulær strand lenger sør, best med bil og god tid."]
+    ],
+    gems: [
+      ["Casa de Pilatos", "Vakkert palass som ofte er roligere enn Alcazar."],
+      ["Hospital de los Venerables", "Kunst og arkitektur i Santa Cruz."],
+      ["Metropol Parasol", "Utsikt og solnedgang over bytakene."],
+      ["Alameda de Hercules", "Mer lokal kveld med barer og restauranter."]
+    ],
+    activities: ["Alcazar Sevilla", "Seville Cathedral and Giralda", "Flamenco Sevilla", "Tapas tour Sevilla", "Triana walking tour", "Cordoba day trip from Seville"]
+  },
+  {
+    name: "Malaga",
+    path: "spania/costa-del-sol/malaga",
+    region: "Costa del Sol",
+    type: "Strand, mat og byliv",
+    intro: [
+      "Malaga er blitt et av de beste inngangspunktene til Spania fra Norge. Du får strand, gamleby, museer, tapas, takbarer, kort transfer og enkel tilgang til resten av Costa del Sol.",
+      "Byen fungerer både som helgetur og base for en uke. Velg sentrum hvis mat og kvelder er viktigst, eller strandnære områder hvis du vil senke tempoet."
+    ],
+    best: "4-7 netter, par, familier, kort transfer og Costa del Sol",
+    airport: "Malaga Airport, cirka 15-25 minutter til sentrum",
+    season: "Mars-juni og september-november er svært gode. Sommeren passer best for strand.",
+    areas: [
+      ["Centro Historico", "Best for tapas, museer, kvelder og første Malaga-tur."],
+      ["La Malagueta", "Best for strandnær byferie og kort vei til sentrum."],
+      ["Soho og havnen", "Best for moderne hotell, kunst, havnepromenade og Muelle Uno."]
+    ],
+    hotels: [
+      ["Palacio Solecio", "Par", "Centro Historico", "Boutique", "4*", "Restaurant", "Elegant byhotell med historisk ramme og perfekt beliggenhet for tapas og gamlebyen."],
+      ["Barcelo Malaga", "Familie", "Maria Zambrano", "Praktisk", "4*", "Tog", "Veldig enkel base med tog, metro, shopping og kort vei videre langs Costa del Sol."],
+      ["Gran Hotel Miramar", "Luksus", "La Malagueta", "Grand hotel", "5*", "Strand", "Malagas klassiske luksushotell ved stranden, med basseng, spa og kort vei til sentrum."],
+      ["Casual del Mar Malaga", "Billig og bra", "Soho", "Verdi", "3*", "Sentrum", "Fargerikt og praktisk hotell når du vil bo sentralt uten å bruke opp budsjettet."],
+      ["Sol Guadalmar", "Barnevennlig", "Guadalmar", "Strandbase", "4*", "Basseng", "Godt strandvalg med barn, basseng og kort vei til flyplassen."]
+    ],
+    food: [
+      ["El Pimpi", "Klassiker for første kveld, vin, tapas og Malaga-stemning."],
+      ["Los Mellizos", "Sjømat og andalusisk ferieenergi nær sentrum."],
+      ["Casa Lola", "Uformell tapas som fungerer godt tidlig på kvelden."],
+      ["Jose Carlos Garcia", "Finere middag ved Muelle Uno for matinteresserte."]
+    ],
+    shopping: [
+      ["Calle Larios", "Byens hovedgate for butikker, ispauser og kveldslys."],
+      ["Muelle Uno", "Butikker, havn, restauranter og fin promenade."],
+      ["Atarazanas-markedet", "Matmarked for lokal frokost, råvarer og småsmaking."]
+    ],
+    beaches: [
+      ["La Malagueta", "Nærmest sentrum og lettest å kombinere med lunsj og gamleby."],
+      ["Pedregalejo", "Bedre for strandlunsj, fiskespyd og lokal søndagsfølelse."],
+      ["El Palo", "Mer lokal strandretning med rimeligere restauranter."]
+    ],
+    gems: [
+      ["Gibralfaro ved solnedgang", "Beste utsikt over havn, by og tyrefekterarena."],
+      ["Automobil- og motemuseet", "Overraskende god regnværs- eller pauseaktivitet."],
+      ["Pedregalejo kveldstur", "Gå østover for roligere strand og fiskerestauranter."],
+      ["Soho street art", "Kort, enkel runde med muralkunst nær havnen."]
+    ],
+    activities: ["Caminito del Rey from Malaga", "Ronda and white villages", "Malaga Alcazaba", "Picasso Museum Malaga", "Malaga tapas tour", "Catamaran Malaga"]
+  },
+  {
+    name: "Marbella",
+    path: "spania/costa-del-sol/marbella",
+    region: "Costa del Sol",
+    type: "Luksus, strand og gamleby",
+    intro: [
+      "Marbella er Costa del Sol med penere hotell, beach clubs, Puerto Banus, golf, gamleby og lange restaurantkvelder. Det er ikke det billigste valget, men det kan være et av de mest komfortable.",
+      "Velg mellom Marbella sentrum, Golden Mile, Puerto Banus og roligere strandsoner østover. Avstandene betyr mer enn man tror, særlig uten leiebil."
+    ],
+    best: "4-7 netter, par, luksus, strandklubber og voksne familier",
+    airport: "Malaga Airport, cirka 40-55 minutter med bil",
+    season: "Mai-juni og september-oktober gir best balanse mellom vær og pris.",
+    areas: [
+      ["Gamlebyen", "Best for restauranter, kveldsliv, små gater og mer spansk følelse."],
+      ["Golden Mile", "Best for luksusresorter, strandklubber og kort vei til alt med taxi."],
+      ["Puerto Banus", "Best for shopping, marina, nattliv og mer glamorøs ferie."]
+    ],
+    hotels: [
+      ["Amare Beach Hotel Marbella", "Par", "Marbella strand", "Adults only", "4*", "Beach club", "Stilrent voksenhotell med strand, basseng og gangavstand til gamlebyen."],
+      ["Marriott's Marbella Beach Resort", "Familie", "Elviria", "Leilighetsresort", "4*", "Kjøkken", "Sterkt familievalg med leiligheter, basseng og strandnær base øst for Marbella."],
+      ["Puente Romano Beach Resort", "Luksus", "Golden Mile", "Resort", "5*", "Restauranter", "Ikonisk luksusresort med strand, hager, tennis, restauranter og veldig høy Marbella-faktor."],
+      ["Ona Marbella Inn", "Billig og bra", "Marbella sentrum", "Verdi", "3*", "Sentrum", "Praktisk og rimeligere valg når beliggenhet og enkel strandtilgang betyr mest."],
+      ["AluaSun Marbella Park", "Barnevennlig", "Elviria", "Familiehotell", "4*", "Basseng", "Godt valg for barn med basseng, aktiviteter og enklere budsjett enn strandresortene."]
+    ],
+    food: [
+      ["Skina", "Finere matopplevelse i gamlebyen."],
+      ["Lobito de Mar", "Sjømat og polert kyststemning."],
+      ["Bibo Marbella", "Livlig og moderne Marbella-middag."],
+      ["Altamirano", "Klassisk sjømat i gamlebyen."]
+    ],
+    shopping: [
+      ["Puerto Banus", "Luksusbutikker, marina og vindusshopping."],
+      ["La Canada", "Stort kjøpesenter for praktisk shopping."],
+      ["Gamlebyen", "Små butikker, keramikk, klær og kveldsvandring."]
+    ],
+    beaches: [
+      ["Playa de la Fontanilla", "Sentralt og enkelt fra Marbella by."],
+      ["Nagueles og Golden Mile", "Penere strandfølelse ved luksushotellene."],
+      ["Cabopino", "Finere sand, roligere preg og godt familievalg."]
+    ],
+    gems: [
+      ["Plaza de los Naranjos tidlig", "Gå før lunsjrushet for roligere gamleby."],
+      ["Dunas de Artola", "Naturlig strand- og sanddyneområde ved Cabopino."],
+      ["Benahavis", "Matlandsby i fjellene, perfekt kveldstur med bil."],
+      ["Istán", "Liten fjellby og grønn kontrast til kysten."]
+    ],
+    activities: ["Marbella yacht", "Puerto Banus tour", "Ronda from Marbella", "Caminito del Rey Marbella", "Marbella tapas tour", "Canyoning Costa del Sol"]
+  },
+  {
+    name: "Alicante",
+    path: "spania/costa-blanca/alicante",
+    region: "Costa Blanca",
+    type: "Prisgunstig strandby",
+    intro: [
+      "Alicante er et av de enkleste og mest prisvennlige Spania-valgene. Flyplassen ligger nær byen, strendene er lett tilgjengelige, og gamlebyen er liten nok til at du raskt finner rytmen.",
+      "Byen passer for korttur, rimelig hotelluke, familier, par og reisende som vil kombinere strand med leiebil til Costa Blanca."
+    ],
+    best: "4-7 netter, budsjett, strand, barnefamilier og kort transfer",
+    airport: "Alicante Airport, cirka 20 minutter til sentrum",
+    season: "April-juni og september-november. Sommeren er varm og strandvennlig.",
+    areas: [
+      ["Centro og gamlebyen", "Best for tapas, strand, havn og kort første tur."],
+      ["Postiguet", "Best for strandnært byhotell og enkel feriehverdag."],
+      ["San Juan", "Best for lengre strand, mer plass og roligere familiedager."]
+    ],
+    hotels: [
+      ["Hospes Amerigo", "Par", "Gamlebyen", "Boutique", "5*", "Takterrasse", "Elegant hotell i sentrum med spa, takbasseng og kort vei til strand og restauranter."],
+      ["Melia Alicante", "Familie", "Postiguet", "Strandby", "4*", "Havn", "Svært praktisk hotell mellom stranden og havnen, med kort vei til alt."],
+      ["Hotel Casa Alberola Alicante", "Luksus", "Havnen", "Boutique", "4*", "Utsikt", "Voksen og stilig base ved vannet, best for par som vil bo pent og sentralt."],
+      ["Hotel Maya Alicante", "Billig og bra", "Santa Barbara", "Verdi", "3*", "Basseng", "God verdi med basseng, enkel strandvei og kort avstand til sentrum."],
+      ["Port Alicante City & Beach", "Barnevennlig", "San Juan", "Familiebase", "4*", "Basseng", "Bedre for familier som vil ha mer strandplass, basseng og roligere dager."]
+    ],
+    food: [
+      ["Nou Manolin", "Klassiker for tapas, sjømat og byfølelse."],
+      ["La Taberna del Gourmet", "Trygt valg for første kveld og deling av småretter."],
+      ["Darsena", "Kjent for risretter og utsikt ved havnen."],
+      ["Monastrell", "Finere matopplevelse for en mer spesiell middag."]
+    ],
+    shopping: [
+      ["Avenida Maisonnave", "Hovedgate for shopping og varehus."],
+      ["Mercado Central", "Mat, råvarer og lokal stemning."],
+      ["Plaza Mar 2", "Praktisk kjøpesenter nær strand og slott."]
+    ],
+    beaches: [
+      ["Playa del Postiguet", "Bystranden under Santa Barbara-slottet."],
+      ["Playa de San Juan", "Lang og bred strand, best for familier og god plass."],
+      ["Tabarca", "Øytur med klart vann og snorkling på riktig dag."]
+    ],
+    gems: [
+      ["Barrio de Santa Cruz", "Små hvite gater under slottet."],
+      ["Serra Grossa", "Enkel utsiktstur mellom sentrum og San Juan-retningen."],
+      ["Altea", "Pen hvit gamleby som passer som dagstur."],
+      ["Villajoyosa", "Fargerike hus, strand og sjokoladehistorie."]
+    ],
+    activities: ["Santa Barbara Castle Alicante", "Tabarca Island", "Guadalest and Algar waterfalls", "Alicante food tour", "Alicante wine tour", "Alicante bike tour"]
+  },
+  {
+    name: "Benidorm",
+    path: "spania/costa-blanca/benidorm",
+    region: "Costa Blanca",
+    type: "Familie, strand og underholdning",
+    intro: [
+      "Benidorm er stort, praktisk og mye bedre for familier enn ryktet tilsier når du velger riktig område. Her får du lange strender, fornøyelsesparker, badeland, rimelige hotell og mye å gjøre.",
+      "Levante gir mest liv, Poniente er roligere og bedre for familier, mens Finestrat og områdene rundt passer hvis du vil ha resort, bil og mer plass."
+    ],
+    best: "5-8 netter, familier, strand, badeland og budsjett",
+    airport: "Alicante Airport, cirka 40-50 minutter med bil",
+    season: "Mai-juni og september-oktober gir god strandtemperatur uten topptrykk.",
+    areas: [
+      ["Levante", "Best for liv, restauranter, strandpromenade og underholdning."],
+      ["Poniente", "Best for familier, roligere hoteller og penere stranddager."],
+      ["Finestrat", "Best for resortfølelse, leiebil og familieaktiviteter."]
+    ],
+    hotels: [
+      ["Villa Venecia Hotel Boutique Gourmet", "Par", "Gamlebyen", "Boutique", "5*", "Utsikt", "Romantisk hotell med havutsikt og voksen stemning ved gamlebyen."],
+      ["Hotel RH Princesa", "Familie", "Sentrum", "Familiehotell", "4*", "Basseng", "Trygt familievalg med basseng, aktiviteter og kort vei til strand og sentrum."],
+      ["Asia Gardens Hotel & Thai Spa", "Luksus", "Finestrat", "Resort", "5*", "Spa", "Luksusresort utenfor byen med hager, basseng og roligere atmosfære."],
+      ["Hotel Helios Benidorm", "Billig og bra", "Levante", "Verdi", "3*", "Basseng", "Populært budsjettvalg nær Levante, restauranter og enkel feriehverdag."],
+      ["Magic Robin Hood Resort", "Barnevennlig", "Alfaz/Finestrat", "Familieresort", "4*", "Vannpark", "Sterkt barnevalg med temaresort, vannparkpreg og mye aktivitet på stedet."]
+    ],
+    food: [
+      ["La Cava Aragonesa", "Tapas i gamlebyen, fint for en første Benidorm-kveld."],
+      ["Ulia", "Sjømat og risretter ved Poniente."],
+      ["The Vagabond", "Lite, populært middagssted i gamlebyen."],
+      ["Amigos Bistro", "Trygt og vennlig restaurantvalg for par og voksne familier."]
+    ],
+    shopping: [
+      ["Gamlebyen", "Småbutikker, tapasgater og kveldsvandring."],
+      ["La Marina", "Stort kjøpesenter i Finestrat."],
+      ["Levante promenade", "Enkelt for strandutstyr, sko, suvenirer og småhandel."]
+    ],
+    beaches: [
+      ["Levante", "Mest liv og mest sentralt."],
+      ["Poniente", "Bredere, roligere og ofte bedre for familier."],
+      ["Cala Tio Ximo", "Liten vik for snorkling og mer skjermet følelse."]
+    ],
+    gems: [
+      ["Balcon del Mediterraneo", "Klassisk utsiktspunkt mellom strendene."],
+      ["Benidorm Island", "Kort båttur og fin kontrast til hotellsonen."],
+      ["Sierra Helada", "Utsiktstur og natur rett utenfor byen."],
+      ["Villajoyosa", "Fargerik naboby som gir roligere dagstur."]
+    ],
+    activities: ["Terra Mitica", "Aqualandia Benidorm", "Mundomar Benidorm", "Benidorm Island boat", "Guadalest and Algar from Benidorm", "Sierra Helada kayak"]
+  },
+  {
+    name: "Palma og Mallorca",
+    path: "spania/mallorca",
+    region: "Balearene",
+    type: "Øyferie for alle",
+    intro: [
+      "Mallorca er et av de tryggeste Spania-valgene fordi øya kan være nesten alt: Palma-helg, familieferie i Alcudia, voksen strandferie i Port de Soller, luksus ved kysten eller roadtrip i Tramuntana.",
+      "Tenk på Mallorca som flere ferier i én. Velg Palma for by og mat, nordkysten for barn, sørøst for penere viker og vestkysten for fjell, utsikt og roligere tempo."
+    ],
+    best: "5-10 netter, familier, par, strand, fjell og mat",
+    airport: "Palma de Mallorca Airport, cirka 15 minutter til Palma",
+    season: "April-juni og september-oktober er best. Juli og august er mest populære og dyrest.",
+    areas: [
+      ["Palma", "Best for par, helgetur, shopping, mat og kort transfer."],
+      ["Alcudia og Playa de Muro", "Best for barnefamilier og lang, grunn sandstrand."],
+      ["Port de Soller og Cala d'Or", "Best for roligere ferie, småbyfølelse og penere kyst."]
+    ],
+    hotels: [
+      ["Hotel Can Cera", "Par", "Palma gamleby", "Boutique", "5*", "Historisk", "Romantisk byhotell i et gammelt palass, perfekt for mat, kultur og korte avstander."],
+      ["Zafiro Palace Palmanova", "Familie", "Palmanova", "Familieresort", "5*", "Basseng", "Sterkt familievalg med store rom, basseng og enkel strandferie."],
+      ["Cap Rocat", "Luksus", "Cala Blava", "Fort-hotell", "5*", "Privatliv", "Et av øyas mest spesielle luksushoteller, best for par og voksne som vil ha ro."],
+      ["Hotel Almudaina", "Billig og bra", "Palma", "Sentrum", "4*", "Takterrasse", "God verdi i Palma med kort vei til shopping, gamlebyen og havneområdet."],
+      ["Zafiro Palace Alcudia", "Barnevennlig", "Alcudia", "Familieresort", "5*", "Basseng", "Svært barnevennlig resort nær nordkystens beste familieområder."]
+    ],
+    food: [
+      ["Marc Fosh", "Finere Palma-middag med moderne middelhavskjøkken."],
+      ["Ca'n Joan de s'Aigo", "Klassiker for iskrem, ensaimada og søt pause."],
+      ["Forn de Sant Joan", "Godt middagsvalg i Palma gamleby."],
+      ["La Rosa Vermuteria", "Uformell og hyggelig vermut- og tapasstemning."]
+    ],
+    shopping: [
+      ["Passeig del Born", "Palmas peneste shoppingakse."],
+      ["Jaime III", "Butikker, varehus og enkel sentrumsshopping."],
+      ["Santa Catalina-markedet", "Mat, snacks og lokal stemning før lunsj."]
+    ],
+    beaches: [
+      ["Playa de Muro", "Lang, familievennlig og ofte det tryggeste strandvalget med barn."],
+      ["Cala Mondrago", "Vakker vik i naturpark, best med tidlig start."],
+      ["Es Trenc", "Lang naturstrand med karibisk følelse på riktig dag."]
+    ],
+    gems: [
+      ["Deia", "Kunstnerby, fjell, utsikt og romantisk dagstur."],
+      ["Valldemossa", "Vakre gater, kaker og fjellfølelse."],
+      ["Cala Figuera", "Liten havn med postkortstemning."],
+      ["Soller-toget", "Klassisk rute fra Palma til fjell og havn."]
+    ],
+    activities: ["Palma Cathedral", "Soller train Mallorca", "Drach Caves Mallorca", "Serra de Tramuntana tour", "Mallorca boat trip", "Mallorca wine tasting"]
+  },
+  {
+    name: "Ibiza",
+    path: "spania/ibiza",
+    region: "Balearene",
+    type: "Strand, club og roligere nord",
+    intro: [
+      "Ibiza er mer enn nattklubber. Øya har små viker, roligere landsbyer, god mat, Dalt Vila, solnedganger, Formentera-turer og hotell for både par, familier og vennegjenger.",
+      "Velg område nøye: Ibiza by og Talamanca gir by og marina, Santa Eularia er roligere, San Antonio har solnedgang og mer budsjett, mens nordkysten er mer voksen og avslappet."
+    ],
+    best: "4-7 netter, par, venner, strand, solnedgang og uteliv",
+    airport: "Ibiza Airport, cirka 15-25 minutter til Ibiza by",
+    season: "Mai-juni og september er best. Juli og august er dyrest og mest intenst.",
+    areas: [
+      ["Ibiza by og Talamanca", "Best for Dalt Vila, marina, restauranter og kort transfer."],
+      ["Santa Eularia", "Best for roligere ferie, familier og bedre søvn."],
+      ["San Antonio og vestkysten", "Best for solnedgang, budsjett og mer uteliv."]
+    ],
+    hotels: [
+      ["Hotel Mirador de Dalt Vila", "Par", "Dalt Vila", "Boutique", "5*", "Historisk", "Romantisk og eksklusivt hotell i gamlebyen, perfekt for par som vil bo spesielt."],
+      ["Grand Palladium Palace Ibiza Resort & Spa", "Familie", "Playa d'en Bossa", "Resort", "5*", "All inclusive", "Trygt familievalg med resortfasiliteter, basseng og kort vei til strand."],
+      ["Six Senses Ibiza", "Luksus", "Xarraca", "Retreat", "5*", "Spa", "Øyas mest eksklusive roligere hotellvalg, best for luksus, spa og nordlig kyst."],
+      ["Hotel Gran Sol", "Billig og bra", "San Antonio", "Verdi", "3*", "Basseng", "Godt budsjettvalg med ryddig standard, basseng og kort vei til solnedgangssonen."],
+      ["Invisa Hotel Club Cala Verde", "Barnevennlig", "Es Figueral", "Familiehotell", "4*", "Aktiviteter", "Barnevennlig hotell ved roligere strand, godt for familier som vil vekk fra klubbområdene."]
+    ],
+    food: [
+      ["La Brasa", "Hyggelig hage og grillmat i Ibiza by."],
+      ["La Oliva", "Klassiker i Dalt Vila for kveldsmat i gamlebyen."],
+      ["Sa Capella", "Stemningsfull restaurant i gammelt kapell nær San Antonio."],
+      ["La Paloma", "Roligere nordlig matopplevelse med landlig preg."]
+    ],
+    shopping: [
+      ["La Marina", "Småbutikker, hvite klær og Ibiza-stil."],
+      ["Las Dalias", "Kjent hippiemarked med klær, smykker og musikk."],
+      ["Sant Jordi-markedet", "Mer lokalt loppemarked med lavere glans og bedre funn."]
+    ],
+    beaches: [
+      ["Cala Comte", "Klassisk solnedgangsstrand med klart vann."],
+      ["Cala Saladeta", "Vakker vik, best tidlig før det blir fullt."],
+      ["Ses Salines", "Lang strand, beach clubs og mer glamorøs energi."]
+    ],
+    gems: [
+      ["Dalt Vila tidlig morgen", "Gamlebyen før varmen og folkemengdene."],
+      ["Santa Gertrudis", "Innlandsby for lunsj, butikker og roligere Ibiza."],
+      ["Es Vedra utsikt", "Dra mot solnedgang, men kom tidlig for plass."],
+      ["Formentera", "Dagstur når du vil se noen av Balearenes fineste strender."]
+    ],
+    activities: ["Formentera boat from Ibiza", "Dalt Vila walking tour", "Ibiza sunset cruise", "Ibiza snorkeling", "Ibiza beach hopping", "Ibiza club tickets"]
+  },
+  {
+    name: "Tenerife",
+    path: "spania/kanarioyene-tenerife",
+    region: "Kanariøyene",
+    type: "Vintervarme og vulkan",
+    intro: [
+      "Tenerife er det mest komplette vintervarme-valget i Spania. Du får strender i sør, Teide, fjellandsbyer, hvalsafari, badeland og nok variasjon til at en uke ikke føles lang.",
+      "Sørkysten er tryggest for sol og resortferie. Nordkysten er grønnere, mer lokal og mer værutsatt. Leiebil gjør Tenerife mye bedre."
+    ],
+    best: "7-10 netter, vintervarme, familier, natur og resort",
+    airport: "Tenerife South for sørkysten, Tenerife North for nord og La Laguna",
+    season: "November-mars for vintervarme. Mai-juni og september er roligere og behagelig.",
+    areas: [
+      ["Costa Adeje", "Best for resort, familier, restauranter og høyere hotellstandard."],
+      ["Los Cristianos og Playa de las Americas", "Best for strand, liv, shopping og enkel logistikk."],
+      ["Puerto de la Cruz", "Best for grønnere nord, lokal følelse og botaniske hager."]
+    ],
+    hotels: [
+      ["Royal Hideaway Corales Beach", "Par", "La Caleta", "Adults only", "5*", "Design", "Elegant voksenhotell med rolig luksusfølelse, sjøutsikt og gode restauranter."],
+      ["GF Victoria", "Familie", "Costa Adeje", "Familieresort", "5*", "Basseng", "Et av de sterkeste familiehotellene på Tenerife med basseng, aktiviteter og god beliggenhet."],
+      ["The Ritz-Carlton Tenerife, Abama", "Luksus", "Guia de Isora", "Resort", "5*", "Golf", "Stor luksusresort med spa, strand, golf og mer tilbaketrukket ferie."],
+      ["MYND Adeje", "Billig og bra", "Callao Salvaje", "Moderne", "4*", "Verdi", "Godt verdi-alternativ med moderne preg og roligere base enn de største ferieområdene."],
+      ["Bahia del Duque", "Barnevennlig", "Costa Adeje", "Luksusfamilie", "5*", "Strand", "Klassisk resort med strandnær beliggenhet, hager og god plass for familier."]
+    ],
+    food: [
+      ["El Rincon de Juan Carlos", "Finere matopplevelse for en spesiell kveld."],
+      ["La Vieja", "Sjømat ved La Caleta."],
+      ["Mercado Nuestra Senora de Africa", "Matmarked i Santa Cruz for lokal smaking."],
+      ["Casa Pache", "Klassisk kanarisk mat i fjellområdene."]
+    ],
+    shopping: [
+      ["Plaza del Duque", "Penere shopping i Costa Adeje."],
+      ["Safari Centre", "Butikker og kveldsliv ved Playa de las Americas."],
+      ["Santa Cruz", "Mer lokal byshopping og varehus."]
+    ],
+    beaches: [
+      ["Playa del Duque", "Pen resortstrand i Costa Adeje."],
+      ["Las Vistas", "Familievennlig strand mellom Los Cristianos og Americas."],
+      ["Playa de Benijo", "Dramatisk naturstrand i nord, best som utflukt."]
+    ],
+    gems: [
+      ["Masca", "Fjellandsby og dramatisk vei. Best tidlig med bil."],
+      ["Anaga", "Grønn natur, utsikt og roligere Tenerife."],
+      ["La Laguna", "Historisk by med mer lokal atmosfære."],
+      ["Garachico", "Vulkanbasseng og pen liten by på nordvestkysten."]
+    ],
+    activities: ["Teide National Park", "Tenerife whale watching", "Siam Park Tenerife", "Masca Tenerife", "Anaga rural park", "Tenerife stargazing"]
+  },
+  {
+    name: "Gran Canaria",
+    path: "spania/kanarioyene-gran-canaria",
+    region: "Kanariøyene",
+    type: "Vinterklassiker",
+    intro: [
+      "Gran Canaria er den klassiske vinterøya for nordmenn: korte avstander, stabil sørkyst, mange hotell, strender, shopping og nok fjellnatur til at du kan bryte opp bassengdagene.",
+      "Sørkysten gir mest sol. Las Palmas gir byliv og strand i samme pakke. Puerto de Mogan er roligere og penere, men mindre praktisk uten bil."
+    ],
+    best: "7-10 netter, vintervarme, familier, pensjonister, par og strand",
+    airport: "Gran Canaria Airport, cirka 20-40 minutter til sørkysten",
+    season: "November-mars for vintervarme. April-juni og september er ofte bedre pris.",
+    areas: [
+      ["Maspalomas og Meloneras", "Best for resort, strand, sanddyner og roligere kvelder."],
+      ["Playa del Ingles", "Best for liv, shopping, strand og bredt hotellutvalg."],
+      ["Puerto de Mogan", "Best for roligere ferie, marina og pen småbyfølelse."]
+    ],
+    hotels: [
+      ["Bohemia Suites & Spa", "Par", "Playa del Ingles", "Adults only", "5*", "Utsikt", "Stilrent voksenhotell med takbar, spa og kort vei til strand og kveldsliv."],
+      ["Lopesan Baobab Resort", "Familie", "Meloneras", "Resort", "5*", "Basseng", "Stor resortfavoritt for familier med mange basseng og kort vei til Meloneras."],
+      ["Seaside Grand Hotel Residencia", "Luksus", "Maspalomas", "Grand hotel", "5*", "Rolig", "Et av øyas mest elegante hotellvalg, med rolig luksus og klassisk service."],
+      ["TC Hotel Dona Luisa", "Billig og bra", "Las Palmas", "Bystrand", "3*", "Las Canteras", "God verdi nær Las Canteras når du vil kombinere strand og by."],
+      ["Radisson Blu Resort & Spa Gran Canaria Mogan", "Barnevennlig", "Puerto de Mogan", "Familieresort", "5*", "Basseng", "Sterkt barnevalg med basseng, aktiviteter og roligere område."]
+    ],
+    food: [
+      ["Que Leche", "Kreativ og populær restaurant i Las Palmas."],
+      ["Casa Montesdeoca", "Historisk ramme og kanarisk preg i Vegueta."],
+      ["La Aquarela", "Finere middag sør på øya."],
+      ["Mercado del Puerto", "Uformell smaking ved Las Canteras."]
+    ],
+    shopping: [
+      ["Triana Las Palmas", "Historisk handlegate med butikker og kaféer."],
+      ["Las Arenas", "Kjøpesenter ved Las Canteras."],
+      ["Yumbo Centre", "Shopping, barer og kveldsliv i Playa del Ingles."]
+    ],
+    beaches: [
+      ["Maspalomas", "Ikonisk strand med sanddyner og god plass."],
+      ["Amadores", "Familievennlig bukt med roligere vann."],
+      ["Las Canteras", "En av Spanias beste bystrender."]
+    ],
+    gems: [
+      ["Roque Nublo", "Fjelltur og øyas mest kjente naturikon."],
+      ["Agaete", "Liten nordvestlig by med hav, fjell og roligere energi."],
+      ["Teror", "Pen innlandsby med balkonger og søndagsmarked."],
+      ["Barranco de Guayadeque", "Dramatisk dal med grotterestauranter."]
+    ],
+    activities: ["Maspalomas dunes", "Gran Canaria dolphin watching", "Roque Nublo tour", "Las Palmas Vegueta", "Gran Canaria buggy tour", "Puerto de Mogan boat"]
+  }
+];
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function stars(value = "4*") {
+  const count = String(value).startsWith("5") ? 5 : String(value).startsWith("3") ? 3 : 4;
+  return "★".repeat(count);
+}
+
+function cjHotelLink(city, hotel) {
+  const target = new URL("https://no.hotels.com/Hotel-Search");
+  target.searchParams.set("destination", `${hotel}, ${city}, Spain`);
+  target.searchParams.set("rooms", "1");
+  target.searchParams.set("adults", "2");
+  target.searchParams.set("locale", "no_NO");
+  target.searchParams.set("currency", "NOK");
+  target.searchParams.set("pos", "HCOM_NO");
+  target.searchParams.set("siteid", "300000012");
+  const url = new URL(HOTELS_CJ);
+  url.searchParams.set("url", target.toString());
+  return url.toString();
+}
+
+function klookLink(query) {
+  const url = new URL("https://www.klook.com/nb/search/result/");
+  url.searchParams.set("query", `${query} Spain`);
+  return url.toString();
+}
+
+function gygLink(query) {
+  const url = new URL("https://www.getyourguide.no/s/");
+  url.searchParams.set("q", `${query} Spain`);
+  url.searchParams.set("partner_id", "FIQDAEB");
+  url.searchParams.set("utm_medium", "local_partners");
+  return url.toString();
+}
+
+function renderList(items) {
+  return items.map(([title, text]) => `
+        <article class="guide-card">
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(text)}</p>
+        </article>`).join("");
+}
+
+function renderHotels(city) {
+  return city.hotels.map((hotel, index) => {
+    const [name, best, area, style, level, strength, why] = hotel;
+    const tone = [
+      "linear-gradient(135deg, rgba(255, 209, 102, .28), rgba(34, 211, 238, .18))",
+      "linear-gradient(135deg, rgba(34, 211, 238, .28), rgba(255, 75, 184, .16))",
+      "linear-gradient(135deg, rgba(255, 107, 107, .24), rgba(255, 209, 102, .2))",
+      "linear-gradient(135deg, rgba(20, 184, 166, .24), rgba(34, 211, 238, .16))",
+      "linear-gradient(135deg, rgba(124, 58, 237, .24), rgba(255, 209, 102, .18))"
+    ][index % 5];
+    return `
+        <article class="mockup-hotel-card">
+          <div class="mockup-hotel-media" style="--hotel-tone:${tone}">
+            <img src="${HERO_IMAGE}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" />
+            <div class="mockup-photo-stars">${stars(level)}</div>
+          </div>
+          <div class="mockup-hotel-content">
+            <h3>${escapeHtml(name)}</h3>
+            <div class="mockup-stars">${stars(level)}</div>
+            <p class="mockup-best">Best for: ${escapeHtml(best)}</p>
+            <div class="mockup-location"><span>Beliggenhet</span><strong>${escapeHtml(area)}</strong></div>
+            <div class="mockup-facts">
+              <div><span>Stil</span><strong>${escapeHtml(style)}</strong></div>
+              <div><span>Nivå</span><strong>${escapeHtml(level)}</strong></div>
+              <div><span>Sterk på</span><strong>${escapeHtml(strength)}</strong></div>
+              <div><span>By</span><strong>${escapeHtml(city.name)}</strong></div>
+            </div>
+            <div class="mockup-why"><span>Hvorfor velge dette hotellet?</span><p>${escapeHtml(why)}</p></div>
+            <div class="mockup-tags"><span>${escapeHtml(best)}</span><span>${escapeHtml(area)}</span><span>${escapeHtml(strength)}</span></div>
+            <a class="mockup-cta" href="${escapeHtml(cjHotelLink(city.name, name))}" target="_blank" rel="nofollow sponsored noopener">Sjekk pris hos Hotels.com →</a>
+          </div>
+        </article>`;
+  }).join("");
+}
+
+function renderActivities(city) {
+  return city.activities.map((activity, index) => {
+    const provider = index % 2 === 0 ? "Klook" : "GetYourGuide";
+    const href = provider === "Klook" ? klookLink(activity) : gygLink(activity);
+    const text = provider === "Klook"
+      ? "Søk etter billetter, dagsutflukter og praktiske opplevelser hos Klook."
+      : "Søk etter guidede turer, skip-the-line og dagsutflukter hos GetYourGuide.";
+    return `
+        <article class="activity-card">
+          <span class="badge">${provider}</span>
+          <h3>${escapeHtml(activity)}</h3>
+          <p>${escapeHtml(text)} Bruk dette som startpunkt og velg tidspunkt, språk og avbestilling før du booker.</p>
+          <a href="${escapeHtml(href)}" target="_blank" rel="nofollow sponsored noopener">Se ${escapeHtml(activity)} →</a>
+        </article>`;
+  }).join("");
+}
+
+function renderCityPage(city) {
+  const links = cities.filter((item) => item.name !== city.name).slice(0, 6);
+  return `<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${escapeHtml(city.name)} guide 2026 | Hotell, mat, strender og opplevelser | Billig-reiser.no</title>
+  <meta name="description" content="${escapeHtml(`${city.name}-guide med hotellvalg for par, familie, luksus, billig og barnevennlig, pluss restauranter, shopping, strender, hidden gems og Klook/GetYourGuide-opplevelser.`)}" />
+  <link rel="canonical" href="https://billig-reiser.no/${city.path}/" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Billig-reiser.no" />
+  <meta property="og:title" content="${escapeHtml(city.name)} guide 2026 | Billig-reiser.no" />
+  <meta property="og:description" content="${escapeHtml(city.intro[0])}" />
+  <meta property="og:image" content="https://billig-reiser.no/spania/assets/spania-hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="/spania/spania-city.css?v=125" />
+  <script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${city.name} guide 2026`,
+    description: city.intro[0],
+    about: city.name,
+    author: { "@type": "Organization", name: "Billig-Reiser.no" },
+    publisher: { "@type": "Organization", name: "Billig-Reiser.no" },
+    mainEntityOfPage: `https://billig-reiser.no/${city.path}/`
+  })}</script>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#020913" />
+  <script defer src="/pwa-register.js"></script>
+  <link rel="stylesheet" href="/app-features.css" />
+  <script defer src="/app-features.js"></script>
+</head>
+<body>
+  <nav class="spain-nav">
+    <a class="brand-logo" href="/index.html"><img src="/assets/billig-reiser-logo-v115.png" alt="Billig-reiser.no" width="220" height="54" /></a>
+    <div class="spain-menu">
+      <a href="/reisemagasinet.html">Magasinet</a>
+      <a class="active" href="/spania/">Spania</a>
+      <a href="#hoteller">Hoteller</a>
+      <a href="#opplevelser">Opplevelser</a>
+      <a href="/index.html">Forside</a>
+    </div>
+  </nav>
+
+  <header class="hero-city" style="--hero-image:url('${HERO_IMAGE}')">
+    <div class="hero-inner">
+      <div class="kicker">${escapeHtml(city.region)} · ${escapeHtml(city.type)}</div>
+      <h1>${escapeHtml(city.name)}</h1>
+      <p>${escapeHtml(city.intro[0])}</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#hoteller">Se hotellvalg</a>
+        <a class="btn secondary" href="#opplevelser">Se opplevelser</a>
+      </div>
+      <div class="quick-links">
+        <a href="#omrader">Hvor bo</a>
+        <a href="#mat">Restauranter</a>
+        <a href="#shopping">Shopping</a>
+        <a href="#strender">Strender</a>
+        <a href="#hidden-gems">Hidden gems</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap">
+      <div class="story-grid">
+        <article class="story-box">
+          <span class="badge">Magasinguide</span>
+          <h2>Derfor velger du ${escapeHtml(city.name)}</h2>
+          ${city.intro.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
+        </article>
+        <aside class="facts-box">
+          <span class="badge">Kort fortalt</span>
+          <ul>
+            <li><strong>Passer best for:</strong> ${escapeHtml(city.best)}</li>
+            <li><strong>Flyplass:</strong> ${escapeHtml(city.airport)}</li>
+            <li><strong>Beste tid:</strong> ${escapeHtml(city.season)}</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap" id="omrader">
+      <div class="section-head">
+        <div>
+          <span class="badge">Områder</span>
+          <h2>Hvor bør du bo?</h2>
+        </div>
+        <p class="lead">Velg område før hotell. Det er den enkleste måten å få riktig ferie, riktigere pris og mindre transport.</p>
+      </div>
+      <div class="grid">${renderList(city.areas)}</div>
+    </section>
+
+    <section class="wrap wide-wrap" id="hoteller">
+      <div class="section-head">
+        <div>
+          <span class="badge">Hotels.com</span>
+          <h2>Beste hotellvalg i ${escapeHtml(city.name)}</h2>
+        </div>
+        <p class="lead">Fem hotellkort i samme stil som Thailand-guidene: par, familie, luksus, billig og bra, og barnevennlig.</p>
+      </div>
+      <div class="hotel-list">${renderHotels(city)}</div>
+      <div class="hero-actions">
+        <a class="btn primary" href="${escapeHtml(HOTELS_CREATOR)}" target="_blank" rel="nofollow sponsored noopener">Åpne Hotels.com-avtalen</a>
+      </div>
+    </section>
+
+    <section class="wrap" id="restauranter">
+      <div class="section-head">
+        <div>
+          <span class="badge">Mat</span>
+          <h2>Restauranter og matområder</h2>
+        </div>
+        <p class="lead">Dette er ikke en låst fasit, men sterke startpunkt som gjør det enklere å velge riktig kveld.</p>
+      </div>
+      <div class="grid">${renderList(city.food)}</div>
+    </section>
+
+    <section class="wrap" id="shopping">
+      <div class="section-head">
+        <div>
+          <span class="badge">Shopping</span>
+          <h2>Shopping som passer byen</h2>
+        </div>
+      </div>
+      <div class="grid">${renderList(city.shopping)}</div>
+    </section>
+
+    <section class="wrap" id="strender">
+      <div class="section-head">
+        <div>
+          <span class="badge">Strender</span>
+          <h2>Strender og badepauser</h2>
+        </div>
+      </div>
+      <div class="grid">${renderList(city.beaches)}</div>
+    </section>
+
+    <section class="wrap" id="hidden-gems">
+      <div class="section-head">
+        <div>
+          <span class="badge">Hidden gems</span>
+          <h2>Smartere stopp når du vil litt utenfor løypa</h2>
+        </div>
+      </div>
+      <div class="grid">${renderList(city.gems)}</div>
+    </section>
+
+    <section class="wrap" id="opplevelser">
+      <div class="section-head">
+        <div>
+          <span class="badge">Klook + GetYourGuide</span>
+          <h2>Opplevelser i ${escapeHtml(city.name)}</h2>
+        </div>
+        <p class="lead">Bruk kortene til å finne billetter, guidede turer, dagsturer, familieaktiviteter og transport. Sjekk språk, hentested og avbestilling før booking.</p>
+      </div>
+      <div class="activity-grid">${renderActivities(city)}</div>
+      <div class="hero-actions">
+        <a class="btn primary" href="${escapeHtml(KLOOK_FALLBACK)}" target="_blank" rel="nofollow sponsored noopener">Åpne Klook-avtalen</a>
+        <a class="btn secondary" href="${escapeHtml(GYG_HOME)}" target="_blank" rel="nofollow sponsored noopener">Åpne GetYourGuide-avtalen</a>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="badge">Reis videre</span>
+          <h2>Flere Spania-guider</h2>
+        </div>
+      </div>
+      <div class="quick-links">
+        ${links.map((item) => `<a href="/${item.path}/">${escapeHtml(item.name)}</a>`).join("")}
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</footer>
+</body>
+</html>
+`;
+}
+
+function renderIndex() {
+  return `<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spania guide 2026 | Byguider, hotell og opplevelser | Billig-reiser.no</title>
+  <meta name="description" content="Stor Spania-guide med egne byguider, hotellkort, restauranter, shopping, strender, hidden gems og Klook/GetYourGuide-opplevelser." />
+  <link rel="canonical" href="https://billig-reiser.no/spania/" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Billig-reiser.no" />
+  <meta property="og:title" content="Spania guide 2026 | Billig-reiser.no" />
+  <meta property="og:description" content="Velg riktig Spania-by og finn hotell, mat, shopping, strender og opplevelser." />
+  <meta property="og:image" content="https://billig-reiser.no/spania/assets/spania-hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="/spania/spania-city.css?v=125" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#020913" />
+  <script defer src="/pwa-register.js"></script>
+  <link rel="stylesheet" href="/app-features.css" />
+  <script defer src="/app-features.js"></script>
+</head>
+<body>
+  <nav class="spain-nav">
+    <a class="brand-logo" href="/index.html"><img src="/assets/billig-reiser-logo-v115.png" alt="Billig-reiser.no" width="220" height="54" /></a>
+    <div class="spain-menu">
+      <a href="/reisemagasinet.html">Magasinet</a>
+      <a class="active" href="/spania/">Spania</a>
+      <a href="#byer">Byguider</a>
+      <a href="#slik-bruker-du">Slik velger du</a>
+      <a href="/index.html">Forside</a>
+    </div>
+  </nav>
+
+  <header class="hero-city" style="--hero-image:url('${HERO_IMAGE}')">
+    <div class="hero-inner">
+      <div class="kicker">Spania · stor guide</div>
+      <h1>Spania by for by.</h1>
+      <p>Dette er den nye Spania-guiden: egne bysider med hotellkort, områder, restauranter, shopping, strender, hidden gems og Klook/GetYourGuide-opplevelser.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#byer">Se alle byguider</a>
+        <a class="btn secondary" href="/index.html#travelSearch">Søk reise</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap" id="slik-bruker-du">
+      <div class="story-grid">
+        <article class="story-box">
+          <span class="badge">Ny struktur</span>
+          <h2>Mer som Phuket, bare for Spania</h2>
+          <p>Hver guide har samme premium-oppsett: først forklarer vi hvem byen passer for, så velger vi riktige områder, deretter fem hotellkort og egne deler for mat, shopping, strender, skjulte perler og opplevelser.</p>
+          <p>Dette gjør Spania-sidene mye bedre å bruke for både Google, besøkende og affiliate-klikk: folk får riktig by, riktig hotelltype og riktige aktiviteter på samme side.</p>
+        </article>
+        <aside class="facts-box">
+          <span class="badge">Dekker nå</span>
+          <ul>
+            <li>12 store Spania-guider</li>
+            <li>60 hotellkort med Hotels.com-søk</li>
+            <li>Klook- og GetYourGuide-kort på hver byside</li>
+            <li>Restauranter, shopping, strender og hidden gems</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap" id="byer">
+      <div class="section-head">
+        <div>
+          <span class="badge">Byguider</span>
+          <h2>Velg Spania-by</h2>
+        </div>
+        <p class="lead">Start med reisestil. Barcelona og Valencia passer når du vil ha storby og strand. Malaga, Alicante og Benidorm er enkle solvalg. Madrid og Sevilla er sterkest på mat, kultur og kvelder.</p>
+      </div>
+      <div class="city-grid">
+${cities.map((city) => `        <article class="city-card">
+          <div class="city-card-media"></div>
+          <div class="city-card-body">
+            <span class="badge">${escapeHtml(city.region)}</span>
+            <h3>${escapeHtml(city.name)}</h3>
+            <p>${escapeHtml(city.type)} · ${escapeHtml(city.best)}</p>
+            <a href="/${city.path}/">Åpne guiden →</a>
+          </div>
+        </article>`).join("")}
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Billig-reiser.no · Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</footer>
+</body>
+</html>
+`;
+}
+
+function writeFile(relativePath, content) {
+  const output = path.join(root, relativePath);
+  fs.mkdirSync(path.dirname(output), { recursive: true });
+  fs.writeFileSync(output, content);
+}
+
+function updateSitemap() {
+  const sitemapPath = path.join(root, "sitemap.xml");
+  if (!fs.existsSync(sitemapPath)) return;
+  let sitemap = fs.readFileSync(sitemapPath, "utf8");
+  const urls = cities.map((city) => `https://billig-reiser.no/${city.path}/`);
+  const newEntries = urls
+    .filter((url) => !sitemap.includes(`<loc>${url}</loc>`))
+    .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <priority>0.75</priority>\n  </url>`)
+    .join("\n");
+  if (newEntries && sitemap.includes("</urlset>")) {
+    sitemap = sitemap.replace("</urlset>", `${newEntries}\n</urlset>`);
+    fs.writeFileSync(sitemapPath, sitemap);
+  }
+}
+
+writeFile("spania/index.html", renderIndex());
+cities.forEach((city) => writeFile(`${city.path}/index.html`, renderCityPage(city)));
+updateSitemap();
+
+console.log(`Generated ${cities.length} Spain city guides and refreshed spania/index.html.`);
