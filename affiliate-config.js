@@ -22,7 +22,7 @@ window.BR_AFFILIATES = Object.freeze({
   cheapFlightFaresProgramId: "6061620",
   cheapFlightFares: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheapflightsfares.com/",
   cheapTicketsProgramId: "4861279",
-  cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
+  cheapTickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
   iberiaProgramId: "4455265",
   iberia: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.iberia.com/no/",
   malaysiaAirlinesProgramId: "7662403",

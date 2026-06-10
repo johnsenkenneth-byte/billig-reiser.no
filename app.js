@@ -13,7 +13,7 @@
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
-    cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
+    cheaptickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.iberia.com/no/",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
@@ -330,7 +330,7 @@
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
-    cheapTickets: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapTickets) || "https://www.dpbolvw.net/click-101724638-17085753",
+    cheapTickets: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapTickets) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheaptickets.com/Flights`,
     cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightsfares.com/`,
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.iberia.com/no/`,
@@ -679,7 +679,7 @@
       return affiliateWrap(baseAffiliateUrl, targetUrl);
     }
     const prefix = `${url.origin}${url.pathname.split("/type/dlg/")[0]}/type/dlg/`;
-    return `${prefix}${/[?#]/.test(targetUrl) ? encodeURIComponent(targetUrl) : targetUrl}`;
+    return `${prefix}${targetUrl}`;
   }
 
   function isCreatorAffiliateUrl(value) {
@@ -986,26 +986,9 @@
     return parts ? `${parts.year}${parts.month}` : "";
   }
 
-  function buildExpediaFlightSearchTarget(state) {
-    const from = airportCode(state.from);
-    const to = airportCode(state.to);
-    const depart = state.depart || fallbackDepartISO();
-    const ret = state.ret || fallbackReturnISO(depart);
-    const adults = Math.max(1, Number(state.adults || 1));
-    const children = Math.max(0, Number(state.children || 0));
-    const url = new URL("https://www.expedia.no/Flights-Search");
-    url.searchParams.set("trip", "roundtrip");
-    url.searchParams.set("leg1", `from:${from},to:${to},departure:${expediaDate(depart)}TANYT`);
-    url.searchParams.set("leg2", `from:${to},to:${from},departure:${expediaDate(ret)}TANYT`);
-    url.searchParams.set("passengers", `adults:${adults},children:${children},seniors:0,infantinlap:N`);
-    url.searchParams.set("mode", "search");
-    url.searchParams.set("options", "cabinclass:economy");
-    return url.toString();
-  }
-
   function buildExpediaFlightUrl(state) {
     try {
-      return affiliateWrap(AFFILIATE_LINKS.expedia, buildExpediaFlightSearchTarget(state));
+      return affiliateWrap(AFFILIATE_LINKS.expedia, "https://www.expedia.no/Flights");
     } catch (error) {
       return AFFILIATE_LINKS.expedia;
     }
@@ -1081,9 +1064,9 @@
   }
 
   function buildCheapTicketsUrl(state) {
-    const target = buildExpediaFlightSearchTarget(state).replace("https://www.expedia.no/Flights-Search", "https://www.cheaptickets.com/Flights-Search");
+    const target = "https://www.cheaptickets.com/Flights";
     try {
-      return affiliateWrap(AFFILIATE_LINKS.cheapTickets, target);
+      return cjDialogLink(AFFILIATE_LINKS.cheapTickets, target);
     } catch (error) {
       return AFFILIATE_LINKS.cheapTickets || target;
     }
