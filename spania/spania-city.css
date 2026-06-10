@@ -35,7 +35,7 @@ a {
 }
 
 .spain-nav {
-  min-height: 74px;
+  min-height: 92px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,9 +55,9 @@ a {
 }
 
 .brand-logo img {
-  height: 54px;
-  width: 220px;
-  max-width: 42vw;
+  width: clamp(220px, 22vw, 270px);
+  height: auto;
+  max-width: 82vw;
   object-fit: contain;
 }
 
@@ -572,7 +572,8 @@ a {
 
 @media (max-width: 620px) {
   .brand-logo img {
-    max-width: 220px;
+    width: 230px;
+    max-width: 82vw;
   }
 
   .hero-city {

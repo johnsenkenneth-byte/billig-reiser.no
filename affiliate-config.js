@@ -8,7 +8,7 @@ window.BR_AFFILIATES = Object.freeze({
   expediaCreator: "https://www.expedia.no/",
   packageTravel: "https://www.expedia.no/go/package/search/FlightHotel/",
   packageTravelCreator: "https://expedia.com/affiliates/expedia-home.ZHzP55g",
-  cruise: "https://expedia.com/affiliates/expedia-home.GhxCnTa",
+  cruise: "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
   interhome: "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
   tuiRestplass: "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
   tuiPackages: "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Freise%2Fpakkereiser%2F",

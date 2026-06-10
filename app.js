@@ -1194,7 +1194,6 @@
   function withExpediaCruiseTracking(targetUrl, state = {}) {
     const target = new URL(targetUrl || DEFAULT_EXPEDIA_CRUISE_URL);
     const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || AFFILIATE_LINKS.cruise || "";
-    if (isCreatorAffiliateUrl(configured)) return configured;
     try {
       const source = new URL(configured);
       ["siid", "referrer"].forEach((param) => {
@@ -2456,7 +2455,6 @@
       .find((item) => key === item || key.includes(item));
     const target = new URL(aiCruiseLinks[match] || aiCruiseLinks.europa);
     const configured = (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "";
-    if (isAiCreatorAffiliateUrl(configured)) return configured;
     try {
       const source = new URL(configured);
       ["siid", "referrer"].forEach((param) => {
