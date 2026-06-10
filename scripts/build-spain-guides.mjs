@@ -10,6 +10,8 @@ const HOTELS_CREATOR = "https://www.hotels.com/affiliates/hotelscom-home.rEFvN68
 const KLOOK_FALLBACK = "https://klook.tpx.gr/Tmj2PfPe";
 const GYG_HOME = "https://www.getyourguide.com/?partner_id=FIQDAEB&utm_medium=local_partners";
 const HERO_IMAGE = "/spania/assets/spania-hero.png";
+const ITEM_IMAGES_PATH = path.join(root, "spania", "item-images.json");
+const ITEM_IMAGES = fs.existsSync(ITEM_IMAGES_PATH) ? JSON.parse(fs.readFileSync(ITEM_IMAGES_PATH, "utf8")) : {};
 const TODAY = "2026-06-09";
 const SPAIN_CSS_VERSION = "129";
 const HOTEL_DEEP_LINKS = {
@@ -763,7 +765,7 @@ const P = {
   alicante: "https://upload.wikimedia.org/wikipedia/commons/8/85/Alicante%2C_Spain.jpg",
   benidorm: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Benidorm-pano-160410.jpg/1280px-Benidorm-pano-160410.jpg",
   palma: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Kathedrale_von_Palma_II.jpg/1280px-Kathedrale_von_Palma_II.jpg",
-  ibiza: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Ibiza_City_seaport_from_Dalt_Vila_asv2023-04_img2.jpg/1280px-Ibiza_City_seaport_from_Dalt_Vila_asv2023-04_img2.jpg",
+  ibiza: "https://mundodele.com/en/wp-content/uploads/2025/10/Ibiza-Old-Town-Walking-Tour-.webp",
   tenerife: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Teide_qtl1.jpg/1280px-Teide_qtl1.jpg",
   granCanaria: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/GC_Dunas_de_Maspalomas_R04.jpg/1280px-GC_Dunas_de_Maspalomas_R04.jpg",
   sagrada: "https://upload.wikimedia.org/wikipedia/commons/e/ef/SF_maig_2_cropped.jpg",
@@ -943,6 +945,10 @@ function cityPhoto(city, section = "hero", index = 0) {
   return set[index % set.length] || HERO_IMAGE;
 }
 
+function itemPhoto(city, section, title, index = 0) {
+  return ITEM_IMAGES[`${city.name}|${section}|${title}`] || cityPhoto(city, section, index);
+}
+
 function renderPhoto(src, alt, className) {
   return `<img class="${className}" src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async" />`;
 }
@@ -1001,7 +1007,7 @@ function activityProviderFromUrl(url, fallbackProvider) {
 function renderList(items, city, section) {
   return items.map(([title, text], index) => `
         <article class="guide-card">
-          ${renderPhoto(cityPhoto(city, section, index), `${title} i ${city.name}`, "guide-card-photo")}
+          ${renderPhoto(itemPhoto(city, section, title, index), `${title} i ${city.name}`, "guide-card-photo")}
           <h3>${escapeHtml(title)}</h3>
           <p>${escapeHtml(text)}</p>
         </article>`).join("");
@@ -1025,7 +1031,7 @@ function renderMagazine(city) {
     },
     {
       title: "En god første dag",
-      photo: cityPhoto(city, "food", 0),
+      photo: itemPhoto(city, "food", food[0], 0),
       text: `Start rolig med kaffe og en spasertur i ${area[0]}, legg lunsjen rundt ${food[0]}, og bruk ettermiddagen på ${activity}. Mot kvelden kan du velge mellom ${beach[0]} for en enklere pause eller ${gem[0]} hvis du vil ha en mer lokal opplevelse. Denne rekkefølgen gir mindre transport og mer feriefølelse.`
     },
     {
@@ -1035,7 +1041,7 @@ function renderMagazine(city) {
     },
     {
       title: "Book smartere",
-      photo: cityPhoto(city, "activities", 0),
+      photo: itemPhoto(city, "activities", activity, 0),
       text: `Bruk ${city.season.toLowerCase()} som pekepinn når du planlegger. De mest populære restaurantene og aktivitetene bør sjekkes før avreise, mens strand, shopping og små hidden gems ofte blir bedre når du lar været og dagsformen bestemme. Kombiner én booket opplevelse per dag med åpne lommer i programmet.`
     }
   ];
@@ -1082,7 +1088,7 @@ function renderActivities(city) {
       : "Guidede turer, skip-the-line og dagsturer med en enkel vei videre til booking.";
     return `
         <article class="activity-card">
-          ${renderPhoto(cityPhoto(city, "activities", index), `${activity} i ${city.name}`, "activity-photo")}
+          ${renderPhoto(itemPhoto(city, "activities", activity, index), `${activity} i ${city.name}`, "activity-photo")}
           <span class="badge">${provider}</span>
           <h3>${escapeHtml(activity)}</h3>
           <p>${escapeHtml(text)}</p>
