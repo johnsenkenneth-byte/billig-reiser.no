@@ -14,7 +14,7 @@
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     cheaptickets: "https://www.dpbolvw.net/click-101724638-17085753",
-    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.kqzyfj.com/click-101724638-15735979",
+    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.iberia.com/no/",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
@@ -330,10 +330,10 @@
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
-    cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
-    cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightfares.com/`,
+    cheapTickets: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapTickets) || "https://www.dpbolvw.net/click-101724638-17085753",
+    cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightsfares.com/`,
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
-    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.kqzyfj.com/click-101724638-15735979",
+    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.iberia.com/no/`,
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
@@ -679,7 +679,7 @@
       return affiliateWrap(baseAffiliateUrl, targetUrl);
     }
     const prefix = `${url.origin}${url.pathname.split("/type/dlg/")[0]}/type/dlg/`;
-    return `${prefix}${targetUrl}`;
+    return `${prefix}${/[?#]/.test(targetUrl) ? encodeURIComponent(targetUrl) : targetUrl}`;
   }
 
   function isCreatorAffiliateUrl(value) {
@@ -821,6 +821,9 @@
     list.setAttribute("role", "listbox");
     list.setAttribute("aria-label", roleLabel);
     wrap.appendChild(list);
+    let currentMatches = [];
+    let remoteTimer = null;
+    let remoteAbort = null;
 
     const close = () => { list.innerHTML = ""; list.classList.remove("show"); };
     const choose = (item) => {
@@ -831,23 +834,8 @@
       input.dispatchEvent(new Event("change", { bubbles:true }));
     };
 
-    const render = () => {
-      const isCarPickup = currentSearchType === "car" && inputId === "fromCity";
-      const isAirRoute = currentSearchType === "flight" || currentSearchType === "package";
-      if (!isAirRoute && !isCarPickup) { close(); return; }
-      const q = normalizeSearch(input.value);
-      if (q.length < 2) { close(); return; }
-      const matches = AIRPORT_SUGGESTIONS
-        .map((item) => {
-          const hay = normalizeSearch(`${item.city} ${item.name} ${item.country} ${item.code} ${item.aliases.join(" ")}`);
-          const starts = normalizeSearch(item.city).startsWith(q) || item.code.toLowerCase().startsWith(q);
-          return hay.includes(q) ? { item, score: starts ? 0 : 1 } : null;
-        })
-        .filter(Boolean)
-        .sort((a,b) => a.score - b.score || a.item.city.localeCompare(b.item.city, "nb"))
-        .slice(0, 5)
-        .map(({item}) => item);
-
+    const renderMatches = (matches, isCarPickup, sourceLabel = "") => {
+      currentMatches = matches;
       if (!matches.length) {
         list.innerHTML = `<div class="airport-empty">Ingen forslag funnet. Skriv by/flyplass, f.eks. Oslo eller OSL.</div>`;
         list.classList.add("show");
@@ -856,10 +844,63 @@
 
       list.innerHTML = matches.map((item) => `
         <button type="button" role="option" data-airport-code="${item.code}">
-          <span><b>${item.city}</b><small>${isCarPickup ? "Hentested" : item.name} • ${item.country}</small></span>
+          <span><b>${item.city}</b><small>${isCarPickup ? "Hentested" : item.name} • ${item.country}${sourceLabel}</small></span>
           <em>${item.code}</em>
         </button>`).join("");
       list.classList.add("show");
+    };
+
+    const localMatches = (q) => AIRPORT_SUGGESTIONS
+      .map((item) => {
+        const hay = normalizeSearch(`${item.city} ${item.name} ${item.country} ${item.code} ${item.aliases.join(" ")}`);
+        const starts = normalizeSearch(item.city).startsWith(q) || item.code.toLowerCase().startsWith(q);
+        return hay.includes(q) ? { item, score: starts ? 0 : 1 } : null;
+      })
+      .filter(Boolean)
+      .sort((a,b) => a.score - b.score || a.item.city.localeCompare(b.item.city, "nb"))
+      .slice(0, 5)
+      .map(({item}) => item);
+
+    const fetchRemoteMatches = (q, isCarPickup) => {
+      clearTimeout(remoteTimer);
+      if (q.length < 3) return;
+      remoteTimer = setTimeout(async () => {
+        try {
+          if (remoteAbort) remoteAbort.abort();
+          remoteAbort = new AbortController();
+          const url = new URL("/api/amadeus-airport-search", window.location.origin);
+          url.searchParams.set("keyword", q);
+          url.searchParams.set("limit", "6");
+          const response = await fetch(url.toString(), { signal: remoteAbort.signal });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok || !data?.success || !Array.isArray(data.locations)) return;
+          const remote = data.locations.map((item) => ({
+            city: item.city || item.name || item.code,
+            name: item.name || item.city || item.code,
+            country: item.country || item.country_code || "",
+            code: item.code,
+            aliases: [item.city_code, item.code].filter(Boolean)
+          }));
+          const merged = [...remote, ...currentMatches]
+            .filter((item, index, all) => /^[A-Z]{3}$/.test(item.code) && all.findIndex((other) => other.code === item.code) === index)
+            .slice(0, 6);
+          if (document.activeElement === input && normalizeSearch(input.value) === q) renderMatches(merged, isCarPickup, " • Amadeus");
+        } catch (error) {
+          if (error?.name !== "AbortError") {
+            // Lokale forslag står igjen hvis Amadeus ikke svarer.
+          }
+        }
+      }, 220);
+    };
+
+    const render = () => {
+      const isCarPickup = currentSearchType === "car" && inputId === "fromCity";
+      const isAirRoute = currentSearchType === "flight" || currentSearchType === "package";
+      if (!isAirRoute && !isCarPickup) { close(); return; }
+      const q = normalizeSearch(input.value);
+      if (q.length < 2) { close(); return; }
+      renderMatches(localMatches(q), isCarPickup);
+      fetchRemoteMatches(q, isCarPickup);
     };
 
     input.addEventListener("input", () => { delete input.dataset.airportCode; render(); });
@@ -869,7 +910,7 @@
     list.addEventListener("click", (event) => {
       const button = event.target.closest("[data-airport-code]");
       if (!button) return;
-      const item = AIRPORT_SUGGESTIONS.find((entry) => entry.code === button.dataset.airportCode);
+      const item = currentMatches.find((entry) => entry.code === button.dataset.airportCode) || AIRPORT_SUGGESTIONS.find((entry) => entry.code === button.dataset.airportCode);
       if (item) choose(item);
     });
   }
@@ -925,21 +966,105 @@
     return url.toString();
   }
 
+  function dateParts(value) {
+    const date = parseISODate(value);
+    if (!date) return null;
+    return {
+      day: String(date.getDate()).padStart(2, "0"),
+      month: String(date.getMonth() + 1).padStart(2, "0"),
+      year: String(date.getFullYear())
+    };
+  }
+
+  function expediaDate(value) {
+    const parts = dateParts(value);
+    return parts ? `${parts.month}/${parts.day}/${parts.year}` : value;
+  }
+
+  function iberiaMonth(value) {
+    const parts = dateParts(value);
+    return parts ? `${parts.year}${parts.month}` : "";
+  }
+
+  function buildExpediaFlightSearchTarget(state) {
+    const from = airportCode(state.from);
+    const to = airportCode(state.to);
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret || fallbackReturnISO(depart);
+    const adults = Math.max(1, Number(state.adults || 1));
+    const children = Math.max(0, Number(state.children || 0));
+    const url = new URL("https://www.expedia.no/Flights-Search");
+    url.searchParams.set("trip", "roundtrip");
+    url.searchParams.set("leg1", `from:${from},to:${to},departure:${expediaDate(depart)}TANYT`);
+    url.searchParams.set("leg2", `from:${to},to:${from},departure:${expediaDate(ret)}TANYT`);
+    url.searchParams.set("passengers", `adults:${adults},children:${children},seniors:0,infantinlap:N`);
+    url.searchParams.set("mode", "search");
+    url.searchParams.set("options", "cabinclass:economy");
+    return url.toString();
+  }
+
   function buildExpediaFlightUrl(state) {
     try {
-      return affiliateWrap(AFFILIATE_LINKS.expedia, buildFlightSearchTarget("https://www.expedia.no/Flights-Search", state));
+      return affiliateWrap(AFFILIATE_LINKS.expedia, buildExpediaFlightSearchTarget(state));
     } catch (error) {
       return AFFILIATE_LINKS.expedia;
     }
   }
 
-  function buildMalaysiaAirlinesUrl() {
-    return AFFILIATE_LINKS.malaysiaAirlines;
+  function buildIberiaFlightUrl(state) {
+    const from = airportCode(state.from);
+    const to = airportCode(state.to);
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret || fallbackReturnISO(depart);
+    const departParts = dateParts(depart);
+    const returnParts = dateParts(ret);
+    const target = new URL("https://www.iberia.com/no/flight-search/");
+    target.searchParams.set("market", "NO");
+    target.searchParams.set("language", "no");
+    target.searchParams.set("TRIP_TYPE", "2");
+    target.searchParams.set("BEGIN_CITY_01", from);
+    target.searchParams.set("END_CITY_01", to);
+    if (departParts) {
+      target.searchParams.set("BEGIN_DAY_01", departParts.day);
+      target.searchParams.set("BEGIN_MONTH_01", iberiaMonth(depart));
+    }
+    if (returnParts) {
+      target.searchParams.set("END_DAY_01", returnParts.day);
+      target.searchParams.set("END_MONTH_01", iberiaMonth(ret));
+    }
+    target.searchParams.set("ADT", String(Math.max(1, Number(state.adults || 1))));
+    target.searchParams.set("CHD", String(Math.max(0, Number(state.children || 0))));
+    target.searchParams.set("INF", "0");
+    target.searchParams.set("BNN", "0");
+    target.searchParams.set("YTH", "0");
+    target.searchParams.set("YCD", "0");
+    target.searchParams.set("FARE_TYPE", "R");
+    try {
+      return cjDialogLink(AFFILIATE_LINKS.iberia, target.toString());
+    } catch (error) {
+      return target.toString();
+    }
+  }
+
+  function buildMalaysiaAirlinesUrl(state) {
+    const target = new URL("https://www.malaysiaairlines.com/no/en/booking/flight-search.html");
+    target.searchParams.set("from", airportCode(state.from));
+    target.searchParams.set("to", airportCode(state.to));
+    target.searchParams.set("departureDate", state.depart || fallbackDepartISO());
+    target.searchParams.set("returnDate", state.ret || fallbackReturnISO(state.depart || fallbackDepartISO()));
+    target.searchParams.set("tripType", "R");
+    target.searchParams.set("adults", String(Math.max(1, Number(state.adults || 1))));
+    target.searchParams.set("children", String(Math.max(0, Number(state.children || 0))));
+    try {
+      return cjDialogLink(AFFILIATE_LINKS.malaysiaAirlines, target.toString());
+    } catch (error) {
+      return AFFILIATE_LINKS.malaysiaAirlines;
+    }
   }
 
   function buildCheapFlightFareUrl(state) {
     const base = AFFILIATE_LINKS.cheapFlightFares || "";
-    const target = "https://www.cheapflightfares.com/";
+    const target = "https://www.cheapflightsfares.com/flights";
     try {
       if (!base) return target;
       const url = new URL(base);
@@ -952,6 +1077,15 @@
       return url.toString();
     } catch (error) {
       return base || target;
+    }
+  }
+
+  function buildCheapTicketsUrl(state) {
+    const target = buildExpediaFlightSearchTarget(state).replace("https://www.expedia.no/Flights-Search", "https://www.cheaptickets.com/Flights-Search");
+    try {
+      return affiliateWrap(AFFILIATE_LINKS.cheapTickets, target);
+    } catch (error) {
+      return AFFILIATE_LINKS.cheapTickets || target;
     }
   }
 
@@ -1497,7 +1631,7 @@
       },
       {
         label: "Iberia",
-        href: AFFILIATE_LINKS.iberia,
+        href: buildIberiaFlightUrl(state),
         meta: "Sjekk Iberia-pris"
       },
       {
@@ -1509,6 +1643,11 @@
         label: "CheapFlightFares",
         href: buildCheapFlightFareUrl(state),
         meta: "Alternativ prissjekk"
+      },
+      {
+        label: "CheapTickets",
+        href: buildCheapTicketsUrl(state),
+        meta: "Sjekk fly/ferie"
       }
     ].filter((partner) => partner.href);
   }
@@ -1664,8 +1803,8 @@
       .filter(Boolean)
       .filter((item, index, list) => list.findIndex((other) => other[0] === item[0]) === index);
     const partnerLinks = [
-      ...airlineLinks.map(([label, href]) => ({ label, href, meta: "Direkte" })),
-      ...buildFlightChoicePartners(partnerState, offers)
+      ...buildFlightChoicePartners(partnerState, offers),
+      ...airlineLinks.map(([label, href]) => ({ label, href, meta: "Direkte" }))
     ].filter((item, index, list) => list.findIndex((other) => other.label === item.label) === index);
     const offerRows = offers.slice(0, 3).map((offer, index) => {
       const departure = offer.departure_at

@@ -1,12 +1,12 @@
-const CACHE_VERSION = "billig-reiser-pwa-v133-flight-price-confirm";
+const CACHE_VERSION = "billig-reiser-pwa-v136-amadeus-radar";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=133",
-  "/affiliate-config.js?v=133",
-  "/app.js?v=133",
+  "/style.css?v=136",
+  "/affiliate-config.js?v=136",
+  "/app.js?v=136",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",

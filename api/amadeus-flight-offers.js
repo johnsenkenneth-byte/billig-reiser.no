@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     const amadeusEnv = String(process.env.AMADEUS_ENV || "test").trim().toLowerCase();
     const defaultBaseUrl = amadeusEnv === "production"
       ? "https://api.amadeus.com"
-      : "https://test.travel.api.amadeus.com";
+      : "https://test.api.amadeus.com";
     const apiBaseUrl = String(process.env.AMADEUS_API_BASE_URL || defaultBaseUrl).trim().replace(/\/+$/, "");
     if (!apiKey || !apiSecret) {
       return res.status(200).json({
@@ -85,13 +85,26 @@ export default async function handler(req, res) {
     }
 
     const offers = (data.data || []).map((item) => {
-      const firstSegment = item.itineraries?.[0]?.segments?.[0] || {};
+      const outbound = item.itineraries?.[0] || {};
+      const inbound = item.itineraries?.[1] || {};
+      const firstSegment = outbound.segments?.[0] || {};
+      const lastOutboundSegment = outbound.segments?.[outbound.segments.length - 1] || {};
+      const firstInboundSegment = inbound.segments?.[0] || {};
+      const outboundStops = Math.max(0, (outbound.segments || []).length - 1);
+      const inboundStops = inbound.segments ? Math.max(0, inbound.segments.length - 1) : 0;
       return {
         price: item.price?.grandTotal,
         currency: item.price?.currency || currency,
         airline: firstSegment.carrierCode || item.validatingAirlineCodes?.[0] || "",
         validating_airlines: item.validatingAirlineCodes || [],
         departure_at: firstSegment.departure?.at || "",
+        arrival_at: lastOutboundSegment.arrival?.at || "",
+        return_departure_at: firstInboundSegment.departure?.at || "",
+        duration: outbound.duration || "",
+        return_duration: inbound.duration || "",
+        stops: outboundStops,
+        return_stops: inboundStops,
+        total_stops: outboundStops + inboundStops,
         bookable_seats: item.numberOfBookableSeats || null
       };
     }).filter((item) => Number(item.price) > 0);

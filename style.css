@@ -5224,7 +5224,7 @@ body.flight-confirm-open{
 
 .flight-confirm-partners{
   display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
   gap:9px;
   padding:0 16px 18px;
 }
