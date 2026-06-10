@@ -966,26 +966,6 @@
     return url.toString();
   }
 
-  function dateParts(value) {
-    const date = parseISODate(value);
-    if (!date) return null;
-    return {
-      day: String(date.getDate()).padStart(2, "0"),
-      month: String(date.getMonth() + 1).padStart(2, "0"),
-      year: String(date.getFullYear())
-    };
-  }
-
-  function expediaDate(value) {
-    const parts = dateParts(value);
-    return parts ? `${parts.month}/${parts.day}/${parts.year}` : value;
-  }
-
-  function iberiaMonth(value) {
-    const parts = dateParts(value);
-    return parts ? `${parts.year}${parts.month}` : "";
-  }
-
   function buildExpediaFlightUrl(state) {
     try {
       return affiliateWrap(AFFILIATE_LINKS.expedia, "https://www.expedia.no/Flights");
@@ -995,51 +975,16 @@
   }
 
   function buildIberiaFlightUrl(state) {
-    const from = airportCode(state.from);
-    const to = airportCode(state.to);
-    const depart = state.depart || fallbackDepartISO();
-    const ret = state.ret || fallbackReturnISO(depart);
-    const departParts = dateParts(depart);
-    const returnParts = dateParts(ret);
-    const target = new URL("https://www.iberia.com/no/flight-search/");
-    target.searchParams.set("market", "NO");
-    target.searchParams.set("language", "no");
-    target.searchParams.set("TRIP_TYPE", "2");
-    target.searchParams.set("BEGIN_CITY_01", from);
-    target.searchParams.set("END_CITY_01", to);
-    if (departParts) {
-      target.searchParams.set("BEGIN_DAY_01", departParts.day);
-      target.searchParams.set("BEGIN_MONTH_01", iberiaMonth(depart));
-    }
-    if (returnParts) {
-      target.searchParams.set("END_DAY_01", returnParts.day);
-      target.searchParams.set("END_MONTH_01", iberiaMonth(ret));
-    }
-    target.searchParams.set("ADT", String(Math.max(1, Number(state.adults || 1))));
-    target.searchParams.set("CHD", String(Math.max(0, Number(state.children || 0))));
-    target.searchParams.set("INF", "0");
-    target.searchParams.set("BNN", "0");
-    target.searchParams.set("YTH", "0");
-    target.searchParams.set("YCD", "0");
-    target.searchParams.set("FARE_TYPE", "R");
     try {
-      return cjDialogLink(AFFILIATE_LINKS.iberia, target.toString());
+      return cjDialogLink(AFFILIATE_LINKS.iberia, "https://www.iberia.com/no/flight-search/");
     } catch (error) {
-      return target.toString();
+      return AFFILIATE_LINKS.iberia;
     }
   }
 
   function buildMalaysiaAirlinesUrl(state) {
-    const target = new URL("https://www.malaysiaairlines.com/no/en/booking/flight-search.html");
-    target.searchParams.set("from", airportCode(state.from));
-    target.searchParams.set("to", airportCode(state.to));
-    target.searchParams.set("departureDate", state.depart || fallbackDepartISO());
-    target.searchParams.set("returnDate", state.ret || fallbackReturnISO(state.depart || fallbackDepartISO()));
-    target.searchParams.set("tripType", "R");
-    target.searchParams.set("adults", String(Math.max(1, Number(state.adults || 1))));
-    target.searchParams.set("children", String(Math.max(0, Number(state.children || 0))));
     try {
-      return cjDialogLink(AFFILIATE_LINKS.malaysiaAirlines, target.toString());
+      return cjDialogLink(AFFILIATE_LINKS.malaysiaAirlines, "https://www.malaysiaairlines.com/no/en/booking/flight-search.html");
     } catch (error) {
       return AFFILIATE_LINKS.malaysiaAirlines;
     }
@@ -1605,7 +1550,7 @@
       {
         label: "Expedia",
         href: buildExpediaFlightUrl(state),
-        meta: "Sammenlign totalpris"
+        meta: "Åpne flysøk"
       },
       {
         label: "Kiwi",
@@ -1615,22 +1560,22 @@
       {
         label: "Iberia",
         href: buildIberiaFlightUrl(state),
-        meta: "Sjekk Iberia-pris"
+        meta: "Åpne flysøk"
       },
       {
         label: "Malaysia Airlines",
         href: buildMalaysiaAirlinesUrl(state),
-        meta: hasMalaysiaOffer ? "Funnet i prislisten" : "Sjekk direkte"
+        meta: hasMalaysiaOffer ? "Flysøk hos Malaysia" : "Åpne flysøk"
       },
       {
         label: "CheapFlightFares",
         href: buildCheapFlightFareUrl(state),
-        meta: "Alternativ prissjekk"
+        meta: "Åpne flysøk"
       },
       {
         label: "CheapTickets",
         href: buildCheapTicketsUrl(state),
-        meta: "Sjekk fly/ferie"
+        meta: "Åpne flysøk"
       }
     ].filter((partner) => partner.href);
   }
@@ -1923,7 +1868,15 @@
       </a>`).join("");
     const statusHtml = error && !offers.length
       ? `<p class="flight-confirm-note">Livepris fra Amadeus er ikke tilgjengelig akkurat nå. Du kan likevel sjekke samme reise hos partnerne under.</p>`
-      : `<p class="flight-confirm-note">Prisene er en indikasjon fra Amadeus. Endelig pris, bagasje, setevalg og betaling bekreftes hos partneren.</p>`;
+      : `<p class="flight-confirm-note">Prisene er en indikasjon fra Amadeus. Kiwi åpner valgt rute automatisk. De andre partnerne åpner flysøk, der endelig pris, bagasje og betaling bekreftes.</p>`;
+    const routeDetailsHtml = `
+      <div class="flight-confirm-route">
+        <span><b>Fra</b>${escapeHTML(from)}</span>
+        <span><b>Til</b>${escapeHTML(to)}</span>
+        <span><b>Avreise</b>${escapeHTML(formatFlightConfirmDate(state.depart, "velg dato"))}</span>
+        <span><b>Retur</b>${escapeHTML(formatFlightConfirmDate(state.ret, "velg retur"))}</span>
+        <span><b>Reisende</b>${escapeHTML(flightConfirmPassengerText(state))}</span>
+      </div>`;
 
     const overlay = document.createElement("div");
     overlay.id = "flightPriceConfirm";
@@ -1944,6 +1897,7 @@
           </div>
           <span><b>${escapeHTML(airlineText)}</b><small>${escapeHTML(departureText)} • ${escapeHTML(seatsText)}</small></span>
         </div>
+        ${routeDetailsHtml}
         ${offerRows ? `<div class="flight-confirm-offers">${offerRows}</div>` : ""}
         ${statusHtml}
         <div class="flight-confirm-partners">

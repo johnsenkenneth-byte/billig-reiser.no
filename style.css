@@ -5177,6 +5177,33 @@ body.flight-confirm-open{
   padding:0 16px 12px;
 }
 
+.flight-confirm-route{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  padding:0 16px 12px;
+}
+
+.flight-confirm-route span{
+  min-width:0;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  background:rgba(255,255,255,.04);
+  color:#edf8ff;
+  font-size:12px;
+  font-weight:850;
+}
+
+.flight-confirm-route b{
+  display:block;
+  margin-bottom:4px;
+  color:#8eeeff;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
 .flight-confirm-offer{
   min-width:0;
   padding:11px;
@@ -5292,6 +5319,10 @@ body.flight-confirm-open{
 
   .flight-confirm-offers{
     grid-template-columns:1fr;
+  }
+
+  .flight-confirm-route{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   .flight-confirm-offer{
