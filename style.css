@@ -5046,9 +5046,266 @@ html body .partner-pills b{
 
   html body .topbar .brand img,
   html body .brand img,
-  html body header img[src*="billig-reiser-logo-v115"]{
+html body header img[src*="billig-reiser-logo-v115"]{
     width:min(190px,56vw)!important;
     max-width:190px!important;
     max-height:58px!important;
+  }
+}
+
+/* BR v133: flight price confirmation before partner handoff */
+body.flight-confirm-open{
+  overflow:hidden;
+}
+
+.flight-confirm-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(1,8,18,.72);
+  backdrop-filter:blur(10px);
+}
+
+.flight-confirm-modal{
+  position:relative;
+  width:min(760px,100%);
+  max-height:calc(100svh - 36px);
+  overflow:auto;
+  border:1px solid rgba(126,232,255,.32);
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(8,26,48,.98),rgba(4,12,26,.98));
+  box-shadow:0 28px 80px rgba(0,0,0,.48);
+  color:#eaf7ff;
+}
+
+.flight-confirm-close{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:38px;
+  height:38px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:8px;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.flight-confirm-close:hover,
+.flight-confirm-close:focus-visible{
+  border-color:rgba(126,232,255,.7);
+  outline:0;
+}
+
+.flight-confirm-head{
+  padding:24px 66px 16px 22px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+
+.flight-confirm-head span{
+  display:block;
+  margin-bottom:7px;
+  color:#79eaff;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.flight-confirm-head h2{
+  margin:0;
+  color:#fff;
+  font-size:clamp(26px,4vw,42px);
+  line-height:1;
+}
+
+.flight-confirm-head p{
+  margin:9px 0 0;
+  color:#a9bfd4;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:750;
+}
+
+.flight-confirm-price{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin:16px;
+  padding:16px;
+  border:1px solid rgba(126,232,255,.28);
+  border-radius:8px;
+  background:rgba(126,232,255,.08);
+}
+
+.flight-confirm-price small{
+  display:block;
+  color:#a8bed1;
+  font-size:11px;
+  font-weight:850;
+}
+
+.flight-confirm-price strong{
+  display:block;
+  margin-top:3px;
+  color:#fff;
+  font-size:clamp(28px,5vw,44px);
+  line-height:1;
+}
+
+.flight-confirm-price span{
+  min-width:190px;
+  text-align:right;
+}
+
+.flight-confirm-price b{
+  display:block;
+  color:#eaf9ff;
+  font-size:14px;
+}
+
+.flight-confirm-offers{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  padding:0 16px 12px;
+}
+
+.flight-confirm-offer{
+  min-width:0;
+  padding:11px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  background:rgba(255,255,255,.04);
+}
+
+.flight-confirm-offer.best{
+  border-color:rgba(255,214,102,.5);
+  background:rgba(255,214,102,.08);
+}
+
+.flight-confirm-offer b,
+.flight-confirm-offer small,
+.flight-confirm-offer strong{
+  display:block;
+}
+
+.flight-confirm-offer b{
+  color:#fff;
+  font-size:13px;
+}
+
+.flight-confirm-offer small{
+  margin:3px 0 9px;
+  color:#9fb3c9;
+  font-size:10px;
+  font-weight:750;
+}
+
+.flight-confirm-offer strong{
+  color:#ffd66a;
+  font-size:18px;
+}
+
+.flight-confirm-note{
+  margin:0;
+  padding:0 18px 14px;
+  color:#b9cbe0;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:700;
+}
+
+.flight-confirm-partners{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:9px;
+  padding:0 16px 18px;
+}
+
+.flight-confirm-choice{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:4px;
+  min-height:66px;
+  padding:10px 11px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:8px;
+  background:rgba(255,255,255,.055);
+  color:#f6fcff;
+  text-decoration:none;
+}
+
+.flight-confirm-choice.primary{
+  border-color:rgba(255,214,102,.72);
+  background:linear-gradient(180deg,rgba(255,214,102,.2),rgba(255,255,255,.06));
+}
+
+.flight-confirm-choice:hover,
+.flight-confirm-choice:focus-visible{
+  border-color:rgba(126,232,255,.8);
+  outline:0;
+  transform:translateY(-1px);
+}
+
+.flight-confirm-choice span{
+  overflow-wrap:anywhere;
+  font-size:14px;
+  font-weight:950;
+}
+
+.flight-confirm-choice small{
+  color:#91eaff;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:850;
+  text-transform:uppercase;
+}
+
+@media(max-width:780px){
+  .flight-confirm-overlay{
+    align-items:end;
+    padding:10px;
+  }
+
+  .flight-confirm-modal{
+    max-height:calc(100svh - 20px);
+  }
+
+  .flight-confirm-price{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .flight-confirm-price span{
+    min-width:0;
+    text-align:left;
+  }
+
+  .flight-confirm-offers{
+    grid-template-columns:1fr;
+  }
+
+  .flight-confirm-offer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .flight-confirm-offer small{
+    margin-bottom:0;
+  }
+
+  .flight-confirm-partners{
+    grid-template-columns:1fr;
   }
 }

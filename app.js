@@ -322,6 +322,7 @@
 */
 (() => {
   const TRAVELPAYOUTS_MARKER = (window.BR_AFFILIATES && window.BR_AFFILIATES.travelpayoutsId) || "718286";
+  const CJ_PUBLISHER_ID = (window.BR_AFFILIATES && window.BR_AFFILIATES.cjPublisherId) || "101724638";
   const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
   const AFFILIATE_LINKS = {
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
@@ -330,6 +331,7 @@
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: "https://www.dpbolvw.net/click-101724638-17085753",
+    cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightfares.com/`,
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.kqzyfj.com/click-101724638-15735979",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
@@ -671,6 +673,15 @@
     return url.toString();
   }
 
+  function cjDialogLink(baseAffiliateUrl, targetUrl) {
+    const url = new URL(baseAffiliateUrl);
+    if (!url.pathname.includes("/links/") || !url.pathname.includes("/type/dlg/")) {
+      return affiliateWrap(baseAffiliateUrl, targetUrl);
+    }
+    const prefix = `${url.origin}${url.pathname.split("/type/dlg/")[0]}/type/dlg/`;
+    return `${prefix}${targetUrl}`;
+  }
+
   function isCreatorAffiliateUrl(value) {
     try {
       return new URL(value).pathname.includes("/affiliates/");
@@ -895,6 +906,53 @@
   async function buildFlightPartnerUrl(state) {
     // Kiwi-deeplinken åpner valgt rute, mens Travelpayouts beholder sporingen.
     return buildFlightDirectUrl(state);
+  }
+
+  function buildFlightSearchTarget(baseUrl, state) {
+    const from = airportCode(state.from);
+    const to = airportCode(state.to);
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret || fallbackReturnISO(depart);
+    const adults = Math.max(1, Number(state.adults || 1));
+    const children = Math.max(0, Number(state.children || 0));
+    const url = new URL(baseUrl);
+    url.searchParams.set("trip", "roundtrip");
+    url.searchParams.set("mode", "search");
+    url.searchParams.set("leg1", `from:${from},to:${to},departure:${depart}TANYT`);
+    url.searchParams.set("leg2", `from:${to},to:${from},departure:${ret}TANYT`);
+    url.searchParams.set("passengers", `adults:${adults}${children ? `,children:${children}` : ""}`);
+    url.searchParams.set("options", "cabinclass:economy");
+    return url.toString();
+  }
+
+  function buildExpediaFlightUrl(state) {
+    try {
+      return affiliateWrap(AFFILIATE_LINKS.expedia, buildFlightSearchTarget("https://www.expedia.no/Flights-Search", state));
+    } catch (error) {
+      return AFFILIATE_LINKS.expedia;
+    }
+  }
+
+  function buildMalaysiaAirlinesUrl() {
+    return AFFILIATE_LINKS.malaysiaAirlines;
+  }
+
+  function buildCheapFlightFareUrl(state) {
+    const base = AFFILIATE_LINKS.cheapFlightFares || "";
+    const target = "https://www.cheapflightfares.com/";
+    try {
+      if (!base) return target;
+      const url = new URL(base);
+      if (url.pathname.includes("/links/") && url.pathname.includes("/type/dlg/")) {
+        return cjDialogLink(base, target);
+      }
+      if (/(\.|^)(kqzyfj|jdoqocy|tkqlhce|dpbolvw|anrdoezrs)\.com$/i.test(url.hostname)) {
+        return affiliateWrap(base, target);
+      }
+      return url.toString();
+    } catch (error) {
+      return base || target;
+    }
   }
 
   function buildHotelUrl(state) {
@@ -1380,6 +1438,8 @@
 
   let livePriceTimer = null;
   let livePriceAbort = null;
+  let flightConfirmAbort = null;
+  let flightConfirmKeyHandler = null;
 
   function formatNOK(value) {
     try {
@@ -1414,6 +1474,43 @@
     if (clean === "IB" && AFFILIATE_LINKS.iberia) return ["Iberia", AFFILIATE_LINKS.iberia];
     if (clean === "MH" && AFFILIATE_LINKS.malaysiaAirlines) return ["Malaysia Airlines", AFFILIATE_LINKS.malaysiaAirlines];
     return null;
+  }
+
+  function offerAirlineCodes(offer) {
+    return [offer?.airline, ...(offer?.validating_airlines || [])]
+      .map((code) => String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 2))
+      .filter(Boolean);
+  }
+
+  function buildFlightChoicePartners(state, offers = []) {
+    const hasMalaysiaOffer = offers.some((offer) => offerAirlineCodes(offer).includes("MH"));
+    return [
+      {
+        label: "Expedia",
+        href: buildExpediaFlightUrl(state),
+        meta: "Sammenlign totalpris"
+      },
+      {
+        label: "Kiwi",
+        href: buildFlightDirectUrl(state),
+        meta: "Åpne valgt rute"
+      },
+      {
+        label: "Iberia",
+        href: AFFILIATE_LINKS.iberia,
+        meta: "Sjekk Iberia-pris"
+      },
+      {
+        label: "Malaysia Airlines",
+        href: buildMalaysiaAirlinesUrl(state),
+        meta: hasMalaysiaOffer ? "Funnet i prislisten" : "Sjekk direkte"
+      },
+      {
+        label: "CheapFlightFares",
+        href: buildCheapFlightFareUrl(state),
+        meta: "Alternativ prissjekk"
+      }
+    ].filter((partner) => partner.href);
   }
 
   const LIVE_DEAL_ROUTES = [
@@ -1550,18 +1647,26 @@
     box.classList.toggle("show", Boolean(show && html));
   }
 
+  function escapeHTML(value) {
+    return String(value || "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;"
+    }[char]));
+  }
+
   function renderAmadeusOffers(offers, state, from, to) {
-    const kiwiUrl = buildFlightDirectUrl({ ...state, from, to });
+    const partnerState = { ...state, from, to };
     const airlineLinks = offers
       .map((offer) => airlinePartnerLink(offer.airline))
       .filter(Boolean)
       .filter((item, index, list) => list.findIndex((other) => other[0] === item[0]) === index);
     const partnerLinks = [
-      ...airlineLinks,
-      ["Kiwi", kiwiUrl],
-      ["Expedia", AFFILIATE_LINKS.expedia],
-      ["CheapTickets", AFFILIATE_LINKS.cheapTickets]
-    ];
+      ...airlineLinks.map(([label, href]) => ({ label, href, meta: "Direkte" })),
+      ...buildFlightChoicePartners(partnerState, offers)
+    ].filter((item, index, list) => list.findIndex((other) => other.label === item.label) === index);
     const offerRows = offers.slice(0, 3).map((offer, index) => {
       const departure = offer.departure_at
         ? new Date(offer.departure_at).toLocaleString("nb-NO", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })
@@ -1571,20 +1676,20 @@
       return `
         <article class="amadeus-offer${index === 0 ? " best" : ""}">
           <div>
-            <strong>${airline}</strong>
-            <small>${departure} • ${seats}</small>
+            <strong>${escapeHTML(airline)}</strong>
+            <small>${escapeHTML(departure)} • ${escapeHTML(seats)}</small>
           </div>
           <b>${formatNOK(offer.price)}</b>
         </article>`;
     }).join("");
-    const compareButtons = partnerLinks.map(([label, href]) => `
-      <a href="${href}" rel="nofollow noopener sponsored" target="_blank">${label}<small>Sammenlign</small></a>
+    const compareButtons = partnerLinks.map(({ label, href, meta }) => `
+      <a href="${escapeHTML(href)}" rel="nofollow noopener sponsored" target="_blank">${escapeHTML(label)}<small>${escapeHTML(meta || "Sammenlign")}</small></a>
     `).join("");
 
     return `
       <section class="amadeus-results">
         <header>
-          <span><b>Live flypriser</b><small>${from} → ${to} • hentet fra Amadeus</small></span>
+          <span><b>Live flypriser</b><small>${escapeHTML(from)} → ${escapeHTML(to)} • hentet fra Amadeus</small></span>
           <em>Prisindikasjon</em>
         </header>
         <div class="amadeus-offers">${offerRows}</div>
@@ -1646,6 +1751,142 @@
         }
       }
     }, immediate ? 0 : 650);
+  }
+
+  function formatFlightConfirmDate(value, fallback) {
+    const date = parseISODate(value);
+    return date ? date.toLocaleDateString("nb-NO", { day: "2-digit", month: "short", year: "numeric" }) : fallback;
+  }
+
+  function flightConfirmPassengerText(state) {
+    const adults = Math.max(1, Number(state.adults || 1));
+    const children = Math.max(0, Number(state.children || 0));
+    return `${adults} ${adults === 1 ? "voksen" : "voksne"}${children ? `, ${children} barn` : ""}`;
+  }
+
+  function closeFlightPriceConfirm() {
+    const existing = $("flightPriceConfirm");
+    if (existing) existing.remove();
+    document.body.classList.remove("flight-confirm-open");
+    if (flightConfirmKeyHandler) {
+      document.removeEventListener("keydown", flightConfirmKeyHandler);
+      flightConfirmKeyHandler = null;
+    }
+  }
+
+  function renderFlightPriceConfirm({ state, from, to, offers = [], error = "" }) {
+    closeFlightPriceConfirm();
+    const bestOffer = offers[0] || null;
+    const partnerLinks = buildFlightChoicePartners({ ...state, from, to }, offers);
+    const priceText = bestOffer ? formatNOK(bestOffer.price) : "Sjekk hos partner";
+    const airlineText = bestOffer ? airlineName(bestOffer.airline) : "Pris må bekreftes";
+    const departureText = bestOffer?.departure_at
+      ? new Date(bestOffer.departure_at).toLocaleString("nb-NO", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })
+      : formatFlightConfirmDate(state.depart, "valgt dato");
+    const seatsText = Number(bestOffer?.bookable_seats) > 0 ? `${Number(bestOffer.bookable_seats)} seter igjen i Amadeus` : "Tilgjengelighet bekreftes hos partner";
+    const offerRows = offers.slice(0, 3).map((offer, index) => {
+      const departure = offer.departure_at
+        ? new Date(offer.departure_at).toLocaleString("nb-NO", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })
+        : state.depart;
+      return `
+        <article class="flight-confirm-offer${index === 0 ? " best" : ""}">
+          <span><b>${escapeHTML(airlineName(offer.airline))}</b><small>${escapeHTML(departure)}</small></span>
+          <strong>${formatNOK(offer.price)}</strong>
+        </article>`;
+    }).join("");
+    const partnerButtons = partnerLinks.map((partner, index) => `
+      <a class="flight-confirm-choice${index === 0 ? " primary" : ""}" ${index === 0 ? "data-flight-confirm-primary" : ""} href="${escapeHTML(partner.href)}" target="_blank" rel="nofollow noopener sponsored">
+        <span>${escapeHTML(partner.label)}</span>
+        <small>${escapeHTML(partner.meta)}</small>
+      </a>`).join("");
+    const statusHtml = error && !offers.length
+      ? `<p class="flight-confirm-note">Livepris fra Amadeus er ikke tilgjengelig akkurat nå. Du kan likevel sjekke samme reise hos partnerne under.</p>`
+      : `<p class="flight-confirm-note">Prisene er en indikasjon fra Amadeus. Endelig pris, bagasje, setevalg og betaling bekreftes hos partneren.</p>`;
+
+    const overlay = document.createElement("div");
+    overlay.id = "flightPriceConfirm";
+    overlay.className = "flight-confirm-overlay";
+    overlay.setAttribute("role", "presentation");
+    overlay.innerHTML = `
+      <section class="flight-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="flightConfirmTitle">
+        <button class="flight-confirm-close" type="button" data-flight-confirm-close aria-label="Lukk prisbekreftelse">×</button>
+        <header class="flight-confirm-head">
+          <span>Prisbekreftelse</span>
+          <h2 id="flightConfirmTitle">${escapeHTML(from)} → ${escapeHTML(to)}</h2>
+          <p>${escapeHTML(formatFlightConfirmDate(state.depart, "avreise"))} til ${escapeHTML(formatFlightConfirmDate(state.ret, "retur"))} • ${escapeHTML(flightConfirmPassengerText(state))}</p>
+        </header>
+        <div class="flight-confirm-price">
+          <div>
+            <small>Beste prisindikasjon</small>
+            <strong>${escapeHTML(priceText)}</strong>
+          </div>
+          <span><b>${escapeHTML(airlineText)}</b><small>${escapeHTML(departureText)} • ${escapeHTML(seatsText)}</small></span>
+        </div>
+        ${offerRows ? `<div class="flight-confirm-offers">${offerRows}</div>` : ""}
+        ${statusHtml}
+        <div class="flight-confirm-partners">
+          ${partnerButtons}
+        </div>
+      </section>`;
+
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay || event.target.closest("[data-flight-confirm-close]")) closeFlightPriceConfirm();
+    });
+    overlay.querySelectorAll(".flight-confirm-choice").forEach((link) => {
+      link.addEventListener("click", () => setTimeout(closeFlightPriceConfirm, 250));
+    });
+    flightConfirmKeyHandler = (event) => {
+      if (event.key === "Escape") closeFlightPriceConfirm();
+    };
+    document.addEventListener("keydown", flightConfirmKeyHandler);
+    document.body.appendChild(overlay);
+    document.body.classList.add("flight-confirm-open");
+    requestAnimationFrame(() => overlay.querySelector("[data-flight-confirm-primary]")?.focus());
+  }
+
+  async function fetchFlightConfirmOffers(state) {
+    if (flightConfirmAbort) flightConfirmAbort.abort();
+    flightConfirmAbort = new AbortController();
+    const from = airportCode(state.from);
+    const to = airportCode(state.to);
+    if (!/^[A-Z]{3}$/.test(from) || !/^[A-Z]{3}$/.test(to)) {
+      throw new Error("Velg gyldige flyplasser for prisbekreftelse.");
+    }
+    const url = new URL("/api/amadeus-flight-offers", window.location.origin);
+    url.searchParams.set("origin", from);
+    url.searchParams.set("destination", to);
+    url.searchParams.set("depart_date", state.depart);
+    url.searchParams.set("return_date", state.ret);
+    url.searchParams.set("adults", String(state.adults || 1));
+    url.searchParams.set("max", "3");
+
+    const response = await fetch(url.toString(), { signal: flightConfirmAbort.signal });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data?.success) {
+      throw new Error(data?.error || "Amadeus kunne ikke hente flyprisene akkurat nå.");
+    }
+    return { from, to, offers: data.offers || [] };
+  }
+
+  async function openFlightPriceConfirm(state) {
+    const from = airportCode(state.from);
+    const to = airportCode(state.to);
+    const button = $("searchSubmitButton");
+    const oldButtonText = button?.textContent || "";
+    if (button) button.textContent = "HENTER PRISBEKREFTELSE ...";
+    setLiveBox(`<div class="tp-row"><span>Henter flypriser for <b>${escapeHTML(from)} → ${escapeHTML(to)}</b> …</span><span class="tp-muted">Amadeus</span></div>`);
+
+    try {
+      const result = await fetchFlightConfirmOffers(state);
+      if (result.offers.length) setLiveBox(renderAmadeusOffers(result.offers, state, result.from, result.to));
+      renderFlightPriceConfirm({ state, from: result.from, to: result.to, offers: result.offers });
+    } catch (error) {
+      if (error?.name === "AbortError") return;
+      setLiveBox(`<div class="tp-row"><span>Livepris er ikke tilgjengelig akkurat nå.</span><span class="tp-muted">Velg partner i bekreftelsen.</span></div>`);
+      renderFlightPriceConfirm({ state, from, to, offers: [], error: error?.message || "Kunne ikke hente flypris." });
+    } finally {
+      if (button) button.textContent = oldButtonText;
+    }
   }
 
   function buildPartnerTarget() {
@@ -1917,7 +2158,8 @@
     let target = "";
     if (currentSearchType === "flight") {
       if (!state.from || !state.to) return false;
-      target = buildFlightUrl(state);
+      openFlightPriceConfirm(state);
+      return true;
     } else if (currentSearchType === "hotel") {
       if (!state.to) return false;
       target = buildHotelUrl(state);
@@ -2111,9 +2353,8 @@
           if (button && oldText) button.textContent = oldText;
         } else if (currentSearchType === "flight") {
           if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
-          target = buildFlightUrl(state);
-          scheduleLivePriceUpdate(true, state);
-          setTimeout(() => $("tpLiveBox")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
+          await openFlightPriceConfirm(state);
+          return;
         } else {
           target = buildPartnerTarget();
         }
