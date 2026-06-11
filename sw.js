@@ -1,17 +1,17 @@
-const CACHE_VERSION = "billig-reiser-pwa-v144-airline-cj-logos";
+const CACHE_VERSION = "billig-reiser-pwa-v145-top-logo-refresh";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=144",
-  "/affiliate-config.js?v=144",
-  "/app.js?v=144",
+  "/style.css?v=145",
+  "/affiliate-config.js?v=145",
+  "/app.js?v=145",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
-  "/assets/billig-reiser-logo-v115.png",
-  "/assets/billig-reiser-logo-full-v115.png",
+  "/assets/billig-reiser-logo-v116.png",
+  "/assets/billig-reiser-logo-full-v116.png",
   "/assets/video/front-hero-v116.mp4",
   "/spania/",
   "/spania/spania-city.css?v=126"

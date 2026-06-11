@@ -1134,7 +1134,7 @@ function renderCityPage(city) {
 </head>
 <body>
   <nav class="spain-nav">
-    <a class="brand-logo" href="/index.html"><img src="/assets/billig-reiser-logo-v115.png" alt="Billig-reiser.no" width="1200" height="360" /></a>
+    <a class="brand-logo" href="/index.html"><img src="/assets/billig-reiser-logo-v116.png" alt="Billig-reiser.no" width="1200" height="360" /></a>
     <div class="spain-menu">
       <a href="/reisemagasinet.html">Magasinet</a>
       <a class="active" href="/spania/">Spania</a>
@@ -1312,7 +1312,7 @@ function renderIndex() {
 </head>
 <body>
   <nav class="spain-nav">
-    <a class="brand-logo" href="/index.html"><img src="/assets/billig-reiser-logo-v115.png" alt="Billig-reiser.no" width="1200" height="360" /></a>
+    <a class="brand-logo" href="/index.html"><img src="/assets/billig-reiser-logo-v116.png" alt="Billig-reiser.no" width="1200" height="360" /></a>
     <div class="spain-menu">
       <a href="/reisemagasinet.html">Magasinet</a>
       <a class="active" href="/spania/">Spania</a>
