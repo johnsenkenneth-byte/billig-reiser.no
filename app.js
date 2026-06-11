@@ -14,8 +14,8 @@
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     cheaptickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
-    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.iberia.com/no/",
-    malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
+    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/click-101724638-12119574",
+    malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.dpbolvw.net/click-101724638-17167285",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && (window.BR_AFFILIATES.economyBookingsEurope || window.BR_AFFILIATES.economyBookings)) || "https://economybookings.tpx.gr/LT8vc2kD",
@@ -334,8 +334,8 @@
     cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightsfares.com/`,
     cheapFlightFaresSearch: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFaresSearch) || "https://www.cheapflightsfares.com/search/id/6dpNqSfo6kNIsvxEf1eiVxl4",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
-    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.iberia.com/no/`,
-    malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
+    iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/click-101724638-12119574",
+    malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.dpbolvw.net/click-101724638-17167285",
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookings) || "https://economybookings.tpx.gr/LT8vc2kD",
     economyBookingsClick: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookingsClick) || "https://c10.travelpayouts.com/click",
@@ -1661,24 +1661,9 @@
   function buildFlightChoicePartners(state, offers = []) {
     return [
       {
-        label: "Expedia",
-        href: buildExpediaFlightUrl(state),
-        meta: "Expedia-rutesøk"
-      },
-      {
         label: "Kiwi",
         href: buildFlightDirectUrl(state),
         meta: "Åpne valgt rute"
-      },
-      {
-        label: "CheapFlightFares",
-        href: buildCheapFlightFareUrl(state),
-        meta: "Åpne flysøk"
-      },
-      {
-        label: "CheapTickets",
-        href: buildCheapTicketsUrl(state),
-        meta: "CheapTickets-rutesøk"
       }
     ].filter((partner) => partner.href);
   }
@@ -1963,8 +1948,8 @@
         <small>${escapeHTML(partner.meta)}</small>
       </a>`).join("");
     const statusHtml = error && !offers.length
-      ? `<p class="flight-confirm-note">Livepris fra Amadeus er ikke tilgjengelig akkurat nå. Du kan likevel sjekke samme reise hos partnerne under.</p>`
-      : `<p class="flight-confirm-note">Prisene er en indikasjon fra Amadeus. Kiwi åpner valgt rute automatisk. De andre partnerne åpner flysøk, der endelig pris, bagasje og betaling bekreftes.</p>`;
+      ? `<p class="flight-confirm-note">Livepris fra Amadeus er ikke tilgjengelig akkurat nå. Du kan likevel åpne valgt rute hos Kiwi.</p>`
+      : `<p class="flight-confirm-note">Prisene er en indikasjon fra Amadeus. Kiwi åpner valgt rute automatisk; endelig pris, bagasje og betaling bekreftes hos Kiwi.</p>`;
     const routeDetailsHtml = `
       <div class="flight-confirm-route">
         <span><b>Fra</b>${escapeHTML(from)}</span>

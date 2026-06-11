@@ -5341,7 +5341,7 @@ body.flight-confirm-open{
   }
 }
 
-/* BR v141: airline partner ads are separated from flight search handoff */
+/* BR v142: route handoff stays Kiwi-only; other flight partners are ads */
 .airline-ad-band{
   width:100%;
   padding:42px clamp(14px,4vw,56px);
@@ -5382,7 +5382,7 @@ body.flight-confirm-open{
 
 .airline-ad-grid{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
   gap:14px;
   max-width:1180px;
   margin:0 auto;
@@ -5402,6 +5402,44 @@ body.flight-confirm-open{
   color:#fff;
   text-decoration:none;
   box-shadow:0 22px 70px rgba(0,0,0,.28);
+}
+
+.airline-ad-logo{
+  position:relative;
+  z-index:1;
+  display:block!important;
+  flex:0 0 auto!important;
+  width:150px!important;
+  max-width:min(170px,76%);
+  height:48px!important;
+  max-height:58px;
+  object-fit:contain;
+  align-self:flex-start;
+  margin-bottom:auto;
+  padding:8px 10px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:8px;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 12px 32px rgba(0,0,0,.16);
+}
+
+.iberia-logo{
+  width:82px!important;
+  height:82px!important;
+  max-width:82px;
+  max-height:82px;
+  padding:0;
+  background:transparent;
+  border:0;
+}
+
+.malaysia-logo{
+  box-sizing:border-box!important;
+  width:162px!important;
+  height:55px!important;
+  max-width:170px;
+  max-height:55px;
+  padding:10px!important;
 }
 
 .airline-ad-card:before{
@@ -5430,7 +5468,7 @@ body.flight-confirm-open{
 }
 
 .airline-ad-card strong{
-  font-size:clamp(30px,4vw,54px);
+  font-size:clamp(25px,3.2vw,46px);
   line-height:.95;
   letter-spacing:0;
 }
@@ -5462,6 +5500,18 @@ body.flight-confirm-open{
   transform:translateY(-2px);
   border-color:rgba(117,237,255,.56);
   outline:0;
+}
+
+.expedia-ad{
+  background:linear-gradient(135deg,#083f92,#146bd8 52%,#22d3ee);
+}
+
+.cheapfares-ad{
+  background:linear-gradient(135deg,#ef5f00,#ff7a18 52%,#ffc857);
+}
+
+.cheaptickets-ad{
+  background:linear-gradient(135deg,#8c1746,#c22d75 52%,#f7a1d2);
 }
 
 .iberia-ad{
