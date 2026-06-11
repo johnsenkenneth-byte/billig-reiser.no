@@ -1,12 +1,12 @@
-const CACHE_VERSION = "billig-reiser-pwa-v138-route-aware-partners";
+const CACHE_VERSION = "billig-reiser-pwa-v141-airline-ad-banners";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=138",
-  "/affiliate-config.js?v=138",
-  "/app.js?v=138",
+  "/style.css?v=141",
+  "/affiliate-config.js?v=141",
+  "/app.js?v=141",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",

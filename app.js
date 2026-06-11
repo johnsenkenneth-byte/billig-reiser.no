@@ -332,6 +332,7 @@
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
     cheapTickets: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapTickets) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheaptickets.com/Flights`,
     cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightsfares.com/`,
+    cheapFlightFaresSearch: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFaresSearch) || "https://www.cheapflightsfares.com/search/id/6dpNqSfo6kNIsvxEf1eiVxl4",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.iberia.com/no/`,
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.malaysiaairlines.com/",
@@ -966,12 +967,138 @@
     return url.toString();
   }
 
+  const EXPEDIA_FLIGHT_PLACES = {
+    OSL: "Oslo (OSL-Gardermoen)",
+    BGO: "Bergen (BGO-Flesland)",
+    SVG: "Stavanger (SVG-Sola)",
+    TRD: "Trondheim (TRD-Værnes)",
+    TOS: "Tromsø (TOS-Langnes)",
+    KRS: "Kristiansand (KRS-Kjevik)",
+    AES: "Ålesund (AES-Vigra)",
+    BKK: "Bangkok, Bangkok (provins), Thailand",
+    HKT: "Phuket, Phuket (provins), Thailand",
+    KBV: "Krabi, Krabi (provins), Thailand",
+    USM: "Koh Samui, Surat Thani (provins), Thailand",
+    CNX: "Chiang Mai, Chiang Mai (provins), Thailand",
+    HDY: "Hat Yai, Songkhla (provins), Thailand",
+    FCO: "Roma (FCO-Fiumicino - Leonardo da Vinci intl.)",
+    ALC: "Alicante (ALC-Alicante internasjonale flyplass)",
+    PMI: "Palma de Mallorca (PMI)",
+    KRK: "Krakow (KRK-John Paul II - Balice)",
+    BCN: "Barcelona (BCN-Barcelona internasjonale flyplass)",
+    AGP: "Malaga (AGP)",
+    MAD: "Madrid (MAD-Adolfo Suárez Madrid-Barajas)"
+  };
+
+  function expediaFlightPlace(value) {
+    const code = airportCode(value);
+    return EXPEDIA_FLIGHT_PLACES[code] || clean(value, code);
+  }
+
+  function expediaDotDate(value) {
+    const date = parseISODate(value);
+    if (!date) return value;
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    return `${day}.${month}.${date.getFullYear()}`;
+  }
+
+  function expediaLooseISO(value) {
+    const date = parseISODate(value);
+    if (!date) return value;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  }
+
+  function buildExpediaFlightSearchUrl(state) {
+    const fromPlace = expediaFlightPlace(state.from);
+    const toPlace = expediaFlightPlace(state.to);
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret || fallbackReturnISO(depart);
+    const adults = Math.max(1, Number(state.adults || 1));
+    const children = Math.max(0, Number(state.children || 0));
+    const passengers = [`adults:${adults}`];
+    if (children) passengers.push(`children:${children}`);
+    passengers.push("infantinlap:N");
+
+    const url = new URL("https://www.expedia.no/Flights-Search");
+    url.searchParams.set("flight-type", "on");
+    url.searchParams.set("mode", "search");
+    url.searchParams.set("trip", "roundtrip");
+    url.searchParams.set("leg1", `from:${fromPlace},to:${toPlace},departure:${expediaDotDate(depart)}TANYT,fromType:U,toType:U`);
+    url.searchParams.set("leg2", `from:${toPlace},to:${fromPlace},departure:${expediaDotDate(ret)}TANYT,fromType:U,toType:U`);
+    url.searchParams.set("options", "cabinclass:economy");
+    url.searchParams.set("fromDate", expediaDotDate(depart));
+    url.searchParams.set("toDate", expediaDotDate(ret));
+    url.searchParams.set("d1", expediaLooseISO(depart));
+    url.searchParams.set("d2", expediaLooseISO(ret));
+    url.searchParams.set("passengers", passengers.join(","));
+    return url.toString();
+  }
+
   function buildExpediaFlightUrl(state) {
     try {
-      return affiliateWrap(AFFILIATE_LINKS.expedia, "https://www.expedia.no/Flights");
+      return affiliateWrap(AFFILIATE_LINKS.expedia, buildExpediaFlightSearchUrl(state));
     } catch (error) {
       return AFFILIATE_LINKS.expedia;
     }
+  }
+
+  const CHEAPTICKETS_FLIGHT_PLACES = {
+    OSL: { label: "Oslo (and vicinity), Norway", type: "MULTICITY" },
+    BGO: { label: "Bergen, Norway (BGO-Flesland)", type: "AIRPORT" },
+    SVG: { label: "Stavanger, Norway (SVG-Sola)", type: "AIRPORT" },
+    TRD: { label: "Trondheim, Norway (TRD-Vaernes)", type: "AIRPORT" },
+    TOS: { label: "Tromso, Norway (TOS-Langnes)", type: "AIRPORT" },
+    BKK: { label: "Bangkok, Thailand (BKK-All Airports)", type: "METROCODE" },
+    HKT: { label: "Phuket, Thailand (HKT-Phuket Intl.)", type: "AIRPORT" },
+    KBV: { label: "Krabi, Thailand (KBV-Krabi Intl.)", type: "AIRPORT" },
+    USM: { label: "Koh Samui, Thailand (USM)", type: "AIRPORT" },
+    CNX: { label: "Chiang Mai, Thailand (CNX-Chiang Mai Intl.)", type: "AIRPORT" },
+    HDY: { label: "Hat Yai, Thailand (HDY-Hat Yai Intl.)", type: "AIRPORT" },
+    FCO: { label: "Rome, Italy (FCO-Fiumicino - Leonardo da Vinci Intl.)", type: "AIRPORT" },
+    ALC: { label: "Alicante, Spain (ALC-Alicante Intl.)", type: "AIRPORT" },
+    PMI: { label: "Palma de Mallorca, Spain (PMI)", type: "AIRPORT" },
+    KRK: { label: "Krakow, Poland (KRK-John Paul II - Balice)", type: "AIRPORT" },
+    BCN: { label: "Barcelona, Spain (BCN-Barcelona Intl.)", type: "AIRPORT" },
+    AGP: { label: "Malaga, Spain (AGP)", type: "AIRPORT" },
+    MAD: { label: "Madrid, Spain (MAD-Adolfo Suarez Madrid-Barajas)", type: "AIRPORT" }
+  };
+
+  function cheapTicketsFlightPlace(value) {
+    const code = airportCode(value);
+    return CHEAPTICKETS_FLIGHT_PLACES[code] || { label: clean(value, code), type: /^[A-Z]{3}$/.test(code) ? "AIRPORT" : "MULTICITY" };
+  }
+
+  function slashDate(value) {
+    const date = parseISODate(value);
+    if (!date) return value;
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  }
+
+  function buildCheapTicketsFlightSearchUrl(state) {
+    const from = cheapTicketsFlightPlace(state.from);
+    const to = cheapTicketsFlightPlace(state.to);
+    const depart = state.depart || fallbackDepartISO();
+    const ret = state.ret || fallbackReturnISO(depart);
+    const adults = Math.max(1, Number(state.adults || 1));
+    const children = Math.max(0, Number(state.children || 0));
+    const passengers = [`adults:${adults}`];
+    if (children) passengers.push(`children:${children}`);
+    passengers.push("infantinlap:N");
+
+    const url = new URL("https://www.cheaptickets.com/Flights-Search");
+    url.searchParams.set("flight-type", "on");
+    url.searchParams.set("mode", "search");
+    url.searchParams.set("trip", "roundtrip");
+    url.searchParams.set("leg1", `from:${from.label},to:${to.label},departure:${slashDate(depart)}TANYT,fromType:${from.type},toType:${to.type}`);
+    url.searchParams.set("leg2", `from:${to.label},to:${from.label},departure:${slashDate(ret)}TANYT,fromType:${to.type},toType:${from.type}`);
+    url.searchParams.set("options", "cabinclass:economy");
+    url.searchParams.set("fromDate", slashDate(depart));
+    url.searchParams.set("toDate", slashDate(ret));
+    url.searchParams.set("d1", expediaLooseISO(depart));
+    url.searchParams.set("d2", expediaLooseISO(ret));
+    url.searchParams.set("passengers", passengers.join(","));
+    return url.toString();
   }
 
   function buildIberiaFlightUrl(state) {
@@ -992,7 +1119,7 @@
 
   function buildCheapFlightFareUrl(state) {
     const base = AFFILIATE_LINKS.cheapFlightFares || "";
-    const target = "https://www.cheapflightsfares.com/flights";
+    const target = AFFILIATE_LINKS.cheapFlightFaresSearch || "https://www.cheapflightsfares.com/flights";
     try {
       if (!base) return target;
       const url = new URL(base);
@@ -1009,7 +1136,7 @@
   }
 
   function buildCheapTicketsUrl(state) {
-    const target = "https://www.cheaptickets.com/Flights";
+    const target = buildCheapTicketsFlightSearchUrl(state);
     try {
       return cjDialogLink(AFFILIATE_LINKS.cheapTickets, target);
     } catch (error) {
@@ -1531,41 +1658,17 @@
     return AIRLINE_NAMES[clean] || clean || "Flyselskap";
   }
 
-  function airlinePartnerLink(code) {
-    const clean = String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 2);
-    if (clean === "IB" && AFFILIATE_LINKS.iberia) return ["Iberia", AFFILIATE_LINKS.iberia];
-    if (clean === "MH" && AFFILIATE_LINKS.malaysiaAirlines) return ["Malaysia Airlines", AFFILIATE_LINKS.malaysiaAirlines];
-    return null;
-  }
-
-  function offerAirlineCodes(offer) {
-    return [offer?.airline, ...(offer?.validating_airlines || [])]
-      .map((code) => String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 2))
-      .filter(Boolean);
-  }
-
   function buildFlightChoicePartners(state, offers = []) {
-    const hasMalaysiaOffer = offers.some((offer) => offerAirlineCodes(offer).includes("MH"));
     return [
       {
         label: "Expedia",
         href: buildExpediaFlightUrl(state),
-        meta: "Åpne flysøk"
+        meta: "Expedia-rutesøk"
       },
       {
         label: "Kiwi",
         href: buildFlightDirectUrl(state),
         meta: "Åpne valgt rute"
-      },
-      {
-        label: "Iberia",
-        href: buildIberiaFlightUrl(state),
-        meta: "Åpne flysøk"
-      },
-      {
-        label: "Malaysia Airlines",
-        href: buildMalaysiaAirlinesUrl(state),
-        meta: hasMalaysiaOffer ? "Flysøk hos Malaysia" : "Åpne flysøk"
       },
       {
         label: "CheapFlightFares",
@@ -1575,15 +1678,15 @@
       {
         label: "CheapTickets",
         href: buildCheapTicketsUrl(state),
-        meta: "Åpne flysøk"
+        meta: "CheapTickets-rutesøk"
       }
     ].filter((partner) => partner.href);
   }
 
   const LIVE_DEAL_ROUTES = [
     { from: "OSL", fromCity: "Oslo", to: "BKK", toCity: "Bangkok", days: 38, nights: 10 },
-    { from: "OSL", fromCity: "Oslo", to: "MAD", toCity: "Madrid", days: 20, nights: 5, airlineCodes: "IB", airlineLabel: "Iberia" },
-    { from: "OSL", fromCity: "Oslo", to: "KUL", toCity: "Kuala Lumpur", days: 42, nights: 12, airlineCodes: "MH", airlineLabel: "Malaysia Airlines" },
+    { from: "OSL", fromCity: "Oslo", to: "MAD", toCity: "Madrid", days: 20, nights: 5 },
+    { from: "OSL", fromCity: "Oslo", to: "KUL", toCity: "Kuala Lumpur", days: 42, nights: 12 },
     { from: "OSL", fromCity: "Oslo", to: "ALC", toCity: "Alicante", days: 20, nights: 7 },
     { from: "BGO", fromCity: "Bergen", to: "AGP", toCity: "Malaga", days: 24, nights: 7 },
     { from: "TRD", fromCity: "Trondheim", to: "FCO", toCity: "Roma", days: 18, nights: 4 }
@@ -1726,14 +1829,7 @@
 
   function renderAmadeusOffers(offers, state, from, to) {
     const partnerState = { ...state, from, to };
-    const airlineLinks = offers
-      .map((offer) => airlinePartnerLink(offer.airline))
-      .filter(Boolean)
-      .filter((item, index, list) => list.findIndex((other) => other[0] === item[0]) === index);
-    const partnerLinks = [
-      ...buildFlightChoicePartners(partnerState, offers),
-      ...airlineLinks.map(([label, href]) => ({ label, href, meta: "Direkte" }))
-    ].filter((item, index, list) => list.findIndex((other) => other.label === item.label) === index);
+    const partnerLinks = buildFlightChoicePartners(partnerState, offers);
     const offerRows = offers.slice(0, 3).map((offer, index) => {
       const departure = offer.departure_at
         ? new Date(offer.departure_at).toLocaleString("nb-NO", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })

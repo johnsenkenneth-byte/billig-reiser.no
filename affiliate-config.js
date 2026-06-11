@@ -21,6 +21,7 @@ window.BR_AFFILIATES = Object.freeze({
   cheapFlights: "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
   cheapFlightFaresProgramId: "6061620",
   cheapFlightFares: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheapflightsfares.com/",
+  cheapFlightFaresSearch: "https://www.cheapflightsfares.com/search/id/6dpNqSfo6kNIsvxEf1eiVxl4",
   cheapTicketsProgramId: "4861279",
   cheapTickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
   iberiaProgramId: "4455265",

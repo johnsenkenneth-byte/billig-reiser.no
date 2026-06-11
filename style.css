@@ -5340,3 +5340,149 @@ body.flight-confirm-open{
     grid-template-columns:1fr;
   }
 }
+
+/* BR v141: airline partner ads are separated from flight search handoff */
+.airline-ad-band{
+  width:100%;
+  padding:42px clamp(14px,4vw,56px);
+  background:linear-gradient(180deg,#06101f,#020913);
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.airline-ad-head{
+  max-width:1180px;
+  margin:0 auto 18px;
+}
+
+.airline-ad-head span{
+  display:inline-flex;
+  margin-bottom:8px;
+  color:#72e9ff;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.airline-ad-head h2{
+  margin:0;
+  color:#fff;
+  font-size:clamp(26px,4vw,44px);
+  line-height:1;
+}
+
+.airline-ad-head p{
+  max-width:620px;
+  margin:9px 0 0;
+  color:#aebed2;
+  font-size:15px;
+  line-height:1.5;
+}
+
+.airline-ad-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  max-width:1180px;
+  margin:0 auto;
+}
+
+.airline-ad-card{
+  position:relative;
+  min-height:188px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  gap:8px;
+  overflow:hidden;
+  padding:22px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:8px;
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 22px 70px rgba(0,0,0,.28);
+}
+
+.airline-ad-card:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.25;
+  background:linear-gradient(120deg,rgba(255,255,255,.24),transparent 38%);
+  pointer-events:none;
+}
+
+.airline-ad-card small,
+.airline-ad-card strong,
+.airline-ad-card span,
+.airline-ad-card em{
+  position:relative;
+  z-index:1;
+}
+
+.airline-ad-card small{
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.82);
+}
+
+.airline-ad-card strong{
+  font-size:clamp(30px,4vw,54px);
+  line-height:.95;
+  letter-spacing:0;
+}
+
+.airline-ad-card span{
+  max-width:520px;
+  color:rgba(255,255,255,.86);
+  font-size:15px;
+  line-height:1.35;
+  font-weight:800;
+}
+
+.airline-ad-card em{
+  width:max-content;
+  max-width:100%;
+  margin-top:6px;
+  padding:10px 13px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:8px;
+  background:rgba(255,255,255,.13);
+  color:#fff;
+  font-style:normal;
+  font-size:13px;
+  font-weight:950;
+}
+
+.airline-ad-card:hover,
+.airline-ad-card:focus-visible{
+  transform:translateY(-2px);
+  border-color:rgba(117,237,255,.56);
+  outline:0;
+}
+
+.iberia-ad{
+  background:linear-gradient(135deg,#c9002b,#e0183d 54%,#f2c14e);
+}
+
+.malaysia-ad{
+  background:linear-gradient(135deg,#043f8f,#0a63b7 52%,#12a0d8);
+}
+
+@media(max-width:760px){
+  .airline-ad-band{
+    padding:34px 12px;
+  }
+
+  .airline-ad-grid{
+    grid-template-columns:1fr;
+  }
+
+  .airline-ad-card{
+    min-height:168px;
+    padding:18px;
+  }
+}
