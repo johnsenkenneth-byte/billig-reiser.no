@@ -1,19 +1,21 @@
-const CACHE_VERSION = "billig-reiser-pwa-v154-new-reiseradar";
+const CACHE_VERSION = "billig-reiser-pwa-v160-reisehacks";
 const APP_SHELL = [
   "/",
   "/index.html",
+  "/reisehacks.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=154",
-  "/affiliate-config.js?v=154",
-  "/app.js?v=154",
+  "/style.css?v=159",
+  "/app-features.css?v=159",
+  "/affiliate-config.js?v=159",
+  "/app.js?v=159",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
   "/assets/billig-reiser-logo-full-v116.png",
   "/assets/video/front-hero-v116.mp4",
   "/spania/",
-  "/spania/spania-city.css?v=131"
+  "/spania/spania-city.css?v=159"
 ];
 
 self.addEventListener("install", event => {

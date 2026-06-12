@@ -53,6 +53,17 @@
       ]
     },
     {
+      "name": "Reisehacks",
+      "short_name": "Hacks",
+      "url": "/reisehacks.html",
+      "icons": [
+        {
+          "src": "/assets/app-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
       "name": "Reisemagasin",
       "short_name": "Magasin",
       "url": "/reisemagasinet.html",
