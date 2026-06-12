@@ -718,6 +718,8 @@
           id: "BKK",
           country: "Thailand",
           city: "Bangkok",
+          hotelSearch: "Bangkok, Thailand",
+          activitySearch: "Bangkok",
           style: ["city", "family"],
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 38,
@@ -732,6 +734,8 @@
           id: "KBV",
           country: "Thailand",
           city: "Krabi",
+          hotelSearch: "Krabi, Thailand",
+          activitySearch: "Krabi",
           style: ["sun", "family"],
           origins: ["OSL", "BGO", "SVG", "TRD"],
           days: 42,
@@ -746,6 +750,8 @@
           id: "FCO",
           country: "Italia",
           city: "Roma",
+          hotelSearch: "Roma, Italia",
+          activitySearch: "Rome",
           style: ["city", "weekend"],
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 24,
@@ -760,6 +766,8 @@
           id: "ALC",
           country: "Spania",
           city: "Alicante",
+          hotelSearch: "Alicante, Spania",
+          activitySearch: "Alicante",
           style: ["sun", "weekend", "family"],
           origins: ["OSL", "BGO", "SVG", "TRD"],
           days: 22,
@@ -774,6 +782,8 @@
           id: "PMI",
           country: "Spania",
           city: "Mallorca",
+          hotelSearch: "Mallorca, Spania",
+          activitySearch: "Mallorca",
           style: ["sun", "family"],
           origins: ["OSL", "BGO", "SVG", "TRD"],
           days: 25,
@@ -788,6 +798,8 @@
           id: "CPH",
           country: "Danmark",
           city: "København",
+          hotelSearch: "København, Danmark",
+          activitySearch: "Copenhagen",
           style: ["city", "weekend", "family"],
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 18,
@@ -802,6 +814,8 @@
           id: "PAR",
           country: "Frankrike",
           city: "Paris",
+          hotelSearch: "Paris, Frankrike",
+          activitySearch: "Paris",
           style: ["city", "weekend"],
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 20,
@@ -816,6 +830,8 @@
           id: "LON",
           country: "Storbritannia",
           city: "London",
+          hotelSearch: "London, Storbritannia",
+          activitySearch: "London",
           style: ["city", "weekend", "family"],
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 16,
@@ -830,6 +846,8 @@
           id: "DXB",
           country: "UAE",
           city: "Dubai",
+          hotelSearch: "Dubai, UAE",
+          activitySearch: "Dubai",
           style: ["sun", "city", "family"],
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 34,
@@ -868,7 +886,9 @@
       const statLive = document.getElementById("statLive");
       const travelpayoutsMarker = window.BR_AFFILIATES?.travelpayoutsId || "718286";
       const kiwiClickUrl = window.BR_AFFILIATES?.kiwi || "https://c111.travelpayouts.com/click";
-      const activityUrl = window.BR_AFFILIATES?.activities || "https://klook.tpx.gr/Tmj2PfPe";
+      const activityFallbackUrl = window.BR_AFFILIATES?.activities || "https://klook.tpx.gr/Tmj2PfPe";
+      const klookSearchBase = window.BR_AFFILIATES?.klookSearchBase || "https://www.klook.com/nb/search/result/?query=";
+      const bookingAid = window.BR_AFFILIATES?.bookingComAid || "1522412";
       const bookingUrl = window.BR_AFFILIATES?.bookingCom || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412";
 
       function getVisibleRoutes() {
@@ -968,6 +988,40 @@
         }
       }
 
+      function destinationSearchText(route) {
+        return route.search || `${route.city}, ${route.country}`;
+      }
+
+      function activityAffiliateUrl(route) {
+        const query = route.activitySearch || destinationSearchText(route);
+        try {
+          const url = new URL(klookSearchBase);
+          url.searchParams.set("query", query);
+          return url.toString();
+        } catch (error) {
+          return query ? `https://www.klook.com/nb/search/result/?query=${encodeURIComponent(query)}` : activityFallbackUrl;
+        }
+      }
+
+      function hotelAffiliateUrl(route, checkin, checkout) {
+        try {
+          const url = new URL("https://www.booking.com/searchresults.no.html");
+          url.searchParams.set("aid", bookingAid);
+          url.searchParams.set("ss", route.hotelSearch || destinationSearchText(route));
+          url.searchParams.set("checkin", checkin);
+          url.searchParams.set("checkout", checkout);
+          url.searchParams.set("group_adults", "2");
+          url.searchParams.set("no_rooms", "1");
+          url.searchParams.set("group_children", "0");
+          url.searchParams.set("selected_currency", "NOK");
+          url.searchParams.set("lang", "no");
+          url.searchParams.set("label", `billigreiser_reiseradar_${route.id.toLowerCase()}`);
+          return url.toString();
+        } catch (error) {
+          return bookingUrl;
+        }
+      }
+
       function renderRows() {
         const visible = getVisibleRoutes();
         if (visible.length && !visible.some(route => route.id === state.selected)) state.selected = visible[0].id;
@@ -1008,8 +1062,8 @@
         document.getElementById("panelDuration").textContent = live ? formatDuration(live.duration) : route.duration;
         document.getElementById("panelDates").textContent = live ? `${formatDate(live.departure_at || depart)}-${formatDate(live.return_departure_at || ret)}` : `${formatDate(depart)}-${formatDate(ret)}`;
         document.getElementById("panelFlight").href = flightAffiliateUrl(route, depart, ret);
-        document.getElementById("panelActivity").href = activityUrl;
-        document.getElementById("panelHotel").href = bookingUrl;
+        document.getElementById("panelActivity").href = activityAffiliateUrl(route);
+        document.getElementById("panelHotel").href = hotelAffiliateUrl(route, depart, ret);
         setActivePins();
         document.querySelectorAll("[data-row-route]").forEach(button => {
           button.classList.toggle("is-active", button.dataset.rowRoute === route.id);
