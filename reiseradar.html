@@ -689,9 +689,9 @@
             </div>
 
             <div class="panel-actions">
-              <a class="primary" id="panelFlight" href="/#travelSearch">Sjekk flypris</a>
+              <a class="primary" id="panelFlight" href="https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_fly&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F" target="_blank" rel="nofollow sponsored noopener">Sjekk flypris</a>
               <a id="panelGuide" href="bangkok.html">Åpne guide</a>
-              <a id="panelActivity" href="https://www.klook.com/nb/search/result/?query=Bangkok%20activities" target="_blank" rel="nofollow sponsored noopener">Opplevelser</a>
+              <a id="panelActivity" href="https://klook.tpx.gr/Tmj2PfPe" target="_blank" rel="nofollow sponsored noopener">Opplevelser</a>
               <button id="refreshLive" type="button">Oppdater pris</button>
               <a class="wide" id="panelHotel" href="https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412" target="_blank" rel="nofollow sponsored noopener">Sjekk hotell</a>
             </div>
@@ -795,7 +795,7 @@
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 24,
           nights: 4,
-          image: "assets/wow-tabs/tab-fly-v22.jpg",
+          image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1400px-Colosseo_2020.jpg",
           guide: "/#travelSearch",
           fallback: "fra 6 366 kr",
           stops: "0-1 stopp",
@@ -810,7 +810,7 @@
           origins: ["OSL", "BGO", "SVG", "TRD"],
           days: 22,
           nights: 7,
-          image: "assets/wow-tabs/tab-hotel-v22.jpg",
+          image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Castello_de_Santa_B%C3%A0rbara_Alicante.jpg/1400px-Castello_de_Santa_B%C3%A0rbara_Alicante.jpg",
           guide: "spania/",
           fallback: "fra 2 376 kr",
           stops: "0-1 stopp",
@@ -825,7 +825,7 @@
           origins: ["OSL", "BGO", "SVG", "TRD"],
           days: 25,
           nights: 7,
-          image: "assets/wow-tabs/tab-car-v22.jpg",
+          image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Catedral_Mallorca.jpg/1280px-Catedral_Mallorca.jpg",
           guide: "spania/",
           fallback: "sjekk live",
           stops: "0-1 stopp",
@@ -858,7 +858,9 @@
       const statSignals = document.getElementById("statSignals");
       const statOrigin = document.getElementById("statOrigin");
       const statLive = document.getElementById("statLive");
-      const klookBase = window.BR_AFFILIATES?.klookSearchBase || "https://www.klook.com/nb/search/result/?query=";
+      const travelpayoutsMarker = window.BR_AFFILIATES?.travelpayoutsId || "718286";
+      const kiwiClickUrl = window.BR_AFFILIATES?.kiwi || "https://c111.travelpayouts.com/click";
+      const activityUrl = window.BR_AFFILIATES?.activities || "https://klook.tpx.gr/Tmj2PfPe";
       const bookingUrl = window.BR_AFFILIATES?.bookingCom || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412";
 
       function getVisibleRoutes() {
@@ -933,13 +935,28 @@
         return airlineNames[clean] || clean || "Flyselskap";
       }
 
-      function klookUrl(city) {
+      function flightAffiliateUrl(route, depart, ret) {
         try {
-          const url = new URL(klookBase);
-          url.searchParams.set("query", `${city} activities`);
+          const kiwiTarget = new URL("https://www.kiwi.com/deep");
+          kiwiTarget.searchParams.set("from", state.origin);
+          kiwiTarget.searchParams.set("to", route.id);
+          kiwiTarget.searchParams.set("departure", depart);
+          kiwiTarget.searchParams.set("return", ret);
+          kiwiTarget.searchParams.set("adults", "2");
+          kiwiTarget.searchParams.set("locale", "no");
+          kiwiTarget.searchParams.set("lang", "no");
+          kiwiTarget.searchParams.set("currency", "NOK");
+          kiwiTarget.searchParams.set("partner_market", "NO");
+
+          const url = new URL(kiwiClickUrl);
+          url.searchParams.set("shmarker", `${travelpayoutsMarker}.billigreiser_reiseradar`);
+          url.searchParams.set("promo_id", "3791");
+          url.searchParams.set("source_type", "customlink");
+          url.searchParams.set("type", "click");
+          url.searchParams.set("custom_url", kiwiTarget.toString());
           return url.toString();
         } catch (error) {
-          return `https://www.klook.com/nb/search/result/?query=${encodeURIComponent(`${city} activities`)}`;
+          return window.BR_AFFILIATES?.flights || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F";
         }
       }
 
@@ -983,7 +1000,8 @@
         document.getElementById("panelDuration").textContent = live ? formatDuration(live.duration) : route.duration;
         document.getElementById("panelDates").textContent = live ? `${formatDate(live.departure_at || depart)}-${formatDate(live.return_departure_at || ret)}` : `${formatDate(depart)}-${formatDate(ret)}`;
         document.getElementById("panelGuide").href = route.guide;
-        document.getElementById("panelActivity").href = klookUrl(route.city);
+        document.getElementById("panelFlight").href = flightAffiliateUrl(route, depart, ret);
+        document.getElementById("panelActivity").href = activityUrl;
         document.getElementById("panelHotel").href = bookingUrl;
         setActivePins();
         document.querySelectorAll("[data-row-route]").forEach(button => {

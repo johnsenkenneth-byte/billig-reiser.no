@@ -83,64 +83,576 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
-    }
-  ],
-  "rewrites": [
+    },
+    {
+      "source": "/bangkok-familie",
+      "destination": "/bangkok-familie.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-familie/",
+      "destination": "/bangkok-familie.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-hotell",
+      "destination": "/bangkok-hotell.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-hotell/",
+      "destination": "/bangkok-hotell.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-hvor-bo",
+      "destination": "/bangkok-hvor-bo.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-hvor-bo/",
+      "destination": "/bangkok-hvor-bo.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-natteliv",
+      "destination": "/bangkok-natteliv.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-natteliv/",
+      "destination": "/bangkok-natteliv.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-restauranter",
+      "destination": "/bangkok-restauranter.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-restauranter/",
+      "destination": "/bangkok-restauranter.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-shopping",
+      "destination": "/bangkok-shopping.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-shopping/",
+      "destination": "/bangkok-shopping.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-spa",
+      "destination": "/bangkok-spa.html",
+      "permanent": true
+    },
+    {
+      "source": "/bangkok-spa/",
+      "destination": "/bangkok-spa.html",
+      "permanent": true
+    },
     {
       "source": "/bangkok",
-      "destination": "/bangkok.html"
+      "destination": "/bangkok.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/",
-      "destination": "/bangkok.html"
+      "destination": "/bangkok.html",
+      "permanent": true
+    },
+    {
+      "source": "/charter-reiser",
+      "destination": "/charter-reiser.html",
+      "permanent": true
+    },
+    {
+      "source": "/charter-reiser/",
+      "destination": "/charter-reiser.html",
+      "permanent": true
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "/cookie-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/cookie-policy/",
+      "destination": "/cookie-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/disclaimer",
+      "destination": "/disclaimer.html",
+      "permanent": true
+    },
+    {
+      "source": "/disclaimer/",
+      "destination": "/disclaimer.html",
+      "permanent": true
+    },
+    {
+      "source": "/kontakt",
+      "destination": "/kontakt.html",
+      "permanent": true
+    },
+    {
+      "source": "/kontakt/",
+      "destination": "/kontakt.html",
+      "permanent": true
+    },
+    {
+      "source": "/om-oss",
+      "destination": "/om-oss.html",
+      "permanent": true
+    },
+    {
+      "source": "/om-oss/",
+      "destination": "/om-oss.html",
+      "permanent": true
+    },
+    {
+      "source": "/personvern",
+      "destination": "/personvern.html",
+      "permanent": true
+    },
+    {
+      "source": "/personvern/",
+      "destination": "/personvern.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-chiang-mai",
+      "destination": "/reise-thailand-chiang-mai.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-chiang-mai/",
+      "destination": "/reise-thailand-chiang-mai.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-hua-hin",
+      "destination": "/reise-thailand-hua-hin.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-hua-hin/",
+      "destination": "/reise-thailand-hua-hin.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-khao-lak",
+      "destination": "/reise-thailand-khao-lak.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-khao-lak/",
+      "destination": "/reise-thailand-khao-lak.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-chang",
+      "destination": "/reise-thailand-koh-chang.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-chang/",
+      "destination": "/reise-thailand-koh-chang.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-kood",
+      "destination": "/reise-thailand-koh-kood.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-kood/",
+      "destination": "/reise-thailand-koh-kood.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-lanta",
+      "destination": "/reise-thailand-koh-lanta.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-lanta/",
+      "destination": "/reise-thailand-koh-lanta.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-lipe",
+      "destination": "/reise-thailand-koh-lipe.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-lipe/",
+      "destination": "/reise-thailand-koh-lipe.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-mak",
+      "destination": "/reise-thailand-koh-mak.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-mak/",
+      "destination": "/reise-thailand-koh-mak.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-phangan",
+      "destination": "/reise-thailand-koh-phangan.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-phangan/",
+      "destination": "/reise-thailand-koh-phangan.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-phi-phi",
+      "destination": "/reise-thailand-koh-phi-phi.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-phi-phi/",
+      "destination": "/reise-thailand-koh-phi-phi.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-samui",
+      "destination": "/reise-thailand-koh-samui.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-samui/",
+      "destination": "/reise-thailand-koh-samui.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-tao",
+      "destination": "/reise-thailand-koh-tao.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-koh-tao/",
+      "destination": "/reise-thailand-koh-tao.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-krabi",
+      "destination": "/reise-thailand-krabi.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-krabi/",
+      "destination": "/reise-thailand-krabi.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-pattaya",
+      "destination": "/reise-thailand-pattaya.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-pattaya/",
+      "destination": "/reise-thailand-pattaya.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-phuket",
+      "destination": "/reise-thailand-phuket.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand-phuket/",
+      "destination": "/reise-thailand-phuket.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand",
+      "destination": "/reise-thailand.html",
+      "permanent": true
+    },
+    {
+      "source": "/reise-thailand/",
+      "destination": "/reise-thailand.html",
+      "permanent": true
+    },
+    {
+      "source": "/reiseblogg",
+      "destination": "/reiseblogg.html",
+      "permanent": true
+    },
+    {
+      "source": "/reiseblogg/",
+      "destination": "/reiseblogg.html",
+      "permanent": true
+    },
+    {
+      "source": "/reisemagasinet",
+      "destination": "/reisemagasinet.html",
+      "permanent": true
+    },
+    {
+      "source": "/reisemagasinet/",
+      "destination": "/reisemagasinet.html",
+      "permanent": true
+    },
+    {
+      "source": "/reiseradar",
+      "destination": "/reiseradar.html",
+      "permanent": true
+    },
+    {
+      "source": "/reiseradar/",
+      "destination": "/reiseradar.html",
+      "permanent": true
+    },
+    {
+      "source": "/spania/andalucia/sevilla",
+      "destination": "/spania/andalucia/sevilla/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/andalucia/sevilla/index.html",
+      "destination": "/spania/andalucia/sevilla/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/barcelona-nordkysten/barcelona",
+      "destination": "/spania/barcelona-nordkysten/barcelona/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/barcelona-nordkysten/barcelona/index.html",
+      "destination": "/spania/barcelona-nordkysten/barcelona/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-blanca/alicante",
+      "destination": "/spania/costa-blanca/alicante/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-blanca/alicante/index.html",
+      "destination": "/spania/costa-blanca/alicante/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-blanca/benidorm",
+      "destination": "/spania/costa-blanca/benidorm/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-blanca/benidorm/index.html",
+      "destination": "/spania/costa-blanca/benidorm/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-del-sol/malaga",
+      "destination": "/spania/costa-del-sol/malaga/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-del-sol/malaga/index.html",
+      "destination": "/spania/costa-del-sol/malaga/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-del-sol/marbella",
+      "destination": "/spania/costa-del-sol/marbella/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/costa-del-sol/marbella/index.html",
+      "destination": "/spania/costa-del-sol/marbella/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/ibiza",
+      "destination": "/spania/ibiza/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/ibiza/index.html",
+      "destination": "/spania/ibiza/",
+      "permanent": true
+    },
+    {
+      "source": "/spania",
+      "destination": "/spania/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/index.html",
+      "destination": "/spania/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/kanarioyene-gran-canaria",
+      "destination": "/spania/kanarioyene-gran-canaria/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/kanarioyene-gran-canaria/index.html",
+      "destination": "/spania/kanarioyene-gran-canaria/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/kanarioyene-tenerife",
+      "destination": "/spania/kanarioyene-tenerife/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/kanarioyene-tenerife/index.html",
+      "destination": "/spania/kanarioyene-tenerife/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/madrid",
+      "destination": "/spania/madrid/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/madrid/index.html",
+      "destination": "/spania/madrid/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/mallorca",
+      "destination": "/spania/mallorca/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/mallorca/index.html",
+      "destination": "/spania/mallorca/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/valencia",
+      "destination": "/spania/valencia/",
+      "permanent": true
+    },
+    {
+      "source": "/spania/valencia/index.html",
+      "destination": "/spania/valencia/",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-beste-reisetid",
+      "destination": "/thailand-beste-reisetid.html",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-beste-reisetid/",
+      "destination": "/thailand-beste-reisetid.html",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-eastern-islands",
+      "destination": "/thailand-eastern-islands.html",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-eastern-islands/",
+      "destination": "/thailand-eastern-islands.html",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-island-guide",
+      "destination": "/thailand-island-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-island-guide/",
+      "destination": "/thailand-island-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-velg-riktig-oy",
+      "destination": "/thailand-velg-riktig-oy.html",
+      "permanent": true
+    },
+    {
+      "source": "/thailand-velg-riktig-oy/",
+      "destination": "/thailand-velg-riktig-oy.html",
+      "permanent": true
+    },
+    {
+      "source": "/vilkar",
+      "destination": "/vilkar.html",
+      "permanent": true
+    },
+    {
+      "source": "/vilkar/",
+      "destination": "/vilkar.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/hotell",
-      "destination": "/bangkok-hotell.html"
+      "destination": "/bangkok-hotell.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/hotell/",
-      "destination": "/bangkok-hotell.html"
+      "destination": "/bangkok-hotell.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/natteliv",
-      "destination": "/bangkok-natteliv.html"
+      "destination": "/bangkok-natteliv.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/natteliv/",
-      "destination": "/bangkok-natteliv.html"
+      "destination": "/bangkok-natteliv.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/shopping",
-      "destination": "/bangkok-shopping.html"
+      "destination": "/bangkok-shopping.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/shopping/",
-      "destination": "/bangkok-shopping.html"
+      "destination": "/bangkok-shopping.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/restauranter",
-      "destination": "/bangkok-restauranter.html"
+      "destination": "/bangkok-restauranter.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/restauranter/",
-      "destination": "/bangkok-restauranter.html"
+      "destination": "/bangkok-restauranter.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/familie",
-      "destination": "/bangkok-familie.html"
+      "destination": "/bangkok-familie.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/familie/",
-      "destination": "/bangkok-familie.html"
+      "destination": "/bangkok-familie.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/spa",
-      "destination": "/bangkok-spa.html"
+      "destination": "/bangkok-spa.html",
+      "permanent": true
     },
     {
       "source": "/bangkok/spa/",
-      "destination": "/bangkok-spa.html"
+      "destination": "/bangkok-spa.html",
+      "permanent": true
     }
   ]
 }

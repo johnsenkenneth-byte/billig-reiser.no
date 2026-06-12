@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /offline.html
 
 Sitemap: https://billig-reiser.no/sitemap.xml

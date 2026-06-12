@@ -3,7 +3,7 @@
   "short_name": "Billig Reiser",
   "description": "Finn fly, hotell, pakkereiser, leiebil og aktiviteter samlet på Billig-reiser.no.",
   "id": "/",
-  "start_url": "/?source=pwa",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "display_override": [
@@ -44,7 +44,7 @@
     {
       "name": "Søk reise",
       "short_name": "Søk",
-      "url": "/?source=pwa#travelSearch",
+      "url": "/#travelSearch",
       "icons": [
         {
           "src": "/assets/app-icon-192.png",
