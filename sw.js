@@ -1,12 +1,12 @@
-const CACHE_VERSION = "billig-reiser-pwa-v153-compact-spain-logo";
+const CACHE_VERSION = "billig-reiser-pwa-v154-new-reiseradar";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=153",
-  "/affiliate-config.js?v=153",
-  "/app.js?v=153",
+  "/style.css?v=154",
+  "/affiliate-config.js?v=154",
+  "/app.js?v=154",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
