@@ -664,6 +664,7 @@
               <option value="2026-09" selected>September 2026</option>
               <option value="2026-10">Oktober 2026</option>
               <option value="2026-11">November 2026</option>
+              <option value="2026-12">Desember 2026</option>
               <option value="2027-01">Januar 2027</option>
               <option value="2027-02">Februar 2027</option>
               <option value="2027-04">April 2027</option>
@@ -820,6 +821,7 @@
         if (state.origin === "TOS") price += 900;
         if (state.origin === "BGO" || state.origin === "SVG" || state.origin === "TRD") price += route.style.includes("longhaul") ? 800 : 350;
         if (state.month === "2026-07" || state.month === "2026-08") price += route.style.includes("family") || route.style.includes("sun") ? 1200 : 500;
+        if (state.month === "2026-12") price += route.style.includes("longhaul") || route.style.includes("sun") ? 1500 : 650;
         if (state.month === "2027-01" && route.style.includes("longhaul")) price += 900;
         return price;
       }
