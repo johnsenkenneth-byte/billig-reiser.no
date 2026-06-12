@@ -618,15 +618,18 @@
         <div class="radar-screen">
           <span class="radar-sweep" aria-hidden="true"></span>
           <span class="radar-axis" aria-hidden="true"></span>
-          <button class="radar-pin is-active" style="--x:66%;--y:34%" type="button" data-select-route="BKK">BKK</button>
-          <button class="radar-pin" style="--x:72%;--y:49%" type="button" data-select-route="KBV">KBV</button>
-          <button class="radar-pin" style="--x:59%;--y:61%" type="button" data-select-route="HKT">HKT</button>
-          <button class="radar-pin" style="--x:45%;--y:35%" type="button" data-select-route="FCO">FCO</button>
-          <button class="radar-pin" style="--x:38%;--y:54%" type="button" data-select-route="ALC">ALC</button>
-          <button class="radar-pin" style="--x:52%;--y:72%" type="button" data-select-route="PMI">PMI</button>
+          <button class="radar-pin is-active" style="--x:75%;--y:39%" type="button" data-select-route="BKK">BKK</button>
+          <button class="radar-pin" style="--x:78%;--y:56%" type="button" data-select-route="KBV">KBV</button>
+          <button class="radar-pin" style="--x:51%;--y:35%" type="button" data-select-route="FCO">FCO</button>
+          <button class="radar-pin" style="--x:31%;--y:55%" type="button" data-select-route="ALC">ALC</button>
+          <button class="radar-pin" style="--x:49%;--y:59%" type="button" data-select-route="PMI">PMI</button>
+          <button class="radar-pin" style="--x:43%;--y:17%" type="button" data-select-route="CPH">CPH</button>
+          <button class="radar-pin" style="--x:36%;--y:36%" type="button" data-select-route="PAR">PAR</button>
+          <button class="radar-pin" style="--x:28%;--y:24%" type="button" data-select-route="LON">LON</button>
+          <button class="radar-pin" style="--x:64%;--y:68%" type="button" data-select-route="DXB">DXB</button>
         </div>
         <div class="radar-caption" aria-label="Radarstatus">
-          <div class="radar-stat"><span>Signaler</span><strong id="statSignals">8</strong></div>
+          <div class="radar-stat"><span>Signaler</span><strong id="statSignals">9</strong></div>
           <div class="radar-stat"><span>Fra</span><strong id="statOrigin">OSL</strong></div>
           <div class="radar-stat"><span>Live</span><strong id="statLive">Amadeus</strong></div>
         </div>
@@ -690,7 +693,6 @@
 
             <div class="panel-actions">
               <a class="primary" id="panelFlight" href="https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_fly&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F" target="_blank" rel="nofollow sponsored noopener">Sjekk flypris</a>
-              <a id="panelGuide" href="bangkok.html">Åpne guide</a>
               <a id="panelActivity" href="https://klook.tpx.gr/Tmj2PfPe" target="_blank" rel="nofollow sponsored noopener">Opplevelser</a>
               <button id="refreshLive" type="button">Oppdater pris</button>
               <a class="wide" id="panelHotel" href="https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412" target="_blank" rel="nofollow sponsored noopener">Sjekk hotell</a>
@@ -721,7 +723,6 @@
           days: 38,
           nights: 10,
           image: "assets/destinations/bangkok-v22.jpg",
-          guide: "bangkok.html",
           fallback: "fra 16 188 kr",
           stops: "1-2 stopp",
           duration: "13-18t",
@@ -736,56 +737,10 @@
           days: 42,
           nights: 11,
           image: "assets/destinations/krabi-v22.jpg",
-          guide: "reise-thailand-krabi.html",
           fallback: "sjekk live",
           stops: "1-2 stopp",
           duration: "15-20t",
           copy: "Kalksteinsklipper, Railay, hotellområder og longtail-båter til tropiske øyer."
-        },
-        {
-          id: "HKT",
-          country: "Thailand",
-          city: "Phuket",
-          style: ["sun", "family"],
-          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
-          days: 39,
-          nights: 12,
-          image: "assets/destinations/phuket-v22.jpg",
-          guide: "reise-thailand-phuket.html",
-          fallback: "sjekk live",
-          stops: "1-2 stopp",
-          duration: "14-19t",
-          copy: "Resorter, strender og et bredt utvalg aktiviteter i Sør-Thailand."
-        },
-        {
-          id: "USM",
-          country: "Thailand",
-          city: "Koh Samui",
-          style: ["sun", "family"],
-          origins: ["OSL", "BGO", "SVG", "TRD"],
-          days: 45,
-          nights: 10,
-          image: "assets/destinations/koh-samui-v22.jpg",
-          guide: "reise-thailand-koh-samui.html",
-          fallback: "sjekk live",
-          stops: "2 stopp",
-          duration: "16-22t",
-          copy: "Private villas, spa, strandliv og enkel øyhopping til Koh Phangan og Koh Tao."
-        },
-        {
-          id: "CNX",
-          country: "Thailand",
-          city: "Chiang Mai",
-          style: ["city"],
-          origins: ["OSL", "BGO", "SVG", "TRD"],
-          days: 36,
-          nights: 9,
-          image: "assets/destinations/chiang-mai-v22.jpg",
-          guide: "reise-thailand-chiang-mai.html",
-          fallback: "sjekk live",
-          stops: "1-2 stopp",
-          duration: "14-19t",
-          copy: "Templer, fjell, matkurs og et roligere tempo i Nord-Thailand."
         },
         {
           id: "FCO",
@@ -795,8 +750,7 @@
           origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
           days: 24,
           nights: 4,
-          image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1400px-Colosseo_2020.jpg",
-          guide: "/#travelSearch",
+          image: "assets/destinations/roma-colosseum-reiseradar.jpg",
           fallback: "fra 6 366 kr",
           stops: "0-1 stopp",
           duration: "3-6t",
@@ -810,8 +764,7 @@
           origins: ["OSL", "BGO", "SVG", "TRD"],
           days: 22,
           nights: 7,
-          image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Castello_de_Santa_B%C3%A0rbara_Alicante.jpg/1400px-Castello_de_Santa_B%C3%A0rbara_Alicante.jpg",
-          guide: "spania/",
+          image: "assets/destinations/alicante-santa-barbara-reiseradar.jpg",
           fallback: "fra 2 376 kr",
           stops: "0-1 stopp",
           duration: "4-7t",
@@ -825,12 +778,67 @@
           origins: ["OSL", "BGO", "SVG", "TRD"],
           days: 25,
           nights: 7,
-          image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Catedral_Mallorca.jpg/1280px-Catedral_Mallorca.jpg",
-          guide: "spania/",
+          image: "assets/destinations/mallorca-palma-cathedral-reiseradar.jpg",
           fallback: "sjekk live",
           stops: "0-1 stopp",
           duration: "4-7t",
           copy: "Strender, familiehoteller og ferieområder med ulike uttrykk."
+        },
+        {
+          id: "CPH",
+          country: "Danmark",
+          city: "København",
+          style: ["city", "weekend", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 18,
+          nights: 3,
+          image: "assets/destinations/copenhagen-nyhavn-reiseradar.jpg",
+          fallback: "fra 1 240 kr",
+          stops: "Direkte/1 stopp",
+          duration: "1-4t",
+          copy: "Kort reisevei, Nyhavn, matmarked og en enkel helg med eller uten barn."
+        },
+        {
+          id: "PAR",
+          country: "Frankrike",
+          city: "Paris",
+          style: ["city", "weekend"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 20,
+          nights: 3,
+          image: "assets/destinations/paris-eiffel-reiseradar.jpg",
+          fallback: "fra 1 690 kr",
+          stops: "0-1 stopp",
+          duration: "2-5t",
+          copy: "Klassisk storbyhelg med museer, nabolag, mat og gode flymuligheter fra Norge."
+        },
+        {
+          id: "LON",
+          country: "Storbritannia",
+          city: "London",
+          style: ["city", "weekend", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 16,
+          nights: 3,
+          image: "assets/destinations/london-tower-bridge-reiseradar.jpg",
+          fallback: "fra 1 450 kr",
+          stops: "0-1 stopp",
+          duration: "2-5t",
+          copy: "Teater, shopping, museer og mange avganger som gjør byen lett å bruke på korttur."
+        },
+        {
+          id: "DXB",
+          country: "UAE",
+          city: "Dubai",
+          style: ["sun", "city", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 34,
+          nights: 6,
+          image: "assets/destinations/dubai-skyline-reiseradar.jpg",
+          fallback: "fra 4 990 kr",
+          stops: "1 stopp",
+          duration: "9-13t",
+          copy: "Vintervarme, hotellkupp, strand, shopping og storbyfølelse i samme reise."
         }
       ];
 
@@ -999,7 +1007,6 @@
         document.getElementById("panelStops").textContent = live ? `${stopsText(live.stops)} ut / ${stopsText(live.return_stops)} hjem` : route.stops;
         document.getElementById("panelDuration").textContent = live ? formatDuration(live.duration) : route.duration;
         document.getElementById("panelDates").textContent = live ? `${formatDate(live.departure_at || depart)}-${formatDate(live.return_departure_at || ret)}` : `${formatDate(depart)}-${formatDate(ret)}`;
-        document.getElementById("panelGuide").href = route.guide;
         document.getElementById("panelFlight").href = flightAffiliateUrl(route, depart, ret);
         document.getElementById("panelActivity").href = activityUrl;
         document.getElementById("panelHotel").href = bookingUrl;
