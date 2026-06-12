@@ -14,7 +14,7 @@
   function renderDrawer(){const f=get(KEY_FAV), r=get(KEY_REC); const fav=document.getElementById('brAppFavList'), rec=document.getElementById('brAppRecentList'); if(fav)fav.innerHTML=f.length?f.map(x=>itemHtml(x,true)).join(''):'<p class="br-app-empty">Ingen lagrede reiser ennå. Trykk “Lagre” på en side du vil tilbake til.</p>'; if(rec)rec.innerHTML=r.length?r.map(x=>itemHtml(x,false)).join(''):'<p class="br-app-empty">Nylig viste sider kommer her.</p>';}
   function openDrawer(){document.querySelector('.br-app-drawer')?.classList.add('is-open');renderDrawer()}
   function closeDrawer(){document.querySelector('.br-app-drawer')?.classList.remove('is-open')}
-  function scrollSearch(){const s=document.querySelector('#travelSearch,.travel-search,.search-card'); if(s){s.scrollIntoView({behavior:'smooth',block:'start'});}else{location.href='index.html#travelSearch'}}
+  function scrollSearch(){const s=document.querySelector('#travelSearch,.travel-search,.search-card'); if(s){s.scrollIntoView({behavior:'smooth',block:'start'});}else{location.href='/#travelSearch'}}
   let deferredPrompt=null; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e; const btn=document.querySelector('[data-br-install]'); if(btn)btn.hidden=false;});
   async function installApp(){ if(deferredPrompt){deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null;} else {toast(/iphone|ipad|ipod/i.test(navigator.userAgent)?'iPhone: Del → Legg til på hjemskjerm':'Bruk nettleserens installer app-meny');}}
   function budgetCalc(){const budget=Number(document.getElementById('brBudget')?.value||0), people=Number(document.getElementById('brPeople')?.value||1), type=document.getElementById('brTripType')?.value||'reise'; const out=document.getElementById('brBudgetResult'); if(!out)return; if(!budget){out.textContent='Skriv inn budsjettet ditt først.';return;} const per=Math.round(budget/Math.max(people,1)); out.textContent=`${budget.toLocaleString('nb-NO')} kr totalt gir ca. ${per.toLocaleString('nb-NO')} kr per person til ${type}.`;}
@@ -23,7 +23,7 @@
     document.body.insertAdjacentHTML('beforeend',`
       <button class="br-app-fab" type="button" data-br-fav>♡ Lagre</button>
       <nav class="br-app-nav" aria-label="Appmeny">
-        <a href="index.html"><strong>⌂</strong>Hjem</a>
+        <a href="/"><strong>⌂</strong>Hjem</a>
         <button type="button" data-br-search><strong>⌕</strong>Søk</button>
         <a href="reisemagasinet.html"><strong>✈</strong>Magasin</a>
         <button type="button" data-br-open><strong>★</strong>Lagret</button>

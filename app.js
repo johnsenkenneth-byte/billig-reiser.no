@@ -12,11 +12,14 @@
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
+    ferryhopper: (window.BR_AFFILIATES && window.BR_AFFILIATES.ferryhopper) || "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fda%2Fbooking%2Fresults%3Fitinerary%3DKRS%252CHIR%252CKRS%26dates%3D20260624%252C20260628%26passengers%3D1%26vehicles%3D0%26pets%3D0",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     cheaptickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/click-101724638-12119574",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.dpbolvw.net/click-101724638-17167285",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
+    bookingCom: (window.BR_AFFILIATES && window.BR_AFFILIATES.bookingCom) || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412",
+    strawberry: (window.BR_AFFILIATES && window.BR_AFFILIATES.strawberry) || "https://clk.tradedoubler.com/click?p=93758&a=3480427&url=https%3A%2F%2Fwww.strawberry.no",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && (window.BR_AFFILIATES.economyBookingsEurope || window.BR_AFFILIATES.economyBookings)) || "https://economybookings.tpx.gr/LT8vc2kD",
     autoeurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/GzEPjKLD",
@@ -88,8 +91,10 @@
     const deals = [
       ["Flydeal", "Oslo → Roma", "Weekendtur med lav inngangpris.", "fra 499 kr", partners.cheapFlights],
       ["Hotell", "Bangkok hotell", "Høy verdi per krone og gode vinterpriser.", "fra 420 kr/natt", partners.hotels],
+      ["Hotell", "Strawberry", "Sjekk hotell i Norge og Norden.", "Se hotell", partners.strawberry],
       ["Opplevelser", "Tokyo aktiviteter", "Attraksjoner, togpass og eSIM.", "fra 129 kr", partners.activities],
       ["Transport", "Flyplasstransfer", "Fast pris fra flyplassen til hotellet.", "fra 199 kr", partners.transfer],
+      ["Ferge", "Kristiansand - Hirtshals", "Sjekk ferge tur/retur med Ferryhopper.", "Se ferge", partners.ferryhopper],
       ["Pakkereise", "Fly + hotell", "Finn en samlet feriepakke hos Expedia Norge.", "Se pakkereiser", partners.packageTravel],
       ["Cruise", "Cruiseferie", "Sammenlign reiseruter, rederier og varighet hos Expedia.", "Se cruise", partners.cruise],
       ["Feriebolig", "Feriehus og leiligheter", "Finn hytter, villaer og ferieleiligheter hos Interhome.", "Se ferieboliger", partners.interhome],
@@ -330,6 +335,8 @@
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.expedia.no/go/package/search/FlightHotel/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
+    bookingCom: (window.BR_AFFILIATES && window.BR_AFFILIATES.bookingCom) || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412",
+    strawberry: (window.BR_AFFILIATES && window.BR_AFFILIATES.strawberry) || "https://clk.tradedoubler.com/click?p=93758&a=3480427&url=https%3A%2F%2Fwww.strawberry.no",
     cheapTickets: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapTickets) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheaptickets.com/Flights`,
     cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightsfares.com/`,
     cheapFlightFaresSearch: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFaresSearch) || "https://www.cheapflightsfares.com/search/id/6dpNqSfo6kNIsvxEf1eiVxl4",
@@ -346,7 +353,8 @@
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || DEFAULT_EXPEDIA_CRUISE_URL,
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
-    nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F"
+    nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
+    ferryhopper: (window.BR_AFFILIATES && window.BR_AFFILIATES.ferryhopper) || "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fda%2Fbooking%2Fresults%3Fitinerary%3DKRS%252CHIR%252CKRS%26dates%3D20260624%252C20260628%26passengers%3D1%26vehicles%3D0%26pets%3D0"
   };
 
   let currentSearchType = "flight";
