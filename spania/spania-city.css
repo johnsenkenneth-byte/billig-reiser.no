@@ -55,9 +55,10 @@ a {
 }
 
 .brand-logo img {
-  width: clamp(220px, 22vw, 270px);
-  height: auto;
-  max-width: 82vw;
+  width: auto;
+  height: 92px;
+  max-height: 92px;
+  max-width: 92px;
   object-fit: contain;
 }
 
@@ -82,10 +83,10 @@ a {
 .hero-city {
   position: relative;
   overflow: hidden;
-  min-height: 560px;
+  min-height: 500px;
   display: flex;
   align-items: center;
-  padding: 92px 72px;
+  padding: 76px 56px;
   background:
     linear-gradient(90deg, rgba(5, 10, 18, .95), rgba(5, 10, 18, .68), rgba(5, 10, 18, .24)),
     var(--hero-image, url("/spania/assets/spania-hero.png")) center / cover no-repeat;
@@ -537,8 +538,8 @@ a {
   }
 
   .hero-city {
-    min-height: 500px;
-    padding: 72px 18px;
+    min-height: 450px;
+    padding: 60px 18px;
   }
 
   .hero-city h1 {
@@ -572,12 +573,14 @@ a {
 
 @media (max-width: 620px) {
   .brand-logo img {
-    width: 230px;
-    max-width: 82vw;
+    width: auto;
+    height: 62px;
+    max-width: 62px;
+    max-height: 62px;
   }
 
   .hero-city {
-    min-height: 430px;
+    min-height: 390px;
   }
 
   .hero-city h1 {

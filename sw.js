@@ -1,19 +1,19 @@
-const CACHE_VERSION = "billig-reiser-pwa-v150-indexing-cleanup";
+const CACHE_VERSION = "billig-reiser-pwa-v153-compact-spain-logo";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=150",
-  "/affiliate-config.js?v=150",
-  "/app.js?v=150",
+  "/style.css?v=153",
+  "/affiliate-config.js?v=153",
+  "/app.js?v=153",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
   "/assets/billig-reiser-logo-full-v116.png",
   "/assets/video/front-hero-v116.mp4",
   "/spania/",
-  "/spania/spania-city.css?v=126"
+  "/spania/spania-city.css?v=131"
 ];
 
 self.addEventListener("install", event => {
