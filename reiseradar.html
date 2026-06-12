@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://billig-reiser.no/reiseradar.html" />
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link href="style.css?v=154" rel="stylesheet" />
+  <link href="style.css?v=159" rel="stylesheet" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="application-name" content="Billig Reiser" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -18,7 +18,7 @@
   <meta name="theme-color" content="#020913" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <script defer src="/pwa-register.js"></script>
-  <link rel="stylesheet" href="/app-features.css" />
+  <link rel="stylesheet" href="/app-features.css?v=159" />
   <script defer src="/app-features.js"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Reiseradar","description":"Kuraterte reisesignaler fra norske flyplasser.","url":"https://billig-reiser.no/reiseradar.html","isPartOf":{"@type":"WebSite","name":"Billig-Reiser.no","url":"https://billig-reiser.no/"}}</script>
   <style>
@@ -29,6 +29,9 @@
       --radar-line: rgba(255,255,255,.12);
       --radar-panel: rgba(8,18,32,.82);
       --radar-panel-strong: rgba(12,27,45,.94);
+      --radar-action-gradient: linear-gradient(90deg, #ff25c8 0%, #7a44ff 52%, #21d7ff 100%);
+      --radar-action-ink: #050713;
+      --radar-action-shadow: 0 16px 38px rgba(255,37,200,.24), 0 10px 30px rgba(33,215,255,.16);
       --radar-cyan: #22d3ee;
       --radar-pink: #ff4db8;
       --radar-green: #3ee48e;
@@ -524,22 +527,24 @@
     .panel-actions a,
     .panel-actions button {
       min-height: 46px;
-      border: 1px solid rgba(255,255,255,.13);
+      border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       padding: 0 12px;
-      color: #fff;
-      background: rgba(255,255,255,.06);
+      color: var(--radar-action-ink);
+      background: var(--radar-action-gradient);
+      box-shadow: var(--radar-action-shadow);
       cursor: pointer;
       font-size: 13px;
       font-weight: 950;
       text-align: center;
+      text-shadow: none;
     }
     .panel-actions .primary {
       border-color: transparent;
-      background: linear-gradient(90deg, #0787ff, #16c6d8, #29d17f);
-      color: #03101a;
+      background: var(--radar-action-gradient);
+      color: var(--radar-action-ink);
     }
     .panel-actions .wide { grid-column: 1 / -1; }
     .trust-strip {

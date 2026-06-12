@@ -5664,3 +5664,90 @@ html body .front-logo-full img[src*="billig-reiser-logo-full-v116"]{
     width:min(218px,74vw)!important;
   }
 }
+
+/* BR v159: felles knappestil fra Reiseradar */
+:root{
+  --br-action-gradient:linear-gradient(90deg,#ff25c8 0%,#7a44ff 52%,#21d7ff 100%);
+  --br-action-ink:#050713;
+  --br-action-shadow:0 16px 38px rgba(255,37,200,.24),0 10px 30px rgba(33,215,255,.16);
+}
+
+html body :is(
+  .hero-ctas a,
+  .search-actions button,
+  .search-launch,
+  #searchSubmitButton,
+  .cta-row a,
+  .route-bottom a,
+  .guide-actions a,
+  .guide-cta,
+  .guide-cards-3 a,
+  .btn,
+  .hero-actions .btn,
+  .mockup-cta,
+  .activity-card a,
+  .guide-card a,
+  .city-card a,
+  .experience-body a,
+  .trip-klook-search button,
+  .klook-quick-links button,
+  .package-inline-actions button,
+  .package-inline-actions a,
+  .summer-charter-copy>button,
+  .summer-charter-links button,
+  .live-deal-card button,
+  .live-deals-head button,
+  .front-hotel-head>button,
+  .front-hotel-card button,
+  .smart-search-main button,
+  .engine-button,
+  .family-card-button,
+  .backpacking-button,
+  .booking-buttons a,
+  .premium-hotel-card .lux-cta,
+  .premium-hotel-card .samui-cta,
+  .premium-hotel-card .hotel-cta,
+  .premium-hotel-card .gold-cta,
+  .premium-hotel-card .cta,
+  .premium-hotel-card .btn,
+  .premium-hotel .gold-cta,
+  .hotel-card .btn,
+  .hotel-card .cta
+){
+  background:var(--br-action-gradient)!important;
+  color:var(--br-action-ink)!important;
+  border-color:transparent!important;
+  box-shadow:var(--br-action-shadow)!important;
+  text-shadow:none!important;
+}
+
+html body :is(.activity-card a,.guide-card a,.city-card a,.experience-body a){
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  margin-top:14px;
+  padding:0 16px;
+  border-radius:999px;
+  font-weight:950;
+  text-decoration:none;
+}
+
+html body :is(
+  #travelSearch #searchSubmitButton.search-launch,
+  #travelSearch .search-launch,
+  form#travelSearch button#searchSubmitButton.search-launch,
+  .front-blog-cta a,
+  .magazine-main-link,
+  .hotel-search-box>a,
+  .booking-buttons a,
+  .premium-hotel-card .gold-cta,
+  .gold-cta,
+  .cookie-actions button
+){
+  background:var(--br-action-gradient)!important;
+  color:var(--br-action-ink)!important;
+  border-color:transparent!important;
+  box-shadow:var(--br-action-shadow)!important;
+  text-shadow:none!important;
+}
