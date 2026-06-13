@@ -5751,3 +5751,23 @@ html body :is(
   box-shadow:var(--br-action-shadow)!important;
   text-shadow:none!important;
 }
+
+/* BR v166: make Reisehacks visible in the mobile quick navigation */
+@media(max-width:820px){
+  html body .bottom-cta{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:6px!important;
+    left:8px!important;
+    right:8px!important;
+  }
+
+  html body .bottom-cta a{
+    min-width:0!important;
+    min-height:48px!important;
+    font-size:18px!important;
+  }
+
+  html body .bottom-cta span{
+    font-size:10px!important;
+  }
+}

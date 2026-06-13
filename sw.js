@@ -1,11 +1,11 @@
-const CACHE_VERSION = "billig-reiser-pwa-v165-vercel-analytics";
+const CACHE_VERSION = "billig-reiser-pwa-v166-reisehacks-mobile";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/reisehacks.html",
   "/offline.html",
   "/manifest.webmanifest",
-  "/style.css?v=159",
+  "/style.css?v=166",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=159",
   "/app.js?v=159",
