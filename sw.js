@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v160-reisehacks";
+const CACHE_VERSION = "billig-reiser-pwa-v165-vercel-analytics";
 const APP_SHELL = [
   "/",
   "/index.html",
