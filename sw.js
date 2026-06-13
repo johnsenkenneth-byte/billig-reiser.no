@@ -1,10 +1,16 @@
-const CACHE_VERSION = "billig-reiser-pwa-v166-reisehacks-mobile";
+const CACHE_VERSION = "billig-reiser-pwa-v167-google-favicon";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/reisehacks.html",
   "/offline.html",
   "/manifest.webmanifest",
+  "/favicon.ico",
+  "/favicon.png",
+  "/favicon-48x48.png",
+  "/favicon-192x192.png",
+  "/favicon-512x512.png",
+  "/apple-touch-icon.png",
   "/style.css?v=166",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=159",
