@@ -4,6 +4,7 @@
 /* Discovery Engine + Deal Engine */
 (() => {
   const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
+  const hotelsBrowserBridge = (targetUrl) => `/go/hotels.html#to=${encodeURIComponent(targetUrl)}`;
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
@@ -17,7 +18,7 @@
     cheaptickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/click-101724638-12119574",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.dpbolvw.net/click-101724638-17167285",
-    hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
+    hotels: hotelsBrowserBridge((window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426"),
     bookingCom: (window.BR_AFFILIATES && window.BR_AFFILIATES.bookingCom) || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412",
     strawberry: (window.BR_AFFILIATES && window.BR_AFFILIATES.strawberry) || "https://clk.tradedoubler.com/click?p=93758&a=3480427&url=https%3A%2F%2Fwww.strawberry.no",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
@@ -691,6 +692,10 @@
     return `${prefix}${targetUrl}`;
   }
 
+  function hotelsBrowserBridge(targetUrl) {
+    return `/go/hotels.html#to=${encodeURIComponent(targetUrl)}`;
+  }
+
   function isCreatorAffiliateUrl(value) {
     try {
       return new URL(value).pathname.includes("/affiliates/");
@@ -1166,7 +1171,7 @@
     url.searchParams.set("currency", "NOK");
     url.searchParams.set("pos", "HCOM_NO");
     url.searchParams.set("siteid", "300000012");
-    return affiliateWrap(AFFILIATE_LINKS.hotels, url.toString());
+    return hotelsBrowserBridge(affiliateWrap(AFFILIATE_LINKS.hotels, url.toString()));
   }
 
   function travelpayoutsCustomLink(clickBase, promoId, targetUrl, markerSuffix) {
@@ -2721,6 +2726,10 @@
     }
   }
 
+  function aiHotelsBrowserBridge(targetUrl) {
+    return `/go/hotels.html#to=${encodeURIComponent(targetUrl)}`;
+  }
+
   function aiHotelUrl(place = "Roma") {
     const depart = $("departDate")?.value || addDaysISO(14);
     const ret = $("returnDate")?.value || addDaysISO(21);
@@ -2735,7 +2744,7 @@
     url.searchParams.set("pos", "HCOM_NO");
     url.searchParams.set("siteid", "300000012");
     const base = (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426";
-    return cjAffiliate(base, url.toString());
+    return aiHotelsBrowserBridge(cjAffiliate(base, url.toString()));
   }
 
   function aiTravelpayoutsCustomLink(clickBase, promoId, targetUrl, markerSuffix) {
