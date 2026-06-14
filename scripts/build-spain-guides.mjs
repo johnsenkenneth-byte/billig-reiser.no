@@ -12,7 +12,7 @@ const GYG_HOME = "https://www.getyourguide.com/?partner_id=FIQDAEB&utm_medium=lo
 const HERO_IMAGE = "/spania/assets/spania-hero.png";
 const ITEM_IMAGES_PATH = path.join(root, "spania", "item-images.json");
 const ITEM_IMAGES = fs.existsSync(ITEM_IMAGES_PATH) ? JSON.parse(fs.readFileSync(ITEM_IMAGES_PATH, "utf8")) : {};
-const TODAY = "2026-06-09";
+const TODAY = "2026-06-14";
 const SPAIN_CSS_VERSION = "129";
 const HOTEL_DEEP_LINKS = {
   "Barcelona|H10 Madison Barcelona": "https://www.hotels.com/affiliates/h10-madison-barcelona-spania.FHqIi8c",
@@ -972,6 +972,10 @@ function cjHotelLink(city, hotel) {
   return url.toString();
 }
 
+function hotelsBrowserBridge(targetUrl) {
+  return `/go/hotels.html#to=${encodeURIComponent(targetUrl)}`;
+}
+
 function hotelDeepLink(city, hotel) {
   return HOTEL_DEEP_LINKS[`${city}|${hotel}`] || "";
 }
@@ -1036,7 +1040,7 @@ function renderMagazine(city) {
     },
     {
       title: "Slik velger du hotell",
-      photo: cityPhoto(city, "hotels", 2),
+      photo: hotelPhoto(city, luxuryHotel[0], 2),
       text: `Hotellvalget bør styres av reisetypen, ikke bare stjerner. ${familyHotel[0]} passer når logistikk og plass betyr mest, ${valueHotel[0]} er et bedre valg når budsjettet skal tåle flere middager og aktiviteter, mens ${luxuryHotel[0]} er riktig når hotellet skal være en stor del av selve reisen.`
     },
     {
@@ -1057,7 +1061,8 @@ function renderHotels(city) {
   return city.hotels.map((hotel, index) => {
     const [name, best, area, style, level, strength, why] = hotel;
     const directHref = hotelDeepLink(city.name, name);
-    const hotelHref = directHref || cjHotelLink(city.name, name);
+    const rawHotelHref = directHref || cjHotelLink(city.name, name);
+    const hotelHref = hotelsBrowserBridge(rawHotelHref);
     const hotelCta = directHref ? "Sjekk pris hos Hotels.com →" : "Søk hos Hotels.com →";
     return `
         <article class="mockup-hotel-card">

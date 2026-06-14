@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v169-hotels-mobile-browser";
+const CACHE_VERSION = "billig-reiser-pwa-v170-spania-image-corrections";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -15,14 +15,14 @@ const APP_SHELL = [
   "/style.css?v=166",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=159",
-  "/app.js?v=169",
+  "/app.js?v=170",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
   "/assets/billig-reiser-logo-full-v116.png",
   "/assets/video/front-hero-v116.mp4",
   "/spania/",
-  "/spania/spania-city.css?v=159"
+  "/spania/spania-city.css?v=129"
 ];
 
 self.addEventListener("install", event => {
