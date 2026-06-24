@@ -17,7 +17,7 @@ window.BR_AFFILIATES = Object.freeze({
   nazar: "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
   ferryhopperProgramId: "382549",
   ferryhopperSiteId: "3480427",
-  ferryhopper: "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fda%2Fbooking%2Fresults%3Fitinerary%3DKRS%252CHIR%252CKRS%26dates%3D20260624%252C20260628%26passengers%3D1%26vehicles%3D0%26pets%3D0",
+  ferryhopper: "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fnb%2F",
   kiwi: "https://c111.travelpayouts.com/click",
   kiwiHome: "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
   flights: "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",

@@ -3211,3 +3211,90 @@
     });
   });
 })();
+
+(() => {
+  function setDealAlertStatus(form, message, type = "") {
+    const status = form.querySelector("[data-deal-alert-status]");
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("is-success", type === "success");
+    status.classList.toggle("is-error", type === "error");
+  }
+
+  function initDealAlertForms() {
+    document.querySelectorAll("[data-deal-alert-form]").forEach((form) => {
+      if (form.dataset.ready === "true") return;
+      form.dataset.ready = "true";
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const payload = {
+          email: String(formData.get("email") || "").trim(),
+          airport: String(formData.get("airport") || "OSL").trim().toUpperCase(),
+          interest: String(formData.get("interest") || "restplass").trim(),
+          consent: formData.get("consent") === "yes",
+          page: window.location.href,
+          source: "frontpage-deal-alert"
+        };
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+          setDealAlertStatus(form, "Skriv inn en gyldig e-postadresse.", "error");
+          return;
+        }
+
+        if (!payload.consent) {
+          setDealAlertStatus(form, "Du må huke av for at vi kan sende deg reisevarsel.", "error");
+          return;
+        }
+
+        const button = form.querySelector("button[type='submit']");
+        const originalText = button?.textContent || "Få varsel";
+        if (button) {
+          button.disabled = true;
+          button.textContent = "Sender...";
+        }
+        setDealAlertStatus(form, "Lagrer varselet ditt...");
+
+        try {
+          const response = await fetch("/api/deal-alert-signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok || data.success === false) {
+            throw new Error(data.message || data.error || "Kunne ikke lagre reisevarselet akkurat nå.");
+          }
+
+          try {
+            localStorage.setItem("br_deal_alert_signup", JSON.stringify({
+              email: payload.email,
+              airport: payload.airport,
+              interest: payload.interest,
+              at: new Date().toISOString()
+            }));
+          } catch (storageError) {
+            // Local storage is only a convenience; the API response is what matters.
+          }
+
+          form.reset();
+          setDealAlertStatus(form, "Klart! Du er satt på reisevarsel.", "success");
+        } catch (error) {
+          setDealAlertStatus(form, error?.message || "Kunne ikke lagre reisevarselet akkurat nå.", "error");
+        } finally {
+          if (button) {
+            button.disabled = false;
+            button.textContent = originalText;
+          }
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDealAlertForms);
+  } else {
+    initDealAlertForms();
+  }
+})();
