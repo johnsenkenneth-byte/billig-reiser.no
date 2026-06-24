@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v174-ferryhopper-topper";
+const CACHE_VERSION = "billig-reiser-pwa-v175-email-bottom";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -12,7 +12,7 @@ const APP_SHELL = [
   "/favicon-512x512.png",
   "/apple-touch-icon.png",
   "/go/hotels.html",
-  "/style.css?v=174",
+  "/style.css?v=175",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=172",
   "/app.js?v=173",

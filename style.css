@@ -6004,6 +6004,13 @@ a.hotel-topper-copy:focus-visible{
   z-index:34;
 }
 
+.deal-alert-strip.is-page-bottom{
+  z-index:1;
+  border-top:1px solid rgba(255,217,120,.20);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:inset 0 20px 70px rgba(255,217,120,.035);
+}
+
 .deal-alert-copy span{
   display:block;
   color:#ffd978;
