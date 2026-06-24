@@ -5917,7 +5917,7 @@ html body :is(
 .hotel-topper-card.is-citybox i{background:#dff5ff;color:#06101f}
 .hotel-topper-card.is-elite i{background:#f8f1e7;color:#111827}
 .hotel-topper-card.is-radisson i{background:#c8f4ff;color:#06101f}
-.hotel-topper-card.is-search i{background:#ffd978;color:#130c02}
+.hotel-topper-card.is-charter i{background:#ffd978;color:#130c02}
 
 @media(max-width:1080px){
   .hotel-topper{
