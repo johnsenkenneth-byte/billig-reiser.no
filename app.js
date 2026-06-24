@@ -131,6 +131,22 @@
   });
 })();
 
+(() => {
+  function hydrateAffiliateLinks() {
+    const links = window.BR_AFFILIATES || {};
+    document.querySelectorAll("[data-affiliate-key]").forEach((element) => {
+      const key = element.getAttribute("data-affiliate-key");
+      if (key && links[key]) element.href = links[key];
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", hydrateAffiliateLinks);
+  } else {
+    hydrateAffiliateLinks();
+  }
+})();
+
 
 /* Klook experience search */
 (() => {
@@ -3176,13 +3192,6 @@
     if (low.includes("leiebil") || low.includes("rental") || low.includes("bil i") || low.includes("car")) return fillCar(text);
     return inspire(text);
   }
-
-  // Open as a friendly popup once per browser session
-  setTimeout(() => {
-    let seen = false;
-    try { seen = sessionStorage.getItem("brAiPopupSeen") === "1"; } catch(e) {}
-    if (!seen && panel?.hidden) openPanel(false);
-  }, 1400);
 
   toggle?.addEventListener("click", () => openPanel(true));
   close?.addEventListener("click", closePanel);
