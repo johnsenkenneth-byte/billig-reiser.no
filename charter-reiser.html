@@ -174,7 +174,7 @@
   }
 
   const destinationKey = key(selectedTo) || choice;
-  const selectedPath = paths[destinationKey] || (choice === "all-inclusive" ? "/tilbud/all-inclusive/" : choice === "family" ? "/reise-med-barn/" : choice === "tui-packages" ? "/reise/pakkereiser/" : "/tilbud/restplass/");
+  const selectedPath = paths[destinationKey] || (choice === "all-inclusive" ? "/reise/all-inclusive/" : choice === "family" ? "/reise/familieferie/" : choice === "tui-packages" ? "/reise/pakkereiser/" : "/tilbud/restplass/");
 
   document.getElementById("routeTitle").textContent = selectedTo ? `${selectedFrom} til ${selectedTo}` : `Charter fra ${selectedFrom}`;
   const depart = prettyDate(params.get("depart"));
@@ -185,7 +185,7 @@
   setHref("tuiRestplassLink", tuiUrl("/tilbud/restplass/"));
   setHref("tuiSelectedLink", tuiUrl(selectedPath));
   setHref("tuiPackagesLink", tuiUrl("/reise/pakkereiser/", tuiPackagesBase));
-  setHref("tuiAllInclusiveLink", tuiUrl("/tilbud/all-inclusive/"));
+  setHref("tuiAllInclusiveLink", tuiUrl("/reise/all-inclusive/"));
   setHref("nazarLink", nazarUrl("/"));
 
   const chips = document.getElementById("destinationChips");

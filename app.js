@@ -660,7 +660,7 @@
       } else if (currentSearchType === "interhome") {
         helper.textContent = state.to ? `Feriebolig: ${state.to} • ${state.depart || "velg ankomst"} til ${state.ret || "velg avreise"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Skriv område, by eller sted — så åpnes riktig ferieboligsøk hos Interhome.";
       } else if (currentSearchType === "restplass") {
-        helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes Nazar direkte på charter og pakkereiser.";
+        helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes chartervalg med TUI og Nazar.";
       } else if (currentSearchType === "hotel") {
         helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} gjester.` : "Skriv byen du vil bo i — så åpnes Hotels.com rett på hotell i den byen.";
       } else if (currentSearchType === "car") {
@@ -1528,8 +1528,8 @@
     charterQuickChoice = choice || "";
     tuiQuickTargetPath = {
       week: "/tilbud/restplass/",
-      family: "/reise-med-barn/",
-      "all-inclusive": "/tilbud/all-inclusive/",
+      family: "/reise/familieferie/",
+      "all-inclusive": "/reise/all-inclusive/",
       "tui-packages": "/reise/pakkereiser/"
     }[choice] || "";
     const today = new Date();
@@ -3157,9 +3157,9 @@
   }
 
   function openTuiRestplass() {
-    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F";
-    addMessage("Jeg åpner <b>Nazar</b>. Der finner du charter, pakkereiser og sydenturer.", "bot", {
-      label: "Se Nazar",
+    const url = (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F";
+    addMessage("Jeg åpner <b>TUI restplass</b>. Der finner du charter, pakkereiser og sydenturer.", "bot", {
+      label: "Se TUI restplass",
       onClick: () => window.open(url, "_blank", "noopener,noreferrer")
     });
   }
