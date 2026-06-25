@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html lang="no">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Billig-reiser.no | Live reisetilbud</title>
+<meta content="Finn billige fly, hotell og leiebil. Sammenlign reisetilbud fra Expedia, Hotels.com, Enjoy Travel og AutoEurope." name="description"/>
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<link href="https://billig-reiser.no/" rel="canonical"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png"/>
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="preload" as="video" href="assets/video/front-hero-v116.mp4" type="video/mp4"/>
+<meta name="google-site-verification" content="7uMco4l4_KFKjl52A59E0vBazR91G7jBTU_7tYssqhc" />
+<link href="style.css?v=177" rel="stylesheet"/>
+<meta content="#020913" name="theme-color"/><meta content="website" property="og:type"/><meta content="Billig-Reiser.no" property="og:site_name"/><meta content="Billig-reiser.no | Live reisetilbud" property="og:title"/><meta content="Finn billige fly, hotell og leiebil. Sammenlign reisetilbud fra Expedia, Hotels.com, Enjoy Travel og AutoEurope." property="og:description"/><meta content="https://billig-reiser.no/" property="og:url"/><meta content="https://billig-reiser.no/assets/billig-reiser-og-v115.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Billig-reiser.no | Live reisetilbud" name="twitter:title"/><meta content="Finn billige fly, hotell og leiebil. Sammenlign reisetilbud fra Expedia, Hotels.com, Enjoy Travel og AutoEurope." name="twitter:description"/><meta content="https://billig-reiser.no/assets/billig-reiser-og-v115.jpg" name="twitter:image"/><link href="https://unpkg.com" rel="preconnect"/><script data-schema="website" type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Billig-Reiser.no","url":"https://billig-reiser.no/"}</script><script data-schema="organization" type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Billig-Reiser.no","alternateName":"Billig-reiser.no","url":"https://billig-reiser.no/","logo":"https://billig-reiser.no/assets/billig-reiser-logo-full-v116.png","image":"https://billig-reiser.no/assets/billig-reiser-og-v115.jpg"}</script><!-- HERO-BILDER OPPDATERT -->
+<style>/* V22 bilde-fix inline */.city-card img,.country-card img,.hotel-card img,.feature-card img{display:block!important;opacity:1!important;visibility:visible!important;background:#07101f!important;filter:none!important}.city-card,.country-card,.hotel-card{background:linear-gradient(180deg,rgba(20,36,58,.98),rgba(8,17,31,.98))!important}.hero-thai,.hero-city,.mag-hero{background-color:#07101f!important}
+.master-lux-grid{display:grid;gap:28px}.shopping-feature,.dining-feature,.nightlife-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid rgba(255,209,102,.20);border-radius:30px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 26px 80px rgba(0,0,0,.33)}.shopping-feature img,.dining-feature img,.nightlife-feature img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}.feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature-copy h3{font-size:clamp(32px,4vw,56px);font-family:Georgia,serif;letter-spacing:-.04em}.feature-kicker{color:#ffd166;text-transform:uppercase;letter-spacing:.13em;font-weight:950;font-size:13px}.feature-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature-meta span{border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:#dbe4f0}.gold-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px 20px;border-radius:16px;background:linear-gradient(135deg,#d7a643,#8c641f);color:#110b03!important;text-decoration:none;font-weight:950;letter-spacing:.03em}.gold-cta:hover{filter:brightness(1.1)}.mini-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mini-gallery div{min-height:76px;border-radius:14px;border:1px solid rgba(255,209,102,.16);background:rgba(255,209,102,.07);padding:12px;color:#ffe4a3;font-weight:900}.premium-note{margin-top:18px;border-left:3px solid #ffd166;background:rgba(255,209,102,.08);padding:14px 16px;border-radius:14px;color:#f6e8c2}.feature-reverse{grid-template-columns:.9fr 1.1fr}.feature-reverse .feature-copy{order:1}.feature-reverse .feature-media{order:2}@media(max-width:900px){.shopping-feature,.dining-feature,.nightlife-feature,.feature-reverse{grid-template-columns:1fr}.feature-reverse .feature-copy,.feature-reverse .feature-media{order:initial}.shopping-feature img,.dining-feature img,.nightlife-feature img{min-height:260px}.feature-meta{grid-template-columns:1fr}.mini-gallery{grid-template-columns:1fr 1fr}.feature-copy{padding:24px}}
+</style>
+<!-- PWA / installerbar app -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="application-name" content="Billig Reiser">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Billig Reiser">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#020913">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<script defer src="/pwa-register.js"></script>
+<link rel="stylesheet" href="/app-features.css?v=159">
+<script defer src="/app-features.js"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="topbar">
+<a aria-label="Billig-reiser.no" class="brand" href="/">
+<img alt="Billig-reiser.no" decoding="async" height="1200" src="assets/billig-reiser-logo-full-v116.png" width="1200"/>
+</a>
+<nav aria-label="Hovedmeny" class="nav desktop-nav">
+<a href="reiseblogg.html">BLOGG</a>
+<a href="reisehacks.html">REISEHACKS</a>
+<a href="reisemagasinet.html">REISEMAGASIN</a>
+<a href="reiseradar.html">REISERADAR</a>
+</nav>
+<div class="top-actions"><span class="avatar">◎</span></div>
+<a aria-label="Åpne meny" class="hamburger" href="#mobile-nav">☰</a>
+</header>
+<nav aria-label="Mobilmeny" class="mobile-nav" id="mobile-nav">
+<a href="reiseblogg.html">📝 Reiseblogg</a>
+<a href="reisehacks.html">⚡ Reisehacks</a>
+<a href="reisemagasinet.html">📖 Reisemagasin</a>
+<a href="reiseradar.html">🌍 Reiseradar</a>
+</nav>
+<section aria-label="Hotell, charter og fergeavtaler" class="hotel-topper is-partner-strip">
+<div class="hotel-topper-rail">
+<a class="hotel-topper-card is-partner-image is-citybox" data-affiliate-key="cityboxHotels" href="https://clk.tradedoubler.com/click?p=398106&amp;a=3480427&amp;url=https%3A%2F%2Fwww.cityboxhotels.com%2F" rel="nofollow noopener sponsored" target="_blank">
+<img alt="Citybox Hotels - hoteller" decoding="async" src="assets/partner-cards/citybox-hotels-card-v176.jpg"/>
+</a>
+<a class="hotel-topper-card is-partner-image is-elite" data-affiliate-key="eliteHotels" href="https://clk.tradedoubler.com/click?p=342562&amp;a=3480427&amp;url=https%3A%2F%2Fwww.elite.se%2F" rel="nofollow noopener sponsored" target="_blank">
+<img alt="Elite Hotels - hoteller" decoding="async" src="assets/partner-cards/elite-hotels-card-v176.jpg"/>
+</a>
+<a class="hotel-topper-card is-partner-image is-ferryhopper" data-affiliate-key="ferryhopper" href="https://clk.tradedoubler.com/click?p=382549&amp;a=3480427&amp;url=https%3A%2F%2Fwww.ferryhopper.com%2Fnb%2F" rel="nofollow noopener sponsored" target="_blank">
+<img alt="Ferryhopper - båtreiser" decoding="async" src="assets/partner-cards/ferryhopper-card-v176.jpg"/>
+</a>
+<a class="hotel-topper-card is-partner-image is-nazar" data-affiliate-key="nazar" href="https://clk.tradedoubler.com/click?p=377463&amp;a=3480427&amp;url=https%3A%2F%2Fwww.nazar.no%2F" rel="nofollow noopener sponsored" target="_blank">
+<img alt="Nazar - hoteller" decoding="async" src="assets/partner-cards/nazar-card-v176.jpg"/>
+</a>
+<a class="hotel-topper-card is-partner-image is-radisson" data-affiliate-key="radissonHotels" href="https://clk.tradedoubler.com/click?p=246020&amp;a=3480427&amp;url=https%3A%2F%2Fwww.radissonhotels.com%2Fno-no%2F" rel="nofollow noopener sponsored" target="_blank">
+<img alt="Radisson Hotels - hoteller" decoding="async" src="assets/partner-cards/radisson-hotels-card-v176.jpg"/>
+</a>
+<a class="hotel-topper-card is-partner-image is-strawberry" data-affiliate-key="strawberry" href="https://clk.tradedoubler.com/click?p=93758&amp;a=3480427&amp;url=https%3A%2F%2Fwww.strawberry.no" rel="nofollow noopener sponsored" target="_blank">
+<img alt="Strawberry - hoteller" decoding="async" src="assets/partner-cards/strawberry-card-v176.jpg"/>
+</a>
+</div>
+</section>
+<main>
+<section aria-label="Live prisindikator" class="ticker">
+<a class="live" href="#travelSearch">● LIVEPRISER</a>
+<span data-live-deal-ticker="OSL-BKK">Oslo → <b>Bangkok</b> <em>henter livepris</em></span>
+<span data-live-deal-ticker="OSL-ALC">Oslo → <b>Alicante</b> <em>henter livepris</em></span>
+<span data-live-deal-ticker="BGO-AGP">Bergen → <b>Malaga</b> <em>henter livepris</em></span>
+<span data-live-deal-ticker="TRD-FCO">Trondheim → <b>Roma</b> <em>henter livepris</em></span>
+<a class="seeall" href="#travelSearch">Søk fly →</a>
+</section>
+<section aria-label="Live flypriser fra Amadeus" class="live-deals-board compact" id="liveDeals">
+<div class="live-deals-head">
+<div>
+<span class="live-deals-kicker">● AMADEUS LIVEPRISER</span>
+<h2>Prisindikator for flysøket</h2>
+<p>Brukes som pekepinn og til å fylle søket. Bestilling skjer videre hos flypartnerne.</p>
+</div>
+<button data-live-deals-refresh type="button">OPPDATER PRISER</button>
+</div>
+<div aria-live="polite" class="live-deals-grid" id="liveDealsGrid">
+<article class="live-deal-loading">Henter livepriser fra Amadeus ...</article>
+</div>
+</section>
+<section class="hero">
+<video aria-hidden="true" autoplay class="front-hero-video" loop muted playsinline preload="auto" poster="assets/front-hero-flight-map.png">
+<source src="assets/video/front-hero-v116.mp4" type="video/mp4"/>
+</video>
+<div aria-hidden="true" class="front-hero-shade"></div>
+<div class="hero-copy">
+<div class="front-logo-full">
+<img alt="Billig-reiser.no - Oppdag mer. Reis smartere." decoding="async" src="assets/billig-reiser-logo-full-v116.png"/>
+</div>
+<form autocomplete="on" class="search-card travel-search neon-flight-deck" id="travelSearch">
+<div aria-hidden="true" class="flight-deck-orbit"></div>
+<div class="flight-deck-head compact-head"><span class="deck-kicker">AI-REISEMOTOR</span><em>Søk blant millioner av reiser verden over</em></div>
+<div class="smart-search-main">
+<span class="smart-search-icon">⌕</span>
+<input aria-label="Hva vil du finne?" id="smartSearchQuery" placeholder="Hvor vil du reise, eller hva vil du finne?" type="search"/>
+<button aria-label="Start smart søk" id="smartSearchLaunch" type="button">SØK</button>
+</div>
+<div aria-label="Velg reisetype" class="smart-service-grid">
+<button data-smart-service="flight" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="M7 22.5 18 19l5-11 3 1-1 9 8-2.5c2-.6 3.5.2 4 1.5.4 1.4-.5 2.6-2.4 3.3L25 23l-4 9-2.7.8.6-8.2-9.5 2.7Z"/><path class="spark" d="m9 9 1.3 2.7L13 13l-2.7 1.3L9 17l-1.3-2.7L5 13l2.7-1.3Z"/></svg></b><span>Fly</span></button>
+<button data-smart-service="hotel" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="M9 33V14l11-7 11 7v19"/><path d="M14 33v-7h12v7M15 17h3m4 0h3m-10 5h3m4 0h3"/><path class="spark" d="M6 10h4M8 8v4"/></svg></b><span>Hotell</span></button>
+<button data-smart-service="package" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="M9 14h22v19H9zM15 14v-3c0-2 1.5-3 3.5-3h3c2 0 3.5 1 3.5 3v3"/><path d="M9 21h22M17 19v4m6-4v4"/><path class="spark" d="m31 7 1 2 2 1-2 1-1 2-1-2-2-1 2-1Z"/></svg></b><span>Pakkereise</span></button>
+<button data-smart-service="interhome" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="m7 20 13-11 13 11M11 18v15h18V18"/><path d="M17 33v-9h6v9M26 11V7h4v8"/><path class="spark" d="M7 29h3m-1.5-1.5v3"/></svg></b><span>Feriebolig</span></button>
+<button data-smart-service="cruise" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="M8 24h24l-4 6H13Z"/><path d="M13 24v-8h14v8M17 16v-5h6v5M11 33c2 1.5 4 1.5 6 0 2 1.5 4 1.5 6 0 2 1.5 4 1.5 6 0"/><path class="spark" d="M29 11h4m-2-2v4"/></svg></b><span>Cruise</span></button>
+<button data-smart-service="restplass" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><circle cx="20" cy="18" r="6"/><path d="M20 6v4m0 16v4M8 18h4m16 0h4M11.5 9.5l3 3m11 11 3 3m0-17-3 3m-11 11-3 3M8 34c4-4 8-4 12 0 4-4 8-4 12 0"/></svg></b><span>Charter</span></button>
+<button data-smart-service="car" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="m10 25 3-8c.5-1.5 1.5-2 3-2h8c1.5 0 2.5.5 3 2l3 8"/><path d="M8 25h24v6H8zM12 31v3m16-3v3M12 27h3m10 0h3M14 21h12"/><path class="spark" d="M30 11h4m-2-2v4"/></svg></b><span>Leiebil</span></button>
+</div>
+<div aria-live="polite" class="search-mode-title" id="searchModeTitle"><b>Fly</b><span>Velg avreisested, reisemål, dato og antall reisende.</span></div>
+<section aria-label="Raske valg for charter og restplass" class="tui-quick-panel" id="tuiQuickPanel">
+<div class="tui-quick-head"><span><b>Charter, restplass og pakkereiser</b><small>Velg et utgangspunkt, juster søket og se utvalg hos TUI og Nazar.</small></span><em>TUI + Nazar</em></div>
+<div class="tui-quick-grid">
+<button data-tui-quick="week" type="button"><b>Restplass</b><span>Denne uken</span></button>
+<button data-tui-quick="mallorca" type="button"><b>Mallorca</b><span>Sol og familie</span></button>
+<button data-tui-quick="kreta" type="button"><b>Kreta</b><span>Populært i Hellas</span></button>
+<button data-tui-quick="rhodos" type="button"><b>Rhodos</b><span>Sommerklassiker</span></button>
+<button data-tui-quick="family" type="button"><b>Familieferie</b><span>TUI og Nazar</span></button>
+<button data-tui-quick="all-inclusive" type="button"><b>All Inclusive</b><span>Se utvalget</span></button>
+</div>
+</section>
+<section aria-label="Raske valg for feriebolig" class="interhome-quick-panel" id="interhomeQuickPanel">
+<div class="tui-quick-head"><span><b>Feriebolig hos Interhome</b><small>Velg område, datoer og gjester. Vi åpner norsk Interhome med valgene dine.</small></span><em>Interhome</em></div>
+<div class="tui-quick-grid">
+<button data-interhome-quick="Spania" type="button"><b>Spania</b><span>Alle ferieboliger</span></button>
+<button data-interhome-quick="Costa Blanca" type="button"><b>Costa Blanca</b><span>Alicante, Calpe, Denia</span></button>
+<button data-interhome-quick="Costa del Sol" type="button"><b>Costa del Sol</b><span>Malaga og Marbella</span></button>
+<button data-interhome-quick="Mallorca" type="button"><b>Mallorca</b><span>Villa og leilighet</span></button>
+<button data-interhome-quick="Italia" type="button"><b>Italia</b><span>Toscana og kysten</span></button>
+<button data-interhome-quick="Frankrike" type="button"><b>Frankrike</b><span>Cote d'Azur</span></button>
+</div>
+</section>
+<section aria-label="Raske valg for cruise" class="cruise-quick-panel" id="cruiseQuickPanel">
+<div class="tui-quick-head"><span><b>Cruise fra Europa</b><small>Velg havn, datoer og reisende. Vi åpner riktig Expedia-side for avreisehavnen.</small></span><em>Expedia Cruise</em></div>
+<div class="tui-quick-grid">
+<button data-cruise-quick="Europa" type="button"><b>Europa</b><span>Alle cruise</span></button>
+<button data-cruise-quick="Barcelona" type="button"><b>Barcelona</b><span>Middelhavet</span></button>
+<button data-cruise-quick="Athen" type="button"><b>Athen / Pireus</b><span>Greske øyer</span></button>
+<button data-cruise-quick="København" type="button"><b>København</b><span>Nord-Europa</span></button>
+<button data-cruise-quick="Marseille" type="button"><b>Marseille</b><span>Sør-Frankrike</span></button>
+<button data-cruise-quick="Genova" type="button"><b>Genova</b><span>Italia</span></button>
+<button data-cruise-quick="Napoli" type="button"><b>Napoli</b><span>Sør-Italia</span></button>
+<button data-cruise-quick="Oslo" type="button"><b>Oslo</b><span>Norske fjorder</span></button>
+<button data-cruise-quick="Stockholm" type="button"><b>Stockholm</b><span>Østersjøen</span></button>
+<button data-cruise-quick="Trieste" type="button"><b>Trieste</b><span>Adriaterhavet</span></button>
+<button data-cruise-quick="Valencia" type="button"><b>Valencia</b><span>Spania</span></button>
+<button data-cruise-quick="Venezia" type="button"><b>Venezia</b><span>Italia</span></button>
+</div>
+</section>
+<div class="fields search-fields">
+<label class="field-from"><span class="field-icon field-icon-origin"><svg aria-hidden="true" viewBox="0 0 36 36"><circle cx="18" cy="18" r="8"/><circle cx="18" cy="18" r="2"/><path d="M18 5v7m0 12v7M5 18h7m12 0h7"/></svg></span><small id="fromLabel">Hvor reiser du fra?</small><input id="fromCity" name="from" placeholder="Skriv by eller flyplass"/></label>
+<label class="field-to"><span class="field-icon field-icon-destination"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="m18 6 3.2 8.8L30 18l-8.8 3.2L18 30l-3.2-8.8L6 18l8.8-3.2Z"/><circle cx="18" cy="18" r="2"/></svg></span><small id="toLabel">Hvor vil du reise?</small><input id="toCity" name="to" placeholder="Skriv reisemål"/></label>
+<label class="date-range-field"><span class="field-icon field-icon-dates"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="M8 11h20v17H8zM13 7v7m10-7v7M8 16h20"/><path d="M13 22h10m-3-3 3 3-3 3"/></svg></span><small id="dateRangeLabel">Datoer</small><button aria-expanded="false" class="date-range-toggle" id="dateRangeToggle" type="button"><span id="dateRangeDepart">Velg avreise</span><i aria-hidden="true">→</i><span id="dateRangeReturn">Velg hjemreise</span></button><input id="departDate" name="depart" type="hidden"/><input id="returnDate" name="return" type="hidden"/></label>
+<label class="traveler-field"><span class="field-icon field-icon-travelers"><svg aria-hidden="true" viewBox="0 0 36 36"><circle cx="18" cy="13" r="4"/><path d="M10 27c1.5-4 4.2-6 8-6s6.5 2 8 6"/><circle cx="18" cy="18" r="13"/></svg></span><small id="adultsLabel">Reisende</small><button aria-expanded="false" class="traveler-toggle" id="travelerToggle" type="button">2 voksne, 0 barn</button><div aria-label="Velg reisende" class="traveler-menu" id="travelerMenu"><div class="traveler-row"><span>Voksne</span><div class="stepper"><button aria-label="Færre voksne" class="step-btn" data-step="-1" data-step-target="adults" type="button">−</button><input id="adults" inputmode="numeric" max="9" min="1" name="adults" type="number" value="2"/><button aria-label="Flere voksne" class="step-btn" data-step="1" data-step-target="adults" type="button">+</button></div></div><div class="traveler-row" id="childrenRow"><span>Barn</span><div class="stepper"><button aria-label="Færre barn" class="step-btn" data-step="-1" data-step-target="children" type="button">−</button><input id="children" inputmode="numeric" max="8" min="0" name="children" type="number" value="0"/><button aria-label="Flere barn" class="step-btn" data-step="1" data-step-target="children" type="button">+</button></div></div><button class="traveler-done" id="travelerDone" type="button">FERDIG</button></div></label>
+</div>
+<div aria-label="Velg avreise og hjemreise" class="live-calendar" id="liveDateCalendar"></div>
+<div class="hero-ctas search-actions single-action">
+<button class="primary search-launch" id="searchSubmitButton" type="submit"><span>START SØKET</span><b>↗</b></button>
+</div>
+<div aria-label="Pakkereisevalg" class="package-inline-actions">
+<button class="package-inline-primary" id="packageDirectSearchButton" type="button"><small>FERDIG UTFYLT</small><span>Åpne Expedia-søk i søkemotoren</span></button>
+</div>
+<p class="search-help">Søk blant millioner av reiser verden over — vi sender deg videre til riktig partner med valgene dine.</p>
+<div aria-label="Live flypriser" class="deal-pulse-row">
+<span>● Live flypriser fra Amadeus</span>
+<a href="#travelSearch">Bruk i flysøket →</a>
+</div>
+<div aria-live="polite" class="tp-live-box" id="tpLiveBox"></div>
+</form>
+<section aria-label="Charter og restplass i sommer" class="summer-charter-spotlight">
+<div class="summer-charter-copy">
+<span class="summer-charter-kicker">SOMMERFERIE 2026</span>
+<h2>Charter og restplasser fra Norge</h2>
+<p>Finn sydenturer, familieferie, restplasser og All Inclusive hos Nazar og TUI.</p>
+<button data-charter-open="restplass" type="button">ÅPNE CHARTERVALG <b>↗</b></button>
+</div>
+<div class="summer-charter-links">
+<button data-charter-open="mallorca" type="button"><b>Mallorca</b><span>Sol og familie</span></button>
+<button data-charter-open="kreta" type="button"><b>Kreta</b><span>Populært i Hellas</span></button>
+<button data-charter-open="rhodos" type="button"><b>Rhodos</b><span>Sommerklassiker</span></button>
+<button data-charter-open="family" type="button"><b>Familieferie</b><span>TUI og Nazar</span></button>
+<button data-charter-open="all-inclusive" type="button"><b>All Inclusive</b><span>Enklere ferie</span></button>
+<button data-charter-open="tui-packages" type="button"><b>TUI pakkereiser</b><span>Fly og hotell</span></button>
+</div>
+<div class="summer-charter-directs">
+<a href="charter-reiser.html?choice=restplass">Chartervelger</a>
+<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F" rel="nofollow noopener sponsored" target="_blank">TUI restplass</a>
+<a href="https://clk.tradedoubler.com/click?p=377463&amp;a=3480427&amp;url=https%3A%2F%2Fwww.nazar.no%2F" rel="nofollow noopener sponsored" target="_blank">Nazar charter</a>
+</div>
+</section>
+</div>
+<div class="map-card live-map-card">
+<div aria-label="Interaktivt live reisekart" id="liveMap"></div>
+<div class="map-vignette"></div>
+<div class="route-beam route-beam-1"></div>
+<div class="route-beam route-beam-2"></div>
+<div class="map-title">LIVE REISEKART <strong>+LIVE</strong></div>
+<div class="live-map-note">Klikk på pins for å åpne tilbud</div>
+</div>
+<div class="travel-pulse-panel">
+<div class="pulse-column">
+<div class="pulse-head"><span>🔥</span><b>Trending nå</b></div>
+<a href="https://www.kqzyfj.com/click-101724638-13852706" rel="nofollow noopener sponsored" target="_blank">
+<strong>Oslo → Roma</strong><em>fra 499 kr</em>
+</a>
+<a href="https://www.kqzyfj.com/click-101724638-13852706" rel="nofollow noopener sponsored" target="_blank">
+<strong>Bergen → Nice</strong><em>fra 649 kr</em>
+</a>
+<a href="https://www.kqzyfj.com/click-101724638-13852706" rel="nofollow noopener sponsored" target="_blank">
+<strong>Stavanger → Bangkok</strong><em>fra 3290 kr</em>
+</a>
+</div>
+<div class="pulse-column">
+<div class="pulse-head"><span>📉</span><b>Prisfall siste 24t</b></div>
+<a href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank">
+<strong>Bali aktiviteter</strong><em>-18%</em>
+</a>
+<a href="/go/hotels.html#to=https%3A%2F%2Fwww.hotels.com%2Faffiliates%2Fhotelscom-home.rEFvN68" rel="nofollow noopener sponsored" target="_blank">
+<strong>Hotell i Roma</strong><em>-22%</em>
+</a>
+<a href="https://c10.travelpayouts.com/click?shmarker=718286.billigreiser_car_europe&amp;promo_id=2018&amp;source_type=customlink&amp;type=click&amp;custom_url=https%3A%2F%2Fwww.economybookings.com%2Fcar-rental%2Feurope" rel="nofollow noopener sponsored" target="_blank">
+<strong>Leiebil Europa</strong><em>EconomyBookings</em>
+</a>
+<a href="https://tiqets.tpx.gr/nL28pCCf" rel="nofollow noopener sponsored" target="_blank">
+<strong>Billetter til attraksjoner</strong><em>Tiqets</em>
+</a>
+<a href="https://gocity.tpx.gr/QHScpmus" rel="nofollow noopener sponsored" target="_blank">
+<strong>Bypass og opplevelser</strong><em>Go City</em>
+</a>
+</div>
+<div class="pulse-column">
+<div class="pulse-head"><span>⚡</span><b>Reisehacks</b></div>
+<a href="reisehacks.html">
+<strong>Åpne Reisehacks</strong><em>Smart motor</em>
+</a>
+<a href="https://deals.flyforsinkelser.no/c?c=40284&amp;m=2508483&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank">
+<strong>Fly forsinket?</strong><em>Sjekk krav</em>
+</a>
+<a href="https://kiwitaxi.tpx.gr/YjkKJSHa" rel="nofollow noopener sponsored" target="_blank">
+<strong>Husk transfer</strong><em>KiwiTaxi</em>
+</a>
+<a href="https://saily.tpx.gr/svbOORah" rel="nofollow noopener sponsored" target="_blank">
+<strong>Trenger du mobildata?</strong><em>Saily eSIM</em>
+</a>
+<a href="https://radicalstorage.tpx.gr/9aBeOTqW" rel="nofollow noopener sponsored" target="_blank">
+<strong>Ventetid i storbyen?</strong><em>Bagasjeoppbevaring</em>
+</a>
+</div>
+</div>
+</section>
+<section aria-label="Reisevelgeren" class="trip-finder-zone" id="hack">
+<div class="trip-finder-panel">
+<div class="trip-finder-copy">
+<span class="trip-kicker">REISEVELGER</span>
+<h2>Hva trenger reisen din nå?</h2>
+<p>Hopp rett til nyttige avtaler, eller åpne den nye Reisehacks-motoren for anbefalinger basert på avreise, reisestil, måned og budsjett.</p>
+<div class="trip-mini-stats"><span>Restplass</span><span>Feriebolig</span><span>Billetter</span><span>Reisehacks</span></div>
+<a class="tool-link" href="reisehacks.html">Åpne Reisehacks-motoren</a>
+</div>
+<div class="trip-finder-grid">
+<form class="trip-klook-search" data-klook-search-form>
+<div>
+<small>Klook-søk</small>
+<strong>Finn opplevelser på reisemålet</strong>
+<span>Søk etter turer, billetter, spa, matkurs, transfer og familieaktiviteter.</span>
+</div>
+<label>
+<input aria-label="Søk opplevelser hos Klook" data-klook-search-input placeholder="Bangkok, Phuket, Roma..." type="search"/>
+<button type="submit">Søk Klook</button>
+</label>
+<div class="klook-quick-links" aria-label="Raske Klook-søk">
+<button data-klook-quick="Bangkok activities" type="button">Bangkok</button>
+<button data-klook-quick="Phuket island hopping" type="button">Phuket</button>
+<button data-klook-quick="Krabi boat tour" type="button">Krabi</button>
+<button data-klook-quick="Rome attractions" type="button">Roma</button>
+<button data-klook-quick="Barcelona attractions" type="button">Barcelona</button>
+</div>
+</form>
+<a class="trip-choice hot" href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F" rel="nofollow noopener sponsored" target="_blank"><small>Restplass</small><strong>Solreise nå</strong><span>TUI restplasser, charter og pakkereiser</span><em>Åpne TUI</em></a>
+<a class="trip-choice stay" href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8" rel="nofollow noopener sponsored" target="_blank"><small>Bo annerledes</small><strong>Feriebolig</strong><span>Villa, hytte eller leilighet hos Interhome</span><em>Se ferieboliger</em></a>
+<a class="trip-choice experience" href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank"><small>På stedet</small><strong>Opplevelser</strong><span>Turer, aktiviteter og billetter hos Klook</span><em>Finn aktiviteter</em></a>
+<a class="trip-choice pass" href="https://gocity.tpx.gr/QHScpmus" rel="nofollow noopener sponsored" target="_blank"><small>Storby</small><strong>Bypass og pass</strong><span>Attraksjonspass for populære byer med Go City</span><em>Se bypass</em></a>
+<a class="trip-choice transfer" href="https://gettransfer.tpx.gr/1szV5hHx" rel="nofollow noopener sponsored" target="_blank"><small>Fremme fort</small><strong>Privat transfer</strong><span>Flyplass til hotell uten kø og pruting</span><em>Bestill transfer</em></a>
+<a class="trip-choice esim" href="https://saily.tpx.gr/svbOORah" rel="nofollow noopener sponsored" target="_blank"><small>Reisehack</small><strong>eSIM på reisen</strong><span>Mobildata før du lander med Saily</span><em>Sjekk datapakker</em></a>
+<a class="trip-choice luggage" href="https://radicalstorage.tpx.gr/9aBeOTqW" rel="nofollow noopener sponsored" target="_blank"><small>Mellom landing og hotell</small><strong>Bagasjeoppbevaring</strong><span>Legg fra deg kofferten hos Radical Storage</span><em>Finn oppbevaring</em></a>
+<a class="trip-choice problem" href="https://deals.flyforsinkelser.no/c?c=40284&amp;m=2508483&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank"><small>Når reisen svikter</small><strong>Fly forsinket?</strong><span>Sjekk om du kan ha krav på erstatning</span><em>Sjekk krav</em></a>
+</div>
+</div>
+</section>
+<section aria-label="Reisemagasinet" class="magazine-front-banner" id="reisemagasin-home">
+<a aria-label="Åpne Reisemagasinet" class="magazine-front-link" href="reisemagasinet.html">
+<img alt="Åpne Reisemagasinet" decoding="async" height="914" loading="lazy" src="assets/reisemagasin-home-banner.webp" width="1600"/>
+</a>
+</section>
+<section aria-label="Reiseblogg" class="front-blog-cta-section">
+<div class="front-blog-cta">
+<div>
+<span>REISEBLOGG</span>
+<h2>Les de nyeste reisetipsene</h2>
+<p>Charter, restplass, smarte bookingvinduer og praktiske råd samlet på én egen bloggside.</p>
+</div>
+<a href="reiseblogg.html">Åpne bloggen</a>
+</div>
+</section>
+<section aria-label="Annonse fra flypartnere" class="airline-ad-band">
+<div class="airline-ad-head">
+<span>ANNONSE</span>
+<h2>Flypartnere for manuelt søk</h2>
+<p>Partnerlenker til fly, kampanjer og flyselskap.</p>
+</div>
+<div class="airline-ad-grid">
+<a class="airline-ad-card expedia-ad" href="https://www.kqzyfj.com/click-101724638-13852706?url=https%3A%2F%2Fwww.expedia.no%2FFly" rel="nofollow noopener sponsored" target="_blank">
+<span class="airline-ad-logo-badge">Expedia</span>
+<small>Fly + hotell</small>
+<strong>Expedia</strong>
+<span class="airline-ad-desc">Fly, hotell og pakkereiser</span>
+<em>Åpne</em>
+</a>
+<a class="airline-ad-card cheapfares-ad" href="https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheapflightsfares.com/" rel="nofollow noopener sponsored" target="_blank">
+<span class="airline-ad-logo-badge">CheapFlightFares</span>
+<small>Flypartner</small>
+<strong>CheapFlight Fares</strong>
+<span class="airline-ad-desc">Manuelt flysøk og kampanjer</span>
+<em>Åpne</em>
+</a>
+<a class="airline-ad-card cheaptickets-ad" href="https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights" rel="nofollow noopener sponsored" target="_blank">
+<span class="airline-ad-logo-badge">CheapTickets</span>
+<small>Flypartner</small>
+<strong>CheapTickets</strong>
+<span class="airline-ad-desc">Manuelt flysøk og reisetilbud</span>
+<em>Åpne</em>
+</a>
+<a class="airline-ad-card iberia-ad" href="https://www.anrdoezrs.net/click-101724638-12119574" rel="nofollow noopener sponsored" target="_blank">
+<span class="airline-ad-logo-badge">Iberia</span>
+<small>Flyselskap</small>
+<strong>Iberia</strong>
+<span class="airline-ad-desc">Spania, Europa og videre ut</span>
+<em>Sjekk tilbud</em>
+</a>
+<a class="airline-ad-card malaysia-ad" href="https://www.dpbolvw.net/click-101724638-17167285" rel="nofollow noopener sponsored" target="_blank">
+<span class="airline-ad-logo-badge">Malaysia Airlines</span>
+<small>Flyselskap</small>
+<strong>Malaysia Airlines</strong>
+<span class="airline-ad-desc">Asia-ruter via Kuala Lumpur</span>
+<em>Sjekk tilbud</em>
+</a>
+</div>
+</section>
+<section aria-label="Våre samarbeidspartnere" class="suppliers live-partners partner-hub">
+<div class="partner-hub-head">
+<span class="partner-eyebrow">SNARVEIER</span>
+<h2>Nyttige valg før reisen</h2>
+<p>Direktelenker til partnere for bestilling, opplevelser, transport og praktisk reisehjelp.</p>
+</div>
+<div class="partner-hub-grid">
+<article class="partner-group is-primary">
+<div><span class="partner-icon">✦</span><small>Bestill reisen</small><h3>Fly, hotell og pakkereiser</h3></div>
+<div class="partner-pills">
+<a href="https://www.expedia.no/go/package/search/FlightHotel/" rel="nofollow noopener sponsored" target="_blank"><b>Expedia</b><em>Fly + hotell</em></a>
+<a href="/go/hotels.html#to=https%3A%2F%2Fwww.hotels.com%2Faffiliates%2Fhotelscom-home.rEFvN68" rel="nofollow noopener sponsored" target="_blank"><b>Hotels.com</b><em>Hotell</em></a>
+<a href="https://www.booking.com/?aid=1522412&amp;utm_source=affnetcj&amp;utm_medium=bannerindex&amp;utm_campaign=no&amp;utm_term=index-1522412" rel="nofollow noopener sponsored" target="_blank"><b>Booking.com</b><em>Hotell</em></a>
+<a href="https://clk.tradedoubler.com/click?p=93758&amp;a=3480427&amp;url=https%3A%2F%2Fwww.strawberry.no" rel="nofollow noopener sponsored" target="_blank"><b>Strawberry</b><em>Hotell</em></a>
+<a href="https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&amp;promo_id=3791&amp;source_type=customlink&amp;type=click&amp;custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F" rel="nofollow noopener sponsored" target="_blank"><b>Kiwi.com</b><em>Fly</em></a>
+<a href="https://tc.tradetracker.net/?c=35742&amp;m=2133355&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.tui.no%2Freise%2Fpakkereiser%2F" rel="nofollow noopener sponsored" target="_blank"><b>TUI</b><em>Charter</em></a>
+<a href="https://clk.tradedoubler.com/click?p=377463&amp;a=3480427&amp;url=https%3A%2F%2Fwww.nazar.no%2F" rel="nofollow noopener sponsored" target="_blank"><b>Nazar</b><em>Charter</em></a>
+</div>
+</article>
+<article class="partner-group">
+<div><span class="partner-icon">⌁</span><small>På stedet</small><h3>Opplevelser og billetter</h3></div>
+<div class="partner-pills">
+<a href="https://klook.tpx.gr/Tmj2PfPe" rel="nofollow noopener sponsored" target="_blank"><b>Klook</b><em>Turer</em></a>
+<a href="https://kkday.tpx.gr/WlhfXaEZ" rel="nofollow noopener sponsored" target="_blank"><b>KKday</b><em>Aktiviteter</em></a>
+<a href="https://www.getyourguide.com/?partner_id=FIQDAEB&amp;utm_medium=local_partners" rel="nofollow noopener sponsored" target="_blank"><b>GetYourGuide</b><em>Guidede turer</em></a>
+<a href="https://tiqets.tpx.gr/nL28pCCf" rel="nofollow noopener sponsored" target="_blank"><b>Tiqets</b><em>Attraksjoner</em></a>
+<a href="https://gocity.tpx.gr/QHScpmus" rel="nofollow noopener sponsored" target="_blank"><b>Go City</b><em>Bypass</em></a>
+</div>
+</article>
+<article class="partner-group">
+<div><span class="partner-icon">↗</span><small>Transport</small><h3>Leiebil, transfer og feriebolig</h3></div>
+<div class="partner-pills">
+<a href="https://c10.travelpayouts.com/click?shmarker=718286.billigreiser_car_europe&amp;promo_id=2018&amp;source_type=customlink&amp;type=click&amp;custom_url=https%3A%2F%2Fwww.economybookings.com%2Fcar-rental%2Feurope" rel="nofollow noopener sponsored" target="_blank"><b>EconomyBookings</b><em>Leiebil</em></a>
+<a href="https://autoeurope.tpx.gr/GzEPjKLD" rel="nofollow noopener sponsored" target="_blank"><b>AutoEurope</b><em>Leiebil</em></a>
+<a href="https://kiwitaxi.tpx.gr/YjkKJSHa" rel="nofollow noopener sponsored" target="_blank"><b>KiwiTaxi</b><em>Transfer</em></a>
+<a href="https://gettransfer.tpx.gr/1szV5hHx" rel="nofollow noopener sponsored" target="_blank"><b>GetTransfer</b><em>Privat transport</em></a>
+<a href="https://clk.tradedoubler.com/click?p=382549&amp;a=3480427&amp;url=https%3A%2F%2Fwww.ferryhopper.com%2Fnb%2F" rel="nofollow noopener sponsored" target="_blank"><b>Ferryhopper</b><em>Ferge</em></a>
+<a href="https://tc.tradetracker.net/?c=27484&amp;m=1269456&amp;a=509866&amp;r=&amp;u=https%3A%2F%2Fwww.interhome.no%2Fsearch%2F5460aeae487f8" rel="nofollow noopener sponsored" target="_blank"><b>Interhome</b><em>Feriebolig</em></a>
+</div>
+</article>
+<article class="partner-group">
+<div><span class="partner-icon">◎</span><small>Praktisk hjelp</small><h3>Data, bagasje og flytrøbbel</h3></div>
+<div class="partner-pills">
+<a href="https://saily.tpx.gr/svbOORah" rel="nofollow noopener sponsored" target="_blank"><b>Saily</b><em>eSIM</em></a>
+<a href="https://radicalstorage.tpx.gr/9aBeOTqW" rel="nofollow noopener sponsored" target="_blank"><b>Radical Storage</b><em>Bagasje</em></a>
+<a href="https://deals.flyforsinkelser.no/c?c=40284&amp;m=2508483&amp;a=509866&amp;r=&amp;u=" rel="nofollow noopener sponsored" target="_blank"><b>Flyforsinkelser</b><em>Erstatning</em></a>
+<a href="https://airhelp.tpx.gr/ZW3oHL4Z" rel="nofollow noopener sponsored" target="_blank"><b>AirHelp</b><em>Flykrav</em></a>
+</div>
+</article>
+</div>
+<p class="partner-live-note">Partnerlenker kan gi oss provisjon uten ekstra kostnad for deg.</p>
+</section>
+<section aria-label="E-postvarsel for reisetilbud" class="deal-alert-strip is-page-bottom" id="reisevarsel">
+<div class="deal-alert-copy">
+<span>GRATIS REISEVARSEL</span>
+<strong>Få ukens beste deals på e-post</strong>
+<small>Restplasser, hotellkupp og chartertips. Kort, nyttig og laget for klikk.</small>
+</div>
+<form autocomplete="on" class="deal-alert-form" data-deal-alert-form>
+<label aria-hidden="true" class="deal-alert-hp">
+<span>Nettside</span>
+<input autocomplete="off" name="website" tabindex="-1" type="text"/>
+</label>
+<label>
+<span>E-post</span>
+<input autocomplete="email" inputmode="email" name="email" placeholder="din@epost.no" required type="email"/>
+</label>
+<label>
+<span>Fra</span>
+<select name="airport">
+<option value="OSL">Oslo</option>
+<option value="BGO">Bergen</option>
+<option value="TRD">Trondheim</option>
+<option value="SVG">Stavanger</option>
+<option value="KRS">Kristiansand</option>
+<option value="TOS">Tromsø</option>
+</select>
+</label>
+<label>
+<span>Type</span>
+<select name="interest">
+<option value="restplass">Restplass</option>
+<option value="charter">Charter</option>
+<option value="hotell">Hotellkupp</option>
+<option value="weekend">Weekend</option>
+<option value="familie">Familie</option>
+</select>
+</label>
+<label class="deal-alert-consent">
+<input name="consent" required type="checkbox" value="yes"/>
+<span>Ja, send meg reisevarsel. Jeg kan melde meg av når som helst.</span>
+</label>
+<button type="submit">Få varsel</button>
+<p aria-live="polite" class="deal-alert-status" data-deal-alert-status></p>
+</form>
+</section>
+</main>
+<footer class="footer">
+<div class="footer-inner">
+<div class="footer-brand">
+<b>✈ Billig-Reiser.no</b>
+<p>Oppdag mer, reis smartere. Magasinet og tilbud fra våre samarbeidspartnere.</p>
+</div>
+<nav class="footer-links">
+<a href="om-oss.html">Om oss</a>
+<a href="kontakt.html">Kontakt</a>
+<a href="personvern.html">Personvern</a>
+<a href="cookie-policy.html">Cookies</a>
+<a href="vilkar.html">Vilkår</a>
+<a href="disclaimer.html">Affiliate-info</a>
+<a href="reisehacks.html">Reisehacks</a>
+<a href="reisemagasinet.html">Reisemagasin</a>
+<a href="reiseblogg.html">Reiseblogg</a>
+</nav>
+<div class="footer-meta">
+<span>post@billig-reiser.no</span>
+<span>Org.nr 937 505 248</span>
+</div>
+</div>
+</footer>
+<nav aria-label="Raske valg" class="bottom-cta"><a data-open-search="flight" href="#travelSearch">✈<span>Fly</span></a><a data-open-search="hotel" href="#travelSearch">🏨<span>Hotell</span></a><a data-open-search="car" href="#travelSearch">🚗<span>Bil</span></a><a data-open-search="flight" href="#travelSearch">🔥<span>Priser</span></a><a href="reisehacks.html">⚡<span>Hacks</span></a></nav>
+<img alt="" aria-hidden="true" class="pixel" data-consent-src="https://www.lduhtrp.net/image-101724638-14078638" height="1" width="1"/>
+<img alt="" aria-hidden="true" class="pixel" data-consent-src="https://www.ftjcfx.com/image-101724638-13852710" height="1" width="1"/>
+<script defer="" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer="" src="affiliate-config.js?v=172"></script>
+<script defer="" src="app.js?v=173"></script>
+<script data-consent-src="https://www.anrdoezrs.net/am/101724638/include/allCj/generate/onLoad/exclude/5275619,6385999,5289022,7211102,6061620,4861279/impressions/page/am.js" type="text/plain"></script>
+<div aria-label="Informasjon om cookies" aria-live="polite" class="cookie-banner" id="cookieBanner" role="dialog">
+<div>
+<strong>Vi bruker cookies</strong>
+<p>Les om cookies og bruk av tredjepartstjenester i vår <a href="cookie-policy.html">cookie-policy</a>.</p>
+</div>
+<div class="cookie-actions">
+<button id="cookieReject" type="button">Kun nødvendige</button>
+<button id="cookieAccept" type="button">Godta</button>
+</div>
+</div>
+<a class="mobile-sticky-cta" data-open-search="flight" href="#travelSearch">Sjekk reisepriser</a>
+<!-- Billig-Reiser AI reisehjelper -->
+<div aria-live="polite" class="ai-travel-assistant" id="aiTravelAssistant">
+<button aria-label="Åpne AI reisehjelper" class="ai-chat-toggle" id="aiChatToggle" type="button">
+<span>AI</span> Reisehjelper
+    <em>Hva kan jeg hjelpe med?</em>
+</button>
+<section aria-label="AI reisehjelper" class="ai-chat-panel" hidden="" id="aiChatPanel">
+<div class="ai-chat-head">
+<div>
+<strong>AI reisehjelper</strong>
+<small>Finn fly, hotell og leiebil raskere</small>
+</div>
+<button aria-label="Lukk" id="aiChatClose" type="button">×</button>
+</div>
+<div class="ai-chat-messages" id="aiChatMessages">
+<div class="ai-msg bot">Hei! Hva kan jeg hjelpe deg med? Skriv for eksempel: <b>Fly Oslo til Bangkok 2 voksne 1 barn</b>, <b>hotell i Roma</b> eller <b>leiebil i Alicante</b>.</div>
+</div>
+<div aria-label="Raske forslag" class="ai-chat-chips">
+<button data-ai-chip="Billig solferie i juli" type="button">Solferie</button>
+<button data-ai-chip="Fly Oslo til Bangkok 2 voksne 1 barn" type="button">Fly til Bangkok</button>
+<button data-ai-chip="Hotell i Roma" type="button">Hotell Roma</button>
+<button data-ai-chip="Leiebil i Alicante" type="button">Leiebil</button>
+<button data-ai-chip="Finn restplass til syden" type="button">Restplass</button>
+<button data-ai-chip="Finn pakkereise med fly og hotell" type="button">Pakkereise</button>
+<button data-ai-chip="Finn feriebolig" type="button">Feriebolig</button>
+<button data-ai-chip="Finn cruise" type="button">Cruise</button>
+</div>
+<form class="ai-chat-form" id="aiChatForm">
+<input autocomplete="off" id="aiChatInput" placeholder="Hva ser du etter?" type="text"/>
+<button type="submit">Send</button>
+</form>
+</section>
+</div>
+</body>
+</html>
