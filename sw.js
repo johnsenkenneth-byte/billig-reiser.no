@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v177-compact-flight-partners";
+const CACHE_VERSION = "billig-reiser-pwa-v179-airport-autocomplete";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -15,17 +15,17 @@ const APP_SHELL = [
   "/style.css?v=177",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=172",
-  "/app.js?v=173",
+  "/app.js?v=174",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
   "/assets/billig-reiser-logo-full-v116.png",
-  "/assets/partner-cards/citybox-hotels-card-v176.jpg",
-  "/assets/partner-cards/elite-hotels-card-v176.jpg",
-  "/assets/partner-cards/ferryhopper-card-v176.jpg",
-  "/assets/partner-cards/nazar-card-v176.jpg",
-  "/assets/partner-cards/radisson-hotels-card-v176.jpg",
-  "/assets/partner-cards/strawberry-card-v176.jpg",
+  "/assets/partner-cards/citybox-hotels-card-v178.jpg",
+  "/assets/partner-cards/elite-hotels-card-v178.jpg",
+  "/assets/partner-cards/ferryhopper-card-v178.jpg",
+  "/assets/partner-cards/nazar-card-v178.jpg",
+  "/assets/partner-cards/radisson-hotels-card-v178.jpg",
+  "/assets/partner-cards/strawberry-card-v178.jpg",
   "/assets/video/front-hero-v116.mp4",
   "/spania/",
   "/spania/spania-city.css?v=129"

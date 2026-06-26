@@ -810,6 +810,103 @@
     { city:"Orlando", name:"Alle flyplasser", country:"USA", code:"ORL", aliases:["orlando", "orl", "mco"] }
   ];
 
+  const EXTRA_AIRPORT_SUGGESTIONS = [
+    { city:"Sandefjord", name:"Torp", country:"Norge", code:"TRF", aliases:["sandefjord", "torp", "oslo torp", "trf"] },
+    { city:"Haugesund", name:"Karmøy", country:"Norge", code:"HAU", aliases:["haugesund", "karmøy", "karmoy", "hau"] },
+    { city:"Bodø", name:"Bodø", country:"Norge", code:"BOO", aliases:["bodø", "bodo", "boo"] },
+    { city:"Harstad/Narvik", name:"Evenes", country:"Norge", code:"EVE", aliases:["evenes", "harstad", "narvik", "harstad narvik", "eve"] },
+    { city:"Alta", name:"Alta", country:"Norge", code:"ALF", aliases:["alta", "alf"] },
+    { city:"Kirkenes", name:"Høybuktmoen", country:"Norge", code:"KKN", aliases:["kirkenes", "høybuktmoen", "hoybuktmoen", "kkn"] },
+    { city:"Bardufoss", name:"Bardufoss", country:"Norge", code:"BDU", aliases:["bardufoss", "bdu"] },
+    { city:"Svalbard", name:"Longyearbyen", country:"Norge", code:"LYR", aliases:["svalbard", "longyearbyen", "lyr"] },
+    { city:"Molde", name:"Årø", country:"Norge", code:"MOL", aliases:["molde", "årø", "aro", "mol"] },
+    { city:"Kristiansund", name:"Kvernberget", country:"Norge", code:"KSU", aliases:["kristiansund", "kvernberget", "ksu"] },
+    { city:"Lakselv", name:"Banak", country:"Norge", code:"LKL", aliases:["lakselv", "banak", "lkl"] },
+    { city:"Billund", name:"Billund", country:"Danmark", code:"BLL", aliases:["billund", "legoland", "bll"] },
+    { city:"Aalborg", name:"Aalborg", country:"Danmark", code:"AAL", aliases:["aalborg", "ålborg", "aal"] },
+    { city:"Aarhus", name:"Aarhus", country:"Danmark", code:"AAR", aliases:["aarhus", "århus", "aar"] },
+    { city:"Gøteborg", name:"Landvetter", country:"Sverige", code:"GOT", aliases:["gøteborg", "goteborg", "gothenburg", "landvetter", "got"] },
+    { city:"Malmö", name:"Malmö", country:"Sverige", code:"MMX", aliases:["malmö", "malmo", "mmx"] },
+    { city:"Helsinki", name:"Vantaa", country:"Finland", code:"HEL", aliases:["helsinki", "vantaa", "hel"] },
+    { city:"Reykjavik", name:"Keflavik", country:"Island", code:"KEF", aliases:["reykjavik", "keflavik", "island", "kef"] },
+    { city:"Dublin", name:"Dublin", country:"Irland", code:"DUB", aliases:["dublin", "dub"] },
+    { city:"Edinburgh", name:"Edinburgh", country:"Storbritannia", code:"EDI", aliases:["edinburgh", "edi"] },
+    { city:"Manchester", name:"Manchester", country:"Storbritannia", code:"MAN", aliases:["manchester", "man"] },
+    { city:"Brussel", name:"Brussels Airport", country:"Belgia", code:"BRU", aliases:["brussel", "brussels", "bru"] },
+    { city:"Zürich", name:"Zürich", country:"Sveits", code:"ZRH", aliases:["zürich", "zurich", "zrh"] },
+    { city:"Genève", name:"Geneva", country:"Sveits", code:"GVA", aliases:["genève", "geneve", "geneva", "gva"] },
+    { city:"Wien", name:"Vienna", country:"Østerrike", code:"VIE", aliases:["wien", "vienna", "vie"] },
+    { city:"Budapest", name:"Ferenc Liszt", country:"Ungarn", code:"BUD", aliases:["budapest", "bud"] },
+    { city:"Warszawa", name:"Chopin", country:"Polen", code:"WAW", aliases:["warszawa", "warsaw", "waw"] },
+    { city:"Gdansk", name:"Lech Walesa", country:"Polen", code:"GDN", aliases:["gdansk", "gdańsk", "gdn"] },
+    { city:"Riga", name:"Riga", country:"Latvia", code:"RIX", aliases:["riga", "rix"] },
+    { city:"Tallinn", name:"Tallinn", country:"Estland", code:"TLL", aliases:["tallinn", "tll"] },
+    { city:"Vilnius", name:"Vilnius", country:"Litauen", code:"VNO", aliases:["vilnius", "vno"] },
+    { city:"Istanbul", name:"Istanbul Airport", country:"Tyrkia", code:"IST", aliases:["istanbul", "ist"] },
+    { city:"Antalya", name:"Antalya", country:"Tyrkia", code:"AYT", aliases:["antalya", "ayt"] },
+    { city:"Dalaman", name:"Dalaman", country:"Tyrkia", code:"DLM", aliases:["dalaman", "dlm"] },
+    { city:"Bodrum", name:"Milas-Bodrum", country:"Tyrkia", code:"BJV", aliases:["bodrum", "milas", "bjv"] },
+    { city:"Valencia", name:"Valencia", country:"Spania", code:"VLC", aliases:["valencia", "vlc"] },
+    { city:"Sevilla", name:"Sevilla", country:"Spania", code:"SVQ", aliases:["sevilla", "seville", "svq"] },
+    { city:"Bilbao", name:"Bilbao", country:"Spania", code:"BIO", aliases:["bilbao", "bio"] },
+    { city:"Ibiza", name:"Ibiza", country:"Spania", code:"IBZ", aliases:["ibiza", "ibz"] },
+    { city:"Menorca", name:"Mahon", country:"Spania", code:"MAH", aliases:["menorca", "mahon", "mah"] },
+    { city:"Tenerife Sør", name:"Reina Sofia", country:"Spania", code:"TFS", aliases:["tenerife sør", "tenerife sor", "tenerife south", "reina sofia", "tfs"] },
+    { city:"Lanzarote", name:"Arrecife", country:"Spania", code:"ACE", aliases:["lanzarote", "arrecife", "ace"] },
+    { city:"Fuerteventura", name:"Fuerteventura", country:"Spania", code:"FUE", aliases:["fuerteventura", "fue"] },
+    { city:"Faro", name:"Faro", country:"Portugal", code:"FAO", aliases:["faro", "algarve", "fao"] },
+    { city:"Porto", name:"Francisco Sá Carneiro", country:"Portugal", code:"OPO", aliases:["porto", "opo"] },
+    { city:"Madeira", name:"Funchal", country:"Portugal", code:"FNC", aliases:["madeira", "funchal", "fnc"] },
+    { city:"Milano", name:"Alle flyplasser", country:"Italia", code:"MIL", aliases:["milano", "milan", "mil", "mxp", "lin", "bgy"] },
+    { city:"Venezia", name:"Marco Polo", country:"Italia", code:"VCE", aliases:["venezia", "venice", "vce"] },
+    { city:"Napoli", name:"Napoli", country:"Italia", code:"NAP", aliases:["napoli", "naples", "nap"] },
+    { city:"Pisa", name:"Galileo Galilei", country:"Italia", code:"PSA", aliases:["pisa", "psa"] },
+    { city:"Catania", name:"Fontanarossa", country:"Italia", code:"CTA", aliases:["catania", "sicilia", "sicily", "cta"] },
+    { city:"Bologna", name:"Guglielmo Marconi", country:"Italia", code:"BLQ", aliases:["bologna", "blq"] },
+    { city:"Marseille", name:"Marseille Provence", country:"Frankrike", code:"MRS", aliases:["marseille", "mrs"] },
+    { city:"Lyon", name:"Saint Exupéry", country:"Frankrike", code:"LYS", aliases:["lyon", "lys"] },
+    { city:"Bordeaux", name:"Bordeaux", country:"Frankrike", code:"BOD", aliases:["bordeaux", "bod"] },
+    { city:"Toulouse", name:"Blagnac", country:"Frankrike", code:"TLS", aliases:["toulouse", "tls"] },
+    { city:"Thessaloniki", name:"Makedonia", country:"Hellas", code:"SKG", aliases:["thessaloniki", "saloniki", "skg"] },
+    { city:"Kos", name:"Kos", country:"Hellas", code:"KGS", aliases:["kos", "kgs"] },
+    { city:"Korfu", name:"Ioannis Kapodistrias", country:"Hellas", code:"CFU", aliases:["korfu", "corfu", "cfu"] },
+    { city:"Zakynthos", name:"Dionysios Solomos", country:"Hellas", code:"ZTH", aliases:["zakynthos", "zante", "zth"] },
+    { city:"Chania", name:"Ioannis Daskalogiannis", country:"Hellas", code:"CHQ", aliases:["chania", "kreta chania", "chq"] },
+    { city:"Split", name:"Split", country:"Kroatia", code:"SPU", aliases:["split", "spu"] },
+    { city:"Dubrovnik", name:"Dubrovnik", country:"Kroatia", code:"DBV", aliases:["dubrovnik", "dbv"] },
+    { city:"Zagreb", name:"Zagreb", country:"Kroatia", code:"ZAG", aliases:["zagreb", "zag"] },
+    { city:"Marrakech", name:"Menara", country:"Marokko", code:"RAK", aliases:["marrakech", "marakesh", "rak"] },
+    { city:"Agadir", name:"Al Massira", country:"Marokko", code:"AGA", aliases:["agadir", "aga"] },
+    { city:"Sharm el-Sheikh", name:"Sharm el-Sheikh", country:"Egypt", code:"SSH", aliases:["sharm", "sharm el sheikh", "ssh"] },
+    { city:"Hurghada", name:"Hurghada", country:"Egypt", code:"HRG", aliases:["hurghada", "hrg"] },
+    { city:"Cairo", name:"Cairo International", country:"Egypt", code:"CAI", aliases:["cairo", "kairo", "cai"] },
+    { city:"Doha", name:"Hamad", country:"Qatar", code:"DOH", aliases:["doha", "doh"] },
+    { city:"Abu Dhabi", name:"Zayed International", country:"UAE", code:"AUH", aliases:["abu dhabi", "auh"] },
+    { city:"Phuket", name:"Phuket", country:"Thailand", code:"HKT", aliases:["phuket", "hkt"] },
+    { city:"Krabi", name:"Krabi", country:"Thailand", code:"KBV", aliases:["krabi", "kbv"] },
+    { city:"Koh Samui", name:"Samui", country:"Thailand", code:"USM", aliases:["koh samui", "samui", "usm"] },
+    { city:"Chiang Mai", name:"Chiang Mai", country:"Thailand", code:"CNX", aliases:["chiang mai", "cnx"] },
+    { city:"Singapore", name:"Changi", country:"Singapore", code:"SIN", aliases:["singapore", "changi", "sin"] },
+    { city:"Kuala Lumpur", name:"Kuala Lumpur International", country:"Malaysia", code:"KUL", aliases:["kuala lumpur", "kul"] },
+    { city:"Ho Chi Minh-byen", name:"Tan Son Nhat", country:"Vietnam", code:"SGN", aliases:["ho chi minh", "saigon", "sgn"] },
+    { city:"Hanoi", name:"Noi Bai", country:"Vietnam", code:"HAN", aliases:["hanoi", "han"] },
+    { city:"Hongkong", name:"Hong Kong International", country:"Hongkong", code:"HKG", aliases:["hongkong", "hong kong", "hkg"] },
+    { city:"Seoul", name:"Incheon", country:"Sør-Korea", code:"ICN", aliases:["seoul", "incheon", "icn"] },
+    { city:"Los Angeles", name:"Los Angeles International", country:"USA", code:"LAX", aliases:["los angeles", "la", "lax"] },
+    { city:"San Francisco", name:"San Francisco International", country:"USA", code:"SFO", aliases:["san francisco", "sfo"] },
+    { city:"Las Vegas", name:"Harry Reid", country:"USA", code:"LAS", aliases:["las vegas", "vegas", "las"] },
+    { city:"Chicago", name:"Alle flyplasser", country:"USA", code:"CHI", aliases:["chicago", "chi", "ord"] },
+    { city:"Boston", name:"Logan", country:"USA", code:"BOS", aliases:["boston", "bos"] },
+    { city:"Washington DC", name:"Alle flyplasser", country:"USA", code:"WAS", aliases:["washington", "washington dc", "was", "iad"] },
+    { city:"Fort Lauderdale", name:"Fort Lauderdale", country:"USA", code:"FLL", aliases:["fort lauderdale", "fll"] },
+    { city:"Cancun", name:"Cancun", country:"Mexico", code:"CUN", aliases:["cancun", "cun"] },
+    { city:"Toronto", name:"Pearson", country:"Canada", code:"YYZ", aliases:["toronto", "yyz"] },
+    { city:"Vancouver", name:"Vancouver", country:"Canada", code:"YVR", aliases:["vancouver", "yvr"] }
+  ];
+
+  const ALL_AIRPORT_SUGGESTIONS = [...AIRPORT_SUGGESTIONS, ...EXTRA_AIRPORT_SUGGESTIONS]
+    .filter((item, index, all) => all.findIndex((other) => other.code === item.code) === index);
+
   function normalizeSearch(value) {
     return String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").trim();
   }
@@ -817,7 +914,7 @@
   function findAirportSuggestion(value) {
     const q = normalizeSearch(value).replace(/[^a-z0-9 ]/g, "");
     if (!q) return null;
-    return AIRPORT_SUGGESTIONS.find((item) => item.code.toLowerCase() === q || item.aliases.some((alias) => normalizeSearch(alias).replace(/[^a-z0-9 ]/g, "") === q));
+    return ALL_AIRPORT_SUGGESTIONS.find((item) => item.code.toLowerCase() === q || item.aliases.some((alias) => normalizeSearch(alias).replace(/[^a-z0-9 ]/g, "") === q));
   }
 
   function airportCode(value) {
@@ -867,7 +964,7 @@
     const renderMatches = (matches, isCarPickup, sourceLabel = "") => {
       currentMatches = matches;
       if (!matches.length) {
-        list.innerHTML = `<div class="airport-empty">Ingen forslag funnet. Skriv by/flyplass, f.eks. Oslo eller OSL.</div>`;
+        list.innerHTML = `<div class="airport-empty">Ingen forslag funnet. Skriv by, land eller IATA-kode, f.eks. Oslo, Malaga eller OSL.</div>`;
         list.classList.add("show");
         return;
       }
@@ -880,15 +977,25 @@
       list.classList.add("show");
     };
 
-    const localMatches = (q) => AIRPORT_SUGGESTIONS
+    const localMatches = (q) => ALL_AIRPORT_SUGGESTIONS
       .map((item) => {
-        const hay = normalizeSearch(`${item.city} ${item.name} ${item.country} ${item.code} ${item.aliases.join(" ")}`);
-        const starts = normalizeSearch(item.city).startsWith(q) || item.code.toLowerCase().startsWith(q);
-        return hay.includes(q) ? { item, score: starts ? 0 : 1 } : null;
+        const aliases = item.aliases || [];
+        const hay = normalizeSearch(`${item.city} ${item.name} ${item.country} ${item.code} ${aliases.join(" ")}`).replace(/[^a-z0-9 ]/g, "");
+        const compactHay = hay.replace(/\s+/g, "");
+        const compactQ = q.replace(/[^a-z0-9]/g, "");
+        const code = item.code.toLowerCase();
+        const city = normalizeSearch(item.city).replace(/[^a-z0-9 ]/g, "");
+        const aliasStarts = aliases.some((alias) => normalizeSearch(alias).replace(/[^a-z0-9 ]/g, "").startsWith(q));
+        const codeMatch = code === q || code.startsWith(q);
+        const cityStarts = city.startsWith(q);
+        const includes = hay.includes(q) || compactHay.includes(compactQ);
+        if (!includes && !codeMatch && !aliasStarts) return null;
+        const score = code === q ? 0 : codeMatch ? 1 : cityStarts ? 2 : aliasStarts ? 3 : 4;
+        return { item, score };
       })
       .filter(Boolean)
       .sort((a,b) => a.score - b.score || a.item.city.localeCompare(b.item.city, "nb"))
-      .slice(0, 5)
+      .slice(0, 9)
       .map(({item}) => item);
 
     const fetchRemoteMatches = (q, isCarPickup) => {
@@ -900,7 +1007,7 @@
           remoteAbort = new AbortController();
           const url = new URL("/api/amadeus-airport-search", window.location.origin);
           url.searchParams.set("keyword", q);
-          url.searchParams.set("limit", "6");
+          url.searchParams.set("limit", "10");
           const response = await fetch(url.toString(), { signal: remoteAbort.signal });
           const data = await response.json().catch(() => ({}));
           if (!response.ok || !data?.success || !Array.isArray(data.locations)) return;
@@ -913,8 +1020,8 @@
           }));
           const merged = [...remote, ...currentMatches]
             .filter((item, index, all) => /^[A-Z]{3}$/.test(item.code) && all.findIndex((other) => other.code === item.code) === index)
-            .slice(0, 6);
-          if (document.activeElement === input && normalizeSearch(input.value) === q) renderMatches(merged, isCarPickup, " • Amadeus");
+            .slice(0, 10);
+          if (document.activeElement === input && normalizeSearch(input.value) === q) renderMatches(merged, isCarPickup);
         } catch (error) {
           if (error?.name !== "AbortError") {
             // Lokale forslag står igjen hvis Amadeus ikke svarer.
@@ -940,7 +1047,7 @@
     list.addEventListener("click", (event) => {
       const button = event.target.closest("[data-airport-code]");
       if (!button) return;
-      const item = currentMatches.find((entry) => entry.code === button.dataset.airportCode) || AIRPORT_SUGGESTIONS.find((entry) => entry.code === button.dataset.airportCode);
+      const item = currentMatches.find((entry) => entry.code === button.dataset.airportCode) || ALL_AIRPORT_SUGGESTIONS.find((entry) => entry.code === button.dataset.airportCode);
       if (item) choose(item);
     });
   }
