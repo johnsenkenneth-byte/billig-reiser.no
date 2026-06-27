@@ -1,8 +1,9 @@
-const CACHE_VERSION = "billig-reiser-pwa-v179-airport-autocomplete";
+const CACHE_VERSION = "billig-reiser-pwa-v180-greece-guide";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/reisehacks.html",
+  "/hellas/",
   "/offline.html",
   "/manifest.webmanifest",
   "/favicon.ico",
