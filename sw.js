@@ -1,9 +1,19 @@
-const CACHE_VERSION = "billig-reiser-pwa-v180-greece-guide";
+const CACHE_VERSION = "billig-reiser-pwa-v181-greece-island-guides";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/reisehacks.html",
   "/hellas/",
+  "/hellas/kreta/",
+  "/hellas/rhodos/",
+  "/hellas/kos/",
+  "/hellas/santorini/",
+  "/hellas/korfu/",
+  "/hellas/zakynthos/",
+  "/hellas/mykonos/",
+  "/hellas/naxos/",
+  "/hellas/paros/",
+  "/hellas/athen/",
   "/offline.html",
   "/manifest.webmanifest",
   "/favicon.ico",
