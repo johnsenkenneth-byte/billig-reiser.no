@@ -375,7 +375,9 @@
   };
 
   let currentSearchType = "flight";
-  const blankTabState = () => ({ from: "", to: "", depart: "", ret: "", adults: "2", children: "0" });
+  let currentFlightTripType = "roundtrip";
+  const normalizeFlightTripType = (value) => ["roundtrip", "oneway", "multicity"].includes(value) ? value : "roundtrip";
+  const blankTabState = () => ({ from: "", to: "", multiTo: "", depart: "", ret: "", adults: "2", children: "0", flightTrip: "roundtrip" });
   const tabStates = {
     flight: blankTabState(),
     hotel: blankTabState(),
@@ -394,6 +396,28 @@
     const key = value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, "").trim();
     return key === "valgfritt" || key === "optional" ? "" : value;
   };
+
+  function updateFlightTripUi() {
+    const form = $("travelSearch");
+    if (form) form.dataset.flightTrip = currentFlightTripType;
+    document.querySelectorAll("[data-flight-trip]").forEach((btn) => {
+      const active = btn.dataset.flightTrip === currentFlightTripType;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-selected", active ? "true" : "false");
+    });
+  }
+
+  function setFlightTripType(type, { resetDates = false } = {}) {
+    currentFlightTripType = normalizeFlightTripType(type);
+    if (currentSearchType === "flight" && resetDates && currentFlightTripType === "oneway" && $("returnDate")) {
+      $("returnDate").value = "";
+    }
+    if (currentSearchType === "flight" && currentFlightTripType === "oneway") calendarPicking = "depart";
+    updateFlightTripUi();
+    updateDateRangeSummary();
+    updateSearchPreview();
+    renderLiveCalendar();
+  }
 
   function addDaysISO(days) {
     const d = new Date();
@@ -444,12 +468,16 @@
     const rawDepart = clean($("departDate")?.value);
     const rawReturn = clean($("returnDate")?.value);
     const useFallback = Boolean(options.forUrl);
+    const flightTrip = currentSearchType === "flight" ? currentFlightTripType : "roundtrip";
+    const needsSecondDate = !(currentSearchType === "flight" && flightTrip === "oneway");
     const depart = validISO(rawDepart) ? rawDepart : (useFallback ? fallbackDepartISO() : "");
-    const ret = validISO(rawReturn) && (!depart || rawReturn > depart) ? rawReturn : (useFallback ? fallbackReturnISO(depart || fallbackDepartISO()) : "");
+    const ret = needsSecondDate ? (validISO(rawReturn) && (!depart || rawReturn > depart) ? rawReturn : (useFallback ? fallbackReturnISO(depart || fallbackDepartISO()) : "")) : "";
     return {
       type: currentSearchType,
+      tripType: flightTrip,
       from: currentSearchType === "hotel" || currentSearchType === "interhome" ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
+      multiTo: currentSearchType === "flight" && flightTrip === "multicity" ? searchFieldForUrl("multiCityTo") : "",
       depart,
       ret,
       adults: adultsRaw.replace(/\D/g, "") || "2",
@@ -492,8 +520,10 @@
   function updateDateRangeSummary() {
     const form = $("travelSearch");
     const toggle = $("dateRangeToggle");
-    if ($("dateRangeDepart")) $("dateRangeDepart").textContent = compactDate($("departDate")?.value, "Avreise");
-    if ($("dateRangeReturn")) $("dateRangeReturn").textContent = compactDate($("returnDate")?.value, "Hjemreise");
+    const isOneWayFlight = currentSearchType === "flight" && currentFlightTripType === "oneway";
+    const isMultiCityFlight = currentSearchType === "flight" && currentFlightTripType === "multicity";
+    if ($("dateRangeDepart")) $("dateRangeDepart").textContent = compactDate($("departDate")?.value, isMultiCityFlight ? "Første fly" : "Avreise");
+    if ($("dateRangeReturn")) $("dateRangeReturn").textContent = isOneWayFlight ? "Én vei" : compactDate($("returnDate")?.value, isMultiCityFlight ? "Neste fly" : "Hjemreise");
     if (toggle) toggle.setAttribute("aria-expanded", form?.classList.contains("calendar-open") ? "true" : "false");
   }
 
@@ -506,7 +536,7 @@
   }
 
   function openDateRangePicker() {
-    calendarPicking = $("departDate")?.value ? "return" : "depart";
+    calendarPicking = currentSearchType === "flight" && currentFlightTripType === "oneway" ? "depart" : ($("departDate")?.value ? "return" : "depart");
     setCalendarOpen(true);
     $("dateRangeToggle")?.focus();
   }
@@ -542,15 +572,19 @@
     const base = new Date();
     base.setMonth(base.getMonth() + calendarMonthOffset, 1);
     const next = new Date(base.getFullYear(), base.getMonth() + 1, 1);
-    const departLabel = currentSearchType === "hotel" ? "Innsjekk" : currentSearchType === "interhome" ? "Ankomst" : currentSearchType === "restplass" ? "Tidligste avreise" : currentSearchType === "car" ? "Hentedato" : "Avreise";
-    const returnLabel = currentSearchType === "hotel" ? "Utsjekk" : currentSearchType === "interhome" ? "Avreise" : currentSearchType === "car" ? "Leveringsdato" : "Retur";
+    const isOneWayFlight = currentSearchType === "flight" && currentFlightTripType === "oneway";
+    const isMultiCityFlight = currentSearchType === "flight" && currentFlightTripType === "multicity";
+    const departLabel = currentSearchType === "hotel" ? "Innsjekk" : currentSearchType === "interhome" ? "Ankomst" : currentSearchType === "restplass" ? "Tidligste avreise" : currentSearchType === "car" ? "Hentedato" : isMultiCityFlight ? "Første fly" : "Avreise";
+    const returnLabel = currentSearchType === "hotel" ? "Utsjekk" : currentSearchType === "interhome" ? "Avreise" : currentSearchType === "car" ? "Leveringsdato" : isMultiCityFlight ? "Neste fly" : "Retur";
+    const returnPickButton = isOneWayFlight ? "" : `<button type="button" data-calendar-pick="return" class="${calendarPicking === "return" ? "active" : ""}">${returnLabel}</button>`;
+    const calendarHelp = isOneWayFlight ? "Velg avreisedato for én vei." : isMultiCityFlight ? "Velg dato for første fly, deretter dato for neste etappe." : "Velg utreise først, deretter hjemreise i den samme kalenderen.";
 
     box.innerHTML = `
       <div class="calendar-header">
-        <div><strong>${calendarPicking === "depart" ? `Velg ${departLabel.toLowerCase()}` : `Velg ${returnLabel.toLowerCase()}`}</strong><small>Velg utreise først, deretter hjemreise i den samme kalenderen.</small></div>
+        <div><strong>${calendarPicking === "depart" ? `Velg ${departLabel.toLowerCase()}` : `Velg ${returnLabel.toLowerCase()}`}</strong><small>${calendarHelp}</small></div>
         <div class="calendar-controls">
           <button type="button" data-calendar-pick="depart" class="${calendarPicking === "depart" ? "active" : ""}">${departLabel}</button>
-          <button type="button" data-calendar-pick="return" class="${calendarPicking === "return" ? "active" : ""}">${returnLabel}</button>
+          ${returnPickButton}
           <button type="button" data-calendar-prev aria-label="Forrige måned">‹</button>
           <button type="button" data-calendar-next aria-label="Neste måned">›</button>
         </div>
@@ -581,6 +615,18 @@
     const depart = $("departDate");
     const ret = $("returnDate");
     const currentDepart = depart?.value || "";
+    const isOneWayFlight = currentSearchType === "flight" && currentFlightTripType === "oneway";
+
+    if (isOneWayFlight) {
+      if (depart) depart.value = iso;
+      if (ret) ret.value = "";
+      calendarPicking = "depart";
+      ensureFreshDates(false);
+      updateSearchPreview();
+      renderLiveCalendar();
+      setCalendarOpen(false);
+      return;
+    }
 
     if (calendarPicking === "depart" || !currentDepart || iso <= currentDepart) {
       if (depart) depart.value = iso;
@@ -603,21 +649,26 @@
     tabStates[key] = {
       from: key === "hotel" || key === "interhome" ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
+      multiTo: key === "flight" ? searchFieldForUrl("multiCityTo") : "",
       depart: $("departDate")?.value || "",
       ret: $("returnDate")?.value || "",
       adults: $("adults")?.value || "2",
-      children: $("children")?.value || "0"
+      children: $("children")?.value || "0",
+      flightTrip: key === "flight" ? currentFlightTripType : "roundtrip"
     };
   }
 
   function loadTabState(type = currentSearchType) {
     const state = tabStates[type] || blankTabState();
+    if (type === "flight") currentFlightTripType = normalizeFlightTripType(state.flightTrip);
     if ($("fromCity")) $("fromCity").value = state.from || "";
     if ($("toCity")) $("toCity").value = state.to || "";
+    if ($("multiCityTo")) $("multiCityTo").value = state.multiTo || "";
     if ($("departDate")) $("departDate").value = state.depart || "";
     if ($("returnDate")) $("returnDate").value = state.ret || "";
     if ($("adults")) $("adults").value = state.adults || "2";
     if ($("children")) $("children").value = state.children || "0";
+    updateFlightTripUi();
     updateTravelerSummary();
     updateDateRangeSummary();
   }
@@ -660,6 +711,10 @@
         button.textContent = state.to ? `SØK HOTELL I ${state.to.toUpperCase()} 🔎` : "SØK HOTELL 🔎";
       } else if (currentSearchType === "car") {
         button.textContent = "SJEKK LEIEBILPRISER PÅ ECONOMYBOOKINGS ↗";
+      } else if (currentSearchType === "flight" && currentFlightTripType === "oneway") {
+        button.textContent = state.from && state.to ? `VIS ÉN VEI ${state.from.toUpperCase()} → ${state.to.toUpperCase()} ↗` : "VIS ÉN VEI HOS KIWI ↗";
+      } else if (currentSearchType === "flight" && currentFlightTripType === "multicity") {
+        button.textContent = state.from && state.to && state.multiTo ? `VIS FLERE BYER ${state.from.toUpperCase()} → ${state.to.toUpperCase()} → ${state.multiTo.toUpperCase()} ↗` : "VIS FLERE BYER HOS EXPEDIA ↗";
       } else if (state.from && state.to) {
         button.textContent = `VIS FLYPRISER ${state.from.toUpperCase()} → ${state.to.toUpperCase()} 🔎`;
       } else {
@@ -681,6 +736,10 @@
         helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} gjester.` : "Skriv byen du vil bo i — så åpnes Hotels.com rett på hotell i den byen.";
       } else if (currentSearchType === "car") {
         helper.textContent = state.from ? `Leiebil: ${state.from} • ${state.depart || "velg hentedato"} til ${state.ret || "velg levering"}. Prisene åpnes hos EconomyBookings.` : "Skriv hentested eller flyplass — så åpnes leiebilprisene hos EconomyBookings.";
+      } else if (currentSearchType === "flight" && currentFlightTripType === "oneway") {
+        helper.textContent = state.from && state.to ? `Én vei: ${state.from} → ${state.to} • ${state.depart || "velg avreise"} • ${state.adults} reisende. Åpnes hos Kiwi med affiliate-sporing.` : "Velg én vei, skriv fra og til, og velg avreisedato. Søket åpnes hos Kiwi.";
+      } else if (currentSearchType === "flight" && currentFlightTripType === "multicity") {
+        helper.textContent = state.from && state.to && state.multiTo ? `Flere byer: ${state.from} → ${state.to} → ${state.multiTo} • ${state.depart || "første fly"} / ${state.ret || "neste fly"} • ${state.adults} reisende. Åpnes hos Expedia.no.` : "Flere byer: fyll inn fra, første by og neste by. Vi åpner Expedia.no med multi-city-søk.";
       } else {
         helper.textContent = (state.from && state.to) ? `Flysøk: ${state.from} → ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} reisende.` : "Skriv by eller IATA-kode — velg forslag, så åpnes flypartner med riktig søk.";
       }
@@ -1054,12 +1113,13 @@
 
   function buildFlightDirectUrl(state) {
     const depart = state.depart || fallbackDepartISO();
-    const ret = state.ret || fallbackReturnISO(depart);
+    const tripType = normalizeFlightTripType(state.tripType);
+    const ret = tripType === "oneway" ? "" : (state.ret || fallbackReturnISO(depart));
     const kiwiTarget = new URL("https://www.kiwi.com/deep");
     kiwiTarget.searchParams.set("from", airportCode(state.from));
     kiwiTarget.searchParams.set("to", airportCode(state.to));
     kiwiTarget.searchParams.set("departure", depart);
-    kiwiTarget.searchParams.set("return", ret);
+    if (ret) kiwiTarget.searchParams.set("return", ret);
     kiwiTarget.searchParams.set("adults", state.adults);
     if (Number(state.children)) kiwiTarget.searchParams.set("children", state.children);
     kiwiTarget.searchParams.set("locale", "no");
@@ -1148,8 +1208,10 @@
   function buildExpediaFlightSearchUrl(state) {
     const fromPlace = expediaFlightPlace(state.from);
     const toPlace = expediaFlightPlace(state.to);
+    const multiPlace = expediaFlightPlace(state.multiTo || state.to);
+    const tripType = normalizeFlightTripType(state.tripType);
     const depart = state.depart || fallbackDepartISO();
-    const ret = state.ret || fallbackReturnISO(depart);
+    const ret = tripType === "oneway" ? "" : (state.ret || fallbackReturnISO(depart));
     const adults = Math.max(1, Number(state.adults || 1));
     const children = Math.max(0, Number(state.children || 0));
     const passengers = [`adults:${adults}`];
@@ -1159,14 +1221,20 @@
     const url = new URL("https://www.expedia.no/Flights-Search");
     url.searchParams.set("flight-type", "on");
     url.searchParams.set("mode", "search");
-    url.searchParams.set("trip", "roundtrip");
+    url.searchParams.set("trip", tripType === "oneway" ? "oneway" : tripType === "multicity" ? "multicity" : "roundtrip");
     url.searchParams.set("leg1", `from:${fromPlace},to:${toPlace},departure:${expediaDotDate(depart)}TANYT,fromType:U,toType:U`);
-    url.searchParams.set("leg2", `from:${toPlace},to:${fromPlace},departure:${expediaDotDate(ret)}TANYT,fromType:U,toType:U`);
+    if (tripType === "roundtrip") {
+      url.searchParams.set("leg2", `from:${toPlace},to:${fromPlace},departure:${expediaDotDate(ret)}TANYT,fromType:U,toType:U`);
+    } else if (tripType === "multicity") {
+      url.searchParams.set("leg2", `from:${toPlace},to:${multiPlace},departure:${expediaDotDate(ret)}TANYT,fromType:U,toType:U`);
+    }
     url.searchParams.set("options", "cabinclass:economy");
     url.searchParams.set("fromDate", expediaDotDate(depart));
-    url.searchParams.set("toDate", expediaDotDate(ret));
     url.searchParams.set("d1", expediaLooseISO(depart));
-    url.searchParams.set("d2", expediaLooseISO(ret));
+    if (tripType !== "oneway") {
+      url.searchParams.set("toDate", expediaDotDate(ret));
+      url.searchParams.set("d2", expediaLooseISO(ret));
+    }
     url.searchParams.set("passengers", passengers.join(","));
     return url.toString();
   }
@@ -1795,11 +1863,40 @@
   }
 
   function buildFlightChoicePartners(state, offers = []) {
+    const tripType = normalizeFlightTripType(state.tripType);
+    if (tripType === "oneway") {
+      return [
+        {
+          label: "Kiwi",
+          href: buildFlightDirectUrl(state),
+          meta: "Én vei"
+        },
+        {
+          label: "Expedia",
+          href: buildExpediaFlightUrl(state),
+          meta: "Sammenlign"
+        }
+      ].filter((partner) => partner.href);
+    }
+    if (tripType === "multicity") {
+      return [
+        {
+          label: "Expedia",
+          href: buildExpediaFlightUrl(state),
+          meta: "Flere byer"
+        }
+      ].filter((partner) => partner.href);
+    }
     return [
       {
         label: "Kiwi",
         href: buildFlightDirectUrl(state),
         meta: "Åpne valgt rute"
+      },
+      {
+        label: "Expedia",
+        href: buildExpediaFlightUrl(state),
+        meta: "Sammenlign hos Expedia"
       }
     ].filter((partner) => partner.href);
   }
@@ -1879,6 +1976,7 @@
   function openLiveDealSearch(route) {
     const dates = liveDealDates(route);
     setSearchType("flight");
+    setFlightTripType("roundtrip");
     if ($("fromCity")) {
       $("fromCity").value = `${route.fromCity} (${route.from})`;
       $("fromCity").dataset.airportCode = route.from;
@@ -1990,7 +2088,7 @@
     clearTimeout(livePriceTimer);
 
     const state = submittedState || readSearchState();
-    if (currentSearchType !== "flight" || !state.from || !state.to || !state.depart) {
+    if (currentSearchType !== "flight" || state.tripType !== "roundtrip" || !state.from || !state.to || !state.depart) {
       setLiveBox("", false);
       return;
     }
@@ -2084,8 +2182,8 @@
         <small>${escapeHTML(partner.meta)}</small>
       </a>`).join("");
     const statusHtml = error && !offers.length
-      ? `<p class="flight-confirm-note">Livepris fra Amadeus er ikke tilgjengelig akkurat nå. Du kan likevel åpne valgt rute hos Kiwi.</p>`
-      : `<p class="flight-confirm-note">Prisene er en indikasjon fra Amadeus. Kiwi åpner valgt rute automatisk; endelig pris, bagasje og betaling bekreftes hos Kiwi.</p>`;
+      ? `<p class="flight-confirm-note">Livepris fra Amadeus er ikke tilgjengelig akkurat nå. Du kan likevel åpne valgt rute hos en flypartner.</p>`
+      : `<p class="flight-confirm-note">Prisene er en indikasjon fra Amadeus. Endelig pris, bagasje og betaling bekreftes hos flypartneren.</p>`;
     const routeDetailsHtml = `
       <div class="flight-confirm-route">
         <span><b>Fra</b>${escapeHTML(from)}</span>
@@ -2213,6 +2311,9 @@
     }
 
     if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
+    if (state.tripType === "multicity" && !state.multiTo) throw new Error("Skriv inn neste by for flere byer-søket.");
+    if (state.tripType === "oneway") return buildFlightDirectUrl(state);
+    if (state.tripType === "multicity") return buildExpediaFlightUrl(state);
     return buildFlightUrl(state);
   }
 
@@ -2227,7 +2328,10 @@
     currentSearchType = nextType;
     loadTabState(currentSearchType);
     const form = $("travelSearch");
-    if (form) form.dataset.mode = currentSearchType;
+    if (form) {
+      form.dataset.mode = currentSearchType;
+      form.dataset.flightTrip = currentFlightTripType;
+    }
 
     document.querySelectorAll("[data-search-type]").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.searchType === currentSearchType);
@@ -2238,6 +2342,7 @@
 
     const fromLabel = $("fromLabel");
     const toLabel = $("toLabel");
+    const multiCityLabel = $("multiCityLabel");
     const departLabel = $("departLabel");
     const returnLabel = $("returnLabel");
     const dateRangeLabel = $("dateRangeLabel");
@@ -2323,16 +2428,22 @@
       if (from) from.placeholder = "Skriv by/flyplass, f.eks. Alicante eller OSL";
       if (to) to.placeholder = "Samme sted som henting";
     } else {
-      if (dateRangeLabel) dateRangeLabel.textContent = "Avreise og hjemreise";
-      if (fromLabel) fromLabel.textContent = "Hvor reiser du fra?";
-      if (toLabel) toLabel.textContent = "Hvor vil du reise?";
+      const isOneWayFlight = currentFlightTripType === "oneway";
+      const isMultiCityFlight = currentFlightTripType === "multicity";
+      if (dateRangeLabel) dateRangeLabel.textContent = isOneWayFlight ? "Avreise" : isMultiCityFlight ? "Flydatoer" : "Avreise og hjemreise";
+      if (fromLabel) fromLabel.textContent = isMultiCityFlight ? "Fra" : "Hvor reiser du fra?";
+      if (toLabel) toLabel.textContent = isMultiCityFlight ? "Første by" : "Hvor vil du reise?";
+      if (multiCityLabel) multiCityLabel.textContent = "Neste by";
       if (departLabel) departLabel.textContent = "Avreise";
-      if (returnLabel) returnLabel.textContent = "Retur";
+      if (returnLabel) returnLabel.textContent = isMultiCityFlight ? "Neste fly" : isOneWayFlight ? "" : "Retur";
       if (adultsLabel) adultsLabel.textContent = "Reisende";
       if (from) from.placeholder = "Skriv by/flyplass, f.eks. Oslo";
-      if (to) to.placeholder = "Skriv reisemål, f.eks. Bangkok";
+      if (to) to.placeholder = isMultiCityFlight ? "Første stopp, f.eks. Bangkok" : "Skriv reisemål, f.eks. Bangkok";
+      if ($("multiCityTo")) $("multiCityTo").placeholder = "Neste stopp, f.eks. Tokyo";
+      if (isOneWayFlight && $("returnDate")) $("returnDate").value = "";
     }
 
+    updateFlightTripUi();
     updateTravelerSummary();
     updateSearchPreview();
     renderLiveCalendar();
@@ -2451,6 +2562,15 @@
     let target = "";
     if (currentSearchType === "flight") {
       if (!state.from || !state.to) return false;
+      if (state.tripType === "multicity" && !state.multiTo) return false;
+      if (state.tripType === "oneway") {
+        window.open(buildFlightDirectUrl(state), "_blank", "noopener,noreferrer");
+        return true;
+      }
+      if (state.tripType === "multicity") {
+        window.open(buildExpediaFlightUrl(state), "_blank", "noopener,noreferrer");
+        return true;
+      }
       openFlightPriceConfirm(state);
       return true;
     } else if (currentSearchType === "hotel") {
@@ -2577,9 +2697,18 @@
     ensureFreshDates(false);
     attachAirportAutocomplete("fromCity", "Forslag til avreiseflyplass");
     attachAirportAutocomplete("toCity", "Forslag til reisemål");
+    attachAirportAutocomplete("multiCityTo", "Forslag til neste by");
 
     document.querySelectorAll("[data-search-type]").forEach((btn) => {
       btn.addEventListener("click", () => setSearchType(btn.dataset.searchType));
+    });
+    document.querySelectorAll("[data-flight-trip]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setSearchType("flight");
+        setFlightTripType(btn.dataset.flightTrip, { resetDates: true });
+        if (btn.dataset.flightTrip === "multicity") $("multiCityTo")?.focus();
+        else $("fromCity")?.focus();
+      });
     });
     document.querySelectorAll("[data-smart-service]").forEach((btn) => {
       btn.addEventListener("click", () => activateSmartService(btn.dataset.smartService));
@@ -2616,7 +2745,7 @@
       }
     });
 
-    ["fromCity", "toCity", "departDate", "returnDate", "adults", "children"].forEach((id) => {
+    ["fromCity", "toCity", "multiCityTo", "departDate", "returnDate", "adults", "children"].forEach((id) => {
       const el = $(id);
       if (el) {
         el.addEventListener("input", () => { updateSearchPreview(); renderLiveCalendar(); });
@@ -2646,8 +2775,15 @@
           if (button && oldText) button.textContent = oldText;
         } else if (currentSearchType === "flight") {
           if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
-          await openFlightPriceConfirm(state);
-          return;
+          if (state.tripType === "multicity" && !state.multiTo) throw new Error("Skriv inn neste by for flere byer-søket.");
+          if (state.tripType === "oneway") {
+            target = buildFlightDirectUrl(state);
+          } else if (state.tripType === "multicity") {
+            target = buildExpediaFlightUrl(state);
+          } else {
+            await openFlightPriceConfirm(state);
+            return;
+          }
         } else {
           target = buildPartnerTarget();
         }

@@ -128,6 +128,11 @@
 <button data-smart-service="car" type="button"><b class="service-icon"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="m10 25 3-8c.5-1.5 1.5-2 3-2h8c1.5 0 2.5.5 3 2l3 8"/><path d="M8 25h24v6H8zM12 31v3m16-3v3M12 27h3m10 0h3M14 21h12"/><path class="spark" d="M30 11h4m-2-2v4"/></svg></b><span>Leiebil</span></button>
 </div>
 <div aria-live="polite" class="search-mode-title" id="searchModeTitle"><b>Fly</b><span>Velg avreisested, reisemål, dato og antall reisende.</span></div>
+<div aria-label="Velg flyreise" class="flight-trip-toggle" id="flightTripToggle" role="tablist">
+<button aria-selected="true" class="active" data-flight-trip="roundtrip" role="tab" type="button">Tur-retur</button>
+<button aria-selected="false" data-flight-trip="oneway" role="tab" type="button">Én vei</button>
+<button aria-selected="false" data-flight-trip="multicity" role="tab" type="button">Flere byer</button>
+</div>
 <section aria-label="Raske valg for charter og restplass" class="tui-quick-panel" id="tuiQuickPanel">
 <div class="tui-quick-head"><span><b>Charter, restplass og pakkereiser</b><small>Velg et utgangspunkt, juster søket og se utvalg hos TUI og Nazar.</small></span><em>TUI + Nazar</em></div>
 <div class="tui-quick-grid">
@@ -170,6 +175,7 @@
 <div class="fields search-fields">
 <label class="field-from"><span class="field-icon field-icon-origin"><svg aria-hidden="true" viewBox="0 0 36 36"><circle cx="18" cy="18" r="8"/><circle cx="18" cy="18" r="2"/><path d="M18 5v7m0 12v7M5 18h7m12 0h7"/></svg></span><small id="fromLabel">Hvor reiser du fra?</small><input id="fromCity" name="from" placeholder="Skriv by eller flyplass"/></label>
 <label class="field-to"><span class="field-icon field-icon-destination"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="m18 6 3.2 8.8L30 18l-8.8 3.2L18 30l-3.2-8.8L6 18l8.8-3.2Z"/><circle cx="18" cy="18" r="2"/></svg></span><small id="toLabel">Hvor vil du reise?</small><input id="toCity" name="to" placeholder="Skriv reisemål"/></label>
+<label class="field-multi-city"><span class="field-icon field-icon-destination"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="M8 26c6-11 14-11 20-2"/><circle cx="10" cy="24" r="3"/><circle cx="18" cy="14" r="3"/><circle cx="28" cy="22" r="3"/><path d="M12 22l4-6m5 0 5 5"/></svg></span><small id="multiCityLabel">Neste by</small><input id="multiCityTo" name="multiTo" placeholder="Skriv neste by"/></label>
 <label class="date-range-field"><span class="field-icon field-icon-dates"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="M8 11h20v17H8zM13 7v7m10-7v7M8 16h20"/><path d="M13 22h10m-3-3 3 3-3 3"/></svg></span><small id="dateRangeLabel">Datoer</small><button aria-expanded="false" class="date-range-toggle" id="dateRangeToggle" type="button"><span id="dateRangeDepart">Velg avreise</span><i aria-hidden="true">→</i><span id="dateRangeReturn">Velg hjemreise</span></button><input id="departDate" name="depart" type="hidden"/><input id="returnDate" name="return" type="hidden"/></label>
 <label class="traveler-field"><span class="field-icon field-icon-travelers"><svg aria-hidden="true" viewBox="0 0 36 36"><circle cx="18" cy="13" r="4"/><path d="M10 27c1.5-4 4.2-6 8-6s6.5 2 8 6"/><circle cx="18" cy="18" r="13"/></svg></span><small id="adultsLabel">Reisende</small><button aria-expanded="false" class="traveler-toggle" id="travelerToggle" type="button">2 voksne, 0 barn</button><div aria-label="Velg reisende" class="traveler-menu" id="travelerMenu"><div class="traveler-row"><span>Voksne</span><div class="stepper"><button aria-label="Færre voksne" class="step-btn" data-step="-1" data-step-target="adults" type="button">−</button><input id="adults" inputmode="numeric" max="9" min="1" name="adults" type="number" value="2"/><button aria-label="Flere voksne" class="step-btn" data-step="1" data-step-target="adults" type="button">+</button></div></div><div class="traveler-row" id="childrenRow"><span>Barn</span><div class="stepper"><button aria-label="Færre barn" class="step-btn" data-step="-1" data-step-target="children" type="button">−</button><input id="children" inputmode="numeric" max="8" min="0" name="children" type="number" value="0"/><button aria-label="Flere barn" class="step-btn" data-step="1" data-step-target="children" type="button">+</button></div></div><button class="traveler-done" id="travelerDone" type="button">FERDIG</button></div></label>
 </div>
@@ -491,7 +497,7 @@
 <img alt="" aria-hidden="true" class="pixel" data-consent-src="https://www.ftjcfx.com/image-101724638-13852710" height="1" width="1"/>
 <script defer="" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script defer="" src="affiliate-config.js?v=172"></script>
-<script defer="" src="app.js?v=174"></script>
+<script defer="" src="app.js?v=183"></script>
 <script data-consent-src="https://www.anrdoezrs.net/am/101724638/include/allCj/generate/onLoad/exclude/5275619,6385999,5289022,7211102,6061620,4861279/impressions/page/am.js" type="text/plain"></script>
 <div aria-label="Informasjon om cookies" aria-live="polite" class="cookie-banner" id="cookieBanner" role="dialog">
 <div>

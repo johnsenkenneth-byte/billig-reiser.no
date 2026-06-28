@@ -17,7 +17,18 @@ const img = {
   rhodesOld: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Lindos_Windmill.jpg/1280px-Lindos_Windmill.jpg",
   kos: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Kos_-_Strand_beiTigkaki.JPG/1280px-Kos_-_Strand_beiTigkaki.JPG",
   santorini: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Oia%2C_Santorini_HDR_sunset.jpg/1280px-Oia%2C_Santorini_HDR_sunset.jpg",
-  santoriniBeach: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Oia%2C_Santorini_HDR_sunset.jpg/1280px-Oia%2C_Santorini_HDR_sunset.jpg",
+  santoriniImerovigli: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Imerovigli_01.jpg/1280px-Imerovigli_01.jpg",
+  santoriniFira: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Nea_Kameni_seen_from_Fira_-_Santorini_-_Greece.jpg/1280px-Nea_Kameni_seen_from_Fira_-_Santorini_-_Greece.jpg",
+  santoriniKamari: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Kamari_Beach%2C_Santorini%2C_Greece_-_panoramio.jpg/1280px-Kamari_Beach%2C_Santorini%2C_Greece_-_panoramio.jpg",
+  santoriniPerissa: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Beach_-_Perissa_-_Santorini_-_Greece_-_02.jpg/1280px-Beach_-_Perissa_-_Santorini_-_Greece_-_02.jpg",
+  santoriniPerivolos: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Perivolos_beach%2C_Santorini_%281335681187%29.jpg/1280px-Perivolos_beach%2C_Santorini_%281335681187%29.jpg",
+  santoriniVlychada: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Santorin_%28GR%29%2C_Exomytis%2C_Vlychada_Beach_--_2017_--_2791.jpg/1280px-Santorin_%28GR%29%2C_Exomytis%2C_Vlychada_Beach_--_2017_--_2791.jpg",
+  santoriniRedBeach: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Red_Beach_in_Santorini.jpg/1280px-Red_Beach_in_Santorini.jpg",
+  santoriniAkrotiri: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Archaeological_site_of_Akrotiri_-_Santorini_-_July_12th_2012_-_98.jpg/1280px-Archaeological_site_of_Akrotiri_-_Santorini_-_July_12th_2012_-_98.jpg",
+  santoriniCaldera: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Alexander_-_Cycladic_Cruises_tour_ship_-_Santorini_-_Greece_-_01.jpg/1280px-Alexander_-_Cycladic_Cruises_tour_ship_-_Santorini_-_Greece_-_01.jpg",
+  santoriniVineyard: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Santorini_vineyard.jpg/1280px-Santorini_vineyard.jpg",
+  santoriniFood: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Tomato_fritters_of_Santorini_%28Tomatokeftedes%29.jpg/1280px-Tomato_fritters_of_Santorini_%28Tomatokeftedes%29.jpg",
+  santoriniBeach: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Kamari_Beach%2C_Santorini%2C_Greece_-_panoramio.jpg/1280px-Kamari_Beach%2C_Santorini%2C_Greece_-_panoramio.jpg",
   corfu: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Old_Corfu_town_aerial_01.jpg/1280px-Old_Corfu_town_aerial_01.jpg",
   zakynthos: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Navagio%2C_Zante_02.jpg/1280px-Navagio%2C_Zante_02.jpg",
   mykonos: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Little_Venice%2C_Mykonos.jpg/1280px-Little_Venice%2C_Mykonos.jpg",
@@ -79,7 +90,7 @@ const islands = [
     ],
     activities: [
       ["Knossos og Heraklion", "Historie og museum som passer godt tidlig i ferien.", gyg("Crete Knossos Heraklion tour")],
-      ["Balos og Gramvousa", "Båttur som selger godt fordi logistikken blir enklere.", gyg("Crete Balos Gramvousa boat trip")],
+      ["Balos og Gramvousa", "Båttur som gjør logistikken enklere og gir en fin heldag på sjøen.", gyg("Crete Balos Gramvousa boat trip")],
       ["Samaria-ravinen", "Heldagstur for aktive reisende og naturinteresserte.", gyg("Crete Samaria Gorge hike")]
     ]
   },
@@ -91,7 +102,7 @@ const islands = [
     cardImage: img.rhodes,
     summary: "Best for Lindos, gamlebyen, barnevennlige resorts, varme kvelder, Anthony Quinn Bay og båtutflukter.",
     intro: [
-      "Rhodos er lett å selge fordi øya kombinerer sol, gamleby, familiehotell, Lindos og varme kvelder. Det er et trygt valg for charter og enkle ukeferier.",
+      "Rhodos fungerer godt fordi øya kombinerer sol, gamleby, familiehotell, Lindos og varme kvelder. Det er et trygt valg for charter og enkle ukeferier.",
       "Bo nær Rhodos by hvis du vil ha mat, historie og kvelder. Velg Faliraki, Kolymbia eller Kiotari for resortferie. Lindos passer best for par og voksne."
     ],
     bestFor: "Charter, familier, par, all inclusive",
@@ -182,31 +193,31 @@ const islands = [
     airport: "Santorini (JTR)",
     season: "Mai-juni og september-oktober. Juli og august er svært travelt.",
     areas: [
-      ["Oia", "Best for ikonisk utsikt, romantikk og høy pris."],
-      ["Imerovigli", "Best for roligere luksus og caldera uten like mye trengsel."],
-      ["Fira", "Best for logistikk, buss, restauranter og mer kveldsliv."]
+      ["Oia", "Best for ikonisk utsikt, romantikk og høy pris.", img.santorini, "Oia på Santorini"],
+      ["Imerovigli", "Best for roligere luksus og caldera uten like mye trengsel.", img.santoriniImerovigli, "Imerovigli på Santorini"],
+      ["Fira", "Best for logistikk, buss, restauranter og mer kveldsliv.", img.santoriniFira, "Utsikt fra Fira på Santorini"]
     ],
     hotels: [
-      ["Canaves Oia Suites", "Luksus", "Oia", "★★★★★", "Ikonisk caldera-hotell for en stor parreise.", img.hotelSantorini, bookingHotel("canaves-oia-suites")],
+      ["Canaves Oia Suites", "Luksus", "Oia", "★★★★★", "Ikonisk caldera-hotell for en stor parreise.", img.santorini, bookingHotel("canaves-oia-suites"), "Oia på Santorini"],
       ["Katikies Santorini", "Boutique", "Oia", "★★★★★", "Klassisk Santorini-hotell med hvit arkitektur og utsikt.", img.hotelKatikies, bookingHotel("katikies")],
-      ["Anassa Deluxe Suites", "Billigere base", "Kamari", "★★★★", "Smart valg når strand og pris er viktigere enn caldera.", img.santoriniBeach, bookingHotel("anassa-deluxe-suites")]
+      ["Anassa Deluxe Suites", "Billigere base", "Kamari", "★★★★", "Smart valg når strand og pris er viktigere enn caldera.", img.santoriniKamari, bookingHotel("anassa-deluxe-suites"), "Kamari-stranden på Santorini"]
     ],
     food: [
-      ["Metaxi Mas", "Et av øyas beste allround-valg, litt unna Oia-prisene."],
-      ["Selene", "Finere Santorini-middag for matinteresserte."],
-      ["To Psaraki", "Godt sjømatvalg ved Vlychada."],
-      ["Billig tips", "Gyros i Fira, bakerier og enklere steder i Karterados/Firostefani."]
+      ["Metaxi Mas", "Et av øyas beste allround-valg, litt unna Oia-prisene.", img.santoriniFood, "Santorini-mat"],
+      ["Selene", "Finere Santorini-middag for matinteresserte.", img.santoriniVineyard, "Vinmarker på Santorini"],
+      ["To Psaraki", "Godt sjømatvalg ved Vlychada.", img.santoriniVlychada, "Vlychada på Santorini"],
+      ["Billig tips", "Gyros i Fira, bakerier og enklere steder i Karterados/Firostefani.", img.santoriniFood, "Tomatokeftedes fra Santorini"]
     ],
     beaches: [
-      ["Perissa og Perivolos", "Mest praktiske strandvalg med svart sand."],
-      ["Kamari", "Enkel strandbase med hoteller og restauranter."],
-      ["Vlychada", "Mer dramatisk landskap og roligere følelse."],
-      ["Red Beach", "Fotogen, men best som kort stopp, ikke heldagsstrand."]
+      ["Perissa og Perivolos", "Mest praktiske strandvalg med svart sand.", img.santoriniPerivolos, "Perivolos-stranden på Santorini"],
+      ["Kamari", "Enkel strandbase med hoteller og restauranter.", img.santoriniKamari, "Kamari-stranden på Santorini"],
+      ["Vlychada", "Mer dramatisk landskap og roligere følelse.", img.santoriniVlychada, "Vlychada-stranden på Santorini"],
+      ["Red Beach", "Fotogen, men best som kort stopp, ikke heldagsstrand.", img.santoriniRedBeach, "Red Beach på Santorini"]
     ],
     activities: [
-      ["Caldera cruise", "Klassisk tur med caldera-utsikt, badestopp og solnedgang.", gyg("Santorini caldera sunset cruise")],
-      ["Akrotiri", "Historie og arkeologi som gir variasjon fra utsikt og solnedgang.", gyg("Santorini Akrotiri tour")],
-      ["Vinsmaking", "Santorini-vin og solnedgang passer svært godt for par.", gyg("Santorini wine tasting tour")]
+      ["Caldera cruise", "Klassisk tur med caldera-utsikt, badestopp og solnedgang.", gyg("Santorini caldera sunset cruise"), img.santoriniCaldera, "Båt i calderaen på Santorini"],
+      ["Akrotiri", "Historie og arkeologi som gir variasjon fra utsikt og solnedgang.", gyg("Santorini Akrotiri tour"), img.santoriniAkrotiri, "Akrotiri-utgravningene på Santorini"],
+      ["Vinsmaking", "Santorini-vin og solnedgang passer svært godt for par.", gyg("Santorini wine tasting tour"), img.santoriniVineyard, "Vinmarker på Santorini"]
     ]
   },
   {
@@ -521,10 +532,11 @@ function nav(active = "Hellas") {
   </nav>`;
 }
 
-function hotelCard([name, type, location, stars, why, image, link], island) {
+function hotelCard([name, type, location, stars, why, image, link, imageAlt], island) {
+  const altText = imageAlt || `${name} i ${island}`;
   return `<article class="mockup-hotel-card">
           <div class="mockup-hotel-media">
-            <img src="${attr(image)}" alt="${attr(name)} i ${attr(island)}" loading="lazy" decoding="async" />
+            <img src="${attr(image)}" alt="${attr(altText)}" loading="lazy" decoding="async" />
             <div class="mockup-photo-stars">${esc(stars)}</div>
           </div>
           <div class="mockup-hotel-content">
@@ -538,17 +550,21 @@ function hotelCard([name, type, location, stars, why, image, link], island) {
         </article>`;
 }
 
-function guideCard([title, text], image, island) {
+function guideCard([title, text, itemImage, itemAlt], image, island) {
+  const photo = itemImage || image;
+  const altText = itemAlt || `${title} i ${island}`;
   return `<article class="guide-card">
-          <img class="guide-card-photo" src="${attr(image)}" alt="${attr(title)} i ${attr(island)}" loading="lazy" decoding="async" />
+          <img class="guide-card-photo" src="${attr(photo)}" alt="${attr(altText)}" loading="lazy" decoding="async" />
           <h3>${esc(title)}</h3>
           <p>${esc(text)}</p>
         </article>`;
 }
 
-function activityCard([title, text, link], image, island) {
+function activityCard([title, text, link, itemImage, itemAlt], image, island) {
+  const photo = itemImage || image;
+  const altText = itemAlt || `${title} i ${island}`;
   return `<article class="activity-card">
-          <img class="activity-photo" src="${attr(image)}" alt="${attr(title)} i ${attr(island)}" loading="lazy" decoding="async" />
+          <img class="activity-photo" src="${attr(photo)}" alt="${attr(altText)}" loading="lazy" decoding="async" />
           <span class="badge">${link === FERRYHOPPER ? "Ferryhopper" : "GetYourGuide"}</span>
           <h3>${esc(title)}</h3>
           <p>${esc(text)}</p>

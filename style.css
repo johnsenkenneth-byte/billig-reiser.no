@@ -4767,6 +4767,92 @@ html body form#travelSearch[data-mode="interhome"] .search-fields.fields .field-
   grid-column:1/-1!important;
 }
 
+/* BR v183: flight trip type tabs */
+#travelSearch .flight-trip-toggle{
+  display:flex;
+  align-items:center;
+  gap:0;
+  width:100%;
+  margin:10px 0 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+
+#travelSearch .flight-trip-toggle button{
+  position:relative;
+  min-height:44px;
+  border:0;
+  border-radius:0;
+  background:transparent!important;
+  color:#c7d5e8!important;
+  box-shadow:none!important;
+  padding:0 clamp(14px,3vw,32px);
+  font:inherit;
+  font-size:clamp(15px,1.8vw,20px);
+  font-weight:950;
+  cursor:pointer;
+}
+
+#travelSearch .flight-trip-toggle button:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:3px;
+  border-radius:999px 999px 0 0;
+  background:transparent;
+}
+
+#travelSearch .flight-trip-toggle button.active{
+  color:#69e8ff!important;
+}
+
+#travelSearch .flight-trip-toggle button.active:after{
+  background:linear-gradient(90deg,#1d7cff,#69e8ff);
+}
+
+#travelSearch:not([data-mode="flight"]) .flight-trip-toggle{
+  display:none!important;
+}
+
+#travelSearch .field-multi-city{
+  display:none!important;
+}
+
+#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .field-multi-city{
+  display:flex!important;
+}
+
+#travelSearch[data-mode="flight"][data-flight-trip="oneway"] #dateRangeToggle i,
+#travelSearch[data-mode="flight"][data-flight-trip="oneway"] #dateRangeReturn{
+  display:none!important;
+}
+
+#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .fields.search-fields{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+
+@media(max-width:760px){
+  #travelSearch .flight-trip-toggle{
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+
+  #travelSearch .flight-trip-toggle::-webkit-scrollbar{
+    display:none;
+  }
+
+  #travelSearch .flight-trip-toggle button{
+    flex:0 0 auto;
+    padding:0 18px;
+    font-size:16px;
+  }
+
+  #travelSearch[data-mode="flight"][data-flight-trip="multicity"] .fields.search-fields{
+    grid-template-columns:1fr!important;
+  }
+}
+
 /* BR v108: static premium hero image instead of front-page video */
 html body .hero{
   background:

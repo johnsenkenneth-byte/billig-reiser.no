@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v181-greece-island-guides";
+const CACHE_VERSION = "billig-reiser-pwa-v183-flight-trip-types";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -26,7 +26,7 @@ const APP_SHELL = [
   "/style.css?v=177",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=172",
-  "/app.js?v=174",
+  "/app.js?v=183",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
