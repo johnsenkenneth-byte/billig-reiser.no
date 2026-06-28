@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Reisehacks | Smart reisemotor | Billig-reiser.no</title>
+  <meta name="description" content="Interaktiv reisehack-motor for billigere fly, hotell, pakkereiser, opplevelser, transfer, eSIM og smartere bookingvalg." />
+  <link rel="canonical" href="https://billig-reiser.no/reisehacks.html" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Billig-reiser.no" />
+  <meta property="og:title" content="Reisehacks | Billig-reiser.no" />
+  <meta property="og:description" content="Velg avreise, reisestil, måned og budsjett. Få konkrete reisehacks og partnerlenker videre." />
+  <meta property="og:image" content="https://billig-reiser.no/assets/front-hero-flight-map.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href="style.css?v=159" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#020913" />
+  <script defer src="/pwa-register.js"></script>
+  <link rel="stylesheet" href="/app-features.css?v=159" />
+  <script defer src="/app-features.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Reisehacks","description":"Interaktiv reisehack-motor for billigere fly, hotell, pakkereiser, opplevelser og praktiske reisevalg.","url":"https://billig-reiser.no/reisehacks.html","isPartOf":{"@type":"WebSite","name":"Billig-Reiser.no","url":"https://billig-reiser.no/"}}</script>
+  <style>
+    :root {
+      --hack-bg: #020913;
+      --hack-panel: rgba(7, 17, 32, .92);
+      --hack-panel-strong: rgba(10, 25, 46, .96);
+      --hack-ink: #f8fbff;
+      --hack-muted: #aebdd0;
+      --hack-line: rgba(255,255,255,.13);
+      --hack-cyan: #21d7ff;
+      --hack-pink: #ff25c8;
+      --hack-purple: #7a44ff;
+      --hack-action: linear-gradient(90deg, #ff25c8 0%, #7a44ff 52%, #21d7ff 100%);
+      --hack-action-ink: #050713;
+      --hack-shadow: 0 22px 70px rgba(0,0,0,.34);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--hack-ink);
+      background:
+        radial-gradient(circle at 14% 0%, rgba(255,37,200,.12), transparent 28%),
+        radial-gradient(circle at 86% 8%, rgba(33,215,255,.13), transparent 30%),
+        linear-gradient(180deg, #020913, #07111f 50%, #020913);
+    }
+
+    .hack-page a { color: inherit; text-decoration: none; }
+    .hack-page button,
+    .hack-page select,
+    .hack-page input { font: inherit; }
+
+    .hack-lab {
+      position: relative;
+      isolation: isolate;
+      min-height: 720px;
+      display: grid;
+      grid-template-columns: minmax(0, .86fr) minmax(360px, 1.14fr);
+      gap: 26px;
+      align-items: stretch;
+      padding: 46px clamp(14px, 4vw, 52px) 42px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(2,9,19,.96), rgba(2,9,19,.76), rgba(2,9,19,.48)),
+        url("assets/front-hero-flight-map.png") center / cover no-repeat;
+      border-bottom: 1px solid var(--hack-line);
+    }
+
+    .hack-lab::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 180px;
+      background: linear-gradient(180deg, transparent, rgba(2,9,19,.96));
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hack-copy {
+      align-self: center;
+      min-width: 0;
+      max-width: 660px;
+    }
+
+    .hack-kicker,
+    .mini-label {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      max-width: 100%;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid rgba(33,215,255,.32);
+      border-radius: 999px;
+      background: rgba(33,215,255,.08);
+      color: #8ff4ff;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .hack-copy h1 {
+      margin: 18px 0 16px;
+      font-size: 64px;
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .hack-copy p {
+      max-width: 640px;
+      margin: 0;
+      color: #d7e3f2;
+      font-size: 18px;
+      line-height: 1.58;
+    }
+
+    .hack-snapshots {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .hack-snapshots span {
+      min-height: 76px;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+      padding: 13px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,.07);
+    }
+
+    .hack-snapshots b {
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .hack-snapshots small {
+      color: var(--hack-muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .hack-tool {
+      align-self: center;
+      min-width: 0;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,37,200,.14), transparent 28%),
+        radial-gradient(circle at 100% 0%, rgba(33,215,255,.15), transparent 30%),
+        rgba(5, 13, 28, .88);
+      box-shadow: var(--hack-shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .hack-tool-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .hack-tool-head h2 {
+      margin: 6px 0 0;
+      font-size: 29px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hack-tool-head p {
+      margin: 5px 0 0;
+      color: var(--hack-muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .hack-live-pill {
+      flex: 0 0 auto;
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: #b8f7ff;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .hack-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px 20px 0;
+    }
+
+    .hack-field {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .hack-field span {
+      color: #9fb1c8;
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .hack-field select,
+    .hack-field input[type="range"] {
+      width: 100%;
+    }
+
+    .hack-field select {
+      min-height: 48px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      background: #071526;
+      color: #fff;
+      padding: 0 13px;
+      font-weight: 850;
+    }
+
+    .hack-field input[type="range"] {
+      accent-color: var(--hack-pink);
+    }
+
+    .budget-row {
+      min-height: 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 0 13px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      background: #071526;
+    }
+
+    .budget-row output {
+      color: #fff;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .style-row {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      padding-top: 2px;
+    }
+
+    .style-row button {
+      min-width: 0;
+      min-height: 46px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      color: #e9f4ff;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .style-row button.is-active {
+      border-color: transparent;
+      background: var(--hack-action);
+      color: var(--hack-action-ink);
+      box-shadow: 0 16px 38px rgba(255,37,200,.2);
+    }
+
+    .hack-result {
+      padding: 18px 20px 20px;
+    }
+
+    .hack-result-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 18px;
+      background: rgba(255,255,255,.055);
+    }
+
+    .hack-result-top h3 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    .hack-result-top p {
+      margin: 0;
+      color: #c6d4e5;
+      font-size: 13px;
+      line-height: 1.48;
+    }
+
+    .score-ring {
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, #071526 57%, transparent 58%),
+        conic-gradient(var(--hack-pink) var(--score, 76%), rgba(255,255,255,.12) 0);
+      color: #fff;
+      font-weight: 950;
+    }
+
+    .hack-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .hack-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(18,38,63,.94), rgba(7,17,32,.96));
+      box-shadow: 0 16px 36px rgba(0,0,0,.22);
+    }
+
+    .hack-card img {
+      display: block;
+      width: 100%;
+      height: 132px;
+      object-fit: cover;
+      background: #071526;
+    }
+
+    .hack-card div {
+      padding: 13px;
+    }
+
+    .hack-card small {
+      color: #7deaff;
+      font-size: 10px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .hack-card h4 {
+      margin: 5px 0 7px;
+      font-size: 19px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hack-card p {
+      min-height: 58px;
+      margin: 0;
+      color: #b8c8dc;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .hack-card strong {
+      display: block;
+      margin-top: 10px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .hack-actions {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .hack-actions a,
+    .tool-link,
+    .hack-mini-actions a {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: var(--hack-action);
+      color: var(--hack-action-ink);
+      padding: 0 13px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 950;
+      box-shadow: 0 16px 38px rgba(255,37,200,.2), 0 10px 30px rgba(33,215,255,.14);
+    }
+
+    .hack-actions a:hover,
+    .tool-link:hover,
+    .hack-mini-actions a:hover { filter: brightness(1.05) saturate(1.05); }
+
+    .hack-detail-band {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 48px 20px 12px;
+    }
+
+    .hack-panel {
+      border: 1px solid var(--hack-line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.045);
+      padding: 22px;
+    }
+
+    .hack-panel h2,
+    .hack-panel h3 {
+      margin: 7px 0 12px;
+      letter-spacing: 0;
+    }
+
+    .hack-panel h2 { font-size: 34px; line-height: 1.04; }
+    .hack-panel h3 { font-size: 24px; }
+    .hack-panel p { color: #c5d2e2; line-height: 1.62; }
+
+    .hack-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .hack-list article {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+    }
+
+    .hack-list b {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(33,215,255,.13);
+      color: #95f4ff;
+    }
+
+    .hack-list strong {
+      display: block;
+      margin-bottom: 3px;
+      color: #fff;
+    }
+
+    .hack-list span {
+      color: #b9c8da;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .hack-mini-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .hack-destinations {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 42px 20px 54px;
+    }
+
+    .section-headline {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 18px;
+    }
+
+    .section-headline h2 {
+      margin: 7px 0 0;
+      font-size: 36px;
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .section-headline p {
+      max-width: 620px;
+      color: var(--hack-muted);
+      line-height: 1.54;
+    }
+
+    .route-hack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .route-hack-card {
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(18,38,63,.96), rgba(7,17,32,.98));
+      box-shadow: 0 18px 44px rgba(0,0,0,.24);
+    }
+
+    .route-hack-card img {
+      display: block;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .route-hack-card div {
+      padding: 16px;
+    }
+
+    .route-hack-card small {
+      color: #7deaff;
+      font-size: 10px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .route-hack-card h3 {
+      margin: 7px 0 8px;
+      font-size: 23px;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    .route-hack-card p {
+      min-height: 74px;
+      color: #bdcadd;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .route-hack-card a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 12px;
+      border-radius: 13px;
+      background: var(--hack-action);
+      color: var(--hack-action-ink);
+      font-weight: 950;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px) {
+      .hack-lab { grid-template-columns: 1fr; padding-top: 32px; }
+      .hack-copy { max-width: 900px; }
+      .hack-copy h1 { font-size: 54px; }
+      .route-hack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hack-detail-band { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .hack-lab { padding: 22px 12px 30px; }
+      .hack-copy h1 { font-size: 40px; }
+      .hack-copy p { font-size: 16px; }
+      .hack-snapshots { grid-template-columns: 1fr; }
+      .hack-tool { border-radius: 22px; }
+      .hack-tool-head { display: block; }
+      .hack-live-pill { margin-top: 12px; }
+      .hack-controls { grid-template-columns: 1fr; padding: 14px 14px 0; }
+      .style-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .style-row button:last-child { grid-column: 1 / -1; }
+      .hack-result { padding: 14px; }
+      .hack-result-top { grid-template-columns: 1fr; }
+      .score-ring { width: 72px; height: 72px; }
+      .hack-card-grid,
+      .hack-actions,
+      .hack-mini-actions,
+      .route-hack-grid { grid-template-columns: 1fr; }
+      .hack-detail-band,
+      .hack-destinations { padding-left: 12px; padding-right: 12px; }
+      .section-headline { display: block; }
+      .route-hack-card p,
+      .hack-card p { min-height: 0; }
+    }
+  </style>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a aria-label="Billig-reiser.no" class="brand" href="/">
+      <img alt="Billig-reiser.no" decoding="async" height="1200" src="assets/billig-reiser-logo-full-v116.png" width="1200" />
+    </a>
+    <nav aria-label="Hovedmeny" class="nav desktop-nav">
+      <a href="reiseblogg.html">BLOGG</a>
+      <a aria-current="page" href="reisehacks.html">REISEHACKS</a>
+      <a href="reisemagasinet.html">REISEMAGASIN</a>
+      <a href="reiseradar.html">REISERADAR</a>
+    </nav>
+    <div class="top-actions"><span class="avatar">◎</span></div>
+    <a aria-label="Åpne meny" class="hamburger" href="#mobile-nav">☰</a>
+  </header>
+  <nav aria-label="Mobilmeny" class="mobile-nav" id="mobile-nav">
+    <a href="reiseblogg.html">Reiseblogg</a>
+    <a aria-current="page" href="reisehacks.html">Reisehacks</a>
+    <a href="reisemagasinet.html">Reisemagasin</a>
+    <a href="reiseradar.html">Reiseradar</a>
+  </nav>
+
+  <main class="hack-page">
+    <section class="hack-lab" aria-label="Reisehack-motor">
+      <div class="hack-copy">
+        <span class="hack-kicker">Smart reisemotor</span>
+        <h1>Reisehacks</h1>
+        <p>Velg avreise, reisestil, måned og budsjett. Motoren prioriterer ruter, bookinggrep og praktiske snarveier som kan gi mer reise for pengene.</p>
+        <div class="hack-snapshots" aria-label="Raske sparegrep">
+          <span><b>2-3 dager</b><small>flytt datoene rundt helg</small></span>
+          <span><b>1 stopp</b><small>kan senke langreisepris</small></span>
+          <span><b>sentrum + metro</b><small>ofte bedre hotellverdi</small></span>
+        </div>
+      </div>
+
+      <section class="hack-tool" aria-label="Finn reisehack">
+        <div class="hack-tool-head">
+          <div>
+            <span class="mini-label">Reisehack-motor</span>
+            <h2>Finn smarteste neste søk</h2>
+            <p>Forslagene oppdateres direkte når du endrer valg.</p>
+          </div>
+          <span class="hack-live-pill" id="hackLivePill">Matcher 12 ruter</span>
+        </div>
+
+        <form class="hack-controls" id="hackForm">
+          <label class="hack-field">
+            <span>Fra</span>
+            <select id="hackOrigin" name="origin">
+              <option value="OSL">Oslo</option>
+              <option value="BGO">Bergen</option>
+              <option value="SVG">Stavanger</option>
+              <option value="TRD">Trondheim</option>
+              <option value="TOS">Tromsø</option>
+            </select>
+          </label>
+          <label class="hack-field">
+            <span>Måned</span>
+            <select id="hackMonth" name="month">
+              <option value="2026-07">Juli 2026</option>
+              <option value="2026-08">August 2026</option>
+              <option value="2026-09" selected>September 2026</option>
+              <option value="2026-10">Oktober 2026</option>
+              <option value="2026-11">November 2026</option>
+              <option value="2026-12">Desember 2026</option>
+              <option value="2027-01">Januar 2027</option>
+              <option value="2027-02">Februar 2027</option>
+              <option value="2027-04">April 2027</option>
+            </select>
+          </label>
+          <label class="hack-field">
+            <span>Budsjett per person</span>
+            <span class="budget-row">
+              <input id="hackBudget" name="budget" type="range" min="2500" max="26000" step="500" value="8000" />
+              <output id="budgetOutput" for="hackBudget">8000 kr</output>
+            </span>
+          </label>
+          <label class="hack-field">
+            <span>Reisende</span>
+            <select id="hackTravelers" name="travelers">
+              <option value="1">1 voksen</option>
+              <option value="2" selected>2 voksne</option>
+              <option value="3">2 voksne + 1 barn</option>
+              <option value="4">2 voksne + 2 barn</option>
+            </select>
+          </label>
+          <div class="style-row" role="group" aria-label="Reisestil">
+            <button class="is-active" type="button" data-style="weekend">Weekend</button>
+            <button type="button" data-style="sun">Sol</button>
+            <button type="button" data-style="city">Storby</button>
+            <button type="button" data-style="family">Familie</button>
+            <button type="button" data-style="longhaul">Langreise</button>
+          </div>
+        </form>
+
+        <div class="hack-result" aria-live="polite">
+          <div class="hack-result-top">
+            <div>
+              <h3 id="resultTitle">København weekend</h3>
+              <p id="resultCopy">Kort flytid, lave hotellkostnader utenfor indre sentrum og mange gratis opplevelser.</p>
+            </div>
+            <div class="score-ring" id="scoreRing" style="--score: 76%">76%</div>
+          </div>
+          <div class="hack-card-grid" id="hackCards"></div>
+          <div class="hack-actions">
+            <a id="flightCta" href="#" target="_blank" rel="nofollow sponsored noopener">Sjekk flypris</a>
+            <a id="hotelCta" href="#" target="_blank" rel="nofollow sponsored noopener">Sjekk hotell</a>
+            <a id="activityCta" href="#" target="_blank" rel="nofollow sponsored noopener">Opplevelser</a>
+            <a id="packageCta" href="#" target="_blank" rel="nofollow sponsored noopener">Pakkereise</a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="hack-detail-band" aria-label="Smarte valg før booking">
+      <article class="hack-panel">
+        <span class="mini-label">Flyplass-hack</span>
+        <h2>Ikke start med dato. Start med fleksibilitet.</h2>
+        <p>De største prisforskjellene kommer ofte fra små justeringer: annen ukedag, litt lavere hotellstandard med bedre område, eller pakkereise når skoleferien presser flyprisene opp.</p>
+        <div class="hack-list" id="dynamicHackList"></div>
+      </article>
+      <aside class="hack-panel">
+        <span class="mini-label">Praktisk pakke</span>
+        <h3>Fiks det som ofte blir dyrt på stedet</h3>
+        <p>Transfer, mobildata, bagasjeoppbevaring og forsinkelseskrav er små ting som kan spise av budsjettet hvis du tar dem for sent.</p>
+        <div class="hack-mini-actions">
+          <a id="transferCta" href="#" target="_blank" rel="nofollow sponsored noopener">Transfer</a>
+          <a id="esimCta" href="#" target="_blank" rel="nofollow sponsored noopener">eSIM</a>
+          <a id="luggageCta" href="#" target="_blank" rel="nofollow sponsored noopener">Bagasje</a>
+          <a id="delayCta" href="#" target="_blank" rel="nofollow sponsored noopener">Flyforsinkelse</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="hack-destinations" aria-label="Populære reisehack-ruter">
+      <div class="section-headline">
+        <div>
+          <span class="mini-label">Ruter som ofte gir verdi</span>
+          <h2>Start med disse søkene</h2>
+        </div>
+        <p>Velg en rute, eller bruk motoren over for å få forslag som matcher reisestilen og budsjettet ditt.</p>
+      </div>
+      <div class="route-hack-grid" id="routeHackGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <strong>Billig-reiser.no</strong>
+    <nav>
+      <a href="/">Forside</a>
+      <a href="reisemagasinet.html">Reisemagasin</a>
+      <a href="reiseradar.html">Reiseradar</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </footer>
+
+  <script src="affiliate-config.js?v=159"></script>
+  <script>
+    (() => {
+      const affiliates = window.BR_AFFILIATES || {};
+      const travelpayoutsId = affiliates.travelpayoutsId || "718286";
+      const kiwiClickUrl = affiliates.kiwi || "https://c111.travelpayouts.com/click";
+      const bookingAid = affiliates.bookingComAid || "1522412";
+      const bookingFallback = affiliates.bookingCom || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412";
+      const klookBase = affiliates.klookSearchBase || "https://www.klook.com/nb/search/result/?query=";
+
+      const origins = {
+        OSL: { city: "Oslo", airport: "OSL" },
+        BGO: { city: "Bergen", airport: "BGO" },
+        SVG: { city: "Stavanger", airport: "SVG" },
+        TRD: { city: "Trondheim", airport: "TRD" },
+        TOS: { city: "Tromsø", airport: "TOS" }
+      };
+
+      const routes = [
+        { id:"cph", name:"København", code:"CPH", country:"Danmark", style:["weekend","city"], base:2700, nights:{weekend:3,city:3}, image:"assets/destinations/copenhagen-nyhavn-reiseradar.jpg", activity:"Copenhagen attractions", hotel:"København", why:"Kort reisevei, enkel metro og mange rimelige hotellvalg litt utenfor sentrum.", hack:"Reis torsdag kveld og hjem søndag ettermiddag for å få mer helg uten ekstra feriedag." },
+        { id:"roma", name:"Roma", code:"FCO", country:"Italia", style:["weekend","city"], base:3900, nights:{weekend:3,city:4}, image:"assets/destinations/roma-colosseum-reiseradar.jpg", activity:"Rome attractions", hotel:"Roma", why:"Stor opplevelsesverdi på kort tur, men hotellområde betyr mye for totalprisen.", hack:"Sjekk hotell ved Termini eller Prati hvis sentrum blir dyrt." },
+        { id:"alicante", name:"Alicante", code:"ALC", country:"Spania", style:["sun","family","weekend"], base:4300, nights:{sun:7,family:7,weekend:4}, image:"assets/destinations/alicante-santa-barbara-reiseradar.jpg", activity:"Alicante attractions", hotel:"Alicante", why:"Kort transfer, god hotellverdi og strand pluss by i samme tur.", hack:"September og oktober kan gi bedre hotellpris og fortsatt varmt badevær." },
+        { id:"mallorca", name:"Mallorca", code:"PMI", country:"Spania", style:["sun","family"], base:5600, nights:{sun:7,family:7}, image:"assets/destinations/mallorca-palma-cathedral-reiseradar.jpg", activity:"Mallorca boat trip", hotel:"Palma de Mallorca", why:"Sterkt valg for familier når fly, hotell og transfer matcher samme uke.", hack:"Sammenlign pakkereise mot separat fly og hotell i skoleferier." },
+        { id:"paris", name:"Paris", code:"PAR", country:"Frankrike", style:["weekend","city"], base:4200, nights:{weekend:3,city:4}, image:"assets/destinations/paris-eiffel-reiseradar.jpg", activity:"Paris attractions", hotel:"Paris", why:"Høy opplevelsesverdi, men hotell kan styres med metroavstand.", hack:"Velg hotell nær metroknutepunkt i stedet for rett ved attraksjonene." },
+        { id:"london", name:"London", code:"LON", country:"Storbritannia", style:["weekend","city","family"], base:4700, nights:{weekend:3,city:4,family:4}, image:"assets/destinations/london-tower-bridge-reiseradar.jpg", activity:"London attractions", hotel:"London", why:"Mange flyavganger gjør datojustering ekstra verdifullt.", hack:"Prøv tirsdag-lørdag hvis fredag-søndag er dyrt." },
+        { id:"bangkok", name:"Bangkok", code:"BKK", country:"Thailand", style:["longhaul","city"], base:9800, nights:{longhaul:12,city:5}, image:"assets/destinations/bangkok-v22.jpg", activity:"Bangkok activities", hotel:"Bangkok", why:"Mye hotell for pengene og et godt startpunkt for Thailand-rundreise.", hack:"Ett stopp kan være betydelig billigere enn direkteruter i høysesong." },
+        { id:"krabi", name:"Krabi", code:"KBV", country:"Thailand", style:["longhaul","sun","family"], base:11800, nights:{longhaul:12,sun:10,family:10}, image:"assets/destinations/krabi-v22.jpg", activity:"Krabi island hopping", hotel:"Krabi", why:"Bra kombinasjon av strand, øyhopping og roligere familiedager.", hack:"Sjekk Bangkok + innenriks separat hvis totalprisen virker høy." },
+        { id:"dubai", name:"Dubai", code:"DXB", country:"De forente arabiske emirater", style:["sun","family","longhaul"], base:7600, nights:{sun:6,family:6,longhaul:7}, image:"assets/destinations/dubai-skyline-reiseradar.jpg", activity:"Dubai attractions", hotel:"Dubai", why:"Solgaranti og mange hotellkampanjer uten lang reisetid.", hack:"Unngå de dyreste eventhelgene og sjekk hotell nær metro." }
+      ];
+
+      const state = {
+        origin: "OSL",
+        month: "2026-09",
+        budget: 8000,
+        travelers: 2,
+        style: "weekend"
+      };
+
+      const form = document.getElementById("hackForm");
+      const budgetOutput = document.getElementById("budgetOutput");
+      const routeGrid = document.getElementById("routeHackGrid");
+
+      function addDays(date, days) {
+        const next = new Date(date);
+        next.setDate(next.getDate() + days);
+        return next;
+      }
+
+      function iso(date) {
+        return date.toISOString().slice(0, 10);
+      }
+
+      function datesFor(route) {
+        const nights = route.nights[state.style] || route.nights.weekend || route.nights.sun || route.nights.longhaul || 5;
+        const parts = state.month.split("-").map(Number);
+        const departDay = state.style === "weekend" ? 12 : 9;
+        const depart = new Date(Date.UTC(parts[0], parts[1] - 1, departDay));
+        return { depart: iso(depart), ret: iso(addDays(depart, nights)), nights };
+      }
+
+      function adjustedPrice(route) {
+        let price = route.base;
+        if (state.origin === "TOS") price += 900;
+        if (state.origin === "BGO" || state.origin === "SVG" || state.origin === "TRD") price += route.style.includes("longhaul") ? 800 : 350;
+        if (state.month === "2026-07" || state.month === "2026-08") price += route.style.includes("family") || route.style.includes("sun") ? 1200 : 500;
+        if (state.month === "2026-12") price += route.style.includes("longhaul") || route.style.includes("sun") ? 1500 : 650;
+        if (state.month === "2027-01" && route.style.includes("longhaul")) price += 900;
+        return price;
+      }
+
+      function scoreRoute(route) {
+        const price = adjustedPrice(route);
+        const budgetFit = Math.max(0, Math.min(45, 45 - Math.max(0, price - state.budget) / 180));
+        const styleFit = route.style.includes(state.style) ? 38 : 12;
+        const seasonFit = (state.month === "2026-09" || state.month === "2026-10") && (route.style.includes("sun") || route.style.includes("city")) ? 12 : 7;
+        return Math.round(Math.min(96, budgetFit + styleFit + seasonFit));
+      }
+
+      function rankedRoutes() {
+        return routes
+          .map((route) => ({ ...route, price: adjustedPrice(route), score: scoreRoute(route) }))
+          .sort((a, b) => b.score - a.score || a.price - b.price);
+      }
+
+      function flightUrl(route) {
+        const dates = datesFor(route);
+        const kiwiTarget = new URL("https://www.kiwi.com/deep");
+        kiwiTarget.searchParams.set("from", origins[state.origin].airport);
+        kiwiTarget.searchParams.set("to", route.code);
+        kiwiTarget.searchParams.set("departure", dates.depart);
+        kiwiTarget.searchParams.set("return", dates.ret);
+        kiwiTarget.searchParams.set("adults", Math.min(2, Number(state.travelers || 2)));
+        if (Number(state.travelers) > 2) kiwiTarget.searchParams.set("children", String(Number(state.travelers) - 2));
+        kiwiTarget.searchParams.set("locale", "no");
+        kiwiTarget.searchParams.set("lang", "no");
+        kiwiTarget.searchParams.set("currency", "NOK");
+        kiwiTarget.searchParams.set("partner_market", "NO");
+
+        const click = new URL(kiwiClickUrl);
+        click.searchParams.set("shmarker", `${travelpayoutsId}.billigreiser_reisehacks`);
+        click.searchParams.set("promo_id", "3791");
+        click.searchParams.set("source_type", "customlink");
+        click.searchParams.set("type", "click");
+        click.searchParams.set("custom_url", kiwiTarget.toString());
+        return click.toString();
+      }
+
+      function hotelUrl(route) {
+        const dates = datesFor(route);
+        try {
+          const url = new URL("https://www.booking.com/searchresults.no.html");
+          url.searchParams.set("aid", bookingAid);
+          url.searchParams.set("ss", route.hotel || route.name);
+          url.searchParams.set("checkin", dates.depart);
+          url.searchParams.set("checkout", dates.ret);
+          url.searchParams.set("group_adults", Math.min(2, Number(state.travelers || 2)));
+          url.searchParams.set("no_rooms", "1");
+          url.searchParams.set("selected_currency", "NOK");
+          if (Number(state.travelers) > 2) url.searchParams.set("group_children", String(Number(state.travelers) - 2));
+          return url.toString();
+        } catch (error) {
+          return bookingFallback;
+        }
+      }
+
+      function activityUrl(route) {
+        const query = encodeURIComponent(route.activity || `${route.name} attractions`);
+        return `${klookBase}${query}`;
+      }
+
+      function packageUrl(route) {
+        if (route.style.includes("sun") || route.style.includes("family")) return affiliates.tuiRestplass || affiliates.packageTravelCreator || affiliates.packageTravel || "/";
+        return affiliates.packageTravelCreator || affiliates.packageTravel || affiliates.expediaCreator || "/";
+      }
+
+      function formatPrice(value) {
+        return `${Math.round(value / 100) * 100} kr`;
+      }
+
+      function renderCards(list) {
+        const cards = list.slice(0, 3).map((route) => {
+          const dates = datesFor(route);
+          return `<article class="hack-card">
+            <img src="${route.image}" alt="${route.name}" loading="lazy" decoding="async" />
+            <div>
+              <small>${route.country} · ${dates.nights} netter</small>
+              <h4>${route.name}</h4>
+              <p>${route.why}</p>
+              <strong>Prisindikator: ${formatPrice(route.price)}</strong>
+            </div>
+          </article>`;
+        }).join("");
+        document.getElementById("hackCards").innerHTML = cards;
+      }
+
+      function renderHackList(best) {
+        const origin = origins[state.origin].city;
+        const longhaul = best.style.includes("longhaul");
+        const items = [
+          { n:"1", title:"Flytt datoene", text:`Start fra ${origin}, men test avreise 2 dager før og etter valgt månedspunkt.` },
+          { n:"2", title: longhaul ? "Vurder ett stopp" : "Sjekk tidlig morgen", text: longhaul ? "Langreise kan falle mye i pris når du tåler ett godt stopp." : "De billigste helgerutene ligger ofte utenfor de mest behagelige klokkeslettene." },
+          { n:"3", title:"Bruk riktig hotellområde", text:`I ${best.name} er totalprisen ofte bedre litt utenfor mest kjente område, så lenge transporten er enkel.` },
+          { n:"4", title:"Book bare det som låser pris", text:"Fly, hotell med gratis avbestilling og de mest populære opplevelsene først. Småting kan vente." }
+        ];
+        document.getElementById("dynamicHackList").innerHTML = items.map((item) => `<article><b>${item.n}</b><span><strong>${item.title}</strong>${item.text}</span></article>`).join("");
+      }
+
+      function renderRouteGrid() {
+        routeGrid.innerHTML = routes.slice(0, 8).map((route) => `<article class="route-hack-card">
+          <img src="${route.image}" alt="${route.name}" loading="lazy" decoding="async" />
+          <div>
+            <small>${route.country}</small>
+            <h3>${route.name}</h3>
+            <p>${route.hack}</p>
+            <a href="${flightUrl(route)}" target="_blank" rel="nofollow sponsored noopener">Sjekk flypris</a>
+          </div>
+        </article>`).join("");
+      }
+
+      function render() {
+        budgetOutput.value = `${state.budget} kr`;
+        const ranked = rankedRoutes();
+        const best = ranked[0];
+        const dates = datesFor(best);
+        document.getElementById("hackLivePill").textContent = `Matcher ${ranked.filter((route) => route.style.includes(state.style)).length} ruter`;
+        document.getElementById("resultTitle").textContent = `${best.name} ${state.style === "weekend" ? "weekend" : "reise"}`;
+        document.getElementById("resultCopy").textContent = `${best.why} ${best.hack}`;
+        document.getElementById("scoreRing").style.setProperty("--score", `${best.score}%`);
+        document.getElementById("scoreRing").textContent = `${best.score}%`;
+        document.getElementById("flightCta").href = flightUrl(best);
+        document.getElementById("hotelCta").href = hotelUrl(best);
+        document.getElementById("activityCta").href = activityUrl(best);
+        document.getElementById("packageCta").href = packageUrl(best);
+        document.getElementById("transferCta").href = affiliates.transfer || affiliates.getTransfer || "#";
+        document.getElementById("esimCta").href = affiliates.saily || "#";
+        document.getElementById("luggageCta").href = affiliates.radicalStorage || "#";
+        document.getElementById("delayCta").href = affiliates.flightDelay || "#";
+        renderCards(ranked);
+        renderHackList(best);
+        renderRouteGrid();
+      }
+
+      form.addEventListener("input", (event) => {
+        const target = event.target;
+        if (target.id === "hackOrigin") state.origin = target.value;
+        if (target.id === "hackMonth") state.month = target.value;
+        if (target.id === "hackBudget") state.budget = Number(target.value);
+        if (target.id === "hackTravelers") state.travelers = Number(target.value);
+        render();
+      });
+
+      document.querySelectorAll("[data-style]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.style = button.dataset.style;
+          document.querySelectorAll("[data-style]").forEach((item) => item.classList.toggle("is-active", item === button));
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
