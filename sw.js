@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v190-search-controls";
+const CACHE_VERSION = "billig-reiser-pwa-v191-smart-search";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -23,10 +23,10 @@ const APP_SHELL = [
   "/favicon-512x512.png",
   "/apple-touch-icon.png",
   "/go/hotels.html",
-  "/style.css?v=190",
+  "/style.css?v=191",
   "/app-features.css?v=159",
-  "/affiliate-config.js?v=190",
-  "/app.js?v=190",
+  "/affiliate-config.js?v=191",
+  "/app.js?v=191",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",

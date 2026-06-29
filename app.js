@@ -377,6 +377,7 @@
   let currentSearchType = "flight";
   let currentFlightTripType = "roundtrip";
   let multiCityExtraStops = [];
+  let pendingSubmitSearchType = "";
   const normalizeFlightTripType = (value) => ["roundtrip", "oneway", "multicity"].includes(value) ? value : "roundtrip";
   const blankTabState = () => ({ from: "", to: "", multiTo: "", multiStops: [], depart: "", ret: "", adults: "2", children: "0", flightTrip: "roundtrip" });
   const tabStates = {
@@ -2818,15 +2819,105 @@
     return true;
   }
 
+  function fillSearchFromSmartQuery(query) {
+    const route = parseRouteQuery(query);
+    const place = route.to || route.from || stripTravelWords(query);
+    if (!place) return false;
+
+    if (currentSearchType === "hotel") {
+      if ($("fromCity")) $("fromCity").value = "";
+      if ($("toCity")) $("toCity").value = place;
+      updateSearchPreview();
+      return true;
+    }
+
+    if (currentSearchType === "interhome") {
+      if ($("fromCity")) $("fromCity").value = "";
+      if ($("toCity")) $("toCity").value = interhomeSearchText(place) || place;
+      updateSearchPreview();
+      return true;
+    }
+
+    if (currentSearchType === "cruise") {
+      const cruiseChoice = cruiseSearchText(query) || place || "Europa";
+      cruiseQuickChoice = cruiseChoice;
+      if ($("fromCity")) $("fromCity").value = "";
+      if ($("toCity")) $("toCity").value = cruiseChoice;
+      updateSearchPreview();
+      return true;
+    }
+
+    if (currentSearchType === "car") {
+      if ($("fromCity")) $("fromCity").value = place;
+      if ($("toCity")) $("toCity").value = "";
+      updateSearchPreview();
+      return true;
+    }
+
+    if (currentSearchType === "package") {
+      if ($("fromCity")) $("fromCity").value = route.from || $("fromCity").value || "Oslo";
+      if ($("toCity")) $("toCity").value = route.to || place;
+      updateSearchPreview();
+      return true;
+    }
+
+    if (currentSearchType === "restplass") {
+      if ($("fromCity") && route.from) $("fromCity").value = route.from;
+      if ($("toCity")) $("toCity").value = route.to || place;
+      updateSearchPreview();
+      return true;
+    }
+
+    if (currentSearchType === "flight") {
+      if ($("fromCity")) $("fromCity").value = route.from || $("fromCity").value || "Oslo";
+      if ($("toCity")) $("toCity").value = route.to || place;
+      updateSearchPreview();
+      return Boolean(route.to || place);
+    }
+
+    return false;
+  }
+
+  function smartQueryCanFillCurrentSearch(query) {
+    if (!query) return false;
+    const state = readSearchState();
+    if (currentSearchType === "flight") return !state.from || !state.to;
+    if (currentSearchType === "car") return !state.from;
+    if (currentSearchType === "restplass") return !state.to;
+    if (["hotel", "package", "interhome", "cruise"].includes(currentSearchType)) return !state.to;
+    return false;
+  }
+
+  function runCurrentModeSmartSearch(query) {
+    const requestedType = currentSearchType;
+    if (!fillSearchFromSmartQuery(query)) return false;
+    if (!openCurrentSearchTarget()) {
+      if (currentSearchType === "car") $("fromCity")?.focus();
+      else $("toCity")?.focus();
+    }
+    stabilizeSmartSearchMode(requestedType, query);
+    return true;
+  }
+
+  function stabilizeSmartSearchMode(type, query) {
+    if (!type || type === "flight" || !tabStates[type]) return;
+    window.setTimeout(() => {
+      if (clean($("smartSearchQuery")?.value) !== clean(query)) return;
+      if (currentSearchType !== type) setSearchType(type);
+      fillSearchFromSmartQuery(query);
+    }, 0);
+  }
+
   function runSmartSearch() {
     const input = $("smartSearchQuery");
-    const query = clean(input?.value).toLowerCase();
-    if (!query) {
+    const rawQuery = clean(input?.value);
+    const query = rawQuery.toLowerCase();
+    if (!rawQuery) {
       input?.focus();
       return;
     }
     if (currentSearchType === "interhome" && !/fly|flight|hotell|hotel|pakkereise|pakke\s*reise|leiebil|rental|car|bil|charter|restplass|cruise/.test(query)) {
-      const destination = interhomeSearchText(query);
+      const destination = interhomeSearchText(rawQuery);
       if (destination && $("toCity")) $("toCity").value = destination;
       updateSearchPreview();
       if (!openCurrentSearchTarget()) $("toCity")?.focus();
@@ -2834,7 +2925,7 @@
     }
     if (/restplass|charter|syden/.test(query)) {
       setSearchType("restplass");
-      const destination = query.match(/(?:til|i)\s+(.+)/)?.[1];
+      const destination = rawQuery.match(/(?:til|i)\s+(.+)/i)?.[1];
       if (destination && $("toCity")) $("toCity").value = destination.trim();
       updateSearchPreview();
       if (!openCurrentSearchTarget()) openDateRangePicker();
@@ -2842,7 +2933,7 @@
     }
     if (/pakkereise|pakke\s*reise|fly\s*(\+|og)\s*hotell/.test(query)) {
       setSearchType("package");
-      const route = parseRouteQuery(query);
+      const route = parseRouteQuery(rawQuery);
       if (route.to) {
         if ($("fromCity")) $("fromCity").value = route.from || "Oslo";
         if ($("toCity")) $("toCity").value = route.to;
@@ -2857,8 +2948,8 @@
     }
     if (/feriebolig|feriehus|villa|hytte|leilighet/.test(query)) {
       setSearchType("interhome");
-      const route = parseRouteQuery(query);
-      const destination = route.to || interhomeSearchText(query);
+      const route = parseRouteQuery(rawQuery);
+      const destination = route.to || interhomeSearchText(rawQuery);
       if (destination && $("toCity")) $("toCity").value = destination;
       updateSearchPreview();
       if (!openCurrentSearchTarget()) $("toCity")?.focus();
@@ -2866,11 +2957,11 @@
     }
     if (/cruise/.test(query)) {
       setSearchType("cruise");
-      const cruiseChoice = cruiseSearchText(query);
+      const cruiseChoice = cruiseSearchText(rawQuery);
       if (cruiseChoice) {
         cruiseQuickChoice = cruiseChoice;
-        if ($("fromCity")) $("fromCity").value = cruiseChoice;
-        if ($("toCity")) $("toCity").value = "";
+        if ($("fromCity")) $("fromCity").value = "";
+        if ($("toCity")) $("toCity").value = cruiseChoice;
         updateSearchPreview();
         if (!openCurrentSearchTarget()) openDateRangePicker();
         return;
@@ -2879,7 +2970,7 @@
       return openDateRangePicker();
     }
 
-    const hotel = query.match(/(?:hotell|hotel)(?:\s+i)?\s+(.+)/);
+    const hotel = rawQuery.match(/(?:hotell|hotel)(?:\s+i)?\s+(.+)/i);
     if (hotel) {
       setSearchType("hotel");
       if ($("toCity")) $("toCity").value = hotel[1].trim();
@@ -2888,7 +2979,7 @@
       return;
     }
 
-    const car = query.match(/(?:leiebil|bil)(?:\s+i)?\s+(.+)/);
+    const car = rawQuery.match(/(?:leiebil|bil)(?:\s+i)?\s+(.+)/i);
     if (car) {
       setSearchType("car");
       if ($("fromCity")) $("fromCity").value = car[1].trim();
@@ -2897,7 +2988,9 @@
       return;
     }
 
-    const route = parseRouteQuery(query);
+    if (runCurrentModeSmartSearch(rawQuery)) return;
+
+    const route = parseRouteQuery(rawQuery);
     setSearchType("flight");
     if (route.to) {
       if ($("fromCity")) $("fromCity").value = route.from || "Oslo";
@@ -3022,13 +3115,20 @@
       }
       window.open(buildPackageUrl(state), "_blank", "noopener,noreferrer");
     });
-    $("smartSearchLaunch")?.addEventListener("click", runSmartSearch);
+    $("smartSearchLaunch")?.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      runSmartSearch();
+    });
     $("smartSearchQuery")?.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
         runSmartSearch();
       }
     });
+    $("searchSubmitButton")?.addEventListener("pointerdown", () => {
+      pendingSubmitSearchType = currentSearchType;
+    }, true);
 
     ["fromCity", "toCity", "multiCityTo", "departDate", "returnDate", "adults", "children"].forEach((id) => {
       const el = $(id);
@@ -3047,6 +3147,11 @@
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       try {
+        const submittedType = pendingSubmitSearchType && tabStates[pendingSubmitSearchType] ? pendingSubmitSearchType : currentSearchType;
+        pendingSubmitSearchType = "";
+        if (submittedType !== currentSearchType) setSearchType(submittedType);
+        const smartQuery = clean($("smartSearchQuery")?.value);
+        if (smartQuery && smartQueryCanFillCurrentSearch(smartQuery)) fillSearchFromSmartQuery(smartQuery);
         saveSearchState();
         const state = readSearchState({ forUrl: true });
         let target;
@@ -3075,7 +3180,6 @@
         }
 
         window.open(target, "_blank", "noopener,noreferrer");
-        resetActiveTabSearch();
         updateSearchPreview();
         renderLiveCalendar();
       } catch (error) {

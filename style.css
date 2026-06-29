@@ -6660,7 +6660,7 @@ html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] #d
   display:inline!important;
 }
 
-/* BR v190: restore full search controls after smart-service UI */
+/* BR v191: restore full search controls after smart-service UI */
 html body form#travelSearch .smart-service-grid,
 html body form#travelSearch .smart-search-main,
 html body form#travelSearch .search-mode-title,
