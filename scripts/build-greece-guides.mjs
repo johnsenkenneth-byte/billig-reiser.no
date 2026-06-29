@@ -505,7 +505,7 @@ function pageHead({ title, description, canonical, image, jsonHeadline }) {
   <link rel="stylesheet" href="/spania/spania-city.css?v=${CSS_VERSION}" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#020913" />
-  <script defer src="/pwa-register.js?v=189"></script>
+  <script defer src="/pwa-register.js?v=190"></script>
   <link rel="stylesheet" href="/app-features.css?v=159" />
   <script defer src="/app-features.js"></script>
   <style>

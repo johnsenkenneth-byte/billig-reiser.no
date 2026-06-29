@@ -6660,7 +6660,7 @@ html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] #d
   display:inline!important;
 }
 
-/* BR v189: restore full search controls after smart-service UI */
+/* BR v190: restore full search controls after smart-service UI */
 html body form#travelSearch .smart-service-grid,
 html body form#travelSearch .smart-search-main,
 html body form#travelSearch .search-mode-title,
@@ -6740,6 +6740,16 @@ html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .s
   pointer-events:auto!important;
 }
 
+html body form#travelSearch[data-mode="cruise"] .search-fields.fields label.field-from{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+html body form#travelSearch[data-mode="cruise"] .search-fields.fields label.field-to{
+  grid-column:1/-1!important;
+}
+
 html body form#travelSearch .multi-city-extra-leg{
   grid-template-columns:auto minmax(0,.95fr) minmax(0,1.2fr) minmax(128px,.55fr) 38px!important;
 }
@@ -6782,5 +6792,16 @@ html body form#travelSearch .multi-leg-origin strong{
   html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields,
   html body form#travelSearch .multi-city-extra-leg{
     grid-template-columns:1fr!important;
+  }
+
+  html body form#travelSearch .airport-suggest{
+    position:static!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    z-index:1!important;
+    width:100%!important;
+    margin-top:10px!important;
+    max-height:230px!important;
   }
 }

@@ -479,7 +479,7 @@
     return {
       type: currentSearchType,
       tripType: flightTrip,
-      from: currentSearchType === "hotel" || currentSearchType === "interhome" ? "" : searchFieldForUrl("fromCity"),
+      from: ["hotel", "interhome", "cruise"].includes(currentSearchType) ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
       multiTo: currentSearchType === "flight" && flightTrip === "multicity" ? searchFieldForUrl("multiCityTo") : "",
       multiStops: currentSearchType === "flight" && flightTrip === "multicity" ? collectMultiCityStops() : [],
@@ -722,7 +722,7 @@
     const key = type || "flight";
     if (!tabStates[key]) return;
     tabStates[key] = {
-      from: key === "hotel" || key === "interhome" ? "" : searchFieldForUrl("fromCity"),
+      from: ["hotel", "interhome", "cruise"].includes(key) ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
       multiTo: key === "flight" ? searchFieldForUrl("multiCityTo") : "",
       multiStops: key === "flight" ? collectMultiCityStops() : [],
@@ -1148,6 +1148,14 @@
 
   function airportDisplay(item) {
     return `${item.city} (${item.code})`;
+  }
+
+  function closeAirportSuggestions(exceptField = null) {
+    document.querySelectorAll(".airport-suggest.show").forEach((list) => {
+      if (exceptField && exceptField.contains(list)) return;
+      list.innerHTML = "";
+      list.classList.remove("show");
+    });
   }
 
   function attachAirportAutocomplete(inputId, roleLabel) {
@@ -1965,11 +1973,11 @@
   function applyCruiseQuickChoice(port) {
     setSearchType("cruise");
     cruiseQuickChoice = port || "Europa";
-    if ($("fromCity")) $("fromCity").value = cruiseQuickChoice;
-    if ($("toCity")) $("toCity").value = "";
+    if ($("fromCity")) $("fromCity").value = "";
+    if ($("toCity")) $("toCity").value = cruiseQuickChoice;
 
     updateSearchPreview();
-    openDateRangePicker();
+    $("toCity")?.focus();
   }
 
   function openHotelPick(destination) {
@@ -2556,12 +2564,12 @@
     }[currentSearchType];
     if (modeTitle && modeCopy) modeTitle.innerHTML = `<b>${modeCopy[0]}</b><span>${modeCopy[1]}</span>`;
     if (fromField) {
-      const hideFromField = currentSearchType === "hotel" || currentSearchType === "interhome";
+      const hideFromField = currentSearchType === "hotel" || currentSearchType === "interhome" || currentSearchType === "cruise";
       fromField.hidden = hideFromField;
       fromField.setAttribute("aria-hidden", hideFromField ? "true" : "false");
     }
     if (from) {
-      const disableFromField = currentSearchType === "hotel" || currentSearchType === "interhome";
+      const disableFromField = currentSearchType === "hotel" || currentSearchType === "interhome" || currentSearchType === "cruise";
       from.disabled = disableFromField;
       if (disableFromField) from.value = "";
     }
@@ -2736,7 +2744,11 @@
     }
     if (["flight", "hotel", "package", "cruise", "interhome", "restplass"].includes(service)) {
       setSearchType(service);
-      if (service === "cruise") openDateRangePicker();
+      if (service === "cruise") {
+        if ($("fromCity")) $("fromCity").value = "";
+        updateSearchPreview();
+        $("toCity")?.focus();
+      }
       else if (service === "package") {
         if ($("fromCity") && !$("fromCity").value) $("fromCity").value = "Oslo";
         updateSearchPreview();
@@ -2910,6 +2922,54 @@
     attachAirportAutocomplete("fromCity", "Forslag til avreiseflyplass");
     attachAirportAutocomplete("toCity", "Forslag til reisemål");
     attachAirportAutocomplete("multiCityTo", "Forslag til Fly 2 til");
+
+    form.addEventListener("pointerdown", (event) => {
+      if (event.target.closest("[data-airport-code]")) return;
+      const fieldTarget = event.target.closest(".field-from, .field-to, .field-multi-city");
+      if (!fieldTarget || !form.contains(fieldTarget)) return;
+      const targetInput = fieldTarget.querySelector("input");
+      if (!targetInput) return;
+      closeAirportSuggestions();
+      setTimeout(() => targetInput.focus(), 0);
+    }, true);
+
+    form.addEventListener("focusin", (event) => {
+      const activeField = event.target.closest(".airport-field");
+      closeAirportSuggestions(activeField);
+    }, true);
+
+    form.addEventListener("click", (event) => {
+      const serviceButton = event.target.closest("[data-smart-service]");
+      if (serviceButton && form.contains(serviceButton)) {
+        event.preventDefault();
+        event.stopPropagation();
+        activateSmartService(serviceButton.dataset.smartService);
+        return;
+      }
+
+      const tuiQuick = event.target.closest("[data-tui-quick]");
+      if (tuiQuick && form.contains(tuiQuick)) {
+        event.preventDefault();
+        event.stopPropagation();
+        applyTuiQuickChoice(tuiQuick.dataset.tuiQuick);
+        return;
+      }
+
+      const interhomeQuick = event.target.closest("[data-interhome-quick]");
+      if (interhomeQuick && form.contains(interhomeQuick)) {
+        event.preventDefault();
+        event.stopPropagation();
+        applyInterhomeQuickChoice(interhomeQuick.dataset.interhomeQuick);
+        return;
+      }
+
+      const cruiseQuick = event.target.closest("[data-cruise-quick]");
+      if (cruiseQuick && form.contains(cruiseQuick)) {
+        event.preventDefault();
+        event.stopPropagation();
+        applyCruiseQuickChoice(cruiseQuick.dataset.cruiseQuick);
+      }
+    }, true);
 
     document.querySelectorAll("[data-search-type]").forEach((btn) => {
       btn.addEventListener("click", () => setSearchType(btn.dataset.searchType));
