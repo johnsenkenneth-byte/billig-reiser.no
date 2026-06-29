@@ -6660,7 +6660,7 @@ html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] #d
   display:inline!important;
 }
 
-/* BR v191: restore full search controls after smart-service UI */
+/* BR v192: restore full search controls after smart-service UI */
 html body form#travelSearch .smart-service-grid,
 html body form#travelSearch .smart-search-main,
 html body form#travelSearch .search-mode-title,
@@ -6803,5 +6803,37 @@ html body form#travelSearch .multi-leg-origin strong{
     width:100%!important;
     margin-top:10px!important;
     max-height:230px!important;
+  }
+}
+
+/* BR v192: multi-city uses Fly 1 fra/til plus "Legg til fly" rows */
+html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+
+html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields label.field-multi-city{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .multi-city-builder{
+  display:block!important;
+}
+
+html body form#travelSearch .airport-suggest{
+  position:static!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  z-index:1!important;
+  width:100%!important;
+  margin-top:10px!important;
+  max-height:230px!important;
+}
+
+@media(max-width:760px){
+  html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields{
+    grid-template-columns:1fr!important;
   }
 }

@@ -482,7 +482,7 @@
       tripType: flightTrip,
       from: ["hotel", "interhome", "cruise"].includes(currentSearchType) ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
-      multiTo: currentSearchType === "flight" && flightTrip === "multicity" ? searchFieldForUrl("multiCityTo") : "",
+      multiTo: currentSearchType === "flight" && flightTrip === "multicity" ? normalizeMultiCityStops(collectMultiCityStops())[0]?.to || "" : "",
       multiStops: currentSearchType === "flight" && flightTrip === "multicity" ? collectMultiCityStops() : [],
       depart,
       ret,
@@ -674,7 +674,7 @@
   }
 
   function multiCityExtraLegOrigin(index, stops = multiCityExtraStops) {
-    if (index === 0) return cityForUrl($("multiCityTo")?.value) || "Fly 2 til";
+    if (index === 0) return cityForUrl($("toCity")?.value) || "Fly 1 til";
     return cityForUrl(stops[index - 1]?.to) || `Fly ${index + 2} til`;
   }
 
@@ -694,9 +694,9 @@
       const dateId = `multiCityDate${index}`;
       return `
         <div class="multi-city-extra-leg" data-multi-city-leg>
-          <span class="multi-leg-number">Fly ${index + 3}</span>
-          <div class="multi-leg-origin"><small>Fly ${index + 3} fra</small><strong data-multi-origin>${escapeHTML(multiCityExtraLegOrigin(index, multiCityExtraStops))}</strong></div>
-          <label><small>Fly ${index + 3} til</small><input id="${inputId}" data-multi-stop placeholder="Neste flyplass eller by" value="${escapeHTML(stop.to)}"/></label>
+          <span class="multi-leg-number">Fly ${index + 2}</span>
+          <div class="multi-leg-origin"><small>Fly ${index + 2} fra</small><strong data-multi-origin>${escapeHTML(multiCityExtraLegOrigin(index, multiCityExtraStops))}</strong></div>
+          <label><small>Fly ${index + 2} til</small><input id="${inputId}" data-multi-stop placeholder="Neste flyplass eller by" value="${escapeHTML(stop.to)}"/></label>
           <label><small>Dato</small><input id="${dateId}" data-multi-date type="date" value="${escapeHTML(stop.depart)}"/></label>
           <button aria-label="Fjern fly ${index + 3}" data-remove-multi-leg="${index}" type="button">×</button>
         </div>`;
@@ -725,7 +725,7 @@
     tabStates[key] = {
       from: ["hotel", "interhome", "cruise"].includes(key) ? "" : searchFieldForUrl("fromCity"),
       to: searchFieldForUrl("toCity"),
-      multiTo: key === "flight" ? searchFieldForUrl("multiCityTo") : "",
+      multiTo: key === "flight" ? normalizeMultiCityStops(collectMultiCityStops())[0]?.to || "" : "",
       multiStops: key === "flight" ? collectMultiCityStops() : [],
       depart: $("departDate")?.value || "",
       ret: $("returnDate")?.value || "",
@@ -771,7 +771,11 @@
   }
 
   function multiCityRouteParts(state) {
-    return [state.from, state.to, state.multiTo, ...normalizeMultiCityStops(state.multiStops).map((stop) => stop.to)].filter(Boolean);
+    return [state.from, state.to, ...normalizeMultiCityStops(state.multiStops).map((stop) => stop.to)].filter(Boolean);
+  }
+
+  function hasMultiCityNextLeg(state) {
+    return normalizeMultiCityStops(state.multiStops).some((stop) => stop.to);
   }
 
   function hasIncompleteMultiCityStop(state) {
@@ -802,7 +806,7 @@
         button.textContent = state.from && state.to ? `VIS ÉN VEI ${state.from.toUpperCase()} → ${state.to.toUpperCase()} ↗` : "VIS ÉN VEI HOS KIWI ↗";
       } else if (currentSearchType === "flight" && currentFlightTripType === "multicity") {
         const route = multiCityRouteParts(state);
-        button.textContent = route.length >= 3 ? `VIS ${route.length - 1} FLY HOS KIWI ↗` : "VIS FLERE BYER HOS KIWI ↗";
+        button.textContent = route.length >= 3 ? `VIS ${route.length - 1} FLY HOS KIWI ↗` : "LEGG TIL NESTE FLY FØRST";
       } else if (state.from && state.to) {
         button.textContent = `VIS FLYPRISER ${state.from.toUpperCase()} → ${state.to.toUpperCase()} 🔎`;
       } else {
@@ -828,7 +832,7 @@
         helper.textContent = state.from && state.to ? `Én vei: ${state.from} → ${state.to} • ${state.depart || "velg avreise"} • ${state.adults} reisende. Åpnes hos Kiwi med affiliate-sporing.` : "Velg én vei, skriv fra og til, og velg avreisedato. Søket åpnes hos Kiwi.";
       } else if (currentSearchType === "flight" && currentFlightTripType === "multicity") {
         const route = multiCityRouteParts(state);
-        helper.textContent = route.length >= 3 ? `Flere byer: ${route.join(" → ")} • ${route.length - 1} fly • åpnes hos Kiwi.` : "Flere byer: fyll inn Fly 1 fra, Fly 1 til og Fly 2 til. Trykk Legg til fly for flere etapper.";
+        helper.textContent = route.length >= 3 ? `Flere byer: ${route.join(" → ")} • ${route.length - 1} fly • åpnes hos Kiwi.` : "Flere fly: fyll inn Fly 1 fra og Fly 1 til. Trykk Legg til fly for neste fly.";
       } else {
         helper.textContent = (state.from && state.to) ? `Flysøk: ${state.from} → ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} reisende.` : "Skriv by eller IATA-kode — velg forslag, så åpnes flypartner med riktig søk.";
       }
@@ -1185,6 +1189,9 @@
       close();
       updateSearchPreview();
       input.dispatchEvent(new Event("change", { bubbles:true }));
+      if (inputId === "fromCity" && (currentSearchType === "flight" || currentSearchType === "package" || currentSearchType === "restplass")) {
+        setTimeout(() => $("toCity")?.focus(), 0);
+      }
     };
 
     const renderMatches = (matches, isCarPickup, sourceLabel = "") => {
@@ -1310,14 +1317,13 @@
   function buildKiwiMulticityUrl(state) {
     const depart = state.depart || fallbackDepartISO();
     const nextDepart = state.ret || fallbackReturnISO(depart);
-    const legs = [
-      { from: state.from, to: state.to, depart },
-      { from: state.to, to: state.multiTo, depart: nextDepart }
-    ];
-    let previousTo = state.multiTo;
-    let previousDate = nextDepart;
-    normalizeMultiCityStops(state.multiStops).filter((stop) => stop.to).forEach((stop) => {
-      const legDate = validISO(stop.depart) && stop.depart > previousDate ? stop.depart : addDaysToISO(previousDate, 3);
+    const stops = normalizeMultiCityStops(state.multiStops).filter((stop) => stop.to);
+    const legs = [{ from: state.from, to: state.to, depart }];
+    let previousTo = state.to;
+    let previousDate = depart;
+    stops.forEach((stop, index) => {
+      const fallbackDate = index === 0 ? nextDepart : addDaysToISO(previousDate, 3);
+      const legDate = validISO(stop.depart) && stop.depart > previousDate ? stop.depart : fallbackDate;
       legs.push({ from: previousTo, to: stop.to, depart: legDate });
       previousTo = stop.to;
       previousDate = legDate;
@@ -2512,7 +2518,7 @@
     }
 
     if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
-    if (state.tripType === "multicity" && !state.multiTo) throw new Error("Skriv inn Fly 2 til for flere byer-søket.");
+    if (state.tripType === "multicity" && !hasMultiCityNextLeg(state)) throw new Error("Trykk Legg til fly og skriv inn neste flyplass.");
     if (state.tripType === "multicity" && hasIncompleteMultiCityStop(state)) throw new Error("Skriv inn byen for ekstra fly, eller fjern raden.");
     if (state.tripType === "oneway") return buildFlightDirectUrl(state);
     if (state.tripType === "multicity") return buildKiwiMulticityUrl(state);
@@ -2635,13 +2641,13 @@
       if (dateRangeLabel) dateRangeLabel.textContent = isOneWayFlight ? "Avreise" : isMultiCityFlight ? "Flydatoer" : "Avreise og hjemreise";
       if (fromLabel) fromLabel.textContent = isMultiCityFlight ? "Fly 1 fra" : "Hvor reiser du fra?";
       if (toLabel) toLabel.textContent = isMultiCityFlight ? "Fly 1 til" : "Hvor vil du reise?";
-      if (multiCityLabel) multiCityLabel.textContent = isMultiCityFlight ? "Fly 2 til" : "Neste by";
+      if (multiCityLabel) multiCityLabel.textContent = isMultiCityFlight ? "Neste fly" : "Neste by";
       if (departLabel) departLabel.textContent = "Avreise";
       if (returnLabel) returnLabel.textContent = isMultiCityFlight ? "Neste fly" : isOneWayFlight ? "" : "Retur";
       if (adultsLabel) adultsLabel.textContent = "Reisende";
       if (from) from.placeholder = isMultiCityFlight ? "Startflyplass, f.eks. Oslo" : "Skriv by/flyplass, f.eks. Oslo";
       if (to) to.placeholder = isMultiCityFlight ? "Første flyplass/by, f.eks. Bangkok" : "Skriv reisemål, f.eks. Bangkok";
-      if ($("multiCityTo")) $("multiCityTo").placeholder = "Andre flyplass/by, f.eks. Tokyo";
+      if ($("multiCityTo")) $("multiCityTo").placeholder = "Legges til via knappen under";
       if (isOneWayFlight && $("returnDate")) $("returnDate").value = "";
     }
 
@@ -2786,7 +2792,7 @@
     let target = "";
     if (currentSearchType === "flight") {
       if (!state.from || !state.to) return false;
-      if (state.tripType === "multicity" && !state.multiTo) return false;
+      if (state.tripType === "multicity" && !hasMultiCityNextLeg(state)) return false;
       if (state.tripType === "multicity" && hasIncompleteMultiCityStop(state)) return false;
       if (state.tripType === "oneway") {
         window.open(buildFlightDirectUrl(state), "_blank", "noopener,noreferrer");
@@ -3022,13 +3028,18 @@
       if (!fieldTarget || !form.contains(fieldTarget)) return;
       const targetInput = fieldTarget.querySelector("input");
       if (!targetInput) return;
-      closeAirportSuggestions();
-      setTimeout(() => targetInput.focus(), 0);
+      if (document.activeElement !== targetInput) event.preventDefault();
+      targetInput.focus({ preventScroll: true });
+      requestAnimationFrame(() => targetInput.focus({ preventScroll: true }));
+      setTimeout(() => {
+        closeAirportSuggestions(targetInput.closest(".airport-field"));
+        targetInput.focus({ preventScroll: true });
+      }, 140);
     }, true);
 
     form.addEventListener("focusin", (event) => {
       const activeField = event.target.closest(".airport-field");
-      closeAirportSuggestions(activeField);
+      setTimeout(() => closeAirportSuggestions(activeField), 120);
     }, true);
 
     form.addEventListener("click", (event) => {
@@ -3071,18 +3082,43 @@
       btn.addEventListener("click", () => {
         setSearchType("flight");
         setFlightTripType(btn.dataset.flightTrip, { resetDates: true });
-        if (btn.dataset.flightTrip === "multicity") $("multiCityTo")?.focus();
+        if (btn.dataset.flightTrip === "multicity") ($("fromCity")?.value ? $("toCity") : $("fromCity"))?.focus();
         else $("fromCity")?.focus();
       });
     });
-    $("addMultiCityLeg")?.addEventListener("click", () => {
+    let addMultiCityPointerHandled = false;
+    const addMultiCityLegFromButton = (event = null) => {
+      event?.preventDefault();
+      closeAirportSuggestions();
       setSearchType("flight");
       setFlightTripType("multicity");
+      if (!$("fromCity")?.value) {
+        showSearchError("Skriv inn Fly 1 fra først.");
+        $("fromCity")?.focus();
+        return;
+      }
+      if (!$("toCity")?.value) {
+        showSearchError("Skriv inn Fly 1 til først.");
+        $("toCity")?.focus();
+        return;
+      }
       const stops = collectMultiCityStops();
       stops.push({ to: "", depart: nextMultiCityDate(stops) });
       renderMultiCityExtraLegs(stops);
       updateSearchPreview();
-      $(`multiCityStop${stops.length - 1}`)?.focus();
+      setTimeout(() => $(`multiCityStop${stops.length - 1}`)?.focus(), 0);
+    };
+    $("addMultiCityLeg")?.addEventListener("pointerdown", (event) => {
+      addMultiCityPointerHandled = true;
+      addMultiCityLegFromButton(event);
+      setTimeout(() => { addMultiCityPointerHandled = false; }, 0);
+    });
+    $("addMultiCityLeg")?.addEventListener("click", (event) => {
+      if (addMultiCityPointerHandled) {
+        event.preventDefault();
+        return;
+      }
+      addMultiCityLegFromButton(event);
     });
     document.querySelectorAll("[data-smart-service]").forEach((btn) => {
       btn.addEventListener("click", (event) => {
@@ -3126,9 +3162,21 @@
         runSmartSearch();
       }
     });
-    $("searchSubmitButton")?.addEventListener("pointerdown", () => {
+    let submitPointerHandled = false;
+    $("searchSubmitButton")?.addEventListener("pointerdown", (event) => {
+      submitPointerHandled = true;
+      event.preventDefault();
       pendingSubmitSearchType = currentSearchType;
+      closeAirportSuggestions();
+      if (form.requestSubmit) form.requestSubmit($("searchSubmitButton"));
+      else form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+      setTimeout(() => { submitPointerHandled = false; }, 350);
     }, true);
+    $("searchSubmitButton")?.addEventListener("click", (event) => {
+      if (!submitPointerHandled) return;
+      event.preventDefault();
+      event.stopPropagation();
+    });
 
     ["fromCity", "toCity", "multiCityTo", "departDate", "returnDate", "adults", "children"].forEach((id) => {
       const el = $(id);
@@ -3165,7 +3213,7 @@
           if (button && oldText) button.textContent = oldText;
         } else if (currentSearchType === "flight") {
           if (!state.from || !state.to) throw new Error("Skriv inn både avreisested og reisemål.");
-          if (state.tripType === "multicity" && !state.multiTo) throw new Error("Skriv inn Fly 2 til for flere byer-søket.");
+          if (state.tripType === "multicity" && !hasMultiCityNextLeg(state)) throw new Error("Trykk Legg til fly og skriv inn neste flyplass.");
           if (state.tripType === "multicity" && hasIncompleteMultiCityStop(state)) throw new Error("Skriv inn byen for ekstra fly, eller fjern raden.");
           if (state.tripType === "oneway") {
             target = buildFlightDirectUrl(state);
@@ -3180,6 +3228,7 @@
         }
 
         window.open(target, "_blank", "noopener,noreferrer");
+        closeAirportSuggestions();
         updateSearchPreview();
         renderLiveCalendar();
       } catch (error) {
