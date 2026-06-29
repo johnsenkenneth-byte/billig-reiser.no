@@ -8,7 +8,7 @@ const TODAY = "2026-06-27";
 const CSS_VERSION = "129";
 const BOOKING_AID = "1522412";
 const GYG = "https://www.getyourguide.no/s/?partner_id=FIQDAEB&utm_medium=local_partners&q=";
-const FERRYHOPPER = "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fnb%2F";
+const FERRYHOPPER = "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fno%2F";
 
 const img = {
   crete: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Aerial_view_of_Balos_Beach_and_Lagoon_on_Crete%2C_Greece.jpg/1280px-Aerial_view_of_Balos_Beach_and_Lagoon_on_Crete%2C_Greece.jpg",

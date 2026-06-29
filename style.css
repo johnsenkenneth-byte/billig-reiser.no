@@ -6659,3 +6659,128 @@ html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] #d
 html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] #dateRangeReturn{
   display:inline!important;
 }
+
+/* BR v188: restore full search controls after smart-service UI */
+html body form#travelSearch .smart-service-grid,
+html body form#travelSearch .smart-search-main,
+html body form#travelSearch .search-mode-title,
+html body form#travelSearch .search-fields,
+html body form#travelSearch .search-actions,
+html body form#travelSearch .package-inline-actions,
+html body form#travelSearch .live-calendar{
+  position:relative!important;
+  z-index:5!important;
+}
+
+html body form#travelSearch .smart-service-grid button,
+html body form#travelSearch .smart-search-main button,
+html body form#travelSearch .flight-trip-toggle button,
+html body form#travelSearch .date-range-toggle,
+html body form#travelSearch .traveler-toggle,
+html body form#travelSearch .search-launch,
+html body form#travelSearch .package-inline-actions button,
+html body form#travelSearch .tui-quick-grid button{
+  pointer-events:auto!important;
+  cursor:pointer!important;
+}
+
+html body form#travelSearch .search-fields input{
+  pointer-events:auto!important;
+}
+
+html body form#travelSearch .search-actions.single-action,
+html body form#travelSearch[data-mode="package"] .search-actions.single-action,
+html body form#travelSearch[data-mode="package"] #searchSubmitButton.search-launch{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+html body form#travelSearch .package-inline-actions{
+  display:none!important;
+}
+
+html body form#travelSearch[data-mode="package"] .package-inline-actions{
+  display:grid!important;
+}
+
+html body form#travelSearch #liveDateCalendar.live-calendar{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+html body form#travelSearch.calendar-open #liveDateCalendar.live-calendar{
+  display:block!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+html body form#travelSearch[data-mode="hotel"] .search-fields.fields label.field-to,
+html body form#travelSearch[data-mode="interhome"] .search-fields.fields label.field-to,
+html body form#travelSearch[data-mode="cruise"] .search-fields.fields label.field-to{
+  display:flex!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+html body form#travelSearch[data-mode="car"] .search-fields.fields label.field-from{
+  display:flex!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+
+html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields label.field-multi-city{
+  display:flex!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+html body form#travelSearch .multi-city-extra-leg{
+  grid-template-columns:auto minmax(0,.95fr) minmax(0,1.2fr) minmax(128px,.55fr) 38px!important;
+}
+
+html body form#travelSearch .multi-leg-origin{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  min-width:0;
+  min-height:62px;
+  padding:10px 12px;
+  border:1px solid rgba(112,158,208,.24);
+  border-radius:14px;
+  background:rgba(255,255,255,.045);
+}
+
+html body form#travelSearch .multi-leg-origin small{
+  margin:0;
+  color:#aab9cf;
+  font-size:10px;
+  line-height:1.2;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  font-weight:950;
+}
+
+html body form#travelSearch .multi-leg-origin strong{
+  min-width:0;
+  color:#f7fbff;
+  font-size:15px;
+  line-height:1.2;
+  font-weight:900;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+@media(max-width:760px){
+  html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields,
+  html body form#travelSearch .multi-city-extra-leg{
+    grid-template-columns:1fr!important;
+  }
+}
