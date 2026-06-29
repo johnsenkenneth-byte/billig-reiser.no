@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <title>Reiseradar | Live reisesignaler | Billig-reiser.no</title>
+  <meta content="Utforsk utvalgte reisesignaler fra norske flyplasser med prisindikator, reisetid, mellomlandinger og rask vei videre til guide eller flysøk." name="description" />
+  <link rel="canonical" href="https://billig-reiser.no/reiseradar.html" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link href="style.css?v=159" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="application-name" content="Billig Reiser" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Billig Reiser" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#020913" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <script defer src="/pwa-register.js"></script>
+  <link rel="stylesheet" href="/app-features.css?v=159" />
+  <script defer src="/app-features.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Reiseradar","description":"Kuraterte reisesignaler fra norske flyplasser.","url":"https://billig-reiser.no/reiseradar.html","isPartOf":{"@type":"WebSite","name":"Billig-Reiser.no","url":"https://billig-reiser.no/"}}</script>
+  <style>
+    :root {
+      --radar-bg: #06101d;
+      --radar-ink: #f8fbff;
+      --radar-muted: #9fb0c7;
+      --radar-line: rgba(255,255,255,.12);
+      --radar-panel: rgba(8,18,32,.82);
+      --radar-panel-strong: rgba(12,27,45,.94);
+      --radar-action-gradient: linear-gradient(90deg, #ff25c8 0%, #7a44ff 52%, #21d7ff 100%);
+      --radar-action-ink: #050713;
+      --radar-action-shadow: 0 16px 38px rgba(255,37,200,.24), 0 10px 30px rgba(33,215,255,.16);
+      --radar-cyan: #22d3ee;
+      --radar-pink: #ff4db8;
+      --radar-green: #3ee48e;
+      --radar-amber: #ffb84a;
+      --radar-blue: #1c8dff;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(2,8,17,.96), rgba(7,16,29,.98) 48%, #030812),
+        url("assets/front-hero-flight-map.png") center top / cover fixed no-repeat;
+      color: var(--radar-ink);
+      font-family: Inter, Arial, sans-serif;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(34,211,238,.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.7), rgba(0,0,0,.05));
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .radar-shell {
+      position: relative;
+      min-height: 100vh;
+      background: rgba(1, 7, 15, .68);
+    }
+    .radar-nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 10px clamp(16px, 4vw, 48px);
+      border-bottom: 1px solid var(--radar-line);
+      background: rgba(2, 9, 18, .88);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .brand-lockup img {
+      width: 58px;
+      height: 58px;
+      display: block;
+      object-fit: contain;
+    }
+    .brand-text {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+    .brand-text strong {
+      color: #fff;
+      font-size: 16px;
+      line-height: 1;
+      letter-spacing: .01em;
+    }
+    .brand-text span {
+      color: var(--radar-muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .radar-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #dce8f6;
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .radar-menu a.active,
+    .radar-menu a:hover { color: var(--radar-cyan); }
+
+    .radar-stage {
+      width: min(1420px, 100%);
+      margin: 0 auto;
+      padding: clamp(22px, 4vw, 56px);
+      display: grid;
+      grid-template-columns: minmax(360px, .94fr) minmax(0, 1.06fr);
+      gap: clamp(22px, 3vw, 42px);
+      align-items: stretch;
+    }
+    .radar-visual,
+    .radar-command,
+    .signal-board {
+      border: 1px solid var(--radar-line);
+      background: var(--radar-panel);
+      box-shadow: 0 28px 80px rgba(0,0,0,.32);
+      backdrop-filter: blur(18px);
+    }
+    .radar-visual {
+      min-height: 620px;
+      padding: clamp(18px, 3vw, 32px);
+      display: grid;
+      align-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .radar-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,77,184,.12), transparent 38%),
+        linear-gradient(300deg, rgba(255,184,74,.10), transparent 42%);
+      pointer-events: none;
+    }
+    .radar-screen {
+      width: min(560px, 100%);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      border-radius: 50%;
+      position: relative;
+      border: 1px solid rgba(34,211,238,.34);
+      background:
+        radial-gradient(circle at center, rgba(34,211,238,.13) 0 2px, transparent 3px),
+        repeating-radial-gradient(circle at center, transparent 0 78px, rgba(34,211,238,.16) 80px 82px),
+        linear-gradient(90deg, transparent 49.8%, rgba(34,211,238,.18) 50%, transparent 50.2%),
+        linear-gradient(180deg, transparent 49.8%, rgba(34,211,238,.18) 50%, transparent 50.2%),
+        radial-gradient(circle at center, rgba(6,27,43,.96), rgba(2,8,17,.98) 72%);
+      box-shadow: inset 0 0 55px rgba(34,211,238,.12), 0 0 45px rgba(34,211,238,.08);
+      overflow: hidden;
+    }
+    .radar-sweep {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      left: 50%;
+      top: 50%;
+      transform-origin: 0 0;
+      background: conic-gradient(from -16deg, rgba(62,228,142,.35), rgba(34,211,238,.12) 24deg, transparent 46deg);
+      animation: radarSweep 7s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes radarSweep {
+      to { transform: rotate(360deg); }
+    }
+    .radar-axis {
+      position: absolute;
+      inset: 13%;
+      border: 1px dashed rgba(255,255,255,.11);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .radar-pin {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      transform: translate(-50%, -50%);
+      min-width: 46px;
+      min-height: 46px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(7,17,30,.84);
+      color: #fff;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .04em;
+      box-shadow: 0 0 0 7px rgba(34,211,238,.08);
+    }
+    .radar-pin.is-active,
+    .radar-pin:hover {
+      border-color: rgba(62,228,142,.8);
+      background: rgba(16,74,58,.92);
+      color: #eafff5;
+      box-shadow: 0 0 0 8px rgba(62,228,142,.12), 0 0 34px rgba(62,228,142,.22);
+    }
+    .radar-caption {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .radar-stat {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.055);
+      padding: 14px;
+    }
+    .radar-stat span {
+      display: block;
+      color: var(--radar-muted);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .radar-stat strong {
+      display: block;
+      margin-top: 7px;
+      color: #fff;
+      font-size: clamp(19px, 3vw, 28px);
+      line-height: 1;
+    }
+
+    .radar-command {
+      padding: clamp(22px, 3.4vw, 42px);
+      display: grid;
+      align-content: center;
+      gap: 28px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      color: #9df6ff;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 10px 0 0;
+      max-width: 720px;
+      color: #fff;
+      font-size: clamp(48px, 6.4vw, 92px);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+    .intro {
+      max-width: 720px;
+      margin: 0;
+      color: #c8d6e8;
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.55;
+    }
+    .control-cluster {
+      display: grid;
+      gap: 14px;
+    }
+    .control-label {
+      color: #aebdd1;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .segmented {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .segment {
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 999px;
+      padding: 0 14px;
+      background: rgba(255,255,255,.06);
+      color: #eef6ff;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 950;
+    }
+    .segment.is-active,
+    .segment:hover {
+      border-color: rgba(34,211,238,.6);
+      background: rgba(34,211,238,.14);
+      color: #dffcff;
+    }
+
+    .signal-board {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      min-height: 520px;
+      overflow: hidden;
+    }
+    .signal-list {
+      padding: clamp(18px, 2.8vw, 30px);
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+    .signal-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+    .signal-head h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .signal-status {
+      color: var(--radar-muted);
+      font-size: 13px;
+      font-weight: 850;
+      text-align: right;
+    }
+    .route-row {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.045);
+      color: #fff;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+    }
+    .route-row.is-active,
+    .route-row:hover {
+      border-color: rgba(62,228,142,.55);
+      background: rgba(62,228,142,.09);
+    }
+    .route-thumb {
+      width: 72px;
+      height: 56px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .route-main {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+    .route-main strong {
+      font-size: 18px;
+      line-height: 1.12;
+    }
+    .route-main span {
+      color: #aec0d5;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .route-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .route-tags b,
+    .route-price {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.055);
+      color: #dce9f8;
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+    .route-price {
+      border-color: rgba(62,228,142,.28);
+      background: rgba(62,228,142,.11);
+      color: #b9ffd8;
+    }
+    .signal-empty {
+      display: none;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--radar-muted);
+      line-height: 1.55;
+    }
+
+    .signal-panel {
+      border-left: 1px solid var(--radar-line);
+      background: var(--radar-panel-strong);
+      display: grid;
+      grid-template-rows: 210px minmax(0, 1fr);
+      min-width: 0;
+    }
+    .panel-image {
+      position: relative;
+      overflow: hidden;
+      background: #0a1627;
+    }
+    .panel-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .panel-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 32%, rgba(5,12,22,.9));
+    }
+    .panel-body {
+      padding: 22px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+    .panel-kicker {
+      color: var(--radar-cyan);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .panel-title {
+      margin: 0;
+      color: #fff;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .panel-copy {
+      margin: 0;
+      color: #bdccdf;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    .live-price-box {
+      border-top: 1px solid rgba(255,255,255,.11);
+      border-bottom: 1px solid rgba(255,255,255,.11);
+      padding: 16px 0;
+      display: grid;
+      gap: 10px;
+    }
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+    }
+    .price-line span {
+      color: #aab9cd;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .price-line strong {
+      color: #8fffbf;
+      font-size: 26px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .meta-grid span {
+      min-width: 0;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.045);
+      padding: 10px;
+      color: #eef6ff;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+    .meta-grid b {
+      display: block;
+      margin-bottom: 5px;
+      color: #7deeff;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .panel-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .panel-actions a,
+    .panel-actions button {
+      min-height: 46px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      color: var(--radar-action-ink);
+      background: var(--radar-action-gradient);
+      box-shadow: var(--radar-action-shadow);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 950;
+      text-align: center;
+      text-shadow: none;
+    }
+    .panel-actions .primary {
+      border-color: transparent;
+      background: var(--radar-action-gradient);
+      color: var(--radar-action-ink);
+    }
+    .panel-actions .wide { grid-column: 1 / -1; }
+    .trust-strip {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--radar-line);
+      background: rgba(2,9,18,.56);
+    }
+    .trust-strip a,
+    .trust-strip span {
+      min-height: 70px;
+      padding: 14px;
+      border-right: 1px solid rgba(255,255,255,.09);
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      color: #fff;
+      font-weight: 950;
+      font-size: 14px;
+    }
+    .trust-strip small {
+      color: #93a9c3;
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    @media (max-width: 1080px) {
+      .radar-stage { grid-template-columns: 1fr; }
+      .radar-visual { min-height: auto; }
+      .radar-screen { width: min(480px, 100%); }
+      .signal-board { grid-template-columns: 1fr; }
+      .signal-panel { border-left: 0; border-top: 1px solid var(--radar-line); grid-template-rows: 240px auto; }
+    }
+    @media (max-width: 720px) {
+      body { background-attachment: scroll; }
+      .radar-nav { align-items: flex-start; flex-direction: column; }
+      .brand-lockup img { width: 48px; height: 48px; }
+      .radar-menu { gap: 12px; font-size: 12px; }
+      .radar-stage { padding: 16px; }
+      .radar-visual,
+      .radar-command,
+      .signal-board { box-shadow: none; }
+      .radar-caption { grid-template-columns: 1fr; }
+      .route-row { grid-template-columns: 58px minmax(0, 1fr); }
+      .route-thumb { width: 58px; height: 48px; }
+      .route-price { grid-column: 2; justify-self: start; }
+      .signal-head { display: grid; }
+      .signal-status { text-align: left; }
+      .panel-actions,
+      .meta-grid,
+      .trust-strip { grid-template-columns: 1fr; }
+      .panel-actions .wide { grid-column: auto; }
+    }
+  </style>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body data-disable-app-features>
+  <div class="radar-shell">
+    <nav class="radar-nav" aria-label="Hovedmeny">
+      <a class="brand-lockup" href="/" aria-label="Billig-reiser.no forside">
+        <img alt="Billig-reiser.no" height="1200" src="assets/billig-reiser-logo-full-v116.png" width="1200" />
+        <span class="brand-text"><strong>Billig-reiser.no</strong><span>Reiseradar</span></span>
+      </a>
+      <div class="radar-menu">
+        <a href="/">Forside</a>
+        <a href="reisemagasinet.html">Reisemagasin</a>
+        <a href="reise-thailand.html">Thailand</a>
+        <a class="active" href="reiseradar.html">Reiseradar</a>
+      </div>
+    </nav>
+
+    <main class="radar-stage">
+      <section class="radar-visual" aria-label="Visuell reiseradar">
+        <div class="radar-screen">
+          <span class="radar-sweep" aria-hidden="true"></span>
+          <span class="radar-axis" aria-hidden="true"></span>
+          <button class="radar-pin is-active" style="--x:75%;--y:39%" type="button" data-select-route="BKK">BKK</button>
+          <button class="radar-pin" style="--x:78%;--y:56%" type="button" data-select-route="KBV">KBV</button>
+          <button class="radar-pin" style="--x:51%;--y:35%" type="button" data-select-route="FCO">FCO</button>
+          <button class="radar-pin" style="--x:31%;--y:55%" type="button" data-select-route="ALC">ALC</button>
+          <button class="radar-pin" style="--x:49%;--y:59%" type="button" data-select-route="PMI">PMI</button>
+          <button class="radar-pin" style="--x:43%;--y:17%" type="button" data-select-route="CPH">CPH</button>
+          <button class="radar-pin" style="--x:36%;--y:36%" type="button" data-select-route="PAR">PAR</button>
+          <button class="radar-pin" style="--x:28%;--y:24%" type="button" data-select-route="LON">LON</button>
+          <button class="radar-pin" style="--x:64%;--y:68%" type="button" data-select-route="DXB">DXB</button>
+        </div>
+        <div class="radar-caption" aria-label="Radarstatus">
+          <div class="radar-stat"><span>Signaler</span><strong id="statSignals">9</strong></div>
+          <div class="radar-stat"><span>Fra</span><strong id="statOrigin">OSL</strong></div>
+          <div class="radar-stat"><span>Live</span><strong id="statLive">Amadeus</strong></div>
+        </div>
+      </section>
+
+      <section class="radar-command">
+        <div>
+          <span class="eyebrow">Nytt radarrom</span>
+          <h1>Finn neste reise som et live signal.</h1>
+        </div>
+        <p class="intro">Velg avreise og reisestil. Radaren viser færre, bedre forslag, med valgt rute i ett tydelig panel i stedet for mange konkurrerende kort.</p>
+
+        <div class="control-cluster" id="originControls">
+          <span class="control-label">Avreiseflyplass</span>
+          <div class="segmented">
+            <button class="segment is-active" type="button" data-origin="OSL">Oslo</button>
+            <button class="segment" type="button" data-origin="BGO">Bergen</button>
+            <button class="segment" type="button" data-origin="SVG">Stavanger</button>
+            <button class="segment" type="button" data-origin="TRD">Trondheim</button>
+            <button class="segment" type="button" data-origin="TOS">Tromsø</button>
+          </div>
+        </div>
+
+        <div class="control-cluster" id="styleControls">
+          <span class="control-label">Reisestil</span>
+          <div class="segmented">
+            <button class="segment is-active" type="button" data-style="all">Alle</button>
+            <button class="segment" type="button" data-style="sun">Sol</button>
+            <button class="segment" type="button" data-style="city">Storby</button>
+            <button class="segment" type="button" data-style="family">Familie</button>
+            <button class="segment" type="button" data-style="weekend">Helg</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="signal-board" aria-label="Reisesignaler">
+        <div class="signal-list">
+          <div class="signal-head">
+            <h2>Aktive signaler</h2>
+            <span class="signal-status" id="signalStatus">Klar</span>
+          </div>
+          <div id="routeList"></div>
+          <div class="signal-empty" id="signalEmpty">Ingen signaler passer valget nå. Bytt reisestil eller avreiseflyplass.</div>
+        </div>
+
+        <aside class="signal-panel" aria-label="Valgt reisesignal">
+          <div class="panel-image"><img id="panelImage" alt="" src="assets/destinations/bangkok-v22.jpg" /></div>
+          <div class="panel-body">
+            <span class="panel-kicker" id="panelKicker">Thailand · Storby</span>
+            <h2 class="panel-title" id="panelTitle">Bangkok</h2>
+            <p class="panel-copy" id="panelCopy">Gatemat, shopping, rooftopbarer og et godt startpunkt for en lengre Thailand-reise.</p>
+
+            <div class="live-price-box" id="livePriceBox">
+              <div class="price-line"><span>Prisindikator</span><strong id="panelPrice">Henter</strong></div>
+              <div class="meta-grid">
+                <span><b>Stopp</b><em id="panelStops">-</em></span>
+                <span><b>Reisetid</b><em id="panelDuration">-</em></span>
+                <span><b>Dato</b><em id="panelDates">-</em></span>
+              </div>
+            </div>
+
+            <div class="panel-actions">
+              <a class="primary" id="panelFlight" href="https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_fly&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F" target="_blank" rel="nofollow sponsored noopener">Sjekk flypris</a>
+              <a id="panelActivity" href="https://klook.tpx.gr/Tmj2PfPe" target="_blank" rel="nofollow sponsored noopener">Opplevelser</a>
+              <button id="refreshLive" type="button">Oppdater pris</button>
+              <a class="wide" id="panelHotel" href="https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412" target="_blank" rel="nofollow sponsored noopener">Sjekk hotell</a>
+            </div>
+          </div>
+        </aside>
+
+        <div class="trust-strip" aria-label="Partnere">
+          <span><small>Fly</small>Kiwi / Amadeus</span>
+          <a href="https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412" target="_blank" rel="nofollow sponsored noopener"><small>Hotell</small>Booking.com</a>
+          <a href="https://clk.tradedoubler.com/click?p=93758&a=3480427&url=https%3A%2F%2Fwww.strawberry.no" target="_blank" rel="nofollow sponsored noopener"><small>Norge</small>Strawberry</a>
+          <a href="https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fnb%2F" target="_blank" rel="nofollow sponsored noopener"><small>Ferge</small>Ferryhopper</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="affiliate-config.js?v=187"></script>
+  <script>
+    (() => {
+      const routes = [
+        {
+          id: "BKK",
+          country: "Thailand",
+          city: "Bangkok",
+          hotelSearch: "Bangkok, Thailand",
+          activitySearch: "Bangkok",
+          style: ["city", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 38,
+          nights: 10,
+          image: "assets/destinations/bangkok-v22.jpg",
+          fallback: "fra 16 188 kr",
+          stops: "1-2 stopp",
+          duration: "13-18t",
+          copy: "Gatemat, shopping, rooftopbarer og et godt startpunkt for en lengre Thailand-reise."
+        },
+        {
+          id: "KBV",
+          country: "Thailand",
+          city: "Krabi",
+          hotelSearch: "Krabi, Thailand",
+          activitySearch: "Krabi",
+          style: ["sun", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD"],
+          days: 42,
+          nights: 11,
+          image: "assets/destinations/krabi-v22.jpg",
+          fallback: "sjekk live",
+          stops: "1-2 stopp",
+          duration: "15-20t",
+          copy: "Kalksteinsklipper, Railay, hotellområder og longtail-båter til tropiske øyer."
+        },
+        {
+          id: "FCO",
+          country: "Italia",
+          city: "Roma",
+          hotelSearch: "Roma, Italia",
+          activitySearch: "Rome",
+          style: ["city", "weekend"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 24,
+          nights: 4,
+          image: "assets/destinations/roma-colosseum-reiseradar.jpg",
+          fallback: "fra 6 366 kr",
+          stops: "0-1 stopp",
+          duration: "3-6t",
+          copy: "Historiske kvartaler, god mat og en storby som fungerer fint for en langhelg."
+        },
+        {
+          id: "ALC",
+          country: "Spania",
+          city: "Alicante",
+          hotelSearch: "Alicante, Spania",
+          activitySearch: "Alicante",
+          style: ["sun", "weekend", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD"],
+          days: 22,
+          nights: 7,
+          image: "assets/destinations/alicante-santa-barbara-reiseradar.jpg",
+          fallback: "fra 2 376 kr",
+          stops: "0-1 stopp",
+          duration: "4-7t",
+          copy: "Strand, byliv og et enkelt utgangspunkt for Costa Blanca og leiebiltur."
+        },
+        {
+          id: "PMI",
+          country: "Spania",
+          city: "Mallorca",
+          hotelSearch: "Mallorca, Spania",
+          activitySearch: "Mallorca",
+          style: ["sun", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD"],
+          days: 25,
+          nights: 7,
+          image: "assets/destinations/mallorca-palma-cathedral-reiseradar.jpg",
+          fallback: "sjekk live",
+          stops: "0-1 stopp",
+          duration: "4-7t",
+          copy: "Strender, familiehoteller og ferieområder med ulike uttrykk."
+        },
+        {
+          id: "CPH",
+          country: "Danmark",
+          city: "København",
+          hotelSearch: "København, Danmark",
+          activitySearch: "Copenhagen",
+          style: ["city", "weekend", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 18,
+          nights: 3,
+          image: "assets/destinations/copenhagen-nyhavn-reiseradar.jpg",
+          fallback: "fra 1 240 kr",
+          stops: "Direkte/1 stopp",
+          duration: "1-4t",
+          copy: "Kort reisevei, Nyhavn, matmarked og en enkel helg med eller uten barn."
+        },
+        {
+          id: "PAR",
+          country: "Frankrike",
+          city: "Paris",
+          hotelSearch: "Paris, Frankrike",
+          activitySearch: "Paris",
+          style: ["city", "weekend"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 20,
+          nights: 3,
+          image: "assets/destinations/paris-eiffel-reiseradar.jpg",
+          fallback: "fra 1 690 kr",
+          stops: "0-1 stopp",
+          duration: "2-5t",
+          copy: "Klassisk storbyhelg med museer, nabolag, mat og gode flymuligheter fra Norge."
+        },
+        {
+          id: "LON",
+          country: "Storbritannia",
+          city: "London",
+          hotelSearch: "London, Storbritannia",
+          activitySearch: "London",
+          style: ["city", "weekend", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 16,
+          nights: 3,
+          image: "assets/destinations/london-tower-bridge-reiseradar.jpg",
+          fallback: "fra 1 450 kr",
+          stops: "0-1 stopp",
+          duration: "2-5t",
+          copy: "Teater, shopping, museer og mange avganger som gjør byen lett å bruke på korttur."
+        },
+        {
+          id: "DXB",
+          country: "UAE",
+          city: "Dubai",
+          hotelSearch: "Dubai, UAE",
+          activitySearch: "Dubai",
+          style: ["sun", "city", "family"],
+          origins: ["OSL", "BGO", "SVG", "TRD", "TOS"],
+          days: 34,
+          nights: 6,
+          image: "assets/destinations/dubai-skyline-reiseradar.jpg",
+          fallback: "fra 4 990 kr",
+          stops: "1 stopp",
+          duration: "9-13t",
+          copy: "Vintervarme, hotellkupp, strand, shopping og storbyfølelse i samme reise."
+        }
+      ];
+
+      const airlineNames = {
+        AF: "Air France",
+        AY: "Finnair",
+        BA: "British Airways",
+        DY: "Norwegian",
+        EK: "Emirates",
+        IB: "Iberia",
+        KL: "KLM",
+        LH: "Lufthansa",
+        LO: "LOT",
+        MH: "Malaysia Airlines",
+        QR: "Qatar Airways",
+        SK: "SAS",
+        TG: "Thai Airways",
+        TK: "Turkish Airlines"
+      };
+
+      const state = { origin: "OSL", style: "all", selected: "BKK", live: {} };
+      const routeList = document.getElementById("routeList");
+      const signalEmpty = document.getElementById("signalEmpty");
+      const signalStatus = document.getElementById("signalStatus");
+      const statSignals = document.getElementById("statSignals");
+      const statOrigin = document.getElementById("statOrigin");
+      const statLive = document.getElementById("statLive");
+      const travelpayoutsMarker = window.BR_AFFILIATES?.travelpayoutsId || "718286";
+      const kiwiClickUrl = window.BR_AFFILIATES?.kiwi || "https://c111.travelpayouts.com/click";
+      const activityFallbackUrl = window.BR_AFFILIATES?.activities || "https://klook.tpx.gr/Tmj2PfPe";
+      const klookSearchBase = window.BR_AFFILIATES?.klookSearchBase || "https://www.klook.com/nb/search/result/?query=";
+      const bookingAid = window.BR_AFFILIATES?.bookingComAid || "1522412";
+      const bookingUrl = window.BR_AFFILIATES?.bookingCom || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412";
+
+      function getVisibleRoutes() {
+        return routes.filter(route => route.origins.includes(state.origin) && (state.style === "all" || route.style.includes(state.style)));
+      }
+
+      function routeById(id) {
+        return routes.find(route => route.id === id) || routes[0];
+      }
+
+      function setActiveButtons(groupSelector, key, value) {
+        document.querySelectorAll(`${groupSelector} .segment`).forEach(button => {
+          button.classList.toggle("is-active", button.dataset[key] === value);
+        });
+      }
+
+      function setActivePins() {
+        document.querySelectorAll("[data-select-route]").forEach(button => {
+          button.classList.toggle("is-active", button.dataset.selectRoute === state.selected);
+        });
+      }
+
+      function styleLabel(route) {
+        const labels = { sun: "Sol", city: "Storby", family: "Familie", weekend: "Helg" };
+        return route.style.map(item => labels[item] || item).join(" · ");
+      }
+
+      function addDaysISO(days) {
+        const date = new Date();
+        date.setHours(12, 0, 0, 0);
+        date.setDate(date.getDate() + days);
+        return date.toISOString().slice(0, 10);
+      }
+
+      function addDaysToISO(value, days) {
+        const date = new Date(`${value}T12:00:00`);
+        date.setDate(date.getDate() + days);
+        return date.toISOString().slice(0, 10);
+      }
+
+      function formatNOK(value) {
+        try {
+          return new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK", maximumFractionDigits: 0 }).format(Number(value));
+        } catch (error) {
+          return `${Math.round(Number(value) || 0)} kr`;
+        }
+      }
+
+      function formatDate(value) {
+        if (!value) return "dato";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return value.slice(0, 10);
+        return date.toLocaleDateString("nb-NO", { day: "2-digit", month: "short" });
+      }
+
+      function formatDuration(value) {
+        const match = String(value || "").match(/^PT(?:(\d+)H)?(?:(\d+)M)?$/);
+        if (!match) return value || "Sjekk";
+        const hours = Number(match[1] || 0);
+        const minutes = Number(match[2] || 0);
+        return `${hours ? `${hours}t ` : ""}${minutes ? `${minutes}m` : ""}`.trim() || "0m";
+      }
+
+      function stopsText(stops) {
+        const count = Number(stops || 0);
+        if (!count) return "Direkte";
+        return `${count} stopp`;
+      }
+
+      function airlineName(code) {
+        const clean = String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 2);
+        return airlineNames[clean] || clean || "Flyselskap";
+      }
+
+      function flightAffiliateUrl(route, depart, ret) {
+        try {
+          const kiwiTarget = new URL("https://www.kiwi.com/deep");
+          kiwiTarget.searchParams.set("from", state.origin);
+          kiwiTarget.searchParams.set("to", route.id);
+          kiwiTarget.searchParams.set("departure", depart);
+          kiwiTarget.searchParams.set("return", ret);
+          kiwiTarget.searchParams.set("adults", "2");
+          kiwiTarget.searchParams.set("locale", "no");
+          kiwiTarget.searchParams.set("lang", "no");
+          kiwiTarget.searchParams.set("currency", "NOK");
+          kiwiTarget.searchParams.set("partner_market", "NO");
+
+          const url = new URL(kiwiClickUrl);
+          url.searchParams.set("shmarker", `${travelpayoutsMarker}.billigreiser_reiseradar`);
+          url.searchParams.set("promo_id", "3791");
+          url.searchParams.set("source_type", "customlink");
+          url.searchParams.set("type", "click");
+          url.searchParams.set("custom_url", kiwiTarget.toString());
+          return url.toString();
+        } catch (error) {
+          return window.BR_AFFILIATES?.flights || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F";
+        }
+      }
+
+      function destinationSearchText(route) {
+        return route.search || `${route.city}, ${route.country}`;
+      }
+
+      function activityAffiliateUrl(route) {
+        const query = route.activitySearch || destinationSearchText(route);
+        try {
+          const url = new URL(klookSearchBase);
+          url.searchParams.set("query", query);
+          return url.toString();
+        } catch (error) {
+          return query ? `https://www.klook.com/nb/search/result/?query=${encodeURIComponent(query)}` : activityFallbackUrl;
+        }
+      }
+
+      function hotelAffiliateUrl(route, checkin, checkout) {
+        try {
+          const url = new URL("https://www.booking.com/searchresults.no.html");
+          url.searchParams.set("aid", bookingAid);
+          url.searchParams.set("ss", route.hotelSearch || destinationSearchText(route));
+          url.searchParams.set("checkin", checkin);
+          url.searchParams.set("checkout", checkout);
+          url.searchParams.set("group_adults", "2");
+          url.searchParams.set("no_rooms", "1");
+          url.searchParams.set("group_children", "0");
+          url.searchParams.set("selected_currency", "NOK");
+          url.searchParams.set("lang", "no");
+          url.searchParams.set("label", `billigreiser_reiseradar_${route.id.toLowerCase()}`);
+          return url.toString();
+        } catch (error) {
+          return bookingUrl;
+        }
+      }
+
+      function renderRows() {
+        const visible = getVisibleRoutes();
+        if (visible.length && !visible.some(route => route.id === state.selected)) state.selected = visible[0].id;
+        routeList.innerHTML = visible.map(route => {
+          const live = state.live[`${state.origin}-${route.id}`];
+          const price = live?.price ? formatNOK(live.price) : route.fallback;
+          return `
+            <button class="route-row${route.id === state.selected ? " is-active" : ""}" type="button" data-row-route="${route.id}">
+              <img class="route-thumb" src="${route.image}" alt="" loading="lazy" />
+              <span class="route-main">
+                <strong>${route.city}</strong>
+                <span>${state.origin} → ${route.id} · ${route.country}</span>
+                <span class="route-tags"><b>${styleLabel(route)}</b><b>${route.stops}</b><b>${route.duration}</b></span>
+              </span>
+              <span class="route-price">${price}</span>
+            </button>
+          `;
+        }).join("");
+        signalEmpty.style.display = visible.length ? "none" : "block";
+        statSignals.textContent = String(visible.length);
+        statOrigin.textContent = state.origin;
+        setActivePins();
+        renderPanel();
+      }
+
+      function renderPanel() {
+        const route = routeById(state.selected);
+        const live = state.live[`${state.origin}-${route.id}`];
+        const depart = addDaysISO(route.days);
+        const ret = addDaysToISO(depart, route.nights);
+        document.getElementById("panelImage").src = route.image;
+        document.getElementById("panelImage").alt = route.city;
+        document.getElementById("panelKicker").textContent = `${route.country} · ${styleLabel(route)}`;
+        document.getElementById("panelTitle").textContent = route.city;
+        document.getElementById("panelCopy").textContent = route.copy;
+        document.getElementById("panelPrice").textContent = live?.price ? formatNOK(live.price) : route.fallback;
+        document.getElementById("panelStops").textContent = live ? `${stopsText(live.stops)} ut / ${stopsText(live.return_stops)} hjem` : route.stops;
+        document.getElementById("panelDuration").textContent = live ? formatDuration(live.duration) : route.duration;
+        document.getElementById("panelDates").textContent = live ? `${formatDate(live.departure_at || depart)}-${formatDate(live.return_departure_at || ret)}` : `${formatDate(depart)}-${formatDate(ret)}`;
+        document.getElementById("panelFlight").href = flightAffiliateUrl(route, depart, ret);
+        document.getElementById("panelActivity").href = activityAffiliateUrl(route);
+        document.getElementById("panelHotel").href = hotelAffiliateUrl(route, depart, ret);
+        setActivePins();
+        document.querySelectorAll("[data-row-route]").forEach(button => {
+          button.classList.toggle("is-active", button.dataset.rowRoute === route.id);
+        });
+      }
+
+      async function fetchLive(route) {
+        const key = `${state.origin}-${route.id}`;
+        const depart = addDaysISO(route.days);
+        const ret = addDaysToISO(depart, route.nights);
+        const url = new URL("/api/amadeus-flight-offers", window.location.origin);
+        url.searchParams.set("origin", state.origin);
+        url.searchParams.set("destination", route.id);
+        url.searchParams.set("depart_date", depart);
+        url.searchParams.set("return_date", ret);
+        url.searchParams.set("adults", "2");
+        url.searchParams.set("max", "1");
+
+        try {
+          const response = await fetch(url.toString());
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok || !data?.success || !data.offers?.length) return false;
+          state.live[key] = data.offers[0];
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      async function loadSelectedLive() {
+        const route = routeById(state.selected);
+        signalStatus.textContent = `Henter ${state.origin} → ${route.id}`;
+        statLive.textContent = "Henter";
+        const ok = await fetchLive(route);
+        signalStatus.textContent = ok ? `${airlineName(state.live[`${state.origin}-${route.id}`]?.airline)} funnet` : "Statisk signal klart";
+        statLive.textContent = ok ? "Live" : "Fallback";
+        renderRows();
+      }
+
+      function selectRoute(id, shouldLoad = true) {
+        state.selected = id;
+        renderRows();
+        if (shouldLoad) loadSelectedLive();
+      }
+
+      document.getElementById("originControls").addEventListener("click", event => {
+        const button = event.target.closest("[data-origin]");
+        if (!button) return;
+        state.origin = button.dataset.origin;
+        setActiveButtons("#originControls", "origin", state.origin);
+        const visible = getVisibleRoutes();
+        state.selected = visible[0]?.id || routes[0].id;
+        renderRows();
+        loadSelectedLive();
+      });
+
+      document.getElementById("styleControls").addEventListener("click", event => {
+        const button = event.target.closest("[data-style]");
+        if (!button) return;
+        state.style = button.dataset.style;
+        setActiveButtons("#styleControls", "style", state.style);
+        const visible = getVisibleRoutes();
+        state.selected = visible[0]?.id || routes[0].id;
+        renderRows();
+        loadSelectedLive();
+      });
+
+      routeList.addEventListener("click", event => {
+        const button = event.target.closest("[data-row-route]");
+        if (button) selectRoute(button.dataset.rowRoute);
+      });
+
+      document.querySelectorAll("[data-select-route]").forEach(button => {
+        button.addEventListener("click", () => {
+          const route = routeById(button.dataset.selectRoute);
+          if (!route.origins.includes(state.origin)) state.origin = route.origins[0];
+          if (state.style !== "all" && !route.style.includes(state.style)) state.style = "all";
+          setActiveButtons("#originControls", "origin", state.origin);
+          setActiveButtons("#styleControls", "style", state.style);
+          selectRoute(route.id);
+        });
+      });
+
+      document.getElementById("refreshLive").addEventListener("click", loadSelectedLive);
+
+      renderRows();
+      loadSelectedLive();
+    })();
+  </script>
+</body>
+</html>
