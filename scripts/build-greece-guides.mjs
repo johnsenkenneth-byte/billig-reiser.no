@@ -13,6 +13,16 @@ const FERRYHOPPER = "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=h
 const img = {
   crete: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Aerial_view_of_Balos_Beach_and_Lagoon_on_Crete%2C_Greece.jpg/1280px-Aerial_view_of_Balos_Beach_and_Lagoon_on_Crete%2C_Greece.jpg",
   chania: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Chania%2C_old_harbour_2019a.jpg/1280px-Chania%2C_old_harbour_2019a.jpg",
+  creteRethymno: "/assets/hellas/kreta/rethymno-harbour.webp",
+  creteElounda: "/assets/hellas/kreta/elounda-bay.webp",
+  creteAgiosNikolaos: "/assets/hellas/kreta/agios-nikolaos-harbour.webp",
+  cretePeskesi: "/assets/hellas/kreta/peskesi-restaurant.webp",
+  creteTamam: "/assets/hellas/kreta/tamam-restaurant-chania.webp",
+  creteAvli: "/assets/hellas/kreta/avli-rustic-fine-dining.webp",
+  creteBalos: "/assets/hellas/kreta/balos-beach.webp",
+  creteElafonissi: "/assets/hellas/kreta/elafonissi-beach.webp",
+  creteFalassarna: "/assets/hellas/kreta/falassarna-beach.webp",
+  cretePreveli: "/assets/hellas/kreta/preveli-beach.webp",
   rhodes: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Pier_at_Lindos._Rhodes%2C_Greece.jpg/1280px-Pier_at_Lindos._Rhodes%2C_Greece.jpg",
   rhodesOld: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Lindos_Windmill.jpg/1280px-Lindos_Windmill.jpg",
   kos: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Kos_-_Strand_beiTigkaki.JPG/1280px-Kos_-_Strand_beiTigkaki.JPG",
@@ -68,8 +78,9 @@ const islands = [
     season: "Mai-juni og september er best. Juli og august er varmest og travlest.",
     areas: [
       ["Chania", "Best for gamleby, havn, mat, par og kort vei til vestkystens strender."],
-      ["Rethymno", "God mellomting med gamleby, strand og roligere tempo."],
-      ["Elounda og Agios Nikolaos", "Best for penere resorts, par og voksne reisende."]
+      ["Rethymno", "God mellomting med gamleby, strand og roligere tempo.", img.creteRethymno, "Rethymno på Kreta"],
+      ["Elounda", "Best for rolige resorts, Spinalonga-tur og penere feriedager ved Mirabello-bukten.", img.creteElounda, "Elounda på Kreta"],
+      ["Agios Nikolaos", "Best for havneby, restauranter, innsjøen Voulismeni og kort vei til Elounda.", img.creteAgiosNikolaos, "Agios Nikolaos på Kreta"]
     ],
     hotels: [
       ["Domes Zeen Chania", "Luksus/familie", "Chania", "★★★★★", "Stilig strandresort nær Chania for par og familier.", img.hotelCrete, bookingHotel("domes-zeen-chania-a-luxury-collection-resort-chania")],
@@ -77,16 +88,16 @@ const islands = [
       ["Lyttos Mare", "Familie", "Hersonissos", "★★★★★", "Sterkt familievalg med basseng, strand og enkel charterlogistikk.", img.crete, bookingHotel("lyttos-mare")]
     ],
     food: [
-      ["Peskesi", "Heraklion-klassiker for kretisk mat med råvarer og tradisjon i sentrum."],
-      ["Tamam", "Populær Chania-favoritt i gamlebyen. Bestill bord i høysesong."],
-      ["Avli", "Rethymno-valg for en penere middag i historiske omgivelser."],
+      ["Peskesi", "Heraklion-klassiker for kretisk mat med råvarer og tradisjon i sentrum.", img.cretePeskesi, "Peskesi på Kreta"],
+      ["TAMAM Restaurant Chania", "Populær Chania-favoritt i gamlebyen. Bestill bord i høysesong.", img.creteTamam, "TAMAM Restaurant Chania på Kreta"],
+      ["Avli Rustic Fine Dining Restaurant", "Rethymno-valg for en penere middag i historiske omgivelser.", img.creteAvli, "Avli Rustic Fine Dining Restaurant på Kreta"],
       ["Billig tips", "Se etter grillsteder, dakos, gyros og små tavernaer et par kvartaler fra havnefronten."]
     ],
     beaches: [
-      ["Balos", "Wow-stranden. Best tidlig, og enklest med planlagt båt/transport."],
-      ["Elafonissi", "Rosa sand og grunt vann, men svært populær i høysesong."],
-      ["Falassarna", "Lang strand, solnedgang og ofte bedre plass."],
-      ["Preveli", "Palmer, elv og annerledes stranddag på sørkysten."]
+      ["Balos", "Wow-stranden. Best tidlig, og enklest med planlagt båt/transport.", img.creteBalos, "Balos på Kreta"],
+      ["Elafonissi", "Rosa sand og grunt vann, men svært populær i høysesong.", img.creteElafonissi, "Elafonissi på Kreta"],
+      ["Falassarna", "Lang strand, solnedgang og ofte bedre plass.", img.creteFalassarna, "Falassarna på Kreta"],
+      ["Preveli", "Palmer, elv og annerledes stranddag på sørkysten.", img.cretePreveli, "Preveli på Kreta"]
     ],
     activities: [
       ["Knossos og Heraklion", "Historie og museum som passer godt tidlig i ferien.", gyg("Crete Knossos Heraklion tour")],
@@ -494,7 +505,7 @@ function pageHead({ title, description, canonical, image, jsonHeadline }) {
   <link rel="stylesheet" href="/spania/spania-city.css?v=${CSS_VERSION}" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#020913" />
-  <script defer src="/pwa-register.js"></script>
+  <script defer src="/pwa-register.js?v=189"></script>
   <link rel="stylesheet" href="/app-features.css?v=159" />
   <script defer src="/app-features.js"></script>
   <style>
