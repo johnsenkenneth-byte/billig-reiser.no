@@ -1,1 +1,0 @@
-Ny logo er oppdatert med slagordet "Oppdag mer. Reis smartere." Header bruker assets/billig-reiser-logo-full-v116.png. Forsiden viser full logo med assets/billig-reiser-logo-full-v116.png. PWA-cache er bumpet til v115.
