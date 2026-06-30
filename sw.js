@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v198-momondo-flights";
+const CACHE_VERSION = "billig-reiser-pwa-v199-denmark-package";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -23,7 +23,7 @@ const APP_SHELL = [
   "/favicon-512x512.png",
   "/apple-touch-icon.png",
   "/go/hotels.html",
-  "/style.css?v=198",
+  "/style.css?v=199",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=198",
   "/app.js?v=198",
@@ -32,12 +32,9 @@ const APP_SHELL = [
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
   "/assets/billig-reiser-logo-full-v116.png",
-  "/assets/partner-cards/citybox-hotels-card-v189.jpg",
-  "/assets/partner-cards/elite-hotels-card-v189.jpg",
   "/assets/partner-cards/ferryhopper-card-v189.jpg",
-  "/assets/partner-cards/nazar-card-v189.jpg",
-  "/assets/partner-cards/radisson-hotels-card-v189.jpg",
-  "/assets/partner-cards/strawberry-card-v189.jpg",
+  "/assets/wow-tabs/tab-fly-v22.jpg",
+  "/assets/wow-tabs/tab-hotel-v22.jpg",
   "/assets/hellas/kreta/rethymno-harbour.webp",
   "/assets/hellas/kreta/elounda-bay.webp",
   "/assets/hellas/kreta/agios-nikolaos-harbour.webp",
