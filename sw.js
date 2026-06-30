@@ -1,7 +1,8 @@
-const CACHE_VERSION = "billig-reiser-pwa-v199-denmark-package";
+const CACHE_VERSION = "billig-reiser-pwa-v202-top-partners";
 const APP_SHELL = [
   "/",
   "/index.html",
+  "/sommerhus-bat-danmark.html",
   "/reisehacks.html",
   "/hellas/",
   "/hellas/kreta/",
@@ -23,7 +24,7 @@ const APP_SHELL = [
   "/favicon-512x512.png",
   "/apple-touch-icon.png",
   "/go/hotels.html",
-  "/style.css?v=199",
+  "/style.css?v=202",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=198",
   "/app.js?v=198",
@@ -32,9 +33,11 @@ const APP_SHELL = [
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",
   "/assets/billig-reiser-logo-full-v116.png",
-  "/assets/partner-cards/ferryhopper-card-v189.jpg",
-  "/assets/wow-tabs/tab-fly-v22.jpg",
-  "/assets/wow-tabs/tab-hotel-v22.jpg",
+  "/assets/partner-cards/sommerhus-bat-danmark-v200.png",
+  "/assets/partner-cards/campanyon-card-v200.png",
+  "/assets/partner-cards/tui-card-v200.png",
+  "/assets/partner-cards/nazar-card-v200.png",
+  "/assets/partner-cards/citybox-card-v200.png",
   "/assets/hellas/kreta/rethymno-harbour.webp",
   "/assets/hellas/kreta/elounda-bay.webp",
   "/assets/hellas/kreta/agios-nikolaos-harbour.webp",
