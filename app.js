@@ -398,11 +398,12 @@
     const key = value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, "").trim();
     return key === "valgfritt" || key === "optional" ? "" : value;
   };
+  const flightTripButtons = () => document.querySelectorAll("#flightTripToggle [data-flight-trip]");
 
   function updateFlightTripUi() {
     const form = $("travelSearch");
     if (form) form.dataset.flightTrip = currentFlightTripType;
-    document.querySelectorAll("[data-flight-trip]").forEach((btn) => {
+    flightTripButtons().forEach((btn) => {
       const active = btn.dataset.flightTrip === currentFlightTripType;
       btn.classList.toggle("active", active);
       btn.setAttribute("aria-selected", active ? "true" : "false");
@@ -2547,6 +2548,15 @@
     document.querySelectorAll("[data-smart-service]").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.smartService === currentSearchType);
     });
+    const tripToggle = $("flightTripToggle");
+    if (tripToggle) {
+      const tripToggleActive = currentSearchType === "flight";
+      tripToggle.setAttribute("aria-hidden", tripToggleActive ? "false" : "true");
+      tripToggle.querySelectorAll("button").forEach((button) => {
+        button.disabled = !tripToggleActive;
+        button.tabIndex = tripToggleActive ? 0 : -1;
+      });
+    }
 
     const fromLabel = $("fromLabel");
     const toLabel = $("toLabel");
@@ -3078,8 +3088,10 @@
     document.querySelectorAll("[data-search-type]").forEach((btn) => {
       btn.addEventListener("click", () => setSearchType(btn.dataset.searchType));
     });
-    document.querySelectorAll("[data-flight-trip]").forEach((btn) => {
-      btn.addEventListener("click", () => {
+    flightTripButtons().forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         setSearchType("flight");
         setFlightTripType(btn.dataset.flightTrip, { resetDates: true });
         if (btn.dataset.flightTrip === "multicity") ($("fromCity")?.value ? $("toCity") : $("fromCity"))?.focus();

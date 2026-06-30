@@ -6660,7 +6660,7 @@ html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] #d
   display:inline!important;
 }
 
-/* BR v193: restore full search controls after smart-service UI */
+/* BR v194: restore full search controls after smart-service UI */
 html body form#travelSearch .smart-service-grid,
 html body form#travelSearch .smart-search-main,
 html body form#travelSearch .search-mode-title,
@@ -6806,7 +6806,7 @@ html body form#travelSearch .multi-leg-origin strong{
   }
 }
 
-/* BR v193: multi-city uses Fly 1 fra/til plus "Legg til fly" rows */
+/* BR v194: multi-city uses Fly 1 fra/til plus "Legg til fly" rows */
 html body form#travelSearch[data-mode="flight"][data-flight-trip="multicity"] .search-fields.fields{
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
 }
@@ -6838,7 +6838,7 @@ html body form#travelSearch .airport-suggest{
   }
 }
 
-/* BR v193: keep the children/passenger picker above the search button */
+/* BR v194: keep the children/passenger picker above the search button */
 html body form#travelSearch .traveler-field.open{
   z-index:2500!important;
   overflow:visible!important;
