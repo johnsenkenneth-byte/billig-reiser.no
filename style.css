@@ -6306,7 +6306,7 @@ a.hotel-topper-copy:focus-visible{
 .sommerhus-section-head h2,
 .sommerhus-route-panel h2{
   margin:9px 0 10px;
-  font-size:clamp(30px,3.4vw,52px);
+  font-size:clamp(28px,3vw,44px);
   line-height:1;
   letter-spacing:-.04em;
 }
@@ -6320,22 +6320,22 @@ a.hotel-topper-copy:focus-visible{
 }
 
 .sommerhus-park-block{
-  padding:26px 0 16px;
+  padding:26px 0 20px;
   border-top:1px solid rgba(255,255,255,.10);
   scroll-margin-top:105px;
 }
 
 .sommerhus-block-head{
   display:grid;
-  grid-template-columns:minmax(0,.45fr) minmax(0,.55fr);
-  gap:18px;
-  align-items:end;
+  grid-template-columns:1fr;
+  gap:8px;
+  max-width:820px;
   margin-bottom:14px;
 }
 
 .sommerhus-block-head h3{
   margin:7px 0 0;
-  font-size:clamp(25px,2.6vw,40px);
+  font-size:clamp(24px,2.3vw,34px);
   line-height:1.02;
   letter-spacing:-.035em;
 }
@@ -6347,10 +6347,62 @@ a.hotel-topper-copy:focus-visible{
   line-height:1.55;
 }
 
+.sommerhus-offer-group{
+  margin-top:18px;
+  padding:18px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.035);
+}
+
+.sommerhus-offer-group + .sommerhus-offer-group{
+  margin-top:14px;
+}
+
+.sommerhus-offer-group.is-experiences{
+  background:rgba(34,211,238,.045);
+}
+
+.sommerhus-subhead{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.sommerhus-subhead > span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:8px;
+  background:#ffd66f;
+  color:#170f03;
+  font-size:14px;
+  font-weight:950;
+}
+
+.sommerhus-subhead h4{
+  margin:0 0 3px;
+  font-size:18px;
+  line-height:1.15;
+  letter-spacing:-.015em;
+}
+
+.sommerhus-subhead p{
+  margin:0;
+  color:#aebed2;
+  font-size:13px;
+  line-height:1.4;
+}
+
 .sommerhus-homes-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;
+  gap:10px;
+  max-width:1040px;
 }
 
 .sommerhus-home-card{
@@ -6363,7 +6415,7 @@ a.hotel-topper-copy:focus-visible{
   border:1px solid rgba(255,255,255,.12);
   background:#081a2b;
   color:#fff;
-  box-shadow:0 18px 46px rgba(0,0,0,.24);
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
   transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
 }
 
@@ -6375,51 +6427,51 @@ a.hotel-topper-copy:focus-visible{
 
 .sommerhus-home-card img{
   width:100%;
-  aspect-ratio:4/3;
+  aspect-ratio:16/10;
   object-fit:cover;
   background:#dce7f2;
 }
 
 .sommerhus-home-card > span{
-  margin:14px 14px 0;
+  margin:10px 11px 0;
   color:#9edfff;
-  font-size:11px;
+  font-size:10px;
   font-weight:950;
-  letter-spacing:.09em;
+  letter-spacing:.08em;
   text-transform:uppercase;
 }
 
 .sommerhus-home-card h3{
-  min-height:2.25em;
-  margin:7px 14px 5px;
-  font-size:20px;
+  min-height:2.1em;
+  margin:5px 11px 4px;
+  font-size:17px;
   line-height:1.12;
   letter-spacing:-.015em;
 }
 
 .sommerhus-home-card p{
-  min-height:3.1em;
-  margin:0 14px 12px;
+  min-height:2.8em;
+  margin:0 11px 9px;
   color:#c8d7ea;
-  font-size:13px;
-  line-height:1.45;
+  font-size:12px;
+  line-height:1.38;
 }
 
 .sommerhus-home-meta{
   display:flex;
   flex-wrap:wrap;
-  gap:7px;
-  margin:0 14px 14px;
+  gap:5px;
+  margin:0 11px 10px;
 }
 
 .sommerhus-home-meta b,
 .sommerhus-home-meta em{
   display:inline-flex;
   align-items:center;
-  min-height:27px;
-  padding:0 9px;
-  border-radius:8px;
-  font-size:12px;
+  min-height:24px;
+  padding:0 7px;
+  border-radius:7px;
+  font-size:11px;
   font-style:normal;
   font-weight:950;
 }
@@ -6438,20 +6490,20 @@ a.hotel-topper-copy:focus-visible{
   display:flex;
   align-items:center;
   justify-content:center;
-  min-height:43px;
-  margin:auto 14px 14px;
+  min-height:36px;
+  margin:auto 11px 11px;
   border-radius:8px;
   background:#fff;
   color:#06101f;
-  font-size:13px;
+  font-size:12px;
   font-weight:950;
 }
 
 .sommerhus-experience-strip{
   display:grid;
-  grid-template-columns:minmax(220px,.9fr) repeat(3,minmax(0,1fr));
-  gap:14px;
-  margin-top:16px;
+  grid-template-columns:minmax(210px,.78fr) repeat(3,minmax(0,1fr));
+  gap:10px;
+  max-width:1040px;
 }
 
 .sommerhus-experience-intro,
@@ -6466,7 +6518,7 @@ a.hotel-topper-copy:focus-visible{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:22px;
+  padding:18px;
   background:
     linear-gradient(135deg,rgba(34,211,238,.18),rgba(255,214,111,.12)),
     #071727;
@@ -6489,7 +6541,7 @@ a.hotel-topper-copy:focus-visible{
 
 .sommerhus-experience-card img{
   width:100%;
-  aspect-ratio:4/3;
+  aspect-ratio:16/10;
   object-fit:cover;
   background:#dce7f2;
 }
@@ -6497,9 +6549,9 @@ a.hotel-topper-copy:focus-visible{
 .sommerhus-experience-intro span,
 .sommerhus-experience-card span{
   display:block;
-  margin:14px 14px 0;
+  margin:10px 11px 0;
   color:#ffd66f;
-  font-size:12px;
+  font-size:10px;
   font-weight:950;
   letter-spacing:.13em;
   text-transform:uppercase;
@@ -6511,22 +6563,22 @@ a.hotel-topper-copy:focus-visible{
 
 .sommerhus-experience-intro h3,
 .sommerhus-experience-card h3{
-  margin:9px 14px 8px;
-  font-size:22px;
+  margin:7px 11px 7px;
+  font-size:17px;
   line-height:1.08;
   letter-spacing:-.035em;
 }
 
 .sommerhus-experience-intro h3{
   margin:9px 0 10px;
-  font-size:clamp(24px,2.3vw,34px);
+  font-size:clamp(22px,2vw,30px);
 }
 
 .sommerhus-experience-intro p,
 .sommerhus-experience-card p{
-  margin:0 14px 14px;
+  margin:0 11px 10px;
   color:#d7e5f5;
-  font-size:14px;
+  font-size:12px;
   line-height:1.48;
 }
 
@@ -6539,13 +6591,13 @@ a.hotel-topper-copy:focus-visible{
   display:flex;
   align-items:center;
   justify-content:center;
-  min-height:42px;
-  margin:auto 14px 14px;
-  padding:0 12px;
+  min-height:36px;
+  margin:auto 11px 11px;
+  padding:0 10px;
   border-radius:8px;
   background:#ffd66f;
   color:#170f03;
-  font-size:12px;
+  font-size:11px;
   font-weight:950;
   text-align:center;
 }
