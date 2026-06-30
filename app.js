@@ -1330,11 +1330,11 @@
     });
     const adults = Math.max(1, Number(state.adults || 1));
     const children = Math.max(0, Number(state.children || 0));
-    const target = new URL("https://www.kiwi.com/no/");
+    const legPath = legs.map((leg) => `${kiwiPlaceSlug(leg.from)}~${kiwiPlaceSlug(leg.to)}~${leg.depart}`).join("/");
+    const target = new URL(`https://www.kiwi.com/no/multicity/results/${legPath}/`);
     target.searchParams.set("adults", String(adults));
     target.searchParams.set("children", String(children));
     target.searchParams.set("infants", "0");
-    target.searchParams.set("multicityMode", legs.map((leg) => `${kiwiPlaceSlug(leg.from)}~${kiwiPlaceSlug(leg.to)}~${leg.depart}`).join(";"));
     return buildKiwiAffiliateUrl(target.toString(), "billigreiser_fly_multicity");
   }
 
