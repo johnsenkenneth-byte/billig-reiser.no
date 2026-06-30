@@ -226,6 +226,13 @@
     "naoussa": "paros",
     "mykonos": "mykonos",
     "mykonos by": "mykonos",
+    "mykonos town": "mykonos",
+    "agios stefanos": "mykonos",
+    "ornos": "mykonos",
+    "platis gialos": "mykonos",
+    "ano mera": "mykonos",
+    "tourlos": "mykonos",
+    "panormos": "mykonos",
     "roma": "roma",
     "rome": "roma",
     "paris": "paris",
@@ -3989,7 +3996,108 @@
         "price": 747
       }
     ],
-    "mykonos": [],
+    "mykonos": [
+      {
+        "id": "162336",
+        "name": "Mykonos Princess Hotel",
+        "city": "Agios Stefanos",
+        "country": "Hellas",
+        "stars": 5,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/hotelier-images/bf/15/c487a26354246d47a354fbb93c257d407e37a0747a8cacc675f1d11a640c",
+        "address": "Agios Stefanos - Mykonos",
+        "price": 1918
+      },
+      {
+        "id": "6528902",
+        "name": "Myconian Kyma, a Member of Design Hotels",
+        "city": "Mykonos-Town",
+        "country": "Hellas",
+        "stars": 5,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/hotelier-images/81/a1/9125f4905b231e8d09a627aa841647117e27a5b32644fb55e1973fbca836",
+        "address": "Vryssi, Mykonos Town",
+        "price": 2484
+      },
+      {
+        "id": "33025",
+        "name": "Myconian Panoptis Escape - Small Luxury Hotels of the World",
+        "city": "Mykonos-Town",
+        "country": "Hellas",
+        "stars": 5,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/hotelier-images/fd/06/f13175a346ee97c1f8be29494a49098a5f4850c7885349d22c361a75c7d1",
+        "address": "Elia Beach",
+        "price": 2948
+      },
+      {
+        "id": "48209",
+        "name": "Palladium Hotel",
+        "city": "Mykonos-Town",
+        "country": "Hellas",
+        "stars": 5,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/hotelier-images/c4/13/a2b795ae3361ab5cc2ad2156a0311c14f949bd473e5e879f7bffcf82c173",
+        "address": "Platys Gialos Beach, P.O.Box 7100",
+        "price": 2955
+      },
+      {
+        "id": "10104890",
+        "name": "The Wild by Interni",
+        "city": "Mykonos-Town",
+        "country": "Hellas",
+        "stars": 5,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/partner-images/fd/56/7fd1cb00cf1b84af62939dc7fba9da653c8a8520afa526ebfd52e6b8573a",
+        "address": "Kalafatis",
+        "price": 3041
+      },
+      {
+        "id": "48198",
+        "name": "Semeli Hotel Mykonos",
+        "city": "Mykonos-Town",
+        "country": "Hellas",
+        "stars": 5,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/partner-images/2d/62/dfd00f6e6dc2e7df9428aa2571644b00e9dfbe22a9e79957bb943ae0438b",
+        "address": "Mykonos Town",
+        "price": 3060
+      },
+      {
+        "id": "841906",
+        "name": "Rocabella Mykonos Hotel",
+        "city": "Agios Stefanos",
+        "country": "Hellas",
+        "stars": 5,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/hotelier-images/16/f4/a5c81705b0887ac3ed1e855cc4382869236804ec26a55a8b142fc89410a0",
+        "address": "Agios Stefanos",
+        "price": 4111
+      },
+      {
+        "id": "39394",
+        "name": "Yiannaki Hotel",
+        "city": "Ornos",
+        "country": "Hellas",
+        "stars": 4,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/partner-images/e3/14/0d116ea4e109bc711e8b5f19d256cb432badf307d30eea928f3a428782e8",
+        "address": "Ornos Beach",
+        "price": 541
+      },
+      {
+        "id": "43712254",
+        "name": "Ve Zo Suites Mykonos",
+        "city": "Mykonos-Town",
+        "country": "Hellas",
+        "stars": 4,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/partner-images/37/3c/4b687e7bc19adbe036740e2c9d6874946499cff28a948d22a23ee9f5e899",
+        "address": "Tourlos",
+        "price": 774
+      },
+      {
+        "id": "38052114",
+        "name": "Boutique di Vito",
+        "city": "Mykonos-Town",
+        "country": "Hellas",
+        "stars": 4,
+        "image": "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,f_auto,h_320,q_auto,w_400/partner-images/e6/fb/16ba0e145a8d1db68091d1c7abdcf4ad88889ce2b67bc77e4650f9eacab7",
+        "address": "Rocharis",
+        "price": 835
+      }
+    ],
     "roma": [
       {
         "id": "4959026",

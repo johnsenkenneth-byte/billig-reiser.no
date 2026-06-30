@@ -1,4 +1,4 @@
-/* BR build: LIVE-KIWI-AIRPORT-SEARCH-2026-05-09 */
+/* BR build: LIVE-MOMONDO-AIRPORT-SEARCH-2026-06-30 */
 
 
 /* Discovery Engine + Deal Engine */
@@ -6,7 +6,7 @@
   const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
-    flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
+    flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F",
     momondo: (window.BR_AFFILIATES && window.BR_AFFILIATES.momondo) || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.no/go/package/search/FlightHotel/",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
@@ -15,7 +15,7 @@
     tuiExperiences: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiExperiences) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Fopplevelser%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     ferryhopper: (window.BR_AFFILIATES && window.BR_AFFILIATES.ferryhopper) || "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fno%2F",
-    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
+    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F",
     cheaptickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/click-101724638-12119574",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.dpbolvw.net/click-101724638-17167285",
@@ -347,7 +347,7 @@
 
 
 /* Dynamic partner search
-   Flight: Kiwi deeplink through Travelpayouts.
+   Flight: Momondo deeplink through TradeTracker, with Kiwi as a secondary option.
    Hotel: local Trivago feed cards before affiliate redirect.
    Car: direct Enjoy Travel / AutoEurope partner link with selected context.
 */
@@ -356,7 +356,7 @@
   const CJ_PUBLISHER_ID = (window.BR_AFFILIATES && window.BR_AFFILIATES.cjPublisherId) || "101724638";
   const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
   const AFFILIATE_LINKS = {
-    // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
+    // Aktive partnere. Momondo-deeplinken sender flysok videre med valgt rute og TradeTracker-sporing.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
     momondo: (window.BR_AFFILIATES && window.BR_AFFILIATES.momondo) || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F",
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.no/Fly",
@@ -368,7 +368,7 @@
     cheapTickets: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapTickets) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheaptickets.com/Flights`,
     cheapFlightFares: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFares) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheapflightsfares.com/`,
     cheapFlightFaresSearch: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlightFaresSearch) || "https://www.cheapflightsfares.com/search/id/6dpNqSfo6kNIsvxEf1eiVxl4",
-    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
+    cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/click-101724638-12119574",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.dpbolvw.net/click-101724638-17167285",
     enjoyTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.enjoyTravel) || "https://www.jdoqocy.com/click-101724638-17010909",
@@ -394,7 +394,7 @@
   let pendingSubmitSearchType = "";
   let trivagoHotelFeedPromise = null;
   const normalizeFlightTripType = (value) => ["roundtrip", "oneway", "multicity"].includes(value) ? value : "roundtrip";
-  const blankTabState = () => ({ from: "", to: "", multiTo: "", multiStops: [], depart: "", ret: "", adults: "2", children: "0", flightTrip: "roundtrip" });
+  const blankTabState = () => ({ from: "", to: "", multiTo: "", multiStops: [], depart: "", ret: "", adults: "2", children: "0", rooms: "1", childAges: [], flightTrip: "roundtrip" });
   const tabStates = {
     flight: blankTabState(),
     hotel: blankTabState(),
@@ -407,6 +407,10 @@
 
   const $ = (id) => document.getElementById(id);
   const clean = (value, fallback = "") => (String(value || "").trim() || fallback);
+  const clampNumber = (value, min, max, fallback) => {
+    const number = Number(value);
+    return Math.max(min, Math.min(max, Number.isFinite(number) ? number : fallback));
+  };
   const cityForUrl = (value) => clean(value).replace(/\s+/g, " ");
   const searchFieldForUrl = (id) => {
     const value = cityForUrl($(id)?.value);
@@ -486,6 +490,8 @@
 
   function readSearchState(options = {}) {
     const adultsRaw = clean($("adults")?.value, "2");
+    const childrenRaw = clean($("children")?.value, "0");
+    const childCount = clampNumber(childrenRaw, 0, 8, 0);
     const rawDepart = clean($("departDate")?.value);
     const rawReturn = clean($("returnDate")?.value);
     const useFallback = Boolean(options.forUrl);
@@ -503,7 +509,9 @@
       depart,
       ret,
       adults: adultsRaw.replace(/\D/g, "") || "2",
-      children: clean($("children")?.value, "0").replace(/\D/g, "") || "0"
+      children: childrenRaw.replace(/\D/g, "") || "0",
+      rooms: clean($("rooms")?.value, "1").replace(/\D/g, "") || "1",
+      childAges: collectChildAges(childCount)
     };
   }
 
@@ -747,6 +755,8 @@
       ret: $("returnDate")?.value || "",
       adults: $("adults")?.value || "2",
       children: $("children")?.value || "0",
+      rooms: $("rooms")?.value || "1",
+      childAges: collectChildAges(clampNumber($("children")?.value, 0, 8, 0)),
       flightTrip: key === "flight" ? currentFlightTripType : "roundtrip"
     };
   }
@@ -763,6 +773,8 @@
     if ($("returnDate")) $("returnDate").value = state.ret || "";
     if ($("adults")) $("adults").value = state.adults || "2";
     if ($("children")) $("children").value = state.children || "0";
+    if ($("rooms")) $("rooms").value = state.rooms || "1";
+    renderChildAgeInputs(clampNumber(state.children, 0, 8, 0), state.childAges || []);
     updateFlightTripUi();
     updateTravelerSummary();
     updateDateRangeSummary();
@@ -819,10 +831,10 @@
       } else if (currentSearchType === "car") {
         button.textContent = "SJEKK LEIEBILPRISER PÅ ECONOMYBOOKINGS ↗";
       } else if (currentSearchType === "flight" && currentFlightTripType === "oneway") {
-        button.textContent = state.from && state.to ? `VIS ÉN VEI ${state.from.toUpperCase()} → ${state.to.toUpperCase()} ↗` : "VIS ÉN VEI HOS KIWI ↗";
+        button.textContent = state.from && state.to ? `VIS ÉN VEI ${state.from.toUpperCase()} → ${state.to.toUpperCase()} ↗` : "VIS ÉN VEI HOS MOMONDO ↗";
       } else if (currentSearchType === "flight" && currentFlightTripType === "multicity") {
         const route = multiCityRouteParts(state);
-        button.textContent = route.length >= 3 ? `VIS ${route.length - 1} FLY HOS KIWI ↗` : "LEGG TIL NESTE FLY FØRST";
+        button.textContent = route.length >= 3 ? `VIS ${route.length - 1} FLY HOS MOMONDO ↗` : "LEGG TIL NESTE FLY FØRST";
       } else if (state.from && state.to) {
         button.textContent = `VIS FLYPRISER ${state.from.toUpperCase()} → ${state.to.toUpperCase()} 🔎`;
       } else {
@@ -841,16 +853,16 @@
       } else if (currentSearchType === "restplass") {
         helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes chartervalg med TUI og Nazar.";
       } else if (currentSearchType === "hotel") {
-        helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart || "velg innsjekk"} til ${state.ret || "velg utsjekk"} • ${state.adults} gjester. Hotellene vises her før Trivago.` : "Skriv byen du vil bo i — så viser vi hotellkort før Trivago.";
+        helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart || "velg innsjekk"} til ${state.ret || "velg utsjekk"} • ${travelerText(state)}. Hotellene vises her før Trivago.` : "Skriv byen du vil bo i — så viser vi hotellkort før Trivago.";
       } else if (currentSearchType === "car") {
         helper.textContent = state.from ? `Leiebil: ${state.from} • ${state.depart || "velg hentedato"} til ${state.ret || "velg levering"}. Prisene åpnes hos EconomyBookings.` : "Skriv hentested eller flyplass — så åpnes leiebilprisene hos EconomyBookings.";
       } else if (currentSearchType === "flight" && currentFlightTripType === "oneway") {
-        helper.textContent = state.from && state.to ? `Én vei: ${state.from} → ${state.to} • ${state.depart || "velg avreise"} • ${state.adults} reisende. Åpnes hos Kiwi med affiliate-sporing.` : "Velg én vei, skriv fra og til, og velg avreisedato. Søket åpnes hos Kiwi.";
+        helper.textContent = state.from && state.to ? `Én vei: ${state.from} → ${state.to} • ${state.depart || "velg avreise"} • ${travelerText(state)}. Åpnes hos Momondo med affiliate-sporing.` : "Velg én vei, skriv fra og til, og velg avreisedato. Søket åpnes hos Momondo.";
       } else if (currentSearchType === "flight" && currentFlightTripType === "multicity") {
         const route = multiCityRouteParts(state);
-        helper.textContent = route.length >= 3 ? `Flere byer: ${route.join(" → ")} • ${route.length - 1} fly • åpnes hos Kiwi.` : "Flere fly: fyll inn Fly 1 fra og Fly 1 til. Trykk Legg til fly for neste fly.";
+        helper.textContent = route.length >= 3 ? `Flere byer: ${route.join(" → ")} • ${route.length - 1} fly • åpnes hos Momondo.` : "Flere fly: fyll inn Fly 1 fra og Fly 1 til. Trykk Legg til fly for neste fly.";
       } else {
-        helper.textContent = (state.from && state.to) ? `Flysøk: ${state.from} → ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} reisende.` : "Skriv by eller IATA-kode — velg forslag, så åpnes flypartner med riktig søk.";
+        helper.textContent = (state.from && state.to) ? `Flysøk: ${state.from} → ${state.to} • ${state.depart} til ${state.ret} • ${travelerText(state)}.` : "Skriv by eller IATA-kode — velg forslag, så åpnes flypartner med riktig søk.";
       }
     }
 
@@ -1302,6 +1314,74 @@
   }
 
   function buildFlightDirectUrl(state) {
+    return buildMomondoFlightUrl(state);
+  }
+
+  function momondoPassengerSegments(state) {
+    const adults = Math.max(1, Number(state.adults || 1));
+    const children = Math.max(0, Number(state.children || 0));
+    const segments = [`${adults}adults`];
+    if (children) {
+      segments.push(`children-${normalizeChildAges(state.childAges || [], children).join("-")}`);
+    }
+    return segments;
+  }
+
+  function buildMomondoAffiliateUrl(targetUrl) {
+    const config = window.BR_AFFILIATES || {};
+    const url = new URL(AFFILIATE_LINKS.momondo || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F");
+    url.searchParams.set("c", config.momondoProgramId || url.searchParams.get("c") || "19390");
+    url.searchParams.set("a", config.tradeTrackerAffiliateId || url.searchParams.get("a") || "509866");
+    url.searchParams.set("r", "");
+    url.searchParams.set("u", targetUrl);
+    return url.toString();
+  }
+
+  function buildMomondoFlightTarget(state) {
+    const depart = state.depart || fallbackDepartISO();
+    const tripType = normalizeFlightTripType(state.tripType);
+    const ret = tripType === "oneway" ? "" : (state.ret || fallbackReturnISO(depart));
+    const segments = ["flight-search", `${airportCode(state.from)}-${airportCode(state.to)}`, depart];
+    if (ret) segments.push(ret);
+    segments.push(...momondoPassengerSegments(state));
+    const url = new URL(`/${segments.map(encodeURIComponent).join("/")}`, "https://www.momondo.no");
+    url.searchParams.set("sort", "bestflight_a");
+    return url.toString();
+  }
+
+  function buildMomondoFlightUrl(state) {
+    return buildMomondoAffiliateUrl(buildMomondoFlightTarget(state));
+  }
+
+  function buildMomondoMulticityTarget(state) {
+    const depart = state.depart || fallbackDepartISO();
+    const nextDepart = state.ret || fallbackReturnISO(depart);
+    const stops = normalizeMultiCityStops(state.multiStops).filter((stop) => stop.to);
+    const legs = [{ from: state.from, to: state.to, depart }];
+    let previousTo = state.to;
+    let previousDate = depart;
+    stops.forEach((stop, index) => {
+      const fallbackDate = index === 0 ? nextDepart : addDaysToISO(previousDate, 3);
+      const legDate = validISO(stop.depart) && stop.depart > previousDate ? stop.depart : fallbackDate;
+      legs.push({ from: previousTo, to: stop.to, depart: legDate });
+      previousTo = stop.to;
+      previousDate = legDate;
+    });
+    const segments = ["flight-search"];
+    legs.forEach((leg) => {
+      segments.push(`${airportCode(leg.from)}-${airportCode(leg.to)}`, leg.depart);
+    });
+    segments.push(...momondoPassengerSegments(state));
+    const url = new URL(`/${segments.map(encodeURIComponent).join("/")}`, "https://www.momondo.no");
+    url.searchParams.set("sort", "bestflight_a");
+    return url.toString();
+  }
+
+  function buildMomondoMulticityUrl(state) {
+    return buildMomondoAffiliateUrl(buildMomondoMulticityTarget(state));
+  }
+
+  function buildKiwiFlightUrl(state) {
     const depart = state.depart || fallbackDepartISO();
     const tripType = normalizeFlightTripType(state.tripType);
     const ret = tripType === "oneway" ? "" : (state.ret || fallbackReturnISO(depart));
@@ -1360,7 +1440,7 @@
   }
 
   async function buildFlightPartnerUrl(state) {
-    // Kiwi-deeplinken åpner valgt rute, mens Travelpayouts beholder sporingen.
+    // Momondo-deeplinken åpner valgt rute, mens TradeTracker beholder sporingen.
     return buildFlightDirectUrl(state);
   }
 
@@ -1591,6 +1671,21 @@
     return { depart, ret };
   }
 
+  function trivagoOccupancy(state = {}) {
+    return {
+      adults: clampNumber(state.adults, 1, 9, 2),
+      children: clampNumber(state.children, 0, 8, 0),
+      rooms: clampNumber(state.rooms, 1, 4, 1),
+      childAges: normalizeChildAges(state.childAges || [], clampNumber(state.children, 0, 8, 0))
+    };
+  }
+
+  function trivagoSearchSuffix(state = {}) {
+    const { depart, ret } = trivagoStayDates(state);
+    const occupancy = trivagoOccupancy(state);
+    return `;dr-${compactTrivagoDate(depart)}-${compactTrivagoDate(ret)};rc-${occupancy.rooms}-${occupancy.adults}-${occupancy.children}`;
+  }
+
   function tradeTrackerTrivagoLink(materialId, targetUrl) {
     const config = window.BR_AFFILIATES || {};
     const url = new URL("https://tc.tradetracker.net/");
@@ -1604,7 +1699,7 @@
 
   function loadTrivagoHotelFeed() {
     if (!trivagoHotelFeedPromise) {
-      trivagoHotelFeedPromise = fetch("assets/trivago-hotels.json?v=195", { cache: "force-cache" })
+      trivagoHotelFeedPromise = fetch("assets/trivago-hotels.json?v=196", { cache: "force-cache" })
         .then((response) => response.ok ? response.json() : null)
         .catch(() => null);
     }
@@ -1636,16 +1731,16 @@
     const place = clean(state.to, "hotell");
     const resolved = destinationKey || resolveTrivagoDestination(feed, place)?.key || "";
     const pathId = resolved && feed?.destinations?.[resolved];
+    const suffix = trivagoSearchSuffix(state);
     const targetUrl = pathId
-      ? `http://www.trivago.no/?iPathId=${encodeURIComponent(pathId)}`
-      : `https://www.trivago.no/nb/srl?search=${encodeURIComponent(place)}`;
+      ? `https://www.trivago.no/nb/lm?search=200-${encodeURIComponent(pathId)}${suffix}`
+      : `https://www.trivago.no/nb/lm?search=${encodeURIComponent(place)}${suffix}`;
     return tradeTrackerTrivagoLink(materialId, targetUrl);
   }
 
   function buildTrivagoHotelUrl(hotel, state = {}) {
     const config = window.BR_AFFILIATES || {};
-    const { depart, ret } = trivagoStayDates(state);
-    const targetUrl = `https://www.trivago.no/nb/lm?search=100-${encodeURIComponent(hotel.id)};dr-${compactTrivagoDate(depart)}-${compactTrivagoDate(ret)}-s`;
+    const targetUrl = `https://www.trivago.no/nb/lm?search=100-${encodeURIComponent(hotel.id)}${trivagoSearchSuffix(state)}`;
     return tradeTrackerTrivagoLink(config.trivagoHotelMaterialId || "1795630", targetUrl);
   }
 
@@ -1697,7 +1792,7 @@
     if (!box || !state.to) return false;
 
     const { depart, ret } = trivagoStayDates(state);
-    const people = `${Math.max(1, Number(state.adults || 2))} voksne${Number(state.children) ? `, ${state.children} barn` : ""}`;
+    const people = travelerText(state);
     box.hidden = false;
     box.innerHTML = `
       <div class="trivago-hotel-loading">
@@ -2249,9 +2344,14 @@
     if (tripType === "oneway") {
       return [
         {
-          label: "Kiwi",
+          label: "Momondo",
           href: buildFlightDirectUrl(state),
-          meta: "Én vei"
+          meta: "Direkte søk"
+        },
+        {
+          label: "Kiwi",
+          href: buildKiwiFlightUrl(state),
+          meta: "Alternativ"
         },
         {
           label: "Expedia",
@@ -2263,9 +2363,14 @@
     if (tripType === "multicity") {
       return [
         {
+          label: "Momondo",
+          href: buildMomondoMulticityUrl(state),
+          meta: "Flere fly"
+        },
+        {
           label: "Kiwi",
           href: buildKiwiMulticityUrl(state),
-          meta: "Flere byer"
+          meta: "Alternativ"
         },
         {
           label: "Expedia",
@@ -2276,9 +2381,14 @@
     }
     return [
       {
-        label: "Kiwi",
+        label: "Momondo",
         href: buildFlightDirectUrl(state),
         meta: "Åpne valgt rute"
+      },
+      {
+        label: "Kiwi",
+        href: buildKiwiFlightUrl(state),
+        meta: "Alternativ"
       },
       {
         label: "Expedia",
@@ -2530,7 +2640,8 @@
   function flightConfirmPassengerText(state) {
     const adults = Math.max(1, Number(state.adults || 1));
     const children = Math.max(0, Number(state.children || 0));
-    return `${adults} ${adults === 1 ? "voksen" : "voksne"}${children ? `, ${children} barn` : ""}`;
+    const ages = normalizeChildAges(state.childAges || [], children);
+    return `${adults} ${adults === 1 ? "voksen" : "voksne"}${children ? `, ${children} barn${ages.length ? ` (${ages.join(", ")} år)` : ""}` : ""}`;
   }
 
   function closeFlightPriceConfirm() {
@@ -2701,7 +2812,7 @@
     if (state.tripType === "multicity" && !hasMultiCityNextLeg(state)) throw new Error("Trykk Legg til fly og skriv inn neste flyplass.");
     if (state.tripType === "multicity" && hasIncompleteMultiCityStop(state)) throw new Error("Skriv inn byen for ekstra fly, eller fjern raden.");
     if (state.tripType === "oneway") return buildFlightDirectUrl(state);
-    if (state.tripType === "multicity") return buildKiwiMulticityUrl(state);
+    if (state.tripType === "multicity") return buildMomondoMulticityUrl(state);
     return buildFlightUrl(state);
   }
 
@@ -2847,16 +2958,84 @@
     renderLiveCalendar();
   }
 
+  function normalizeChildAges(ages = [], count = 0) {
+    return Array.from({ length: count }, (_, index) => {
+      const age = clampNumber(Array.isArray(ages) ? ages[index] : "", 0, 17, 6);
+      return String(age);
+    });
+  }
+
+  function collectChildAges(count = clampNumber($("children")?.value, 0, 8, 0)) {
+    const selects = Array.from(document.querySelectorAll("[data-child-age]"));
+    const ages = selects.map((select) => select.value);
+    return normalizeChildAges(ages, count);
+  }
+
+  function childAgeOptions(selectedAge) {
+    return Array.from({ length: 18 }, (_, age) => `<option value="${age}"${String(age) === String(selectedAge) ? " selected" : ""}>${age}</option>`).join("");
+  }
+
+  function renderChildAgeInputs(count, preferredAges = collectChildAges(count)) {
+    const panel = $("childAgePanel");
+    const list = $("childAgeList");
+    if (!panel || !list) return;
+    const usesChildAges = currentSearchType === "hotel" || currentSearchType === "flight";
+    const ages = normalizeChildAges(preferredAges, count);
+    const note = panel.querySelector(".child-age-head small");
+    if (note) note.textContent = currentSearchType === "flight" ? "Brukes i Momondo-søket" : "Påkrevd for hotellsøk";
+    panel.hidden = !usesChildAges || count <= 0;
+    panel.classList.toggle("show", usesChildAges && count > 0);
+    if (!usesChildAges || count <= 0) {
+      list.innerHTML = "";
+      return;
+    }
+
+    list.innerHTML = ages.map((age, index) => `
+      <label class="child-age-row">
+        <span>Barn ${index + 1}</span>
+        <select aria-label="Alder for barn ${index + 1}" data-child-age="${index}">
+          ${childAgeOptions(age)}
+        </select>
+      </label>
+    `).join("");
+    list.querySelectorAll("[data-child-age]").forEach((select) => {
+      select.addEventListener("change", () => {
+        if (currentSearchType === "hotel") hideHotelResults();
+        updateTravelerSummary();
+        updateSearchPreview();
+        saveFormToTabState(currentSearchType);
+      });
+    });
+  }
+
+  function travelerText(state = readSearchState()) {
+    const adults = clampNumber(state.adults, 1, 9, 2);
+    const children = clampNumber(state.children, 0, 8, 0);
+    const rooms = clampNumber(state.rooms, 1, 4, 1);
+    const childAges = normalizeChildAges(state.childAges || [], children);
+    const childText = children ? `, ${children} barn${childAges.length ? ` (${childAges.join(", ")} år)` : ""}` : "";
+    const roomText = currentSearchType === "hotel" ? `, ${rooms} ${rooms === 1 ? "rom" : "rom"}` : "";
+    return `${adults} voksne${childText}${roomText}`;
+  }
+
   function updateTravelerSummary() {
     const toggle = $("travelerToggle");
-    const adults = Math.max(1, Math.min(9, Number($("adults")?.value || 2)));
-    const children = Math.max(0, Math.min(8, Number($("children")?.value || 0)));
+    const adults = clampNumber($("adults")?.value, 1, 9, 2);
+    const children = clampNumber($("children")?.value, 0, 8, 0);
+    const rooms = clampNumber($("rooms")?.value, 1, 4, 1);
     if ($("adults")) $("adults").value = String(adults);
     if ($("children")) $("children").value = String(children);
+    if ($("rooms")) $("rooms").value = String(rooms);
+    $("roomsRow")?.classList.toggle("show", currentSearchType === "hotel");
+    renderChildAgeInputs(children);
     if (!toggle) return;
     if (currentSearchType === "car") {
       toggle.textContent = "";
-    } else if (currentSearchType === "hotel" || currentSearchType === "interhome") {
+    } else if (currentSearchType === "hotel") {
+      toggle.textContent = travelerText({ adults, children, rooms, childAges: collectChildAges(children) });
+    } else if (currentSearchType === "flight") {
+      toggle.textContent = travelerText({ adults, children, rooms, childAges: collectChildAges(children) });
+    } else if (currentSearchType === "interhome") {
       toggle.textContent = `${adults} voksne${children ? `, ${children} barn` : ""}`;
     } else {
       toggle.textContent = `${adults} voksne${children ? `, ${children} barn` : ""}`;
@@ -2899,9 +3078,14 @@
         toggle.setAttribute("aria-expanded", "false");
       }
     });
-    ["adults", "children"].forEach((id) => {
+    ["adults", "children", "rooms"].forEach((id) => {
       const el = $(id);
-      if (el) el.addEventListener("input", () => { updateTravelerSummary(); updateSearchPreview(); saveFormToTabState(currentSearchType); });
+      if (el) el.addEventListener("input", () => {
+        if (currentSearchType === "hotel") hideHotelResults();
+        updateTravelerSummary();
+        updateSearchPreview();
+        saveFormToTabState(currentSearchType);
+      });
     });
     menu.querySelectorAll("[data-step-target]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -2989,7 +3173,7 @@
         return true;
       }
       if (state.tripType === "multicity") {
-        window.open(buildKiwiMulticityUrl(state), "_blank", "noopener,noreferrer");
+        window.open(buildMomondoMulticityUrl(state), "_blank", "noopener,noreferrer");
         return true;
       }
       openFlightPriceConfirm(state);
@@ -3018,6 +3202,8 @@
 
   window.BR_showHotelResults = showHotelResults;
   window.BR_buildTrivagoDestinationUrl = buildTrivagoDestinationUrl;
+  window.BR_buildMomondoFlightUrl = buildMomondoFlightUrl;
+  window.BR_buildMomondoMulticityUrl = buildMomondoMulticityUrl;
 
   function fillSearchFromSmartQuery(query) {
     const route = parseRouteQuery(query);
@@ -3374,7 +3560,7 @@
       event.stopPropagation();
     });
 
-    ["fromCity", "toCity", "multiCityTo", "departDate", "returnDate", "adults", "children"].forEach((id) => {
+    ["fromCity", "toCity", "multiCityTo", "departDate", "returnDate", "adults", "children", "rooms"].forEach((id) => {
       const el = $(id);
       if (el) {
         el.addEventListener("input", () => { if (currentSearchType === "hotel") hideHotelResults(); updateSearchPreview(); renderLiveCalendar(); });
@@ -3423,7 +3609,7 @@
           if (state.tripType === "oneway") {
             target = buildFlightDirectUrl(state);
           } else if (state.tripType === "multicity") {
-            target = buildKiwiMulticityUrl(state);
+            target = buildMomondoMulticityUrl(state);
           } else {
             await openFlightPriceConfirm(state);
             return;
@@ -3538,6 +3724,16 @@
     return d.toISOString().slice(0, 10);
   }
 
+  function aiClampNumber(value, min, max, fallback) {
+    const number = Number(value);
+    return Math.max(min, Math.min(max, Number.isFinite(number) ? number : fallback));
+  }
+
+  function aiCollectChildAges(count = aiClampNumber($("children")?.value, 0, 8, 0)) {
+    const selects = Array.from(document.querySelectorAll("[data-child-age]"));
+    return Array.from({ length: count }, (_, index) => String(aiClampNumber(selects[index]?.value, 0, 17, 6)));
+  }
+
   function airportCode(value) {
     const raw = String(value || "").trim();
     const parenCode = raw.match(/\(([A-Za-z]{3})\)/);
@@ -3588,13 +3784,16 @@
     const from = data.from || $("fromCity")?.value || "Oslo (OSL)";
     const to = data.to || $("toCity")?.value || "";
     if (!to) return "";
+    const childCount = aiClampNumber(data.children || $("children")?.value, 0, 8, 0);
+    const state = { from, to, depart, ret, adults: data.adults || $("adults")?.value || "2", children: String(childCount), childAges: aiCollectChildAges(childCount), tripType: "roundtrip" };
+    if (typeof window.BR_buildMomondoFlightUrl === "function") return window.BR_buildMomondoFlightUrl(state);
     const kiwiTarget = new URL("https://www.kiwi.com/deep");
     kiwiTarget.searchParams.set("from", airportCode(from));
     kiwiTarget.searchParams.set("to", airportCode(to));
     kiwiTarget.searchParams.set("departure", depart);
     kiwiTarget.searchParams.set("return", ret);
     kiwiTarget.searchParams.set("adults", data.adults || "2");
-    if (Number(data.children)) kiwiTarget.searchParams.set("children", data.children);
+    if (childCount) kiwiTarget.searchParams.set("children", String(childCount));
     kiwiTarget.searchParams.set("locale", "no");
     kiwiTarget.searchParams.set("lang", "no");
     kiwiTarget.searchParams.set("currency", "NOK");
@@ -3636,7 +3835,7 @@
   function aiHotelUrl(place = "Roma") {
     const depart = $("departDate")?.value || addDaysISO(14);
     const ret = $("returnDate")?.value || addDaysISO(21);
-    const state = { to: placeName(place) || "Roma", depart, ret, adults: $("adults")?.value || "2", children: $("children")?.value || "0" };
+    const state = { to: placeName(place) || "Roma", depart, ret, adults: $("adults")?.value || "2", children: $("children")?.value || "0", rooms: $("rooms")?.value || "1", childAges: aiCollectChildAges(aiClampNumber($("children")?.value, 0, 8, 0)) };
     if (typeof window.BR_buildTrivagoDestinationUrl === "function") return window.BR_buildTrivagoDestinationUrl(state);
     const config = window.BR_AFFILIATES || {};
     const url = new URL("https://tc.tradetracker.net/");
@@ -3955,12 +4154,12 @@
     setValue("adults", data.adults);
     setValue("children", data.children);
     if (!data.to) {
-      addMessage("Jeg har valgt flysøk og satt avreise til <b>Oslo</b>. Skriv reisemålet også, så åpner jeg riktig Kiwi-søk.", "bot");
+      addMessage("Jeg har valgt flysøk og satt avreise til <b>Oslo</b>. Skriv reisemålet også, så åpner jeg riktig Momondo-søk.", "bot");
       document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    addMessage(`Jeg har fylt ut flysøk: <b>${data.from || "Oslo"} → ${data.to}</b>, ${data.adults} voksne og ${data.children} barn. Velg dato i kalenderfeltet, eller åpne et ferdig Kiwi-søk med standarddato.`, "bot", {
-      label: "Åpne Kiwi-søk",
+    addMessage(`Jeg har fylt ut flysøk: <b>${data.from || "Oslo"} → ${data.to}</b>, ${data.adults} voksne og ${data.children} barn. Velg dato i kalenderfeltet, eller åpne et ferdig Momondo-søk med standarddato.`, "bot", {
+      label: "Åpne Momondo-søk",
       onClick: () => {
         const url = aiFlightUrl(data);
         if (url) window.open(url, "_blank", "noopener,noreferrer");
@@ -3977,13 +4176,16 @@
     setValue("toCity", hotelPlace);
     setValue("adults", "2");
     setValue("children", "0");
+    setValue("rooms", "1");
     const showCards = () => {
       const state = {
         to: hotelPlace,
         depart: document.getElementById("departDate")?.value || "",
         ret: document.getElementById("returnDate")?.value || "",
         adults: document.getElementById("adults")?.value || "2",
-        children: document.getElementById("children")?.value || "0"
+        children: document.getElementById("children")?.value || "0",
+        rooms: document.getElementById("rooms")?.value || "1",
+        childAges: aiCollectChildAges(aiClampNumber(document.getElementById("children")?.value, 0, 8, 0))
       };
       if (typeof window.BR_showHotelResults === "function") window.BR_showHotelResults(state, { scroll: true });
       else window.open(aiHotelUrl(hotelPlace), "_blank", "noopener,noreferrer");

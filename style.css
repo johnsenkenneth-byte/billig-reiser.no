@@ -6870,6 +6870,87 @@ html body form#travelSearch .traveler-field.open .stepper{
   display:none!important;
 }
 
+/* BR v196: rooms and child ages for hotel searches */
+html body form#travelSearch #roomsRow.hotel-room-row{
+  display:none!important;
+}
+
+html body form#travelSearch[data-mode="hotel"] #roomsRow.hotel-room-row.show,
+html body form#travelSearch[data-mode="hotel"] #roomsRow.hotel-room-row{
+  display:flex!important;
+}
+
+html body form#travelSearch .child-age-panel{
+  display:none!important;
+  min-width:0!important;
+  padding-top:14px!important;
+  margin-top:2px!important;
+  border-top:1px solid rgba(255,255,255,.14)!important;
+}
+
+html body form#travelSearch .child-age-panel.show{
+  display:grid!important;
+  gap:12px!important;
+}
+
+html body form#travelSearch .child-age-head{
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+}
+
+html body form#travelSearch .child-age-head b{
+  color:#fff!important;
+  font-size:15px!important;
+  line-height:1.2!important;
+}
+
+html body form#travelSearch .child-age-head small{
+  margin:0!important;
+  color:#93c5fd!important;
+  font-size:11px!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+
+html body form#travelSearch .child-age-list{
+  display:grid!important;
+  gap:10px!important;
+}
+
+html body form#travelSearch .child-age-row{
+  display:flex!important;
+  min-height:44px!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+html body form#travelSearch .child-age-row span{
+  color:#eaf2ff!important;
+  font-size:14px!important;
+  font-weight:900!important;
+}
+
+html body form#travelSearch .child-age-row select{
+  min-width:94px!important;
+  min-height:42px!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  border-radius:12px!important;
+  background:#101b2d!important;
+  color:#fff!important;
+  font:inherit!important;
+  font-size:16px!important;
+  font-weight:950!important;
+  padding:0 34px 0 14px!important;
+}
+
 .trivago-hotel-results{
   width:min(100%,1120px);
   margin:18px auto 0;
