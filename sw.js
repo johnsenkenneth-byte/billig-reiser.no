@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v194-flight-fields";
+const CACHE_VERSION = "billig-reiser-pwa-v195-trivago-hotels";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -23,10 +23,11 @@ const APP_SHELL = [
   "/favicon-512x512.png",
   "/apple-touch-icon.png",
   "/go/hotels.html",
-  "/style.css?v=194",
+  "/style.css?v=195",
   "/app-features.css?v=159",
-  "/affiliate-config.js?v=194",
-  "/app.js?v=194",
+  "/affiliate-config.js?v=195",
+  "/app.js?v=195",
+  "/assets/trivago-hotels.json?v=195",
   "/assets/app-icon-192.png",
   "/assets/app-icon-512.png",
   "/assets/front-hero-flight-map.png",

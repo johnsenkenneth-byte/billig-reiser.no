@@ -6864,3 +6864,189 @@ html body form#travelSearch .traveler-field.open .traveler-row{
 html body form#travelSearch .traveler-field.open .stepper{
   flex:0 0 auto!important;
 }
+
+/* BR v195: local Trivago hotel cards before external redirect */
+.trivago-hotel-results[hidden]{
+  display:none!important;
+}
+
+.trivago-hotel-results{
+  width:min(100%,1120px);
+  margin:18px auto 0;
+  padding:18px;
+  color:#f8fbff;
+  background:rgba(2,10,25,.84);
+  border:1px solid rgba(125,211,252,.24);
+  border-radius:8px;
+  box-shadow:0 22px 70px rgba(0,0,0,.34);
+  backdrop-filter:blur(18px);
+}
+
+.trivago-hotel-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+}
+
+.trivago-hotel-head span{
+  display:block;
+  margin-bottom:4px;
+  color:#67e8f9;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+
+.trivago-hotel-head h2{
+  margin:0;
+  color:#fff;
+  font-size:clamp(22px,3vw,34px);
+  line-height:1.05;
+  letter-spacing:0;
+}
+
+.trivago-hotel-head p{
+  margin:6px 0 0;
+  color:#cbd5e1;
+  font-size:15px;
+  line-height:1.45;
+}
+
+.trivago-hotel-all{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 16px;
+  border-radius:8px;
+  background:#facc15;
+  color:#111827!important;
+  font-weight:900;
+  text-decoration:none!important;
+  white-space:nowrap;
+}
+
+.trivago-hotel-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:12px;
+}
+
+.trivago-hotel-card{
+  min-width:0;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(15,23,42,.96),rgba(4,12,24,.98));
+}
+
+.trivago-hotel-card img{
+  display:block;
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+  background:#07111f;
+}
+
+.trivago-hotel-body{
+  display:flex;
+  min-height:182px;
+  flex-direction:column;
+  gap:10px;
+  padding:13px;
+}
+
+.trivago-hotel-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.trivago-hotel-meta span{
+  display:inline-flex;
+  min-height:26px;
+  align-items:center;
+  padding:0 9px;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:999px;
+  color:#e2e8f0;
+  background:rgba(255,255,255,.05);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0;
+}
+
+.trivago-hotel-card h3{
+  margin:0;
+  color:#fff;
+  font-size:18px;
+  line-height:1.18;
+  letter-spacing:0;
+  overflow-wrap:anywhere;
+}
+
+.trivago-hotel-card p{
+  margin:0;
+  color:#cbd5e1;
+  font-size:13px;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+
+.trivago-hotel-card a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  margin-top:auto;
+  border-radius:8px;
+  background:#22d3ee;
+  color:#06101f!important;
+  font-size:14px;
+  font-weight:950;
+  text-decoration:none!important;
+}
+
+.trivago-hotel-empty,
+.trivago-hotel-loading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:16px;
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:8px;
+  background:rgba(255,255,255,.055);
+  color:#e5edf7;
+}
+
+.trivago-hotel-empty p,
+.trivago-hotel-loading p{
+  margin:0;
+  color:#cbd5e1;
+}
+
+@media(max-width:760px){
+  .trivago-hotel-results{
+    padding:14px;
+    margin-top:14px;
+  }
+
+  .trivago-hotel-head,
+  .trivago-hotel-empty,
+  .trivago-hotel-loading{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .trivago-hotel-all{
+    width:100%;
+  }
+
+  .trivago-hotel-grid{
+    grid-template-columns:1fr;
+  }
+}

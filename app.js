@@ -4,27 +4,31 @@
 /* Discovery Engine + Deal Engine */
 (() => {
   const DEFAULT_EXPEDIA_CRUISE_URL = "https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise";
-  const hotelsBrowserBridge = (targetUrl) => `/go/hotels.html#to=${encodeURIComponent(targetUrl)}`;
   const partners = {
     // Partnerne dekker videresending til flysok, hotell, aktiviteter og transport.
     flights: (window.BR_AFFILIATES && window.BR_AFFILIATES.flights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
+    momondo: (window.BR_AFFILIATES && window.BR_AFFILIATES.momondo) || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.no/go/package/search/FlightHotel/",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
+    tuiExperiences: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiExperiences) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Fopplevelser%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     ferryhopper: (window.BR_AFFILIATES && window.BR_AFFILIATES.ferryhopper) || "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fno%2F",
     cheapFlights: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapFlights) || "https://c111.travelpayouts.com/click?shmarker=718286.billigreiser_flight_home&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fno%2F",
     cheaptickets: "https://www.anrdoezrs.net/links/101724638/type/dlg/https://www.cheaptickets.com/Flights",
     iberia: (window.BR_AFFILIATES && window.BR_AFFILIATES.iberia) || "https://www.anrdoezrs.net/click-101724638-12119574",
     malaysiaAirlines: (window.BR_AFFILIATES && window.BR_AFFILIATES.malaysiaAirlines) || "https://www.dpbolvw.net/click-101724638-17167285",
-    hotels: hotelsBrowserBridge((window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426"),
+    hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.trivago) || "https://tc.tradetracker.net/?c=14374&m=929990&a=509866&r=&u=http%3A%2F%2Fwww.trivago.no%2F",
+    trivago: (window.BR_AFFILIATES && window.BR_AFFILIATES.trivago) || "https://tc.tradetracker.net/?c=14374&m=929990&a=509866&r=&u=http%3A%2F%2Fwww.trivago.no%2F",
     bookingCom: (window.BR_AFFILIATES && window.BR_AFFILIATES.bookingCom) || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412",
     strawberry: (window.BR_AFFILIATES && window.BR_AFFILIATES.strawberry) || "https://clk.tradedoubler.com/click?p=93758&a=3480427&url=https%3A%2F%2Fwww.strawberry.no",
     car: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     economyBookings: (window.BR_AFFILIATES && (window.BR_AFFILIATES.economyBookingsEurope || window.BR_AFFILIATES.economyBookings)) || "https://economybookings.tpx.gr/LT8vc2kD",
-    autoeurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/5w1cp3PR",
+    autoeurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://tc.tradetracker.net/?c=9260&a=509866&r=&u=https%3A%2F%2Fwww.autoeurope.no%2F",
     activities: (window.BR_AFFILIATES && window.BR_AFFILIATES.activities) || "https://klook.tpx.gr/Tmj2PfPe",
+    campanyon: (window.BR_AFFILIATES && window.BR_AFFILIATES.campanyon) || "https://tc.tradetracker.net/?c=37268&a=509866&r=&u=https%3A%2F%2Fwww.campanyon.com%2Fnb-no",
+    solOgStrand: (window.BR_AFFILIATES && window.BR_AFFILIATES.solOgStrand) || "https://tc.tradetracker.net/?c=37454&a=509866&r=&u=https%3A%2F%2Fwww.sologstrand.no%2F",
     kkday: (window.BR_AFFILIATES && window.BR_AFFILIATES.kkday) || "https://kkday.tpx.gr/WlhfXaEZ",
     transfer: (window.BR_AFFILIATES && window.BR_AFFILIATES.transfer) || "https://kiwitaxi.tpx.gr/YjkKJSHa",
     saily: (window.BR_AFFILIATES && window.BR_AFFILIATES.saily) || "https://saily.tpx.gr/svbOORah",
@@ -32,7 +36,7 @@
     tiqets: (window.BR_AFFILIATES && window.BR_AFFILIATES.tiqets) || "https://tiqets.tpx.gr/nL28pCCf",
     goCity: (window.BR_AFFILIATES && window.BR_AFFILIATES.goCity) || "https://gocity.tpx.gr/QHScpmus",
     flightDelay: (window.BR_AFFILIATES && window.BR_AFFILIATES.flightDelay) || "https://deals.flyforsinkelser.no/c?c=40284&m=2508483&a=509866&r=&u=",
-    airhelp: (window.BR_AFFILIATES && window.BR_AFFILIATES.airhelp) || "https://airhelp.tpx.gr/ZW3oHL4Z"
+    airhelp: (window.BR_AFFILIATES && window.BR_AFFILIATES.airhelp) || "https://tc.tradetracker.net/?c=38382&a=509866&r=&u=https%3A%2F%2Fwww.airhelp.com%2Fnb%2F"
   };
 
   const inspiration = {
@@ -91,14 +95,19 @@
 
     const deals = [
       ["Flydeal", "Oslo → Roma", "Weekendtur med lav inngangpris.", "fra 499 kr", partners.cheapFlights],
+      ["Fly", "Momondo.no", "Sammenlign flypriser og finn gode ruter.", "Sjekk fly", partners.momondo],
       ["Hotell", "Bangkok hotell", "Høy verdi per krone og gode vinterpriser.", "fra 420 kr/natt", partners.hotels],
+      ["Hotell", "Trivago.no", "Sammenlign hotellpriser på tvers av leverandører.", "Sammenlign hotell", partners.trivago],
       ["Hotell", "Strawberry", "Sjekk hotell i Norge og Norden.", "Se hotell", partners.strawberry],
       ["Opplevelser", "Tokyo aktiviteter", "Attraksjoner, togpass og eSIM.", "fra 129 kr", partners.activities],
+      ["Opplevelser", "TUI Opplevelser", "Finn turer, aktiviteter og ferieopplevelser hos TUI.", "Se opplevelser", partners.tuiExperiences],
       ["Transport", "Flyplasstransfer", "Fast pris fra flyplassen til hotellet.", "fra 199 kr", partners.transfer],
       ["Ferge", "Kristiansand - Hirtshals", "Sjekk ferge tur/retur med Ferryhopper.", "Se ferge", partners.ferryhopper],
       ["Pakkereise", "Fly + hotell", "Finn en samlet feriepakke hos Expedia Norge.", "Se pakkereiser", partners.packageTravel],
       ["Cruise", "Cruiseferie", "Sammenlign reiseruter, rederier og varighet hos Expedia.", "Se cruise", partners.cruise],
       ["Feriebolig", "Feriehus og leiligheter", "Finn hytter, villaer og ferieleiligheter hos Interhome.", "Se ferieboliger", partners.interhome],
+      ["Naturferie", "Campanyon", "Finn camping, glamping og naturnære overnattinger.", "Se steder", partners.campanyon],
+      ["Feriehus", "Sol og Strand", "Danske feriehus og strandnære opphold.", "Se feriehus", partners.solOgStrand],
       ["Charter", "Nazar charter", "Finn charter, pakkereiser og sydenturer hos Nazar Norge.", "Se Nazar", partners.nazar],
       ["Pakkereise", "Nazar reiser", "Charter og pakkereiser hos Nazar Norge.", "Se Nazar", partners.nazar],
       ["Reisehack", "eSIM på reisen", "Mobildata uten å bytte fysisk SIM-kort.", "Sjekk datapakker", partners.saily],
@@ -339,7 +348,7 @@
 
 /* Dynamic partner search
    Flight: Kiwi deeplink through Travelpayouts.
-   Hotel: Hotels.com affiliate deeplink wrapper.
+   Hotel: local Trivago feed cards before affiliate redirect.
    Car: direct Enjoy Travel / AutoEurope partner link with selected context.
 */
 (() => {
@@ -349,9 +358,11 @@
   const AFFILIATE_LINKS = {
     // Aktive partnere. Kiwi-deeplinken sender flysok videre med valgt rute og markor.
     kiwi: (window.BR_AFFILIATES && window.BR_AFFILIATES.kiwi) || "https://c111.travelpayouts.com/click",
+    momondo: (window.BR_AFFILIATES && window.BR_AFFILIATES.momondo) || "https://tc.tradetracker.net/?c=19390&a=509866&r=&u=https%3A%2F%2Fwww.momondo.no%2F",
     expedia: (window.BR_AFFILIATES && window.BR_AFFILIATES.expedia) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.no/Fly",
     packageTravel: (window.BR_AFFILIATES && window.BR_AFFILIATES.packageTravel) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.no/go/package/search/FlightHotel/",
     hotels: (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426",
+    trivago: (window.BR_AFFILIATES && window.BR_AFFILIATES.trivago) || "https://tc.tradetracker.net/?c=14374&m=929990&a=509866&r=&u=http%3A%2F%2Fwww.trivago.no%2F",
     bookingCom: (window.BR_AFFILIATES && window.BR_AFFILIATES.bookingCom) || "https://www.booking.com/?aid=1522412&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=no&utm_term=index-1522412",
     strawberry: (window.BR_AFFILIATES && window.BR_AFFILIATES.strawberry) || "https://clk.tradedoubler.com/click?p=93758&a=3480427&url=https%3A%2F%2Fwww.strawberry.no",
     cheapTickets: (window.BR_AFFILIATES && window.BR_AFFILIATES.cheapTickets) || `https://www.anrdoezrs.net/links/${CJ_PUBLISHER_ID}/type/dlg/https://www.cheaptickets.com/Flights`,
@@ -365,11 +376,14 @@
     economyBookingsClick: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookingsClick) || "https://c10.travelpayouts.com/click",
     economyBookingsPromoId: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookingsPromoId) || "2018",
     economyBookingsEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.economyBookingsEurope) || "https://c10.travelpayouts.com/click?shmarker=718286.billigreiser_car_europe&promo_id=2018&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.economybookings.com%2Fcar-rental%2Feurope",
-    autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://autoeurope.tpx.gr/5w1cp3PR",
+    autoEurope: (window.BR_AFFILIATES && window.BR_AFFILIATES.autoEurope) || "https://tc.tradetracker.net/?c=9260&a=509866&r=&u=https%3A%2F%2Fwww.autoeurope.no%2F",
     carFallback: (window.BR_AFFILIATES && window.BR_AFFILIATES.car) || "https://www.jdoqocy.com/click-101724638-17010909",
     interhome: (window.BR_AFFILIATES && window.BR_AFFILIATES.interhome) || "https://tc.tradetracker.net/?c=27484&m=1269456&a=509866&r=&u=https%3A%2F%2Fwww.interhome.no%2F",
+    campanyon: (window.BR_AFFILIATES && window.BR_AFFILIATES.campanyon) || "https://tc.tradetracker.net/?c=37268&a=509866&r=&u=https%3A%2F%2Fwww.campanyon.com%2Fnb-no",
+    solOgStrand: (window.BR_AFFILIATES && window.BR_AFFILIATES.solOgStrand) || "https://tc.tradetracker.net/?c=37454&a=509866&r=&u=https%3A%2F%2Fwww.sologstrand.no%2F",
     cruise: (window.BR_AFFILIATES && window.BR_AFFILIATES.cruise) || "https://www.kqzyfj.com/links/101724638/type/dlg/https://www.expedia.com/Cruises-to-Europe.d6022967.Travel-Guide-Cruise",
     tuiRestplass: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiRestplass) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F",
+    tuiExperiences: (window.BR_AFFILIATES && window.BR_AFFILIATES.tuiExperiences) || "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Fopplevelser%2F",
     nazar: (window.BR_AFFILIATES && window.BR_AFFILIATES.nazar) || "https://clk.tradedoubler.com/click?p=377463&a=3480427&url=https%3A%2F%2Fwww.nazar.no%2F",
     ferryhopper: (window.BR_AFFILIATES && window.BR_AFFILIATES.ferryhopper) || "https://clk.tradedoubler.com/click?p=382549&a=3480427&url=https%3A%2F%2Fwww.ferryhopper.com%2Fno%2F"
   };
@@ -378,6 +392,7 @@
   let currentFlightTripType = "roundtrip";
   let multiCityExtraStops = [];
   let pendingSubmitSearchType = "";
+  let trivagoHotelFeedPromise = null;
   const normalizeFlightTripType = (value) => ["roundtrip", "oneway", "multicity"].includes(value) ? value : "roundtrip";
   const blankTabState = () => ({ from: "", to: "", multiTo: "", multiStops: [], depart: "", ret: "", adults: "2", children: "0", flightTrip: "roundtrip" });
   const tabStates = {
@@ -800,7 +815,7 @@
       } else if (currentSearchType === "restplass") {
         button.textContent = state.to ? `SE NAZAR-REISER TIL ${state.to.toUpperCase()} ↗` : "SE CHARTER HOS NAZAR ↗";
       } else if (currentSearchType === "hotel") {
-        button.textContent = state.to ? `SØK HOTELL I ${state.to.toUpperCase()} 🔎` : "SØK HOTELL 🔎";
+        button.textContent = state.to ? `VIS HOTELL I ${state.to.toUpperCase()} 🔎` : "VIS HOTELL 🔎";
       } else if (currentSearchType === "car") {
         button.textContent = "SJEKK LEIEBILPRISER PÅ ECONOMYBOOKINGS ↗";
       } else if (currentSearchType === "flight" && currentFlightTripType === "oneway") {
@@ -826,7 +841,7 @@
       } else if (currentSearchType === "restplass") {
         helper.textContent = state.to ? `Charter: ${state.from || "valgfri flyplass"} → ${state.to} • fra ${state.depart || "velg dato"} • ${state.adults} voksne${Number(state.children) ? ` og ${state.children} barn` : ""}.` : "Velg dato og reisemål — så åpnes chartervalg med TUI og Nazar.";
       } else if (currentSearchType === "hotel") {
-        helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart} til ${state.ret} • ${state.adults} gjester.` : "Skriv byen du vil bo i — så åpnes Hotels.com rett på hotell i den byen.";
+        helper.textContent = state.to ? `Hotellsøk: ${state.to} • ${state.depart || "velg innsjekk"} til ${state.ret || "velg utsjekk"} • ${state.adults} gjester. Hotellene vises her før Trivago.` : "Skriv byen du vil bo i — så viser vi hotellkort før Trivago.";
       } else if (currentSearchType === "car") {
         helper.textContent = state.from ? `Leiebil: ${state.from} • ${state.depart || "velg hentedato"} til ${state.ret || "velg levering"}. Prisene åpnes hos EconomyBookings.` : "Skriv hentested eller flyplass — så åpnes leiebilprisene hos EconomyBookings.";
       } else if (currentSearchType === "flight" && currentFlightTripType === "oneway") {
@@ -1551,21 +1566,185 @@
     }
   }
 
+  function normalizeTrivagoText(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replace(/æ/g, "ae")
+      .replace(/ø/g, "o")
+      .replace(/å/g, "a")
+      .replace(/ä/g, "a")
+      .replace(/ö/g, "o")
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function compactTrivagoDate(value) {
+    return String(value || "").replace(/-/g, "");
+  }
+
+  function trivagoStayDates(state = {}) {
+    const depart = validISO(state.depart) && !dateIsBeforeToday(state.depart) ? state.depart : fallbackDepartISO();
+    const ret = validISO(state.ret) && state.ret > depart ? state.ret : fallbackReturnISO(depart);
+    return { depart, ret };
+  }
+
+  function tradeTrackerTrivagoLink(materialId, targetUrl) {
+    const config = window.BR_AFFILIATES || {};
+    const url = new URL("https://tc.tradetracker.net/");
+    url.searchParams.set("c", config.trivagoProgramId || "14374");
+    if (materialId) url.searchParams.set("m", materialId);
+    url.searchParams.set("a", config.tradeTrackerAffiliateId || "509866");
+    url.searchParams.set("r", "");
+    url.searchParams.set("u", targetUrl);
+    return url.toString();
+  }
+
+  function loadTrivagoHotelFeed() {
+    if (!trivagoHotelFeedPromise) {
+      trivagoHotelFeedPromise = fetch("assets/trivago-hotels.json?v=195", { cache: "force-cache" })
+        .then((response) => response.ok ? response.json() : null)
+        .catch(() => null);
+    }
+    return trivagoHotelFeedPromise;
+  }
+
+  function resolveTrivagoDestination(feed, place) {
+    const key = normalizeTrivagoText(place);
+    if (!key || !feed) return null;
+    const aliases = feed.aliases || {};
+    if (aliases[key]) return { key: aliases[key], label: feed.labels?.[aliases[key]] || place };
+    if (feed.hotelsByDestination?.[key]) return { key, label: feed.labels?.[key] || place };
+
+    const aliasMatch = Object.keys(aliases)
+      .sort((a, b) => b.length - a.length)
+      .find((alias) => alias.length >= 4 && key.length >= 4 && (key.includes(alias) || alias.includes(key)));
+    if (aliasMatch) {
+      const destinationKey = aliases[aliasMatch];
+      return { key: destinationKey, label: feed.labels?.[destinationKey] || place };
+    }
+
+    const labelMatch = Object.entries(feed.labels || {}).find(([, label]) => normalizeTrivagoText(label) === key);
+    return labelMatch ? { key: labelMatch[0], label: labelMatch[1] } : null;
+  }
+
+  function buildTrivagoDestinationUrl(state = {}, feed = null, destinationKey = "") {
+    const config = window.BR_AFFILIATES || {};
+    const materialId = config.trivagoDestinationMaterialId || "929990";
+    const place = clean(state.to, "hotell");
+    const resolved = destinationKey || resolveTrivagoDestination(feed, place)?.key || "";
+    const pathId = resolved && feed?.destinations?.[resolved];
+    const targetUrl = pathId
+      ? `http://www.trivago.no/?iPathId=${encodeURIComponent(pathId)}`
+      : `https://www.trivago.no/nb/srl?search=${encodeURIComponent(place)}`;
+    return tradeTrackerTrivagoLink(materialId, targetUrl);
+  }
+
+  function buildTrivagoHotelUrl(hotel, state = {}) {
+    const config = window.BR_AFFILIATES || {};
+    const { depart, ret } = trivagoStayDates(state);
+    const targetUrl = `https://www.trivago.no/nb/lm?search=100-${encodeURIComponent(hotel.id)};dr-${compactTrivagoDate(depart)}-${compactTrivagoDate(ret)}-s`;
+    return tradeTrackerTrivagoLink(config.trivagoHotelMaterialId || "1795630", targetUrl);
+  }
+
   function buildHotelUrl(state) {
-    // Hotels.com Norge: behold norsk domene og tving norske innstillinger videre
-    // gjennom CJ-redirecten, slik at brukeren lander med norsk språk og NOK-priser.
-    const url = new URL("https://no.hotels.com/Hotel-Search");
-    url.searchParams.set("destination", state.to);
-    url.searchParams.set("startDate", state.depart);
-    url.searchParams.set("endDate", state.ret);
-    url.searchParams.set("rooms", "1");
-    url.searchParams.set("adults", state.adults);
-    if (Number(state.children)) url.searchParams.set("children", state.children);
-    url.searchParams.set("locale", "no_NO");
-    url.searchParams.set("currency", "NOK");
-    url.searchParams.set("pos", "HCOM_NO");
-    url.searchParams.set("siteid", "300000012");
-    return hotelsBrowserBridge(affiliateWrap(AFFILIATE_LINKS.hotels, url.toString()));
+    return buildTrivagoDestinationUrl(state);
+  }
+
+  function hotelStarsText(stars) {
+    const count = Number(stars) || 0;
+    return count ? `${count} stjerner` : "Hotell";
+  }
+
+  function hotelLocationText(hotel) {
+    return [hotel.city, hotel.country].filter(Boolean).join(", ") || "Trivago";
+  }
+
+  function renderTrivagoHotelCards(hotels, state) {
+    return hotels.map((hotel) => {
+      const href = buildTrivagoHotelUrl(hotel, state);
+      const address = hotel.address ? `<p>${escapeHTML(hotel.address)}</p>` : "";
+      return `
+        <article class="trivago-hotel-card">
+          <img alt="${escapeHTML(hotel.name)}" loading="lazy" src="${escapeHTML(hotel.image)}">
+          <div class="trivago-hotel-body">
+            <div class="trivago-hotel-meta">
+              <span>${escapeHTML(hotelStarsText(hotel.stars))}</span>
+              <span>${escapeHTML(hotel.city || "Trivago")}</span>
+            </div>
+            <h3>${escapeHTML(hotel.name)}</h3>
+            <p>${escapeHTML(hotelLocationText(hotel))}</p>
+            ${address}
+            <a href="${escapeHTML(href)}" rel="nofollow noopener sponsored" target="_blank">Sjekk pris hos Trivago</a>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  function hideHotelResults(clear = true) {
+    const box = $("hotelResults");
+    if (!box) return;
+    box.hidden = true;
+    if (clear) box.innerHTML = "";
+  }
+
+  async function showHotelResults(rawState = {}, options = {}) {
+    const state = { ...rawState, to: clean(rawState.to || $("toCity")?.value) };
+    const box = $("hotelResults");
+    if (!box || !state.to) return false;
+
+    const { depart, ret } = trivagoStayDates(state);
+    const people = `${Math.max(1, Number(state.adults || 2))} voksne${Number(state.children) ? `, ${state.children} barn` : ""}`;
+    box.hidden = false;
+    box.innerHTML = `
+      <div class="trivago-hotel-loading">
+        <strong>Henter hotell i ${escapeHTML(state.to)}</strong>
+        <p>${escapeHTML(depart)} til ${escapeHTML(ret)} • ${escapeHTML(people)}</p>
+      </div>
+    `;
+    if (options.scroll !== false) box.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const feed = await loadTrivagoHotelFeed();
+    const resolved = resolveTrivagoDestination(feed, state.to);
+    const label = resolved?.label || state.to;
+    const hotels = resolved ? feed?.hotelsByDestination?.[resolved.key] || [] : [];
+    const allUrl = buildTrivagoDestinationUrl(state, feed, resolved?.key || "");
+
+    if (!hotels.length) {
+      box.innerHTML = `
+        <div class="trivago-hotel-head">
+          <div>
+            <span>Trivago hotell</span>
+            <h2>Hotell i ${escapeHTML(label)}</h2>
+            <p>${escapeHTML(depart)} til ${escapeHTML(ret)} • ${escapeHTML(people)}</p>
+          </div>
+          <a class="trivago-hotel-all" href="${escapeHTML(allUrl)}" rel="nofollow noopener sponsored" target="_blank">Se hos Trivago</a>
+        </div>
+        <div class="trivago-hotel-empty">
+          <strong>Ingen lokale hotellkort for ${escapeHTML(label)} akkurat nå.</strong>
+          <p>Trivago åpnes med reisemålet ditt.</p>
+        </div>
+      `;
+      return true;
+    }
+
+    box.innerHTML = `
+      <div class="trivago-hotel-head">
+        <div>
+          <span>Trivago hotell</span>
+          <h2>Hotell i ${escapeHTML(label)}</h2>
+          <p>${escapeHTML(depart)} til ${escapeHTML(ret)} • ${escapeHTML(people)}</p>
+        </div>
+        <a class="trivago-hotel-all" href="${escapeHTML(allUrl)}" rel="nofollow noopener sponsored" target="_blank">Se alle hos Trivago</a>
+      </div>
+      <div class="trivago-hotel-grid">
+        ${renderTrivagoHotelCards(hotels, { ...state, depart, ret })}
+      </div>
+    `;
+    return true;
   }
 
   function travelpayoutsCustomLink(clickBase, promoId, targetUrl, markerSuffix) {
@@ -2541,6 +2720,7 @@
       form.dataset.mode = currentSearchType;
       form.dataset.flightTrip = currentFlightTripType;
     }
+    if (currentSearchType !== "hotel") hideHotelResults();
 
     document.querySelectorAll("[data-search-type]").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.searchType === currentSearchType);
@@ -2572,7 +2752,7 @@
     const modeTitle = $("searchModeTitle");
     const modeCopy = {
       flight: ["Fly", "Velg avreisested, reisemål, dato og antall reisende."],
-      hotel: ["Hotell", "Finn hotell med innsjekk, utsjekk og antall gjester."],
+      hotel: ["Hotell", "Vis hotellkort før du går videre til Trivago."],
       package: ["Pakkereise", "Søk etter fly og hotell samlet hos Expedia."],
       interhome: ["Feriebolig", "Finn feriehus, villa eller leilighet hos Interhome."],
       cruise: ["Cruise", "Velg europeisk avreisehavn og sjekk cruisepriser hos Expedia."],
@@ -2816,7 +2996,8 @@
       return true;
     } else if (currentSearchType === "hotel") {
       if (!state.to) return false;
-      target = buildHotelUrl(state);
+      showHotelResults(state, { scroll: true });
+      return true;
     } else if (currentSearchType === "package") {
       if (!state.to) return false;
       target = buildPackageUrl(state);
@@ -2834,6 +3015,9 @@
     window.open(target, "_blank", "noopener,noreferrer");
     return true;
   }
+
+  window.BR_showHotelResults = showHotelResults;
+  window.BR_buildTrivagoDestinationUrl = buildTrivagoDestinationUrl;
 
   function fillSearchFromSmartQuery(query) {
     const route = parseRouteQuery(query);
@@ -3193,8 +3377,8 @@
     ["fromCity", "toCity", "multiCityTo", "departDate", "returnDate", "adults", "children"].forEach((id) => {
       const el = $(id);
       if (el) {
-        el.addEventListener("input", () => { updateSearchPreview(); renderLiveCalendar(); });
-        el.addEventListener("change", () => { ensureFreshDates(false); updateSearchPreview(); renderLiveCalendar(); });
+        el.addEventListener("input", () => { if (currentSearchType === "hotel") hideHotelResults(); updateSearchPreview(); renderLiveCalendar(); });
+        el.addEventListener("change", () => { if (currentSearchType === "hotel") hideHotelResults(); ensureFreshDates(false); updateSearchPreview(); renderLiveCalendar(); });
       }
     });
 
@@ -3215,6 +3399,15 @@
         saveSearchState();
         const state = readSearchState({ forUrl: true });
         let target;
+
+        if (currentSearchType === "hotel") {
+          if (!state.to) throw new Error("Skriv inn byen du vil finne hotell i.");
+          await showHotelResults(state, { scroll: true });
+          closeAirportSuggestions();
+          updateSearchPreview();
+          renderLiveCalendar();
+          return;
+        }
 
         if (currentSearchType === "car") {
           if (!state.from) throw new Error("Skriv inn hvor du vil hente leiebilen.");
@@ -3440,25 +3633,19 @@
     }
   }
 
-  function aiHotelsBrowserBridge(targetUrl) {
-    return `/go/hotels.html#to=${encodeURIComponent(targetUrl)}`;
-  }
-
   function aiHotelUrl(place = "Roma") {
     const depart = $("departDate")?.value || addDaysISO(14);
     const ret = $("returnDate")?.value || addDaysISO(21);
-    const url = new URL("https://no.hotels.com/Hotel-Search");
-    url.searchParams.set("destination", placeName(place) || "Roma");
-    url.searchParams.set("startDate", depart);
-    url.searchParams.set("endDate", ret);
-    url.searchParams.set("rooms", "1");
-    url.searchParams.set("adults", $("adults")?.value || "2");
-    url.searchParams.set("locale", "no_NO");
-    url.searchParams.set("currency", "NOK");
-    url.searchParams.set("pos", "HCOM_NO");
-    url.searchParams.set("siteid", "300000012");
-    const base = (window.BR_AFFILIATES && window.BR_AFFILIATES.hotels) || "https://www.tkqlhce.com/click-101724638-14361426";
-    return aiHotelsBrowserBridge(cjAffiliate(base, url.toString()));
+    const state = { to: placeName(place) || "Roma", depart, ret, adults: $("adults")?.value || "2", children: $("children")?.value || "0" };
+    if (typeof window.BR_buildTrivagoDestinationUrl === "function") return window.BR_buildTrivagoDestinationUrl(state);
+    const config = window.BR_AFFILIATES || {};
+    const url = new URL("https://tc.tradetracker.net/");
+    url.searchParams.set("c", config.trivagoProgramId || "14374");
+    url.searchParams.set("m", config.trivagoDestinationMaterialId || "929990");
+    url.searchParams.set("a", config.tradeTrackerAffiliateId || "509866");
+    url.searchParams.set("r", "");
+    url.searchParams.set("u", `https://www.trivago.no/nb/srl?search=${encodeURIComponent(state.to)}`);
+    return url.toString();
   }
 
   function aiTravelpayoutsCustomLink(clickBase, promoId, targetUrl, markerSuffix) {
@@ -3784,15 +3971,28 @@
 
   function fillHotel(text) {
     const place = placeName(extractPlaceAfter(text, ["hotell", "hotel", "bo"]));
+    const hotelPlace = place || "Roma";
     setTab("hotel");
     setValue("fromCity", "");
-    setValue("toCity", place || "Roma");
+    setValue("toCity", hotelPlace);
     setValue("adults", "2");
     setValue("children", "0");
-    addMessage(`Jeg har fylt ut hotellsøk for <b>${place || "Roma"}</b>. Velg innsjekk og utsjekk, eller åpne Hotels.com med standarddato.`, "bot", {
-      label: "Åpne Hotels.com",
-      onClick: () => window.open(aiHotelUrl(place || "Roma"), "_blank", "noopener,noreferrer")
+    const showCards = () => {
+      const state = {
+        to: hotelPlace,
+        depart: document.getElementById("departDate")?.value || "",
+        ret: document.getElementById("returnDate")?.value || "",
+        adults: document.getElementById("adults")?.value || "2",
+        children: document.getElementById("children")?.value || "0"
+      };
+      if (typeof window.BR_showHotelResults === "function") window.BR_showHotelResults(state, { scroll: true });
+      else window.open(aiHotelUrl(hotelPlace), "_blank", "noopener,noreferrer");
+    };
+    addMessage(`Jeg har fylt ut hotellsøk for <b>${hotelPlace}</b>. Hotellkortene vises her før du går videre til Trivago.`, "bot", {
+      label: "Vis hotellforslag",
+      onClick: showCards
     });
+    setTimeout(() => { if (typeof window.BR_showHotelResults === "function") showCards(); }, 120);
     document.getElementById("travelSearch")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
