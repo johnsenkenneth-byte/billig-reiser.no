@@ -156,6 +156,169 @@
   }
 })();
 
+/* Front page "where should I start" helper */
+(() => {
+  const fallbacks = {
+    activities: "https://klook.tpx.gr/Tmj2PfPe",
+    campanyon: "https://tc.tradetracker.net/?c=37268&a=509866&r=&u=https%3A%2F%2Fwww.campanyon.com%2Fnb",
+    solOgStrand: "https://tc.tradetracker.net/?c=37454&a=509866&r=&u=https%3A%2F%2Fwww.sologstrand.no%2F",
+    transfer: "https://kiwitaxi.tpx.gr/YjkKJSHa",
+    tuiRestplass: "https://tc.tradetracker.net/?c=35742&m=2133355&a=509866&r=&u=https%3A%2F%2Fwww.tui.no%2Ftilbud%2Frestplass%2F"
+  };
+
+  const modes = {
+    price: {
+      kicker: "BESTE START",
+      badge: "Lav risiko",
+      title: "Start med totalpris, ikke bare flypris",
+      text: "En billig flybillett kan bli dyr når bagasje, sen landing, transport og feil hotellområde kommer i tillegg.",
+      steps: ["Flytid", "Bagasje", "Hotellområde", "Transfer"],
+      actions: [
+        { label: "Sjekk fly", search: "flight" },
+        { label: "Sjekk hotell", search: "hotel" },
+        { label: "Transfer", key: "transfer" }
+      ]
+    },
+    family: {
+      kicker: "FAMILIESTART",
+      badge: "Mindre mas",
+      title: "Velg base før du velger attraksjoner",
+      text: "For barn er kort vei, kjøkken, badeland og en rolig kveld ofte mer verdt enn en lavere pris langt unna.",
+      steps: ["Kort vei", "Kjøkken", "Badeland", "Parkbilletter"],
+      actions: [
+        { label: "Danmark hytte og park", href: "sommerhus-bat-danmark.html" },
+        { label: "Hotell for familien", search: "hotel" },
+        { label: "Billetter og aktiviteter", key: "activities" }
+      ]
+    },
+    lastminute: {
+      kicker: "SNART AVREISE",
+      badge: "Rask sjekk",
+      title: "Start med fleksibilitet, ikke ønskelisten",
+      text: "Restplass fungerer best når dato, flyplass eller hotell kan være litt fleksibelt. Da finner du raskere et faktisk kupp.",
+      steps: ["Dato", "Avreiseflyplass", "Reiselengde", "Hotellnivå"],
+      actions: [
+        { label: "Charter og restplass", href: "charter-reiser.html" },
+        { label: "TUI restplass", key: "tuiRestplass" },
+        { label: "Søk fly nå", search: "flight" }
+      ]
+    },
+    calm: {
+      kicker: "TRYGT VALG",
+      badge: "Færre løse tråder",
+      title: "Start med det som gjør reisen enklest",
+      text: "Når du vil ha minst mulig å passe på, er fly + hotell, tydelig transfer og riktig hotellområde ofte bedre enn å spare noen hundrelapper.",
+      steps: ["Fly + hotell", "Transfer", "Ankomsttid", "Avstand"],
+      actions: [
+        { label: "Pakkereise", search: "package" },
+        { label: "Hotell først", search: "hotel" },
+        { label: "Privat transfer", key: "transfer" }
+      ]
+    },
+    nature: {
+      kicker: "NATUR OG HYTTE",
+      badge: "Nært og enkelt",
+      title: "Start med overnattingen, så bygger du turen rundt den",
+      text: "For Norge, hytte og glamping er selve basen ofte opplevelsen. Finn stedet først, og legg til små utflukter etterpå.",
+      steps: ["Område", "Soveplass", "Kjøkken", "Aktiviteter i nærheten"],
+      actions: [
+        { label: "Campanyon Norge", key: "campanyon" },
+        { label: "Feriebolig", search: "interhome" },
+        { label: "Sol og Strand Danmark", key: "solOgStrand" }
+      ]
+    },
+    experience: {
+      kicker: "OPPLEVELSER",
+      badge: "Bygg rundt høydepunktet",
+      title: "Start med det dere faktisk vil oppleve",
+      text: "Noen turer blir best når du velger høydepunktet først: badeland, øyhopping, matkurs, museum, båttur eller parkdag.",
+      steps: ["Billetter", "Transport", "Åpningstid", "Nærmeste base"],
+      actions: [
+        { label: "Reisemagasinet", href: "reisemagasinet.html" },
+        { label: "Hellas-guidene", href: "hellas/" },
+        { label: "Billetter og turer", key: "activities" }
+      ]
+    }
+  };
+
+  function affiliateUrl(action) {
+    const links = window.BR_AFFILIATES || {};
+    return action.href || links[action.key] || fallbacks[action.key] || "#travelSearch";
+  }
+
+  function openSearch(type) {
+    const searchCard = document.getElementById("travelSearch");
+    const tab = document.querySelector(`[data-smart-service="${type}"], [data-search-type="${type}"]`);
+    if (tab) tab.click();
+    if (searchCard) {
+      setTimeout(() => searchCard.scrollIntoView({ behavior: "smooth", block: "center" }), 40);
+    }
+  }
+
+  function renderStartHelper(helper, modeKey) {
+    const mode = modes[modeKey] || modes.price;
+    helper.querySelectorAll("[data-start-mode]").forEach((button) => {
+      const active = button.getAttribute("data-start-mode") === modeKey;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+    const setText = (selector, value) => {
+      const node = helper.querySelector(selector);
+      if (node) node.textContent = value;
+    };
+    setText("[data-start-kicker]", mode.kicker);
+    setText("[data-start-badge]", mode.badge);
+    setText("[data-start-title]", mode.title);
+    setText("[data-start-text]", mode.text);
+
+    const steps = helper.querySelector("[data-start-steps]");
+    if (steps) {
+      steps.replaceChildren(...mode.steps.map((text) => {
+        const span = document.createElement("span");
+        span.textContent = text;
+        return span;
+      }));
+    }
+
+    const actions = helper.querySelector("[data-start-actions]");
+    if (actions) {
+      actions.replaceChildren(...mode.actions.map((action) => {
+        const link = document.createElement("a");
+        const rawHref = action.search ? "#travelSearch" : affiliateUrl(action);
+        link.textContent = action.label;
+        link.setAttribute("href", rawHref);
+        if (action.search) {
+          link.setAttribute("data-start-search", action.search);
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            openSearch(action.search);
+          });
+        } else if (/^https?:\/\//i.test(rawHref)) {
+          link.target = "_blank";
+          link.rel = "nofollow noopener sponsored";
+        }
+        return link;
+      }));
+    }
+  }
+
+  function bindStartHelpers() {
+    document.querySelectorAll("[data-start-helper]").forEach((helper) => {
+      helper.querySelectorAll("[data-start-mode]").forEach((button) => {
+        button.addEventListener("click", () => renderStartHelper(helper, button.getAttribute("data-start-mode")));
+      });
+      renderStartHelper(helper, helper.querySelector(".is-active")?.getAttribute("data-start-mode") || "price");
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindStartHelpers);
+  } else {
+    bindStartHelpers();
+  }
+})();
+
 
 /* Klook experience search */
 (() => {
