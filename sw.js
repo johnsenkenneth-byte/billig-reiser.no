@@ -1,4 +1,4 @@
-const CACHE_VERSION = "billig-reiser-pwa-v209-frontpage-value-check";
+const CACHE_VERSION = "billig-reiser-pwa-v211-frontpage-cleanup";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -24,7 +24,7 @@ const APP_SHELL = [
   "/favicon-512x512.png",
   "/apple-touch-icon.png",
   "/go/hotels.html",
-  "/style.css?v=209",
+  "/style.css?v=211",
   "/app-features.css?v=159",
   "/affiliate-config.js?v=206",
   "/app.js?v=209",
@@ -38,6 +38,13 @@ const APP_SHELL = [
   "/assets/partner-cards/tui-card-v200.png",
   "/assets/partner-cards/nazar-card-v200.png",
   "/assets/partner-cards/citybox-card-v200.png",
+  "/assets/reisevelger/attraksjonspass.jpg",
+  "/assets/reisevelger/bagasjeoppbevaring.jpg",
+  "/assets/reisevelger/esim.jpg",
+  "/assets/reisevelger/feriebolig-spania.jpg",
+  "/assets/reisevelger/forsinket-fly.jpg",
+  "/assets/reisevelger/opplevelser.jpg",
+  "/assets/reisevelger/privat-sjafor.jpg",
   "/assets/hellas/kreta/rethymno-harbour.webp",
   "/assets/hellas/kreta/elounda-bay.webp",
   "/assets/hellas/kreta/agios-nikolaos-harbour.webp",
