@@ -4636,3 +4636,104 @@
     initDealAlertForms();
   }
 })();
+
+/* BR v213: direct live hero links */
+(() => {
+  const pad = (value) => String(value).padStart(2, "0");
+  const addDaysISO = (days) => {
+    const date = new Date();
+    date.setDate(date.getDate() + Number(days || 0));
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+  };
+  const compactDate = (value) => String(value || "").replace(/-/g, "");
+  const airportCode = (value) => {
+    const raw = String(value || "").trim();
+    const paren = raw.match(/\(([A-Z]{3})\)/i);
+    if (paren) return paren[1].toUpperCase();
+    const direct = raw.match(/\b[A-Z]{3}\b/i);
+    return direct ? direct[0].toUpperCase() : raw.slice(0, 3).toUpperCase();
+  };
+  const numberValue = (value, fallback) => {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+  };
+  const heroFlightState = (link) => {
+    const startOffset = numberValue(link.dataset.startOffset, 14);
+    const retOffset = numberValue(link.dataset.retOffset, startOffset + 7);
+    return {
+      from: link.dataset.from || "Oslo (OSL)",
+      to: link.dataset.to || "Roma (FCO)",
+      depart: addDaysISO(startOffset),
+      ret: addDaysISO(retOffset),
+      adults: String(numberValue(link.dataset.adults, 2)),
+      children: String(Math.max(0, Number(link.dataset.children || 0))),
+      childAges: [],
+      tripType: "roundtrip"
+    };
+  };
+  const buildKiwiHeroUrl = (state) => {
+    const config = window.BR_AFFILIATES || {};
+    const target = new URL("https://www.kiwi.com/deep");
+    target.searchParams.set("from", airportCode(state.from));
+    target.searchParams.set("to", airportCode(state.to));
+    target.searchParams.set("departure", state.depart);
+    target.searchParams.set("return", state.ret);
+    target.searchParams.set("adults", state.adults || "2");
+    if (Number(state.children)) target.searchParams.set("children", state.children);
+    target.searchParams.set("locale", "no");
+    target.searchParams.set("lang", "no");
+    target.searchParams.set("currency", "NOK");
+    target.searchParams.set("partner_market", "NO");
+
+    const url = new URL(config.kiwi || "https://c111.travelpayouts.com/click");
+    url.searchParams.set("shmarker", `${config.travelpayoutsId || "718286"}.billigreiser_hero_fly`);
+    url.searchParams.set("promo_id", "3791");
+    url.searchParams.set("source_type", "customlink");
+    url.searchParams.set("type", "click");
+    url.searchParams.set("custom_url", target.toString());
+    return url.toString();
+  };
+  const buildTrivagoHeroHotelUrl = (link) => {
+    const hotelId = link.dataset.hotelId;
+    if (!hotelId) return "";
+    const config = window.BR_AFFILIATES || {};
+    const checkin = addDaysISO(numberValue(link.dataset.startOffset, 14));
+    const checkout = addDaysISO(numberValue(link.dataset.retOffset, 17));
+    const rooms = Math.max(1, Number(link.dataset.rooms || 1));
+    const adults = Math.max(1, Number(link.dataset.adults || 2));
+    const children = Math.max(0, Number(link.dataset.children || 0));
+    const target = `https://www.trivago.no/nb/lm?search=100-${encodeURIComponent(hotelId)};dr-${compactDate(checkin)}-${compactDate(checkout)};rc-${rooms}-${adults}-${children}`;
+    const url = new URL("https://tc.tradetracker.net/");
+    url.searchParams.set("c", config.trivagoProgramId || "14374");
+    url.searchParams.set("m", config.trivagoHotelMaterialId || "1795630");
+    url.searchParams.set("a", config.tradeTrackerAffiliateId || "509866");
+    url.searchParams.set("r", "");
+    url.searchParams.set("u", target);
+    return url.toString();
+  };
+  const updateHeroLiveLinks = () => {
+    document.querySelectorAll("[data-hero-live-link]").forEach((link) => {
+      const type = link.dataset.heroLiveLink;
+      let href = "";
+      try {
+        if (type === "flight") {
+          const state = heroFlightState(link);
+          href = link.dataset.provider === "kiwi"
+            ? buildKiwiHeroUrl(state)
+            : (typeof window.BR_buildMomondoFlightUrl === "function" ? window.BR_buildMomondoFlightUrl(state) : "");
+        } else if (type === "hotel") {
+          href = buildTrivagoHeroHotelUrl(link);
+        }
+      } catch (error) {
+        href = "";
+      }
+      if (href) link.href = href;
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateHeroLiveLinks);
+  } else {
+    updateHeroLiveLinks();
+  }
+})();
