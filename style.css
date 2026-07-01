@@ -7739,3 +7739,85 @@ html body form#travelSearch .child-age-row select{
     grid-template-columns:1fr;
   }
 }
+
+/* Homepage SEO entry points */
+.seo-signal-section{
+  max-width:1180px;
+  margin:28px auto 42px;
+  padding:0 18px;
+}
+.seo-signal-head{
+  max-width:840px;
+  margin:0 0 20px;
+}
+.seo-signal-head span{
+  display:inline-flex;
+  margin-bottom:10px;
+  color:#69e8ff;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.seo-signal-head h2{
+  font-size:clamp(32px,4.6vw,58px);
+  line-height:1;
+  margin:0 0 12px;
+  letter-spacing:-.055em;
+}
+.seo-signal-head p{
+  margin:0;
+  color:#c7d5e8;
+  line-height:1.65;
+  font-size:16px;
+}
+.seo-signal-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.seo-signal-card{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-height:190px;
+  padding:20px;
+  border-radius:20px;
+  border:1px solid rgba(105,232,255,.15);
+  background:linear-gradient(145deg,rgba(13,33,56,.92),rgba(5,14,28,.95));
+  box-shadow:0 18px 55px rgba(0,0,0,.24);
+  text-decoration:none;
+  color:#fff;
+}
+.seo-signal-card:hover{
+  border-color:rgba(105,232,255,.38);
+  transform:translateY(-2px);
+  transition:.2s ease;
+}
+.seo-signal-card small{
+  color:#ffd166;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.seo-signal-card strong{
+  font-size:22px;
+  line-height:1.08;
+  letter-spacing:-.03em;
+}
+.seo-signal-card span{
+  color:#b8c7db;
+  line-height:1.55;
+  font-size:14px;
+}
+@media(max-width:900px){
+  .seo-signal-grid{grid-template-columns:1fr 1fr;}
+  .seo-signal-card{min-height:170px;}
+}
+@media(max-width:620px){
+  .seo-signal-section{margin:22px auto 34px;padding:0 14px;}
+  .seo-signal-grid{grid-template-columns:1fr;}
+  .seo-signal-card{min-height:0;}
+  .seo-signal-head h2{font-size:34px;}
+}

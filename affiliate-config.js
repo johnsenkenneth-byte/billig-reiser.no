@@ -70,7 +70,7 @@ window.BR_AFFILIATES = Object.freeze({
   activities: "https://klook.tpx.gr/Tmj2PfPe",
   klookSearchBase: "https://www.klook.com/nb/search/result/?query=",
   campanyonProgramId: "37268",
-  campanyon: "https://tc.tradetracker.net/?c=37268&a=509866&r=&u=https%3A%2F%2Fwww.campanyon.com%2Fnb-no",
+  campanyon: "https://tc.tradetracker.net/?c=37268&a=509866&r=&u=https%3A%2F%2Fwww.campanyon.com%2Fnb",
   solOgStrandProgramId: "37454",
   solOgStrand: "https://tc.tradetracker.net/?c=37454&a=509866&r=&u=https%3A%2F%2Fwww.sologstrand.no%2F",
   kkday: "https://kkday.tpx.gr/WlhfXaEZ",
