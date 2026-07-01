@@ -6238,33 +6238,12 @@ a.hotel-topper-copy:focus-visible{
   font-weight:820;
 }
 
-.sommerhus-park-nav,
 .sommerhus-section,
 .sommerhus-route-panel{
   max-width:1420px;
   margin:0 auto;
 }
 
-.sommerhus-park-nav{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-  padding:26px 0 8px;
-}
-
-.sommerhus-park-card{
-  min-height:178px;
-  padding:22px;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,.12);
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04)),
-    #071727;
-  color:#fff;
-  box-shadow:0 18px 48px rgba(0,0,0,.22);
-}
-
-.sommerhus-park-card span,
 .sommerhus-section-head span,
 .sommerhus-block-head span,
 .sommerhus-route-panel span{
@@ -6276,26 +6255,8 @@ a.hotel-topper-copy:focus-visible{
   text-transform:uppercase;
 }
 
-.sommerhus-park-card h2{
-  margin:10px 0 8px;
-  font-size:clamp(22px,2vw,32px);
-  line-height:1.02;
-  letter-spacing:-.025em;
-}
-
-.sommerhus-park-card p{
-  margin:0;
-  color:#c8d7ea;
-  font-size:14px;
-  line-height:1.5;
-}
-
-.sommerhus-park-card.is-legoland{background:linear-gradient(135deg,rgba(255,198,62,.22),rgba(255,255,255,.05)),#071727}
-.sommerhus-park-card.is-djurs{background:linear-gradient(135deg,rgba(44,211,157,.20),rgba(255,255,255,.05)),#071727}
-.sommerhus-park-card.is-faarup{background:linear-gradient(135deg,rgba(43,164,255,.20),rgba(255,255,255,.05)),#071727}
-
 .sommerhus-section{
-  padding-top:34px;
+  padding-top:28px;
 }
 
 .sommerhus-section-head{
@@ -6707,7 +6668,6 @@ a.hotel-topper-copy:focus-visible{
     font-size:40px;
   }
 
-  .sommerhus-park-nav,
   .sommerhus-block-head,
   .sommerhus-experience-strip,
   .sommerhus-route-panel{
@@ -6736,11 +6696,6 @@ a.hotel-topper-copy:focus-visible{
     left:10px;
     bottom:10px;
     padding:10px 11px;
-  }
-
-  .sommerhus-park-card{
-    min-height:150px;
-    padding:18px;
   }
 
   .sommerhus-homes-grid{
